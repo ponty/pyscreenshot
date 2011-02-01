@@ -5,7 +5,7 @@ import Image
 import tempfile
 
 class ImagemagickWrapper(IPlugin):
-    #home_url = 'http://'
+    home_url = 'http://www.imagemagick.org/'
     ubuntu_package = 'imagemagick'
     def __init__(self):
         self.is_available = False

@@ -19,7 +19,7 @@ except ImportError, e:
 #sys.path.append(path('.').abspath())
 #from pyscreenshot import version
 #ver = version.__version__
-ver = '0.1.1'
+ver = '0.1.2'
 
 classifiers = [
     # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers

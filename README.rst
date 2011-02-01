@@ -53,4 +53,4 @@ Uninstall::
 .. _pip: http://pip.openplans.org/
 .. _ImageGrab: http://www.pythonware.com/library/pil/handbook/imagegrab.htm
 .. _PIL: http://www.pythonware.com/library/pil/
-.. _ImageMagick: http://www.imagemagick.org/script/index.php
+.. _ImageMagick: http://www.imagemagick.org/

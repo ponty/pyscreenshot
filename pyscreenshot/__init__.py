@@ -1,10 +1,11 @@
 from path import path
 from yapsy.PluginManager import PluginManager
 import logging
+import platform
 
-#from version import __version__
+__version__ = '0.1.2'
 
-__version__='0.1.1'
+
 
 def get_plugin(backend_preference=None, force_backend=None):    
     places = [path(__file__).dirname()]
@@ -31,18 +32,36 @@ def get_plugin(backend_preference=None, force_backend=None):
         plugin = pm.activatePluginByName(x.name)
         if plugin.is_available:
             return plugin
+    
+    if not len(all):
+        raise(Exception('no plugin found!'))
+        
+    
+    message = 'Install at least one backend!' 
+    for x in all:
+        message += '\n'
+        message += '[%s]' % (x.name)
+        if hasattr(x.plugin_object, 'home_url'):
+            home_url=x.plugin_object.home_url
+            message += '\n'
+            message += '%s' % (home_url)
+        message += '\n'
+        if platform.dist()[0].lower() == 'ubuntu':
+            message += 'You can install it in terminal:'
+            message += '\n'
+            message += '\t'
+            message+= 'sudo apt-get install %s' % x.plugin_object.ubuntu_package
+    raise Exception(message)
 
-default_backend_preference=['pil', 'scrot']
+default_backend_preference = ['pil', 'scrot']
 def grab(bbox=None, backend_preference=default_backend_preference, force_backend=None):  
     x = get_plugin(backend_preference=backend_preference, force_backend=force_backend)
-    if not x:
-        raise(Exception('no plugin found!'))
+    assert x
     return x.grab(bbox)
 
 def grab_to_file(filename, backend_preference=default_backend_preference, force_backend=None):  
     x = get_plugin(backend_preference=backend_preference, force_backend=force_backend)
-    if not x:
-        raise(Exception('no plugin found!'))
+    assert x
     return x.grab_to_file(filename)
 
 
