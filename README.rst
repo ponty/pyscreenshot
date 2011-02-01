@@ -28,6 +28,14 @@ Example::
 Installation
 ------------
 
+You should install at least one backend on linux. 
+
+On Ubuntu::
+
+	# one of them
+	sudo apt-get install scrot
+	sudo apt-get install imagemagick
+
 The easiest way to get pyscreenshot is if you have setuptools_ installed::
 
     easy_install pyscreenshot
@@ -39,7 +47,6 @@ or if you have pip_ installed::
 Uninstall::
 
     pip uninstall pyscreenshot
-
 
 
 .. _setuptools: http://peak.telecommunity.com/DevCenter/EasyInstall
