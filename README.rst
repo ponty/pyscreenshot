@@ -30,11 +30,11 @@ Installation
 
 The easiest way to get pyscreenshot is if you have setuptools_ installed::
 
-    easy_install https://github.com/ponty/pyscreenshot/zipball/master
+    easy_install pyscreenshot
 
 or if you have pip_ installed::
 
-    pip install https://github.com/ponty/pyscreenshot/zipball/master
+    pip install pyscreenshot
 
 Uninstall::
 

@@ -68,11 +68,11 @@ options(
             # -*- Minilib extra files: -*-
             ]
         ),
-    sphinx=Bunch(
-        docroot='docs',
-        builddir="_build",
-        sourcedir=""
-        ),
+#    sphinx=Bunch(
+#        docroot='docs',
+#        builddir="_build",
+#        sourcedir=""
+#        ),
     virtualenv=Bunch(
         packages_to_install=[
             # -*- Virtualenv packages to install: -*-
