@@ -13,6 +13,8 @@ home: https://github.com/ponty/pyscreenshot
 Usage
 ------------
 
+Example::
+
 	import pyscreenshot as ImageGrab
 	# fullscreen
 	im=ImageGrab.grab()
@@ -34,8 +36,7 @@ or if you have pip_ installed::
 
     pip install https://github.com/ponty/pyscreenshot/zipball/master
 
-Uninstall
----------
+Uninstall::
 
     pip uninstall pyscreenshot
 
