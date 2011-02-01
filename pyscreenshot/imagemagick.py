@@ -13,9 +13,9 @@ class ImagemagickWrapper(IPlugin):
         
     def activate(self):
         p = Process()
-        p.call('import -version')
-        self.version = utils.extract_version(p.stdout)
-        self.is_available = self.version
+        ret=p.call('import -version')
+        self.version = utils.extract_version(p.stdout.replace('-',' '))
+        self.is_available = (ret==0)
         
     def grab(self, bbox=None):
         f = tempfile.NamedTemporaryFile(suffix='.png', prefix='screenshot_imagemagick_')

@@ -18,3 +18,5 @@ class Process():
         log.debug('process has ended, return code=' + str(self.returncode))
         log.debug('stdout:\n' + self.stdout)
         log.debug('stderr:\n' + self.stderr)
+        return self.returncode
+    

@@ -3,9 +3,10 @@ from yapsy.PluginManager import PluginManager
 import logging
 import platform
 
-__version__ = '0.1.2'
+__version__ = '0.1.3'
 
 
+log=logging.getLogger(__name__)
 
 def get_plugin(backend_preference=None, force_backend=None):    
     places = [path(__file__).dirname()]
@@ -15,19 +16,26 @@ def get_plugin(backend_preference=None, force_backend=None):
     pm.setPluginInfoExtension(ext)
     pm.setPluginPlaces(places)
     pm.collectPlugins()
+
+    all = pm.getAllPlugins()
+    for x in all:
+        x.plugin_object.name = x.name
     
     if force_backend:
         return pm.activatePluginByName(force_backend)
-        
-    if backend_preference:
-        for x in backend_preference:
-            plugin = pm.activatePluginByName(x)
-            if plugin:
-                if plugin.is_available:
-                    return plugin
     
+    if backend_preference:
+        def key(x):
+            if x.name in backend_preference:
+                return backend_preference.index(x.name)
+            return 1000
+        log.debug('before sort:')
+        log.debug([x.name for x in all])
+        all.sort(key=key)
+        log.debug('after sort:')
+        log.debug([x.name for x in all])
+
     # get first
-    all = pm.getAllPlugins()
     for x in all:
         plugin = pm.activatePluginByName(x.name)
         if plugin.is_available:
@@ -42,7 +50,7 @@ def get_plugin(backend_preference=None, force_backend=None):
         message += '\n'
         message += '[%s]' % (x.name)
         if hasattr(x.plugin_object, 'home_url'):
-            home_url=x.plugin_object.home_url
+            home_url = x.plugin_object.home_url
             message += '\n'
             message += '%s' % (home_url)
         message += '\n'
@@ -50,7 +58,7 @@ def get_plugin(backend_preference=None, force_backend=None):
             message += 'You can install it in terminal:'
             message += '\n'
             message += '\t'
-            message+= 'sudo apt-get install %s' % x.plugin_object.ubuntu_package
+            message += 'sudo apt-get install %s' % x.plugin_object.ubuntu_package
     raise Exception(message)
 
 default_backend_preference = ['pil', 'scrot']
