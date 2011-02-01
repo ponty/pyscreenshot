@@ -2,8 +2,9 @@ from path import path
 from yapsy.PluginManager import PluginManager
 import logging
 
+#from version import __version__
 
-__version__='0.1.0'
+__version__='0.1.1'
 
 def get_plugin(backend_preference=None, force_backend=None):    
     places = [path(__file__).dirname()]
