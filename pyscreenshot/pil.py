@@ -9,9 +9,9 @@ class PilWrapper(IPlugin):
     
     home_url = 'http://www.pythonware.com/products/pil/'
     ubuntu_package = 'python-imaging'
+
     def __init__(self):
-        self.is_available = True
-        self.version = Image.VERSION
+        pass
         
     def activate(self):
         pass
@@ -22,3 +22,6 @@ class PilWrapper(IPlugin):
     def grab_to_file(self, filename):
         im=self.grab()
         im.save(filename)
+        
+    def backend_version(self):
+        return Image.VERSION

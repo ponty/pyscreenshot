@@ -10,9 +10,12 @@ class Test(TestCase):
         self.assertEquals(get_plugin(backend_preference=['scrot']).name, 'scrot')
         self.assertEquals(get_plugin(backend_preference=['scrot','imagemagick', 'scrot']).name, 'scrot')
         self.assertEquals(get_plugin(backend_preference=['imagemagick','scrot', 'imagemagick']).name, 'imagemagick')
+
+        self.assertEquals(get_plugin(backend_preference=['pygtk','imagemagick', 'scrot']).name, 'pygtk')
+        self.assertEquals(get_plugin(backend_preference=['scrot','imagemagick', 'pygtk']).name, 'scrot')
         
     def test_force(self):
-        for name in ['imagemagick', 'scrot']:
+        for name in ['imagemagick', 'scrot', 'pygtk']:
             p = get_plugin(force_backend=name)
             self.assertEquals(p.name, name)
         

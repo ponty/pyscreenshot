@@ -16,10 +16,14 @@ except ImportError, e:
     ALL_TASKS_LOADED = False
 
 
-#sys.path.append(path('.').abspath())
-#from pyscreenshot import version
-#ver = version.__version__
-ver = '0.1.3'
+if ALL_TASKS_LOADED:
+    sys.path.insert(0, path('.').abspath())
+    from pyscreenshot import __version__
+    version = __version__
+    open('VERSION.txt','w').write(version)
+else:
+    version = open('VERSION.txt','r').read()
+#version = '0.0.0'
 
 classifiers = [
     # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
@@ -44,7 +48,7 @@ entry_points = """
 # compatible with distutils of python 2.3+ or later
 setup(
     name='pyscreenshot',
-    version=ver,
+    version=version,
     description='screenshot',
     long_description=open('README.rst', 'r').read(),
     classifiers=classifiers,
