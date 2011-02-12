@@ -1,27 +1,58 @@
-from pyscreenshot import get_plugin
+from nose.tools import eq_
+from pyscreenshot.backendloader import BackendLoader
 from unittest import TestCase
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 
 class Test(TestCase):
+    
     def test_pref(self):
-        self.assertEquals(get_plugin(backend_preference=['imagemagick', 'scrot']).name, 'imagemagick')
-        self.assertEquals(get_plugin(backend_preference=['scrot', 'imagemagick']).name, 'scrot')
-        self.assertEquals(get_plugin(backend_preference=['imagemagick']).name, 'imagemagick')
-        self.assertEquals(get_plugin(backend_preference=['scrot']).name, 'scrot')
-        self.assertEquals(get_plugin(backend_preference=['scrot','imagemagick', 'scrot']).name, 'scrot')
-        self.assertEquals(get_plugin(backend_preference=['imagemagick','scrot', 'imagemagick']).name, 'imagemagick')
+        man=BackendLoader()
+        man.force(None)
 
-        self.assertEquals(get_plugin(backend_preference=['pygtk','imagemagick', 'scrot']).name, 'pygtk')
-        self.assertEquals(get_plugin(backend_preference=['scrot','imagemagick', 'pygtk']).name, 'scrot')
+        man.set_preference(['imagemagick', 'scrot'])
+        eq_(man.selected().name, 'imagemagick')
+        
+
+        man.set_preference(['imagemagick','scrot', 'imagemagick'])
+        eq_(man.selected().name, 'imagemagick')
+
+        man.set_preference(['imagemagick'])
+        eq_(man.selected().name, 'imagemagick')
+        
+        man.set_preference(['pygtk','imagemagick', 'scrot'])
+        eq_(man.selected().name, 'pygtk')
+        
+        man.set_preference(['scrot', 'imagemagick'])
+        eq_(man.selected().name, 'scrot')
+        
+        man.set_preference(['scrot','imagemagick', 'pygtk'])
+        eq_(man.selected().name, 'scrot')
+        
+        man.set_preference(['scrot','imagemagick', 'scrot'])
+        eq_(man.selected().name, 'scrot')
+
+        man.set_preference(['scrot'])
+        eq_(man.selected().name, 'scrot')
+        
         
     def test_force(self):
+        man=BackendLoader()
         for name in ['imagemagick', 'scrot', 'pygtk']:
-            p = get_plugin(force_backend=name)
-            self.assertEquals(p.name, name)
+            man.force(name)
+            eq_(man.selected().name, name)
+            man.force(None) # for other tests
+        
+    def test_mix(self):
+        man=BackendLoader()
+        man.force('scrot')
+        man.set_preference(['imagemagick', 'scrot'])
+        eq_(man.selected().name, 'scrot')
         
         
-        
-        
+                          
         
         
         

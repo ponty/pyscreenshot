@@ -6,9 +6,11 @@ The ``pyscreenshot`` module can be used to copy
 the contents of the screen to a PIL_ image memory or file.
 Replacement for the ImageGrab_ Module, which works on Windows only.
 
-Plugin based, it has wrappers for scrot, ImageMagick_, PyGTK_ and PIL_.
-
-(ImageMagick_ creates blackbox_ on some systems)
+Plugin based, it has wrappers for various backends:
+ * scrot (recommended)
+ * ImageMagick_ (it creates blackbox_ on some systems)
+ * PyGTK_ (does not check $DISPLAY)
+ * PIL_ (only on windows)
 
 home: https://github.com/ponty/pyscreenshot
 
@@ -30,28 +32,42 @@ Example::
 Installation
 ============
 
-You should install at least one backend on linux.
+General
+--------
 
-On Ubuntu::
+ * install setuptools_ or pip_
+ * install PIL_
+ * install at least one backend
+ * install the program:
 
-    # Python Imaging Library (required)
-    sudo apt-get install python-imaging
+if you have setuptools_ installed::
 
-    # one of them
+    # as root
+    easy_install pyscreenshot
+
+if you have pip_ installed::
+
+    # as root
+    pip install pyscreenshot
+
+Ubuntu
+----------
+::
+
+    # one or more
     sudo apt-get install scrot
     sudo apt-get install imagemagick
     sudo apt-get install python-gtk2
 
-The easiest way to get pyscreenshot is if you have setuptools_ installed::
+    # Python Imaging Library (required)
+    sudo apt-get install python-imaging
 
-    easy_install pyscreenshot
-
-or if you have pip_ installed::
-
-    pip install pyscreenshot
+    sudo apt-get install python-setuptools
+    sudo easy_install pyscreenshot
 
 Uninstall::
 
+    # as root
     pip uninstall pyscreenshot
 
 

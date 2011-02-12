@@ -3,6 +3,7 @@ from paver.easy import *
 from paver.setuputils import setup
 from setuptools import find_packages
 
+
 try:
     # Optional tasks, only needed for development
     # -*- Optional import: -*-
@@ -15,15 +16,20 @@ except ImportError, e:
     debug(str(e))
     ALL_TASKS_LOADED = False
 
+NAME = 'pyscreenshot'
+PACKAGE = 'pyscreenshot'
+URL = 'https://github.com/ponty/pyscreenshot'
+DESCRIPTION = 'python screenshot'
 
-if ALL_TASKS_LOADED:
+
+try:
     sys.path.insert(0, path('.').abspath())
-    from pyscreenshot import __version__
-    version = __version__
-    open('VERSION.txt','w').write(version)
-else:
-    version = open('VERSION.txt','r').read()
-#version = '0.0.0'
+    version = None
+    exec 'from %s import __version__; version = __version__' % PACKAGE
+    open('.version', 'w').write(version)
+except ImportError, e:
+    version = open('.version', 'r').read()
+
 
 classifiers = [
     # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
@@ -39,6 +45,7 @@ install_requires = [
     'yapsy',
     'path.py',
     'PIL',
+    'EasyProcess',
     ]
 
 entry_points = """
@@ -47,15 +54,15 @@ entry_points = """
 
 # compatible with distutils of python 2.3+ or later
 setup(
-    name='pyscreenshot',
+    name=NAME,
     version=version,
-    description='screenshot',
+    description=DESCRIPTION,
     long_description=open('README.rst', 'r').read(),
     classifiers=classifiers,
     keywords='screenshot',
     author='ponty',
     #author_email='zy@gmail.com',
-    url='https://github.com/ponty/pyscreenshot',
+    url=URL,
     license='BSD',
     packages=find_packages(exclude=['bootstrap', 'pavement', ]),
     include_package_data=True,
@@ -92,7 +99,7 @@ options(
     )
 
 options.setup.package_data = paver.setuputils.find_package_data(
-    'pyscreenshot', package='pyscreenshot', only_in_packages=False)
+    PACKAGE, package=PACKAGE, only_in_packages=False)
 
 if ALL_TASKS_LOADED:
     @task
@@ -102,18 +109,50 @@ if ALL_TASKS_LOADED:
 
 @task
 def pychecker():
-    sh('pychecker --stdlib --only --limit 100 pyscreenshot/*.py')
+    sh('pychecker --stdlib --only --limit 100 {package}/'.format(package=PACKAGE))
 
 @task
 def findimports():
-    '''list external imports
-    sudo pip install findimports
-    '''
-    sh('findimports pyscreenshot |grep -v ":"|grep -v pyscreenshot|sort|uniq')
+    '''list external imports'''
+    sh('findimports {package} |grep -v ":"|grep -v {package}|sort|uniq'.format(package=PACKAGE))
 
 @task
 def pyflakes():
-    sh('pyflakes pyscreenshot')
+    sh('pyflakes {package}'.format(package=PACKAGE))
 
+@task
+def nose():
+    sh('nosetests --with-xunit --verbose')
+
+@task
+def sloccount():
+    sh('sloccount --wide --details {package} tests > sloccount.sc'.format(package=PACKAGE))
+
+@task
+def clean():
+    root=path(__file__).dirname().abspath()
+    ls=[]
+    dls=[]
+    ls+=root.walkfiles('*.pyc')
+    ls+=root.walkfiles('*.html')
+    ls+=root.walkfiles('*.zip')
+    ls+=root.walkfiles('*.css')
+    ls+=root.walkfiles('*.png')
+    ls+=root.walkfiles('*.doctree')
+    ls+=root.walkfiles('*.pickle')
+
+    dls+=[root / 'dist']
+    dls+=root.listdir('*.egg-info')
+
+    for x in ls:
+        x.remove()
+    for x in dls:
+        x.rmtree()
+
+#html
+@task
+@needs('sloccount', 'sdist', 'nose')
+def hudson():
+    pass
 
 

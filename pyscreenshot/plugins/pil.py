@@ -1,8 +1,7 @@
-from pyscreenshot import utils
-from pyscreenshot.proc import Process
 from yapsy.IPlugin import IPlugin
 import Image
-import ImageGrab
+import ImageGrab # windows only
+
 
 class PilWrapper(IPlugin):
     '''windows only'''
@@ -13,14 +12,11 @@ class PilWrapper(IPlugin):
     def __init__(self):
         pass
         
-    def activate(self):
-        pass
-        
     def grab(self, bbox=None):
         return ImageGrab.grab(bbox)
         
     def grab_to_file(self, filename):
-        im=self.grab()
+        im = self.grab()
         im.save(filename)
         
     def backend_version(self):
