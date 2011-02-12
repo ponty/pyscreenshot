@@ -65,34 +65,12 @@ Ubuntu
     sudo apt-get install python-setuptools
     sudo easy_install pyscreenshot
 
-Uninstall::
+Uninstall
+----------
+::
 
     # as root
     pip uninstall pyscreenshot
-
-
-Speed
-======
-
-::
-
-    n=10 to_file: True bounding box: None
-    ------------------------------------------------------
-    scrot       2.2 sec
-    imagemagick 5.2 sec
-    pygtk       3.2 sec
-
-    n=10 to_file: False bounding box: None
-    ------------------------------------------------------
-    scrot       2.1 sec
-    imagemagick 5.2 sec
-    pygtk       3.2 sec
-
-    n=10 to_file: False bounding box: (10, 10, 20, 20)
-    ------------------------------------------------------
-    scrot       2.6 sec
-    imagemagick 1.9 sec
-    pygtk       3.6 sec
 
 
 
