@@ -7,4 +7,3 @@ include paver-minilib.zip
 recursive-include pyscreenshot *.conf
 recursive-include test *.py
 
-include .version

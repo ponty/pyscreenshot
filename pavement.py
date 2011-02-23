@@ -22,13 +22,14 @@ URL = 'https://github.com/ponty/pyscreenshot'
 DESCRIPTION = 'python screenshot'
 
 
-try:
-    sys.path.insert(0, path('.').abspath())
-    version = None
-    exec 'from %s import __version__; version = __version__' % PACKAGE
-    open('.version', 'w').write(version)
-except ImportError, e:
-    version = open('.version', 'r').read()
+__version__ = None
+py = path('.') / PACKAGE / '__init__.py'
+for line in open(py).readlines():
+    if '__version__' in line:
+        exec line
+        break
+assert __version__    
+version = __version__
 
 
 classifiers = [
