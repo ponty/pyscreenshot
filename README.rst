@@ -6,20 +6,20 @@ The ``pyscreenshot`` module can be used to copy
 the contents of the screen to a PIL_ image memory or file.
 Replacement for the ImageGrab_ Module, which works on Windows only.
 
-Plugin based, it has wrappers for various backends:
- * scrot 
- * ImageMagick_
- * PyGTK_ 
- * PIL_ (only on windows)
 
 Features:
  * Capturing the whole desktop
  * Capturing an area
+ * Plugin based, it has wrappers for various backends:
+	 * scrot 
+	 * ImageMagick_
+	 * PyGTK_ 
+	 * PIL_ (only on windows)
  
 Known problems:
  * not implemented: Capturing an active window
  * different backends generate slightly different images from the same desktop,
-     this should be investigated 
+   this should be investigated 
  * ImageMagick_ creates blackbox_ on some systems, I had it once
  * PyGTK_ backend does not check $DISPLAY -> not working with Xvfb
  * slow: 0.2s - 0.7s
