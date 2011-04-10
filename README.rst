@@ -8,10 +8,12 @@ Replacement for the ImageGrab_ Module, which works on Windows only.
 
 
 Features:
+ * Crossplatform wrapper
  * Capturing the whole desktop
  * Capturing an area
+ * saving to file or PIL_ image memory
  * Plugin based, it has wrappers for various backends:
-	 * scrot 
+	 * scrot_ 
 	 * ImageMagick_
 	 * PyGTK_ 
 	 * PIL_ (only on windows)
@@ -93,3 +95,4 @@ Uninstall
 .. _ImageMagick: http://www.imagemagick.org/
 .. _PyGTK: http://www.pygtk.org/
 .. _blackbox: http://www.imagemagick.org/discourse-server/viewtopic.php?f=3&t=13658
+.. _scrot: http://linux.die.net/man/1/scrot
