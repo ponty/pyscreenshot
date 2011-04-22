@@ -92,7 +92,7 @@ if ALL_TASKS_LOADED:
     options.paved.clean.patterns += ['*.pickle', '*.doctree', '*.gz' , 'nosetests.xml', 'sloccount.sc']
     
     options.paved.dist.manifest.include.remove('distribute_setup.py')
-    
+    options.paved.dist.manifest.recursive_include.add('pyscreenshot *.conf')
     
     @task
     @needs('sloccount', 'sdist', 'nose')
