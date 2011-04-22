@@ -6,6 +6,7 @@ The ``pyscreenshot`` module can be used to copy
 the contents of the screen to a PIL_ image memory or file.
 Replacement for the ImageGrab_ Module, which works on Windows only.
 
+home: https://github.com/ponty/pyscreenshot
 
 Features:
  * Crossplatform wrapper
@@ -26,7 +27,8 @@ Known problems:
  * PyGTK_ backend does not check $DISPLAY -> not working with Xvfb
  * slow: 0.2s - 0.7s
  
-home: https://github.com/ponty/pyscreenshot
+Similar projects:
+ - http://sourceforge.net/projects/gtkshots/
 
 Usage
 ============
@@ -42,7 +44,7 @@ Example::
     im.show()
     # to file
     ImageGrab.grab_to_file('im.png')
-
+ 
 Installation
 ============
 
