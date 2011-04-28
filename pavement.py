@@ -89,7 +89,14 @@ options(
 
 if ALL_TASKS_LOADED:
     
-    options.paved.clean.patterns += ['*.pickle', '*.doctree', '*.gz' , 'nosetests.xml', 'sloccount.sc']
+    options.paved.clean.patterns += ['*.pickle', 
+                                     '*.doctree', 
+                                     '*.gz' , 
+                                     'nosetests.xml', 
+                                     'sloccount.sc', 
+                                     '*.pdf','*.tex', 
+                                     '*.png',
+                                     ]
     
     options.paved.dist.manifest.include.remove('distribute_setup.py')
     options.paved.dist.manifest.recursive_include.add('pyscreenshot *.conf')

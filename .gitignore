@@ -29,6 +29,7 @@ nosetests.xml
 !/docs/_build/latex
 !*.pdf
 
+.*
 !.gitignore
 /distribute_setup.py
 
