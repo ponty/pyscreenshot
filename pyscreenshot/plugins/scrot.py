@@ -1,5 +1,5 @@
 from easyprocess import EasyProcess
-from pyscreenshot.extract_version import extract_version
+from easyprocess import extract_version
 from yapsy.IPlugin import IPlugin
 import Image
 import tempfile

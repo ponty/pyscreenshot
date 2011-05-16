@@ -103,7 +103,8 @@ if ALL_TASKS_LOADED:
     
     @task
     @needs('sloccount', 'sdist', 'nose')
-    def hudson():
+    def alltest():
+        'all tasks to check'
         pass
     
     @task
@@ -111,3 +112,10 @@ if ALL_TASKS_LOADED:
     def html():
         pass
 
+    @task
+    @needs('sphinxcontrib.paverutils.pdf')
+    def pdf():
+        fpdf = list(path('docs/_build/latex').walkfiles('*.pdf'))[0]
+        d=path('docs/_build/html')
+        d.makedirs()
+        fpdf.copy(d)
