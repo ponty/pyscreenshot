@@ -1,4 +1,4 @@
-from pyscreenshot.examples.speedtest import speedtest
+from pyscreenshot.check.speedtest import speedtest
 
 def test_speed():
     speedtest()

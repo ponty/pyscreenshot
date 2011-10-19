@@ -1,7 +1,7 @@
 from pyscreenshot.backendloader import BackendLoader
 import logging
 
-__version__ = '0.2.0'
+__version__ = '0.2.1'
 
 log = logging.getLogger(__name__)
 log.debug('version=' + __version__)
