@@ -1,12 +1,11 @@
 from pyscreenshot.backendloader import BackendLoader
-import logging
 import pyscreenshot
-
-#logging.basicConfig(level=logging.DEBUG)
+from entrypoint2 import entrypoint
 
 def print_name(name):
     print name, ' '*(20-len(name)),
 
+@entrypoint
 def print_versions():
     print_name('pyscreenshot')
     print pyscreenshot.__version__
@@ -20,5 +19,3 @@ def print_versions():
         except Exception:
             print 'missing'
 
-if __name__ == "__main__": 
-    print_versions() 

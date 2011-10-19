@@ -5,6 +5,8 @@ import platform
 
 log = logging.getLogger(__name__)
 
+class PluginLoaderError(Exception):
+    pass
 
 class PluginLoader(object):
     def __init__(self, default_preference=[]):
@@ -79,7 +81,7 @@ class PluginLoader(object):
             if self.is_forced:
                 b = self.get_valid_plugin_by_name(self._force_backend)
                 if not b:
-                    raise Exception('Forced backend not found, or cannot be loaded:' + self._force_backend)
+                    raise PluginLoaderError('Forced backend not found, or cannot be loaded:' + self._force_backend)
             else:
                 biglist = self.preference + self.default_preference + self.all_names
                 b = self.get_valid_plugin_by_list(biglist)
@@ -106,7 +108,7 @@ class PluginLoader(object):
 #                    message += '\n'
 #                    message += '\t'
 #                    message += 'sudo apt-get install %s' % x.ubuntu_package
-        raise Exception(message)
+        raise PluginLoaderError(message)
     
     
      

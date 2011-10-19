@@ -54,6 +54,7 @@ install_requires = [
     'path.py',
     'PIL',
     'EasyProcess',
+    'entrypoint2',
     ]
 
 # compatible with distutils of python 2.3+ or later
@@ -102,7 +103,7 @@ if ALL_TASKS_LOADED:
     options.paved.dist.manifest.recursive_include.add('pyscreenshot *.conf')
     
     @task
-    @needs('sloccount', 'sdist', 'nose')
+    @needs('sloccount', 'html', 'pdf', 'sdist', 'nose')
     def alltest():
         'all tasks to check'
         pass

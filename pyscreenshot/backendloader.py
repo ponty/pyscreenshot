@@ -2,7 +2,7 @@ from pyscreenshot.loader import PluginLoader
 from pyscreenshot.singl import singleton
 
 
-default_preference = ['pil', 'scrot', 'pygtk', 'imagemagick']
+default_preference = ['pil', 'scrot', 'wx', 'pygtk', 'pyqt', 'imagemagick']
 
 @singleton 
 class BackendLoader(PluginLoader):

@@ -1,7 +1,8 @@
-from yapsy.IPlugin import IPlugin
-import tempfile
 from gtk.gdk import Pixbuf, COLORSPACE_RGB, get_default_root_window
+from yapsy.IPlugin import IPlugin
 import Image
+import gtk
+import tempfile
 
 class GtkPixbufWrapper(IPlugin):
     #home_url = 'http://???'
@@ -43,4 +44,4 @@ class GtkPixbufWrapper(IPlugin):
         
     def backend_version(self):
         # TODO:
-        return 'unknown'
+        return '.'.join(map(str,gtk.ver))

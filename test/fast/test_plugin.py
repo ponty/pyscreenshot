@@ -40,7 +40,7 @@ class Test(TestCase):
         
     def test_force(self):
         man=BackendLoader()
-        for name in ['imagemagick', 'scrot', 'pygtk']:
+        for name in ['imagemagick', 'scrot', 'pygtk','pyqt','wx']:
             man.force(name)
             eq_(man.selected().name, name)
             man.force(None) # for other tests
