@@ -3,7 +3,6 @@ from PyQt4.QtGui import QPixmap, QApplication
 from yapsy.IPlugin import IPlugin
 import Image
 import StringIO
-import sys
 
 class QtGrabWindow(IPlugin):
     '''based on: http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
