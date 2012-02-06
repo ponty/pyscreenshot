@@ -30,6 +30,7 @@ Known problems:
  
 Similar projects:
  - http://sourceforge.net/projects/gtkshots/
+ - http://pypi.python.org/pypi/autopy
  
 
 Usage
@@ -56,17 +57,10 @@ Installation
 General
 --------
 
- * install setuptools_ or pip_
+ * install pip_
  * install PIL_
  * install at least one backend
- * install the program:
-
-if you have setuptools_ installed::
-
-    # as root
-    easy_install pyscreenshot
-
-if you have pip_ installed::
+ * install the program::
 
     # as root
     pip install pyscreenshot
@@ -85,8 +79,8 @@ Ubuntu
     # Python Imaging Library (required)
     sudo apt-get install python-imaging
 
-    sudo apt-get install python-setuptools
-    sudo easy_install pyscreenshot
+    sudo apt-get install python-pip
+    sudo pip install pyscreenshot
 
 Uninstall
 ----------
