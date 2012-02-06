@@ -13,6 +13,7 @@ try:
     from paved.util import *
     from paved.docs import *
     from paved.pycheck import *
+    from paved.pkg import *
     from sphinxcontrib import paverutils
     ALL_TASKS_LOADED = True
 except ImportError, e:
@@ -47,15 +48,7 @@ classifiers = [
     "Programming Language :: Python",
     ]
 
-install_requires = [
-    # -*- Install requires: -*-
-    'setuptools',
-    'yapsy',
-    'path.py',
-    'PIL',
-    'EasyProcess',
-    'entrypoint2',
-    ]
+install_requires = open("requirements.txt").read().split('\n')
 
 # compatible with distutils of python 2.3+ or later
 setup(
@@ -101,9 +94,17 @@ if ALL_TASKS_LOADED:
     
     options.paved.dist.manifest.include.remove('distribute_setup.py')
     options.paved.dist.manifest.recursive_include.add('pyscreenshot *.conf')
+    options.paved.dist.manifest.include.add('requirements.txt')
     
     @task
-    @needs('sloccount', 'html', 'pdf', 'sdist', 'nose')
+    @needs(
+           'clean',
+           'sloccount', 
+           'html', 
+           'pdf', 
+           'sdist', 
+           'nose',
+           )
     def alltest():
         'all tasks to check'
         pass
@@ -120,3 +121,4 @@ if ALL_TASKS_LOADED:
         d=path('docs/_build/html')
         d.makedirs()
         fpdf.copy(d)
+
