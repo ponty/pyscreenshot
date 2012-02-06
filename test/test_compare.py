@@ -7,7 +7,13 @@ import ImageChops
 import Xlib.display
 import pyscreenshot
 
-backends = ['scrot', 'imagemagick', 'pygtk','pyqt','wx'] 
+backends = [
+            'scrot', 
+            'imagemagick', 
+            'pygtk',
+#            'pyqt', #strange error: ICE default IO error handler doing an exit(), pid = 26424, errno = 32
+            'wx',
+            ] 
 bbox_ls = [(100, 200, 300, 400), (10, 10, 20, 20), (100, 100, 200, 200), (1, 2, 3, 4), (10, 20, 30, 40), None]
 ref = 'scrot'
 
