@@ -4,8 +4,9 @@ from nose.tools import eq_, with_setup
 from pyscreenshot.backendloader import BackendLoader
 from pyvirtualdisplay import Display
 import ImageChops
-import Xlib.display
+#import Xlib.display
 import pyscreenshot
+import Tkinter
 
 backends = [
             'scrot', 
@@ -16,6 +17,17 @@ backends = [
             ] 
 bbox_ls = [(100, 200, 300, 400), (10, 10, 20, 20), (100, 100, 200, 200), (1, 2, 3, 4), (10, 20, 30, 40), None]
 ref = 'scrot'
+
+def display_size():
+    root = Tkinter.Tk()
+    
+    screen_width = root.winfo_screenwidth()
+    screen_height = root.winfo_screenheight()
+
+#    xdisp=Xlib.display.Display()
+#    width = xdisp.screen().width_in_pixels
+#    height = xdisp.screen().height_in_pixels
+    return screen_width,screen_height
 
 process = screen = None
 def setup_func():
@@ -42,9 +54,7 @@ def check_size(backend, bbox):
         width = bbox[2] - bbox[0]
         height = bbox[3] - bbox[1]
     else:
-        xdisp=Xlib.display.Display()
-        width = xdisp.screen().width_in_pixels
-        height = xdisp.screen().height_in_pixels
+        width , height = display_size()
     
     eq_(width, im.size[0], 'wrong width! %s' % (backend))
     eq_(height, im.size[1], 'wrong height! %s' % (backend))
