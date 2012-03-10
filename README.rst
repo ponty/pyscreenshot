@@ -7,12 +7,12 @@ Links:
  * documentation: http://ponty.github.com/pyscreenshot
 
 Features:
- * Crossplatform wrapper
+ * Cross-platform wrapper
  * Capturing the whole desktop
  * Capturing an area
  * saving to file or PIL_ image memory
- * some backends are based on this discussion: http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
- * Plugin based, it has wrappers for various backends:
+ * some back-ends are based on this discussion: http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
+ * Plugin based, it has wrappers for various back-ends:
      * scrot_ 
      * ImageMagick_
      * PyGTK_ 
@@ -22,10 +22,10 @@ Features:
  
 Known problems:
  * not implemented: Capturing an active window
- * different backends generate slightly different images from the same desktop,
+ * different back-ends generate slightly different images from the same desktop,
    this should be investigated 
  * ImageMagick_ creates blackbox_ on some systems
- * PyGTK_ backend does not check $DISPLAY -> not working with Xvfb
+ * PyGTK_ back-end does not check $DISPLAY -> not working with Xvfb
  * slow: 0.2s - 0.7s
  
 Similar projects:
@@ -59,7 +59,7 @@ General
 
  * install pip_
  * install PIL_
- * install at least one backend
+ * install at least one back-end
  * install the program::
 
     # as root

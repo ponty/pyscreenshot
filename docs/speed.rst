@@ -1,4 +1,4 @@
-Backend performance 
+back-end performance 
 ====================
 
 .. program-output:: python -m pyscreenshot.check.speedtest
