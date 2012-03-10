@@ -17,7 +17,7 @@ pip-log.txt
 */build/*
 */_build/*
 */_build/latex/*
-#.*
+
 *.class
 *.png
 .version
