@@ -12,6 +12,7 @@ Features:
  * Capturing an area
  * saving to file or PIL_ image memory
  * some back-ends are based on this discussion: http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
+ * pure Python library
  * Plugin based, it has wrappers for various back-ends:
      * scrot_ 
      * ImageMagick_
