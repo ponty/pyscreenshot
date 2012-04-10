@@ -98,6 +98,6 @@ Uninstall
 .. _ImageMagick: http://www.imagemagick.org/
 .. _PyGTK: http://www.pygtk.org/
 .. _blackbox: http://www.imagemagick.org/discourse-server/viewtopic.php?f=3&t=13658
-.. _scrot: http://linux.die.net/man/1/scrot
+.. _scrot: http://en.wikipedia.org/wiki/Scrot
 .. _PyQt4: http://www.riverbankcomputing.co.uk/software/pyqt
 .. _wxPython: http://www.wxpython.org/
