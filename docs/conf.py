@@ -31,7 +31,7 @@ extensions = [
      'sphinx.ext.autodoc',
      'sphinxcontrib.programoutput',
 #     'sphinxcontrib.programscreenshot',
-#     'sphinx.ext.graphviz',
+     'sphinx.ext.graphviz',
      'sphinxcontrib.autorun',
      #'sphinx.ext.autosummary',
 #     'sphinx.ext.intersphinx',
