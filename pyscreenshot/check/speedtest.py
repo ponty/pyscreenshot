@@ -7,7 +7,7 @@ import time
 
 
 def run(force_backend, n, to_file, bbox=None):
-    print force_backend, ' ' * (20 - len(force_backend)),
+    print '%-20s' % force_backend,
 
     BackendLoader().force(force_backend)
 
@@ -21,7 +21,7 @@ def run(force_backend, n, to_file, bbox=None):
             pyscreenshot.grab(bbox=bbox)
     end = time.time()
     dt = end - start
-    print '%.2g sec' % (dt), '(%d ms per call)' % (1000.0 * dt / n)
+    print '%-4.2g sec' % (dt), '(%5d ms per call)' % (1000.0 * dt / n)
 
 
 def run_all(n, to_file, bbox=None):
