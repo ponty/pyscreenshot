@@ -15,7 +15,7 @@ class ImagemagickWrapper(IPlugin):
         pass
         
     def grab(self, bbox=None):
-        f = tempfile.NamedTemporaryFile(suffix='.png', prefix='screenshot_imagemagick_')
+        f = tempfile.NamedTemporaryFile(suffix='.png', prefix='pyscreenshot_imagemagick_')
         filename = f.name
         self.grab_to_file(filename, bbox=bbox) 
         im = Image.open(filename)

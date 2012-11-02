@@ -14,7 +14,7 @@ class GtkPixbufWrapper(IPlugin):
 #        from gtk.gdk import Pixbuf, COLORSPACE_RGB, get_default_root_window
 
     def grab(self, bbox=None):
-        f = tempfile.NamedTemporaryFile(suffix='.png', prefix='screenshot_gtkpixbuf_')
+        f = tempfile.NamedTemporaryFile(suffix='.png', prefix='pyscreenshot_gtkpixbuf_')
         filename = f.name
         self.grab_to_file(filename) 
         im = Image.open(filename)

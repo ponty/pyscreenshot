@@ -17,7 +17,7 @@ class ScrotWrapper(IPlugin):
         pass
     
     def grab(self, bbox=None):
-        f = tempfile.NamedTemporaryFile(suffix='.png', prefix='screenshot_scrot_')
+        f = tempfile.NamedTemporaryFile(suffix='.png', prefix='pyscreenshot_scrot_')
         filename = f.name
         self.grab_to_file(filename) 
         im = Image.open(filename)
