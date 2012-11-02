@@ -1,16 +1,21 @@
-from yapsy.IPlugin import IPlugin
 import Image
-import wx
+from pyscreenshot.loader import IPlugin
+
 
 class WxScreen(IPlugin):
     '''based on: http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
     '''
-    #home_url = 'http://???'
-    #ubuntu_package = '???'
+    # home_url = 'http://???'
+    # ubuntu_package = '???'
+    name = 'wx'
+
     def __init__(self):
-        self.app=None
-        
+        import wx
+        self.wx = wx
+        self.app = None
+
     def grab(self, bbox=None):
+        wx = self.wx
         if not self.app:
             self.app = wx.App()
         screen = wx.ScreenDC()
@@ -19,17 +24,17 @@ class WxScreen(IPlugin):
         mem = wx.MemoryDC(bmp)
         mem.Blit(0, 0, size[0], size[1], screen, 0, 0)
         del mem
-        myWxImage = wx.ImageFromBitmap( bmp )
-        im = Image.new( 'RGB', (myWxImage.GetWidth(), myWxImage.GetHeight()) )
-        im.fromstring( myWxImage.GetData() )
+        myWxImage = wx.ImageFromBitmap(bmp)
+        im = Image.new('RGB', (myWxImage.GetWidth(), myWxImage.GetHeight()))
+        im.fromstring(myWxImage.GetData())
         if bbox:
             im = im.crop(bbox)
         return im
 
     def grab_to_file(self, filename):
-        #bmp.SaveFile('screenshot.png', wx.BITMAP_TYPE_PNG)
+        # bmp.SaveFile('screenshot.png', wx.BITMAP_TYPE_PNG)
         im = self.grab()
         im.save(filename)
-        
+
     def backend_version(self):
-        return wx.__version__
+        return self.wx.__version__

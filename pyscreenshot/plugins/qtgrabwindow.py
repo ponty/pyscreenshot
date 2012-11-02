@@ -1,18 +1,28 @@
-from PyQt4.Qt import QBuffer, QIODevice
-from PyQt4.QtGui import QPixmap, QApplication
-from yapsy.IPlugin import IPlugin
 import Image
 import StringIO
+from pyscreenshot.loader import IPlugin
+
 
 class QtGrabWindow(IPlugin):
     '''based on: http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
     '''
-    #home_url = 'http://???'
-    #ubuntu_package = '???'
+    # home_url = 'http://???'
+    # ubuntu_package = '???'
+    name = 'pyqt'
+
     def __init__(self):
-        self.app=None
-        
+        import PyQt4
+        self.PyQt4 = PyQt4
+        from PyQt4 import QtGui
+        from PyQt4 import Qt
+        self.app = None
+
     def grab_to_buffer(self, buffer, file_type='png'):
+        QApplication = self.PyQt4.QtGui.QApplication
+        QBuffer = self.PyQt4.Qt.QBuffer
+        QIODevice = self.PyQt4.Qt.QIODevice
+        QPixmap = self.PyQt4.QtGui.QPixmap
+
         if not self.app:
             self.app = QApplication([])
         qbuffer = QBuffer()
@@ -38,7 +48,7 @@ class QtGrabWindow(IPlugin):
         buff = open(filename, 'wb')
         self.grab_to_buffer(buff, file_type)
         buff.close()
-        
+
     def backend_version(self):
         # TODO:
         return 'not implemented'

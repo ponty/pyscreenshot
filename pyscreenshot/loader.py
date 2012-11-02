@@ -1,36 +1,27 @@
 from path import path
-from yapsy2 import PluginManager2
 import logging
-import platform
 
 log = logging.getLogger(__name__)
+
+class IPlugin(object):
+    pass
 
 class PluginLoaderError(Exception):
     pass
 
+
 class PluginLoader(object):
     def __init__(self, default_preference=[]):
-        places = [path(__file__).dirname() / 'plugins']
-        ext = 'conf'
-    
-        self.pm = pm = PluginManager2()
-        #pm = PluginManagerSingleton.get()
-        pm.setPluginInfoExtension(ext)
-        pm.setPluginPlaces(places)
-        pm.locatePlugins()
-        self.all_names = [ x[2].name for x in pm.getPluginCandidates()]
-        #pm.loadPlugins()
-    
-        #all = pm.getAllPlugins()
-        #for x in all:
-        #    x.plugin_object.name = x.name
+        self.plugins = dict()
+
+        self.all_names = [x.name for x in IPlugin.__subclasses__()]
 
         self.changed = True
         self._force_backend = None
         self.preference = []
         self.default_preference = default_preference
         self._backend = None
-        
+
     def set_preference(self, x):
         self.changed = True
         self.preference = x
@@ -39,43 +30,34 @@ class PluginLoader(object):
         log.debug('forcing:' + str(name))
         self.changed = True
         self._force_backend = name
-    
+
     @property
     def is_forced(self):
         return self._force_backend is not None
-            
+
     @property
     def loaded_plugins(self):
-        return [x.plugin_object for x in self.pm.getAllPlugins()]     
-        
+        return self.plugins.values()
+
     def get_valid_plugin_by_name(self, name):
-        return self.pm.loadPluginByName(name)
-#        x = self.pm.activatePluginByName(name)
-#        if x:
-#            if hasattr(x, 'is_valid'):
-#                if not x.is_valid:
-#                    x = None
-#            else:
-#                if hasattr(x, 'validate'):
-#                    try:
-#                        log.debug('validating:' + name)
-#                        x.validate()
-#                        x.is_valid = True
-#                        log.debug('success')
-#                    except Exception, detail:
-#                        log.debug('error:' + str(detail))
-#                        x.is_valid = False
-#                        x = None
-#                else:
-#                    x.is_valid = True
-#        return x
-    
+        if name not in self.plugins:
+            ls = filter(lambda x: x.name == name, IPlugin.__subclasses__())
+            if len(ls):
+                try:
+                    plugin = ls[0]()
+                except Exception:
+                    plugin = None
+            else:
+                plugin = None
+            self.plugins[name] = plugin
+        return self.plugins[name]
+
     def get_valid_plugin_by_list(self, ls):
         for name in ls:
             x = self.get_valid_plugin_by_name(name)
-            if x :
+            if x:
                 return x
-    
+
     def selected(self):
         if self.changed:
             if self.is_forced:
@@ -91,24 +73,10 @@ class PluginLoader(object):
             self._backend = b
             log.debug('selecting plugin:' + self._backend.name)
         return self._backend
-    
+
     def raise_exc(self):
-        message = 'Install at least one backend!' 
-#        for x in self.loaded_plugins():
-#            message += '\n'
-#            message += '[%s]' % (x.name)
-#            if hasattr(x, 'home_url'):
-#                home_url = x.home_url
-#                message += '\n'
-#                message += '%s' % (home_url)
-#            message += '\n'
-#            if hasattr(x, 'ubuntu_package'):
-#                if platform.dist()[0].lower() == 'ubuntu':
-#                    message += 'You can install it in terminal:'
-#                    message += '\n'
-#                    message += '\t'
-#                    message += 'sudo apt-get install %s' % x.ubuntu_package
+        message = 'Install at least one backend!'
         raise PluginLoaderError(message)
-    
-    
-     
+
+
+

@@ -1,8 +1,9 @@
 from pyscreenshot.loader import PluginLoader
 from pyscreenshot.singl import singleton
-
+import plugins
 
 default_preference = ['pil', 'scrot', 'wx', 'pygtk', 'pyqt', 'imagemagick']
+
 
 @singleton 
 class BackendLoader(PluginLoader):

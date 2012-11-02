@@ -1,25 +1,25 @@
 from easyprocess import EasyProcess
 from easyprocess import extract_version
-from yapsy.IPlugin import IPlugin
 import Image
 import tempfile
+from pyscreenshot.loader import IPlugin
 
 
-PROGRAM='scrot'
+PROGRAM = 'scrot'
 URL = None
 PACKAGE = 'scrot'
 
-EasyProcess([PROGRAM, '-version'], url=URL, ubuntu_package=PACKAGE).check_installed()
 
 class ScrotWrapper(IPlugin):
-    
+    name = 'scrot'
+
     def __init__(self):
-        pass
-    
+        EasyProcess([PROGRAM, '-version'], url=URL, ubuntu_package=PACKAGE).check_installed()
+
     def grab(self, bbox=None):
         f = tempfile.NamedTemporaryFile(suffix='.png', prefix='pyscreenshot_scrot_')
         filename = f.name
-        self.grab_to_file(filename) 
+        self.grab_to_file(filename)
         im = Image.open(filename)
         if bbox:
             im = im.crop(bbox)
@@ -29,5 +29,5 @@ class ScrotWrapper(IPlugin):
         EasyProcess([PROGRAM , filename]).call()
 
     def backend_version(self):
-        return extract_version(EasyProcess([PROGRAM,'-version']).call().stdout)
-        
+        return extract_version(EasyProcess([PROGRAM, '-version']).call().stdout)
+

@@ -1,22 +1,21 @@
-from gtk.gdk import Pixbuf, COLORSPACE_RGB, get_default_root_window
-from yapsy.IPlugin import IPlugin
+from pyscreenshot.loader import IPlugin
 import Image
-import gtk
 import tempfile
 
+
 class GtkPixbufWrapper(IPlugin):
-    #home_url = 'http://???'
+    # home_url = 'http://???'
     ubuntu_package = 'python-gtk2'
+    name = 'pygtk'
+
     def __init__(self):
-        pass
-        
-#    def validate(self):
-#        from gtk.gdk import Pixbuf, COLORSPACE_RGB, get_default_root_window
+        import gtk
+        self.gtk = gtk
 
     def grab(self, bbox=None):
         f = tempfile.NamedTemporaryFile(suffix='.png', prefix='pyscreenshot_gtkpixbuf_')
         filename = f.name
-        self.grab_to_file(filename) 
+        self.grab_to_file(filename)
         im = Image.open(filename)
         if bbox:
             im = im.crop(bbox)
@@ -30,18 +29,19 @@ class GtkPixbufWrapper(IPlugin):
         
         only "jpeg" or "png"
         '''
-        w = get_default_root_window()
+ 
+        w = self.gtk.gdk.get_default_root_window()
         sz = w.get_size()
-        #print "The size of the window is %d x %d" % sz
-        pb = Pixbuf(COLORSPACE_RGB, False, 8, sz[0], sz[1]) # 24bit RGB
+        # print "The size of the window is %d x %d" % sz
+        pb = self.gtk.gdk.Pixbuf(self.gtk.gdk.COLORSPACE_RGB, False, 8, sz[0], sz[1])  # 24bit RGB
         pb = pb.get_from_drawable(w, w.get_colormap(), 0, 0, 0, 0, sz[0], sz[1])
         assert pb
         type = "png"
         if filename.endswith('.jpeg'):
             type = "jpeg"
-            
+
         pb.save(filename, type)
-        
+
     def backend_version(self):
         # TODO:
-        return '.'.join(map(str,gtk.ver))
+        return '.'.join(map(str, gtk.ver))
