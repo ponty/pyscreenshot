@@ -6,5 +6,4 @@ include requirements.txt
 include CHANGES*
 include README*
 include setup.py
-recursive-include pyscreenshot *.conf
 prune docs/_build

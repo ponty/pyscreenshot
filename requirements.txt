@@ -1,5 +1,4 @@
 path.py
 PIL
 EasyProcess
-entrypoint2
 

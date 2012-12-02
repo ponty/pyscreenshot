@@ -79,18 +79,16 @@ Ubuntu
 ----------
 ::
 
-    # one or more
+    sudo apt-get install python-pip
+    sudo pip install pyscreenshot
+    sudo apt-get install python-imaging
+    # optional back-ends
     sudo apt-get install scrot
     sudo apt-get install imagemagick
     sudo apt-get install python-gtk2
     sudo apt-get install python-qt4
-    sudo apt-get install python-wxversion
-
-    # Python Imaging Library (required)
-    sudo apt-get install python-imaging
-
-    sudo apt-get install python-pip
-    sudo pip install pyscreenshot
+    # optional for examples
+    sudo pip install entrypoint2
 
 Uninstall
 ----------
