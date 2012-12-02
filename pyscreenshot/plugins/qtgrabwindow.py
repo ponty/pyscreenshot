@@ -1,6 +1,6 @@
 import Image
 import StringIO
-from pyscreenshot.loader import IPlugin
+from pyscreenshot.iplugin import IPlugin
 
 
 class QtGrabWindow(IPlugin):

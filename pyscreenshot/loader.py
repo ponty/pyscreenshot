@@ -1,10 +1,9 @@
-from path import path
+from pyscreenshot.iplugin import IPlugin
 import logging
+import plugins
 
 log = logging.getLogger(__name__)
 
-class IPlugin(object):
-    pass
 
 class PluginLoaderError(Exception):
     pass

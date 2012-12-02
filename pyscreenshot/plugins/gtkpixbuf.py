@@ -1,4 +1,4 @@
-from pyscreenshot.loader import IPlugin
+from pyscreenshot.iplugin import IPlugin
 import Image
 import tempfile
 

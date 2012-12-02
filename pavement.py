@@ -44,7 +44,6 @@ options.paved.clean.patterns += ['*.pickle',
 
 options.paved.dist.manifest.include.remove('distribute_setup.py')
 options.paved.dist.manifest.include.remove('paver-minilib.zip')
-options.paved.dist.manifest.recursive_include.add('pyscreenshot *.conf')
 options.paved.dist.manifest.include.add('requirements.txt')
 
 @task

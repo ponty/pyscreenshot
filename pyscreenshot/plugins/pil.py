@@ -1,5 +1,5 @@
 import Image
-from pyscreenshot.loader import IPlugin
+from pyscreenshot.iplugin import IPlugin
 
 
 class PilWrapper(IPlugin):

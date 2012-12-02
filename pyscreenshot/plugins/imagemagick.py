@@ -2,7 +2,7 @@ from easyprocess import EasyProcess
 from easyprocess import extract_version
 import Image
 import tempfile
-from pyscreenshot.loader import IPlugin
+from pyscreenshot.iplugin import IPlugin
 
 PROGRAM = 'import'
 URL = 'http://www.imagemagick.org/'
