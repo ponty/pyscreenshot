@@ -14,10 +14,12 @@ class ScrotWrapper(IPlugin):
     name = 'scrot'
 
     def __init__(self):
-        EasyProcess([PROGRAM, '-version'], url=URL, ubuntu_package=PACKAGE).check_installed()
+        EasyProcess([PROGRAM, '-version'], url=URL,
+                    ubuntu_package=PACKAGE).check_installed()
 
     def grab(self, bbox=None):
-        f = tempfile.NamedTemporaryFile(suffix='.png', prefix='pyscreenshot_scrot_')
+        f = tempfile.NamedTemporaryFile(
+            suffix='.png', prefix='pyscreenshot_scrot_')
         filename = f.name
         self.grab_to_file(filename)
         im = Image.open(filename)
@@ -26,8 +28,7 @@ class ScrotWrapper(IPlugin):
         return im
 
     def grab_to_file(self, filename):
-        EasyProcess([PROGRAM , filename]).call()
+        EasyProcess([PROGRAM, filename]).call()
 
     def backend_version(self):
         return extract_version(EasyProcess([PROGRAM, '-version']).call().stdout)
-

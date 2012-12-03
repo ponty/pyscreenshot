@@ -20,4 +20,3 @@ def show():
     for x in im:
         x.show()
         time.sleep(1)
-

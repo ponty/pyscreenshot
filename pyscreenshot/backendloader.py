@@ -5,7 +5,7 @@ import plugins
 default_preference = ['pil', 'scrot', 'wx', 'pygtk', 'pyqt', 'imagemagick']
 
 
-@singleton 
+@singleton
 class BackendLoader(PluginLoader):
     def __init__(self):
         PluginLoader.__init__(self, default_preference)

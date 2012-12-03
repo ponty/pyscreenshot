@@ -13,10 +13,12 @@ class ImagemagickWrapper(IPlugin):
     name = 'imagemagick'
 
     def __init__(self):
-        EasyProcess([PROGRAM, '-version'], url=URL, ubuntu_package=PACKAGE).check_installed()
+        EasyProcess([PROGRAM, '-version'], url=URL,
+                    ubuntu_package=PACKAGE).check_installed()
 
     def grab(self, bbox=None):
-        f = tempfile.NamedTemporaryFile(suffix='.png', prefix='pyscreenshot_imagemagick_')
+        f = tempfile.NamedTemporaryFile(
+            suffix='.png', prefix='pyscreenshot_imagemagick_')
         filename = f.name
         self.grab_to_file(filename, bbox=bbox)
         im = Image.open(filename)
@@ -27,7 +29,8 @@ class ImagemagickWrapper(IPlugin):
     def grab_to_file(self, filename, bbox=None):
         command = 'import -window root '
         if bbox:
-            command += " -crop '%sx%s+%s+%s' " % (bbox[2] - bbox[0], bbox[3] - bbox[1], bbox[0], bbox[1])
+            command += " -crop '%sx%s+%s+%s' " % (
+                bbox[2] - bbox[0], bbox[3] - bbox[1], bbox[0], bbox[1])
         command += filename
         EasyProcess(command).call()
 

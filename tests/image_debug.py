@@ -10,10 +10,12 @@ img_dir = None
 img_ind = 0
 CROP_RECT = None
 
+
 def set_crop_rect(rct):
     global CROP_RECT
     CROP_RECT = rct
-    
+
+
 def img_debug(im, text):
     if not log.isEnabledFor(DEBUG):
         return
@@ -26,8 +28,8 @@ def img_debug(im, text):
         img_dir = path(mkdtemp(prefix='img_debug_', suffix='', dir=root))
     if CROP_RECT:
         im = im.crop(CROP_RECT)
-    fname = str(img_dir /  str(img_ind) + '_' + text + '.png')
+    fname = str(img_dir / str(img_ind) + '_' + text + '.png')
     im.save(fname)
     log.debug('image (%s) was saved:' % im + fname)
     img_ind += 1
-#BackendLoader().selected().name + '_'
+# BackendLoader().selected().name + '_'

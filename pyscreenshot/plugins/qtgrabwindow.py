@@ -27,7 +27,8 @@ class QtGrabWindow(IPlugin):
             self.app = QApplication([])
         qbuffer = QBuffer()
         qbuffer.open(QIODevice.ReadWrite)
-        QPixmap.grabWindow(QApplication.desktop().winId()).save(qbuffer, file_type)
+        QPixmap.grabWindow(
+            QApplication.desktop().winId()).save(qbuffer, file_type)
         buffer.write(qbuffer.data())
         qbuffer.close()
 #        del app

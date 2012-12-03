@@ -64,7 +64,8 @@ class PluginLoader(object):
                 if not b:
                     raise PluginLoaderError('Forced backend not found, or cannot be loaded:' + self._force_backend)
             else:
-                biglist = self.preference + self.default_preference + self.all_names
+                biglist = self.preference + \
+                    self.default_preference + self.all_names
                 b = self.get_valid_plugin_by_list(biglist)
                 if not b:
                     self.raise_exc()
@@ -76,6 +77,3 @@ class PluginLoader(object):
     def raise_exc(self):
         message = 'Install at least one backend!'
         raise PluginLoaderError(message)
-
-
-

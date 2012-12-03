@@ -12,17 +12,18 @@ log.debug('version=' + __version__)
 
 def grab(bbox=None, childprocess=False, backend=None):
     '''Copy the contents of the screen to PIL image memory.
-    
+
     :param bbox: optional bounding box
-    :param childprocess: pyscreenshot can cause an error, 
-            if it is used on more different virtual displays 
+    :param childprocess: pyscreenshot can cause an error,
+            if it is used on more different virtual displays
             and back-end is not in different process.
             Some back-ends are always different processes: scrot, imagemagick
-    :param backend: back-end can be forced if set (examples:scrot, wx,..), 
+    :param backend: back-end can be forced if set (examples:scrot, wx,..),
                     otherwise back-end is automatic
     '''
     if childprocess:
-        f = tempfile.NamedTemporaryFile(suffix='.png', prefix='pyscreenshot_childprocess_')
+        f = tempfile.NamedTemporaryFile(
+            suffix='.png', prefix='pyscreenshot_childprocess_')
         filename = f.name
 
         params = ["'%s'" % (filename), 'childprocess=False']
@@ -46,7 +47,7 @@ def grab(bbox=None, childprocess=False, backend=None):
 
 def grab_to_file(filename, childprocess=False, backend=None):
     '''Copy the contents of the screen to a file.
-    
+
     :param filename: file for saving
     :param childprocess: see :py:func:`grab`
     :param backend: see :py:func:`grab`
@@ -66,6 +67,3 @@ def grab_to_file(filename, childprocess=False, backend=None):
         if backend:
             BackendLoader().force(backend)
         return BackendLoader().selected().grab_to_file(filename)
-
-
-
