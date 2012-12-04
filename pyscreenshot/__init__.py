@@ -4,7 +4,7 @@ import Image
 import logging
 import tempfile
 
-__version__ = '0.3.0'
+__version__ = '0.3.1'
 
 log = logging.getLogger(__name__)
 log.debug('version=' + __version__)
