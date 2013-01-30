@@ -32,7 +32,7 @@ def grab(bbox=None, childprocess=False, backend=None):
             params += ["backend='%s'" % (backend)]
         params = ','.join(params)
 
-        EasyProcess([sys.executable, #'python',
+        EasyProcess([sys.executable, 
                      '-c',
                      "import pyscreenshot; pyscreenshot.grab_to_file(%s)" % params,
                      ]).check()
@@ -60,7 +60,7 @@ def grab_to_file(filename, childprocess=False, backend=None):
             params += ["backend='%s'" % (backend)]
         params = ','.join(params)
 
-        EasyProcess([sys.executable, #'python',
+        EasyProcess([sys.executable, 
                      '-c',
                      "import pyscreenshot; pyscreenshot.grab_to_file(%s)" % params,
                      ]).check()
