@@ -3,6 +3,7 @@ from pyscreenshot.backendloader import BackendLoader
 import Image
 import logging
 import tempfile
+import sys
 
 __version__ = '0.3.1'
 
@@ -31,7 +32,7 @@ def grab(bbox=None, childprocess=False, backend=None):
             params += ["backend='%s'" % (backend)]
         params = ','.join(params)
 
-        EasyProcess(['python',
+        EasyProcess([sys.executable, 
                      '-c',
                      "import pyscreenshot; pyscreenshot.grab_to_file(%s)" % params,
                      ]).check()
@@ -59,7 +60,7 @@ def grab_to_file(filename, childprocess=False, backend=None):
             params += ["backend='%s'" % (backend)]
         params = ','.join(params)
 
-        EasyProcess(['python',
+        EasyProcess([sys.executable, 
                      '-c',
                      "import pyscreenshot; pyscreenshot.grab_to_file(%s)" % params,
                      ]).check()
