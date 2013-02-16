@@ -1,8 +1,8 @@
 from logging import DEBUG
-from path import path
 from pyscreenshot.backendloader import BackendLoader
 from tempfile import mkdtemp, gettempdir
 import logging
+import os
 
 log = logging.getLogger(__name__)
 
@@ -22,13 +22,13 @@ def img_debug(im, text):
     global img_dir
     global img_ind
     if not img_dir:
-        root = path(gettempdir()) / 'img_debug'
-        if not root.exists():
-            root.makedirs()
-        img_dir = path(mkdtemp(prefix='img_debug_', suffix='', dir=root))
+        root = gettempdir() + '/img_debug'
+        if not os.path.exists(root):
+            os.makedirs(root, mode=0777)
+        img_dir = mkdtemp(prefix='img_debug_', suffix='', dir=root)
     if CROP_RECT:
         im = im.crop(CROP_RECT)
-    fname = str(img_dir / str(img_ind) + '_' + text + '.png')
+    fname = img_dir + '/' + str(img_ind) + '_' + text + '.png'
     im.save(fname)
     log.debug('image (%s) was saved:' % im + fname)
     img_ind += 1
