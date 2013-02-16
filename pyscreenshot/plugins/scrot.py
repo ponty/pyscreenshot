@@ -1,6 +1,6 @@
 from easyprocess import EasyProcess
 from easyprocess import extract_version
-import Image
+from PIL import Image
 import tempfile
 from pyscreenshot.iplugin import IPlugin
 
@@ -12,6 +12,7 @@ PACKAGE = 'scrot'
 
 class ScrotWrapper(IPlugin):
     name = 'scrot'
+    childprocess = True
 
     def __init__(self):
         EasyProcess([PROGRAM, '-version'], url=URL,

@@ -1,4 +1,4 @@
-import Image
+from PIL import Image
 from pyscreenshot.iplugin import IPlugin
 
 
@@ -8,6 +8,7 @@ class PilWrapper(IPlugin):
     home_url = 'http://www.pythonware.com/products/pil/'
     ubuntu_package = 'python-imaging'
     name = 'pil'
+    childprocess = False
 
     def __init__(self):
         import ImageGrab  # windows only

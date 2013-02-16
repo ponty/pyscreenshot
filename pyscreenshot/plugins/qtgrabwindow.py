@@ -1,4 +1,4 @@
-import Image
+from PIL import Image
 import StringIO
 from pyscreenshot.iplugin import IPlugin
 
@@ -9,6 +9,7 @@ class QtGrabWindow(IPlugin):
     # home_url = 'http://???'
     # ubuntu_package = '???'
     name = 'pyqt'
+    childprocess = False
 
     def __init__(self):
         import PyQt4

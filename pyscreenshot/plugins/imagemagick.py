@@ -1,6 +1,6 @@
 from easyprocess import EasyProcess
 from easyprocess import extract_version
-import Image
+from PIL import Image
 import tempfile
 from pyscreenshot.iplugin import IPlugin
 
@@ -11,6 +11,7 @@ PACKAGE = 'imagemagick'
 
 class ImagemagickWrapper(IPlugin):
     name = 'imagemagick'
+    childprocess = True
 
     def __init__(self):
         EasyProcess([PROGRAM, '-version'], url=URL,

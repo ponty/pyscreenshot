@@ -1,6 +1,6 @@
 from easyprocess import EasyProcess
 from pyscreenshot.backendloader import BackendLoader
-import Image
+from PIL import Image
 import logging
 import tempfile
 import sys

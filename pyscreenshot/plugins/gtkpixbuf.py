@@ -1,5 +1,5 @@
 from pyscreenshot.iplugin import IPlugin
-import Image
+from PIL import Image
 import tempfile
 
 
@@ -7,6 +7,7 @@ class GtkPixbufWrapper(IPlugin):
     # home_url = 'http://???'
     ubuntu_package = 'python-gtk2'
     name = 'pygtk'
+    childprocess = False
 
     def __init__(self):
         import gtk

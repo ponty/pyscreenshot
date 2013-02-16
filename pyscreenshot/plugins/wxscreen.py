@@ -1,4 +1,4 @@
-import Image
+from PIL import Image
 from pyscreenshot.iplugin import IPlugin
 
 
@@ -8,6 +8,7 @@ class WxScreen(IPlugin):
     # home_url = 'http://???'
     # ubuntu_package = '???'
     name = 'wx'
+    childprocess = False
 
     def __init__(self):
         import wx
