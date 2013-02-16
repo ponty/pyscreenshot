@@ -31,7 +31,8 @@ def display_size():
 
     for x in EasyProcess('xrandr').call().stdout.splitlines():
         if '*' in x:
-            screen_width, screen_height = map(int, x.strip().split()[0].split('x'))
+            screen_width, screen_height = map(
+                int, x.strip().split()[0].split('x'))
     return screen_width, screen_height
 
 process = screen = None
@@ -109,12 +110,12 @@ def check_ref(backend, bbox):
 
 
 bbox_ls = [
-           (100, 200, 300, 400),
-           (10, 10, 20, 20),
-           (100, 100, 200, 200),
-           (1, 2, 3, 4),
-           (10, 20, 30, 40),
-           None]
+    (100, 200, 300, 400),
+    (10, 10, 20, 20),
+    (100, 100, 200, 200),
+    (1, 2, 3, 4),
+    (10, 20, 30, 40),
+    None]
 
 
 def backend_size(backend):
@@ -133,7 +134,3 @@ def backend_ref(backend):
         print 'backend:', backend
         check_ref(backend, bbox)
         teardown_func()
-
-
-
-
