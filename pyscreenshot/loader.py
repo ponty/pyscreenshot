@@ -13,13 +13,16 @@ class PluginLoader(object):
     def __init__(self, default_preference=[]):
         self.plugins = dict()
 
-        self.all_names = [x.name for x in IPlugin.__subclasses__()]
+        self.all_names = [x.name for x in self.plugin_classes()]
 
         self.changed = True
         self._force_backend = None
         self.preference = []
         self.default_preference = default_preference
         self._backend = None
+
+    def plugin_classes(self):
+        return IPlugin.__subclasses__()
 
     def set_preference(self, x):
         self.changed = True
@@ -40,7 +43,7 @@ class PluginLoader(object):
 
     def get_valid_plugin_by_name(self, name):
         if name not in self.plugins:
-            ls = filter(lambda x: x.name == name, IPlugin.__subclasses__())
+            ls = filter(lambda x: x.name == name, self.plugin_classes())
             if len(ls):
                 try:
                     plugin = ls[0]()
