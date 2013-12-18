@@ -28,7 +28,7 @@ class ImagemagickWrapper(IPlugin):
         return im
 
     def grab_to_file(self, filename, bbox=None):
-        command = 'import -window root '
+        command = 'import -silent -window root '
         if bbox:
             command += " -crop '%sx%s+%s+%s' " % (
                 bbox[2] - bbox[0], bbox[3] - bbox[1], bbox[0], bbox[1])
