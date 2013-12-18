@@ -28,11 +28,18 @@ def display_size():
 #    xdisp=Xlib.display.Display()
 #    width = xdisp.screen().width_in_pixels
 #    height = xdisp.screen().height_in_pixels
-
-    for x in EasyProcess('xrandr').call().stdout.splitlines():
-        if '*' in x:
+    # http://www.cyberciti.biz/faq/how-do-i-find-out-screen-resolution-of-my-linux-desktop/
+    # xdpyinfo  | grep 'dimensions:'
+    for x in EasyProcess('xdpyinfo').call().stdout.splitlines():
+        if 'dimensions:' in x:
             screen_width, screen_height = map(
-                int, x.strip().split()[0].split('x'))
+                int, x.strip().split()[1].split('x'))
+
+    # xrandr | grep '*'
+#    for x in EasyProcess('xrandr').call().stdout.splitlines():
+#        if '*' in x:
+#            screen_width, screen_height = map(
+#                int, x.strip().split()[0].split('x'))
     return screen_width, screen_height
 
 process = screen = None
@@ -52,6 +59,12 @@ def teardown_func():
     process.stop()
     screen.stop()
 
+
+def test_display_size():
+    width, height = display_size()
+    assert width>10
+    assert height>10
+    
 
 def check_size(backend, bbox):
 #    BackendLoader().force(backend)
