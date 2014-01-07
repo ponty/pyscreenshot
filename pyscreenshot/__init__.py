@@ -49,7 +49,7 @@ def _grab(to_file, childprocess=False, backend=None, bbox=None, filename=None):
 def grab(bbox=None, childprocess=False, backend=None):
     '''Copy the contents of the screen to PIL image memory.
 
-    :param bbox: optional bounding box
+    :param bbox: optional bounding box (x1,y1,x2,y2)
     :param childprocess: pyscreenshot can cause an error,
             if it is used on more different virtual displays
             and back-end is not in different process.
