@@ -10,8 +10,8 @@ Goal:
   Pyscreenshot tries to allow to take screenshots without installing 3rd party libraries.
   It is cross-platform but useful for Linux based distributions.
   It is only a pure Python wrapper, a thin layer over existing back-ends.
-  Its strategy should work on most Linux distributions: 
-  a lot of back-ends are wrapped, if at least one exists then it works,  
+  Its strategy should work on most Linux distributions:
+  a lot of back-ends are wrapped, if at least one exists then it works,
   if not then one back-end should be installed.
   Performance and interactivity are not important for this library.
 
@@ -24,25 +24,25 @@ Features:
  * pure Python library
  * supported python versions: 2.6, 2.7
  * Plugin based, it has wrappers for various back-ends:
-     * scrot_ 
+     * scrot_
      * ImageMagick_
-     * PyGTK_ 
+     * PyGTK_
      * PIL_ (only on windows)
      * PyQt4_
      * wxPython_
- 
+
 Known problems:
  * not implemented: Capturing an active window
  * different back-ends generate slightly different images from the same desktop,
-   this should be investigated 
+   this should be investigated
  * ImageMagick_ creates blackbox_ on some systems
  * PyGTK_ back-end does not check $DISPLAY -> not working with Xvfb
  * slow: 0.2s - 0.7s
- 
+
 Similar projects:
  - http://sourceforge.net/projects/gtkshots/
  - http://pypi.python.org/pypi/autopy
- 
+
 
 Usage
 ============
@@ -50,18 +50,18 @@ Usage
 Example::
 
     import pyscreenshot as ImageGrab
-    
+
     # fullscreen
     im=ImageGrab.grab()
     im.show()
-    
+
     # part of the screen
-    im=ImageGrab.grab(bbox=(10,10,500,500))
+    im=ImageGrab.grab(bbox=(10,10,500,500)) # X1,Y1,X2,Y2
     im.show()
-    
+
     # to file
     ImageGrab.grab_to_file('im.png')
- 
+
 Installation
 ============
 
