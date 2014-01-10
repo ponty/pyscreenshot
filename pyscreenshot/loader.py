@@ -1,4 +1,3 @@
-from pyscreenshot.iplugin import IPlugin
 import logging
 import plugins
 
@@ -10,7 +9,7 @@ class PluginLoaderError(Exception):
 
 
 class PluginLoader(object):
-    def __init__(self, default_preference=[]):
+    def __init__(self):
         self.plugins = dict()
 
         self.all_names = [x.name for x in self.plugin_classes()]
@@ -18,11 +17,11 @@ class PluginLoader(object):
         self.changed = True
         self._force_backend = None
         self.preference = []
-        self.default_preference = default_preference
+        self.default_preference = plugins.default_preference
         self._backend = None
 
     def plugin_classes(self):
-        return IPlugin.__subclasses__()
+        return plugins.BACKENDS
 
     def set_preference(self, x):
         self.changed = True

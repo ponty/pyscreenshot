@@ -1,2 +1,0 @@
-class IPlugin(object):
-    pass

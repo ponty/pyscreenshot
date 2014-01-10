@@ -2,14 +2,13 @@ import platform
 from easyprocess import EasyProcess, EasyProcessCheckInstalledError
 from PIL import Image
 import tempfile
-from ..iplugin import IPlugin
 
 PROGRAM = 'screencapture'
 URL = 'http://support.apple.com/kb/ph11229'
 PACKAGE = 'screencapture'
 
 
-class ScreencaptureWrapper(IPlugin):
+class ScreencaptureWrapper(object):
     name = 'mac_screencapture'
     childprocess = True
 

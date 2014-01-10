@@ -1,8 +1,7 @@
 from PIL import Image
-from pyscreenshot.iplugin import IPlugin
 
 
-class PilWrapper(IPlugin):
+class PilWrapper(object):
     '''windows only'''
 
     home_url = 'http://www.pythonware.com/products/pil/'

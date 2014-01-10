@@ -1,9 +1,8 @@
 from PIL import Image
 import StringIO
-from pyscreenshot.iplugin import IPlugin
 
 
-class QtGrabWindow(IPlugin):
+class QtGrabWindow(object):
     '''based on: http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
     '''
     # home_url = 'http://???'

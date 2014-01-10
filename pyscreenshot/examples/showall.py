@@ -13,7 +13,7 @@ def show():
     for x in backends:
         try:
             print 'grabbing by ' + x
-            im.append(ImageGrab.grab(bbox=(100, 200, 300, 400), backend=x))
+            im.append(ImageGrab.grab(bbox=(500, 400, 800, 600), backend=x))
         except PluginLoaderError as e:
             print e
     print im

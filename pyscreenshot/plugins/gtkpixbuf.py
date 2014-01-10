@@ -1,9 +1,8 @@
-from pyscreenshot.iplugin import IPlugin
 from PIL import Image
 import tempfile
 
 
-class GtkPixbufWrapper(IPlugin):
+class GtkPixbufWrapper(object):
     # home_url = 'http://???'
     ubuntu_package = 'python-gtk2'
     name = 'pygtk'

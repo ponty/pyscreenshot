@@ -2,14 +2,13 @@ from easyprocess import EasyProcess
 from easyprocess import extract_version
 from PIL import Image
 import tempfile
-from pyscreenshot.iplugin import IPlugin
 
 PROGRAM = 'import'
 URL = 'http://www.imagemagick.org/'
 PACKAGE = 'imagemagick'
 
 
-class ImagemagickWrapper(IPlugin):
+class ImagemagickWrapper(object):
     name = 'imagemagick'
     childprocess = True
 

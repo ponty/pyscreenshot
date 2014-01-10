@@ -56,7 +56,7 @@ Example::
     im.show()
 
     # part of the screen
-    im=ImageGrab.grab(bbox=(10,10,500,500)) # X1,Y1,X2,Y2
+    im=ImageGrab.grab(bbox=(10,10,510,510)) # X1,Y1,X2,Y2
     im.show()
 
     # to file
