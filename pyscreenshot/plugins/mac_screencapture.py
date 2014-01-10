@@ -34,4 +34,5 @@ class ScreencaptureWrapper(IPlugin):
         EasyProcess(command).call()
 
     def backend_version(self):
-        return '1.0'
+        # TODO:
+        return 'not implemented'
