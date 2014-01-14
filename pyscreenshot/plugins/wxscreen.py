@@ -2,6 +2,7 @@ from PIL import Image
 
 
 class WxScreen(object):
+
     '''based on: http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
     '''
     # home_url = 'http://???'

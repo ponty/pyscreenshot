@@ -27,7 +27,7 @@ class ScreencaptureWrapper(object):
     def grab_to_file(self, filename, bbox=None):
         command = 'screencapture '
         if bbox:
-            command += " -R%s,%s,%s,%s " % (
+            command += ' -R%s,%s,%s,%s ' % (
                 bbox[0], bbox[1], bbox[2] - bbox[0], bbox[3] - bbox[1])
         command += filename
         EasyProcess(command).call()

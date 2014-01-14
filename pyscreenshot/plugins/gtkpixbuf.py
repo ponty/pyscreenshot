@@ -39,9 +39,9 @@ class GtkPixbufWrapper(object):
         pb = pb.get_from_drawable(
             w, w.get_colormap(), 0, 0, 0, 0, sz[0], sz[1])
         assert pb
-        type = "png"
+        type = 'png'
         if filename.endswith('.jpeg'):
-            type = "jpeg"
+            type = 'jpeg'
 
         pb.save(filename, type)
 

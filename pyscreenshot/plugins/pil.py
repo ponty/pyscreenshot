@@ -2,7 +2,8 @@ from PIL import Image
 
 
 class PilWrapper(object):
-    '''windows only'''
+
+    """windows only."""
 
     home_url = 'http://www.pythonware.com/products/pil/'
     ubuntu_package = 'python-imaging'

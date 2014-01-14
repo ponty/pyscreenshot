@@ -9,6 +9,7 @@ class PluginLoaderError(Exception):
 
 
 class PluginLoader(object):
+
     def __init__(self):
         self.plugins = dict()
 
@@ -64,7 +65,8 @@ class PluginLoader(object):
             if self.is_forced:
                 b = self.get_valid_plugin_by_name(self._force_backend)
                 if not b:
-                    raise PluginLoaderError('Forced backend not found, or cannot be loaded:' + self._force_backend)
+                    raise PluginLoaderError(
+                        'Forced backend not found, or cannot be loaded:' + self._force_backend)
             else:
                 biglist = self.preference + \
                     self.default_preference + self.all_names

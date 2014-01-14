@@ -3,6 +3,7 @@ import StringIO
 
 
 class QtGrabWindow(object):
+
     '''based on: http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
     '''
     # home_url = 'http://???'
@@ -43,9 +44,9 @@ class QtGrabWindow(object):
         return im
 
     def grab_to_file(self, filename):
-        file_type = "png"
+        file_type = 'png'
         if filename.endswith('.jpeg'):
-            file_type = "jpeg"
+            file_type = 'jpeg'
         buff = open(filename, 'wb')
         self.grab_to_buffer(buff, file_type)
         buff.close()

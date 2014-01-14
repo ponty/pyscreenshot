@@ -1,5 +1,4 @@
 from logging import DEBUG
-from pyscreenshot.backendloader import BackendLoader
 from tempfile import mkdtemp, gettempdir
 import logging
 import os

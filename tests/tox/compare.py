@@ -13,7 +13,7 @@ import tempfile
 #    'scrot',
 #    'imagemagick',
 #    'pygtk',
-#    #            'pyqt', #strange error: ICE default IO error handler doing an exit(), pid = 26424, errno = 32
+# 'pyqt', #strange error: ICE default IO error handler doing an exit(), pid = 26424, errno = 32
 #    'wx',
 # ]
 ref = 'scrot'
@@ -46,7 +46,7 @@ process = screen = None
 
 
 def setup_func():
-    "set up test fixtures"
+    'set up test fixtures'
     global process, screen
     screen = Display(visible=0)
     screen.start()
@@ -54,7 +54,7 @@ def setup_func():
 
 
 def teardown_func():
-    "tear down test fixtures"
+    'tear down test fixtures'
     global process, screen
     process.stop()
     screen.stop()
@@ -62,9 +62,9 @@ def teardown_func():
 
 def test_display_size():
     width, height = display_size()
-    assert width>10
-    assert height>10
-    
+    assert width > 10
+    assert height > 10
+
 
 def check_size(backend, bbox):
 #    BackendLoader().force(backend)

@@ -27,8 +27,8 @@ def _grab(to_file, childprocess=False, backend=None, bbox=None, filename=None):
 
         EasyProcess([sys.executable,
                      '-c',
-                     "import pyscreenshot; pyscreenshot.grab_to_file(%s)" % (
-                     params),
+                     'import pyscreenshot; pyscreenshot.grab_to_file(%s)' % (
+                         params),
                      ]).check()
         if not to_file:
             im = Image.open(filename)
@@ -47,7 +47,7 @@ def _grab(to_file, childprocess=False, backend=None, bbox=None, filename=None):
 
 
 def grab(bbox=None, childprocess=False, backend=None):
-    '''Copy the contents of the screen to PIL image memory.
+    """Copy the contents of the screen to PIL image memory.
 
     :param bbox: optional bounding box (x1,y1,x2,y2)
     :param childprocess: pyscreenshot can cause an error,
@@ -56,15 +56,17 @@ def grab(bbox=None, childprocess=False, backend=None):
             Some back-ends are always different processes: scrot, imagemagick
     :param backend: back-end can be forced if set (examples:scrot, wx,..),
                     otherwise back-end is automatic
-    '''
+
+    """
     return _grab(to_file=False, childprocess=childprocess, backend=backend, bbox=bbox)
 
 
 def grab_to_file(filename, childprocess=False, backend=None):
-    '''Copy the contents of the screen to a file.
+    """Copy the contents of the screen to a file.
 
     :param filename: file for saving
     :param childprocess: see :py:func:`grab`
     :param backend: see :py:func:`grab`
-    '''
+
+    """
     return _grab(to_file=True, childprocess=childprocess, backend=backend, filename=filename)

@@ -21,12 +21,12 @@ exec(setup_py)
 options(
     sphinx=Bunch(
         docroot='docs',
-        builddir="_build",
+        builddir='_build',
     ),
-#    pdf=Bunch(
-#        builddir='_build',
-#        builder='latex',
-#    ),
+    #    pdf=Bunch(
+    #        builddir='_build',
+    #        builder='latex',
+    #    ),
 )
 
 options.paved.clean.rmdirs += ['.tox',
@@ -64,6 +64,5 @@ def alltest():
 @task
 @needs('manifest', 'setuptools.command.sdist')
 def sdist():
-    """Overrides sdist to make sure that our MANIFEST.in is generated.
-    """
+    """Overrides sdist to make sure that our MANIFEST.in is generated."""
     pass
