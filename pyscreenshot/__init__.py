@@ -1,14 +1,24 @@
-from easyprocess import EasyProcess
-from pyscreenshot.backendloader import BackendLoader
 from PIL import Image
+from easyprocess import EasyProcess
 import logging
-import tempfile
+from pyscreenshot.loader import BackendLoader
 import sys
+import tempfile
 
-__version__ = '0.3.2'
+
+__version__ = '0.3.3'
 
 log = logging.getLogger(__name__)
 log.debug('version=' + __version__)
+
+BACKEND_LOADER = None
+
+
+def _get_loader():
+    global BACKEND_LOADER
+    if not BACKEND_LOADER:
+        BACKEND_LOADER = BackendLoader()
+    return BACKEND_LOADER
 
 
 def _grab(to_file, childprocess=False, backend=None, bbox=None, filename=None):
@@ -37,8 +47,8 @@ def _grab(to_file, childprocess=False, backend=None, bbox=None, filename=None):
             return im
     else:
         if backend:
-            BackendLoader().force(backend)
-        backend_obj = BackendLoader().selected()
+            _get_loader().force(backend)
+        backend_obj = _get_loader().selected()
 
         if to_file:
             return backend_obj.grab_to_file(filename)
@@ -70,3 +80,8 @@ def grab_to_file(filename, childprocess=False, backend=None):
 
     """
     return _grab(to_file=True, childprocess=childprocess, backend=backend, filename=filename)
+
+
+def backends():
+    '''Back-end names as a list'''
+    return _get_loader().all_names

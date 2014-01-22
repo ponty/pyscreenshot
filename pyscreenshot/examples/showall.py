@@ -1,20 +1,20 @@
-from pyscreenshot.backendloader import BackendLoader
-from pyscreenshot.loader import PluginLoaderError
-import pyscreenshot as ImageGrab
-import time
 from entrypoint2 import entrypoint
+from pyscreenshot import backends
+from pyscreenshot.loader import BackendLoaderError
+import time
+
+import pyscreenshot as ImageGrab
 
 
 @entrypoint
 def show():
     im = []
 
-    backends = BackendLoader().all_names
-    for x in backends:
+    for x in backends():
         try:
             print 'grabbing by ' + x
             im.append(ImageGrab.grab(bbox=(500, 400, 800, 600), backend=x))
-        except PluginLoaderError as e:
+        except BackendLoaderError as e:
             print e
     print im
     for x in im:

@@ -1,6 +1,6 @@
 from entrypoint2 import entrypoint
 from pyscreenshot.backendloader import BackendLoader
-from pyscreenshot.loader import PluginLoaderError
+from pyscreenshot.loader import BackendLoaderError
 from pyvirtualdisplay.display import Display
 import pyscreenshot
 import time
@@ -33,7 +33,7 @@ def run_all(bgcolor, display, bbox):
 #                time.sleep(1)
                 try:
                     run(x, bbox, bgcolor=bgcolor)
-                except PluginLoaderError as e:
+                except BackendLoaderError as e:
                     print e
         except Exception as e:
             print e

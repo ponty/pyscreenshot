@@ -1,6 +1,6 @@
 from entrypoint2 import entrypoint
-from pyscreenshot.backendloader import BackendLoader
-from pyscreenshot.loader import PluginLoaderError
+from pyscreenshot.loader import BackendLoader
+from pyscreenshot.loader import BackendLoaderError
 import pyscreenshot
 import tempfile
 import time
@@ -34,7 +34,7 @@ def run_all(n, to_file, bbox=None):
         try:
             run(x, n, to_file, bbox)
 #            print 'grabbing by '+x
-        except PluginLoaderError as e:
+        except BackendLoaderError as e:
             print e
 
 

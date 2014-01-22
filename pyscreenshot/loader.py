@@ -4,11 +4,11 @@ from pyscreenshot import plugins
 log = logging.getLogger(__name__)
 
 
-class PluginLoaderError(Exception):
+class BackendLoaderError(Exception):
     pass
 
 
-class PluginLoader(object):
+class BackendLoader(object):
 
     def __init__(self):
         self.plugins = dict()
@@ -65,7 +65,7 @@ class PluginLoader(object):
             if self.is_forced:
                 b = self.get_valid_plugin_by_name(self._force_backend)
                 if not b:
-                    raise PluginLoaderError(
+                    raise BackendLoaderError(
                         'Forced backend not found, or cannot be loaded:' + self._force_backend)
             else:
                 biglist = self.preference + \
@@ -80,4 +80,4 @@ class PluginLoader(object):
 
     def raise_exc(self):
         message = 'Install at least one backend!'
-        raise PluginLoaderError(message)
+        raise BackendLoaderError(message)

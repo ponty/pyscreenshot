@@ -1,7 +1,7 @@
 from easyprocess import EasyProcess
 from image_debug import img_debug
 from nose.tools import eq_, with_setup
-from pyscreenshot.backendloader import BackendLoader
+from pyscreenshot.loader import BackendLoader
 from pyvirtualdisplay import Display
 from PIL import ImageChops
 # import Tkinter

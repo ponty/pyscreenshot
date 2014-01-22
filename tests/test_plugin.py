@@ -1,7 +1,8 @@
-from nose.tools import eq_
-from pyscreenshot.backendloader import BackendLoader
-from unittest import TestCase
 import logging
+from nose.tools import eq_
+from pyscreenshot.loader import BackendLoader
+from unittest import TestCase
+
 
 logging.basicConfig(level=logging.DEBUG)
 
