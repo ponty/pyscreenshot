@@ -1,5 +1,5 @@
 import logging
-import plugins
+from pyscreenshot import plugins
 
 log = logging.getLogger(__name__)
 
