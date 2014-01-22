@@ -1,4 +1,4 @@
-from setuptools import find_packages, setup
+from distutils.core import setup
 import os.path
 import sys
 
@@ -16,6 +16,11 @@ NAME = 'pyscreenshot'
 URL = 'https://github.com/ponty/pyscreenshot'
 DESCRIPTION = 'python screenshot'
 VERSION = read_project_version(NAME)
+PACKAGES = ['pyscreenshot',
+            'pyscreenshot.plugins',
+            'pyscreenshot.check',
+            'pyscreenshot.examples',
+            ]
 
 extra = {}
 if sys.version_info >= (3,):
@@ -32,7 +37,6 @@ classifiers = [
 
 install_requires = open('requirements.txt').read().split('\n')
 
-# compatible with distutils of python 2.3+ or later
 setup(
     name=NAME,
     version=VERSION,
@@ -44,7 +48,7 @@ setup(
     # author_email='',
     url=URL,
     license='BSD',
-    packages=find_packages(exclude=['bootstrap', 'pavement', ]),
+    packages=PACKAGES,
     include_package_data=True,
     test_suite='nose.collector',
     zip_safe=False,

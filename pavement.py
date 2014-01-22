@@ -1,6 +1,5 @@
 from paver.easy import *
 from paver.setuputils import setup
-from setuptools import find_packages
 
 import paver.doctools
 import paver.virtual
@@ -14,7 +13,7 @@ from paved.pkg import *
 
 # get info from setup.py
 setup_py = ''.join(
-    [x for x in path('setup.py').lines() if 'setuptools' not in x])
+    [x for x in path('setup.py').lines() if 'distutils' not in x])
 exec(setup_py)
 
 

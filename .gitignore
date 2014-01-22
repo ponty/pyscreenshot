@@ -30,3 +30,4 @@ nosetests.xml
 
 sloccount.sc
 *.prefs
+MANIFEST
