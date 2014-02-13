@@ -27,7 +27,12 @@ class WxScreen(object):
         del mem
         myWxImage = wx.ImageFromBitmap(bmp)
         im = Image.new('RGB', (myWxImage.GetWidth(), myWxImage.GetHeight()))
-        im.frombytes(myWxImage.GetData())
+        if hasattr(Image, 'frombytes'):
+            # for Pillow
+            im.frombytes(myWxImage.GetData())
+        else:
+            # for PIL
+            im.fromstring(myWxImage.GetData())
         if bbox:
             im = im.crop(bbox)
         return im
