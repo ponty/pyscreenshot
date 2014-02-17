@@ -61,7 +61,7 @@ def alltest():
 
 
 @task
-@needs('manifest', 'setuptools.command.sdist')
+@needs('manifest')
 def sdist():
     """Overrides sdist to make sure that our MANIFEST.in is generated."""
     pass

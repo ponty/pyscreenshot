@@ -33,7 +33,6 @@ Features:
      * wxPython_
 
 Known problems:
- * not implemented: Capturing an active window
  * different back-ends generate slightly different images from the same desktop,
    this should be investigated
  * ImageMagick_ creates blackbox_ on some systems
