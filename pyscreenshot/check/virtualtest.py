@@ -1,6 +1,5 @@
 from entrypoint2 import entrypoint
 import pyscreenshot
-from pyscreenshot.loader import BackendLoader, BackendLoaderError
 from pyvirtualdisplay.display import Display
 
 
@@ -15,8 +14,7 @@ def run(force_backend, bbox, bgcolor):
         print 'SKIP'
         return
 
-    BackendLoader().force(force_backend)
-    im = pyscreenshot.grab(bbox=bbox)
+    im = pyscreenshot.grab(bbox=bbox, backend=force_backend)
     ls = list(im.getdata())
     print 'OK' if all([x == color or x == (color, color, color) for x in ls]) else 'FAIL'
 
@@ -25,14 +23,13 @@ def run_all(bgcolor, display, bbox):
     print
     print 'bgcolor=', bgcolor
     print '-------------------------------------'
-    backends = BackendLoader().all_names
-    for x in backends:
+    for x in pyscreenshot.backends():
         try:
             with Display(size=display, bgcolor=bgcolor):
 #                time.sleep(1)
                 try:
                     run(x, bbox, bgcolor=bgcolor)
-                except BackendLoaderError as e:
+                except pyscreenshot.FailedBackendError as e:
                     print e
         except Exception as e:
             print e

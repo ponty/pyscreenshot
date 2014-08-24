@@ -1,6 +1,6 @@
 import logging
 from nose.tools import eq_
-from pyscreenshot.loader import BackendLoader
+from pyscreenshot.loader import Loader
 from unittest import TestCase
 
 
@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.DEBUG)
 class Test(TestCase):
 
     def test_pref(self):
-        man = BackendLoader()
+        man = Loader()
         man.force(None)
 
         man.set_preference(['imagemagick', 'scrot'])
@@ -38,14 +38,14 @@ class Test(TestCase):
         eq_(man.selected().name, 'scrot')
 
     def test_force(self):
-        man = BackendLoader()
+        man = Loader()
         for name in ['imagemagick', 'scrot', 'pygtk', 'pyqt', 'wx']:
             man.force(name)
             eq_(man.selected().name, name)
             man.force(None)  # for other tests
 
     def test_mix(self):
-        man = BackendLoader()
+        man = Loader()
         man.force('scrot')
         man.set_preference(['imagemagick', 'scrot'])
         eq_(man.selected().name, 'scrot')

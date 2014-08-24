@@ -1,7 +1,7 @@
 from PIL import Image
 from easyprocess import EasyProcess
 import logging
-from pyscreenshot.loader import BackendLoader
+from pyscreenshot.loader import Loader, FailedBackendError
 import sys
 import tempfile
 
@@ -17,7 +17,7 @@ BACKEND_LOADER = None
 def _get_loader():
     global BACKEND_LOADER
     if not BACKEND_LOADER:
-        BACKEND_LOADER = BackendLoader()
+        BACKEND_LOADER = Loader()
     return BACKEND_LOADER
 
 

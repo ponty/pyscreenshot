@@ -1,7 +1,6 @@
 from easyprocess import EasyProcess
 from image_debug import img_debug
 from nose.tools import eq_, with_setup
-from pyscreenshot.loader import BackendLoader
 from pyvirtualdisplay import Display
 from PIL import ImageChops
 # import Tkinter
@@ -67,8 +66,6 @@ def test_display_size():
 
 
 def check_size(backend, bbox):
-#    BackendLoader().force(backend)
-
     for childprocess in [0, 1]:
         im = pyscreenshot.grab(
             bbox=bbox,
@@ -103,12 +100,10 @@ def check_ref(backend, bbox):
         # some tests fail -> disable
     return
 
-    BackendLoader().force(ref)
-    img_ref = pyscreenshot.grab(bbox=bbox)
+    img_ref = pyscreenshot.grab(bbox=bbox, backend=ref)
     img_debug(img_ref, ref + str(bbox))
 
-    BackendLoader().force(backend)
-    im = pyscreenshot.grab(bbox=bbox)
+    im = pyscreenshot.grab(bbox=bbox, backend=backend)
     img_debug(im, backend + str(bbox))
 
     eq_('RGB', img_ref.mode)

@@ -31,4 +31,3 @@ def img_debug(im, text):
     im.save(fname)
     log.debug('image (%s) was saved:' % im + fname)
     img_ind += 1
-# BackendLoader().selected().name + '_'
