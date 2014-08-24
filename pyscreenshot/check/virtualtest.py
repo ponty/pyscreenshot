@@ -1,9 +1,8 @@
 from entrypoint2 import entrypoint
-from pyscreenshot.backendloader import BackendLoader
-from pyscreenshot.loader import BackendLoaderError
-from pyvirtualdisplay.display import Display
 import pyscreenshot
-import time
+from pyscreenshot.loader import BackendLoader, BackendLoaderError
+from pyvirtualdisplay.display import Display
+
 
 # they make exceptions that can not be catched
 SKIP = ['pygtk', 'wx', 'pyqt']

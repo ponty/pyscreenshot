@@ -1,4 +1,4 @@
-from pyscreenshot.backendloader import BackendLoader
+from pyscreenshot.loader import BackendLoader
 import pyscreenshot
 from entrypoint2 import entrypoint
 

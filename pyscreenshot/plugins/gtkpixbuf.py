@@ -46,5 +46,4 @@ class GtkPixbufWrapper(object):
         pb.save(filename, type)
 
     def backend_version(self):
-        # TODO:
-        return '.'.join(map(str, gtk.ver))
+        return '.'.join(map(str, self.gtk.ver))
