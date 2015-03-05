@@ -11,7 +11,7 @@ class PilWrapper(object):
     childprocess = False
 
     def __init__(self):
-        import ImageGrab  # windows only
+        from PIL import ImageGrab  # windows only
         self.ImageGrab = ImageGrab
 
     def grab(self, bbox=None):
