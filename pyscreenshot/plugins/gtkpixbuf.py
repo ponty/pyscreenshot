@@ -16,13 +16,11 @@ class GtkPixbufWrapper(object):
         f = tempfile.NamedTemporaryFile(
             suffix='.png', prefix='pyscreenshot_gtkpixbuf_')
         filename = f.name
-        self.grab_to_file(filename)
+        self.grab_to_file(filename, bbox)
         im = Image.open(filename)
-        if bbox:
-            im = im.crop(bbox)
         return im
 
-    def grab_to_file(self, filename):
+    def grab_to_file(self, filename, bbox=None):
         '''
         based on: http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
 
@@ -32,12 +30,20 @@ class GtkPixbufWrapper(object):
         '''
 
         w = self.gtk.gdk.get_default_root_window()
-        sz = w.get_size()
-        # print "The size of the window is %d x %d" % sz
-        pb = self.gtk.gdk.Pixbuf(
-            self.gtk.gdk.COLORSPACE_RGB, False, 8, sz[0], sz[1])  # 24bit RGB
-        pb = pb.get_from_drawable(
-            w, w.get_colormap(), 0, 0, 0, 0, sz[0], sz[1])
+#       Capture the whole screen.
+        if bbox == None:
+            sz = w.get_size()
+            pb = self.gtk.gdk.Pixbuf(
+                self.gtk.gdk.COLORSPACE_RGB, False, 8, sz[0], sz[1])  # 24bit RGB
+            pb = pb.get_from_drawable(
+                w, w.get_colormap(), 0, 0, 0, 0, sz[0], sz[1])
+#       Only capture what we need. The smaller the capture, the faster.
+        else:
+            sz = [bbox[2]-bbox[0], bbox[3]-bbox[1]]
+            pb = self.gtk.gdk.Pixbuf(
+                self.gtk.gdk.COLORSPACE_RGB, False, 8, sz[0], sz[1])
+            pb = pb.get_from_drawable(
+                w, w.get_colormap(), bbox[0], bbox[1], 0, 0, sz[0], sz[1])
         assert pb
         type = 'png'
         if filename.endswith('.jpeg'):
