@@ -7,6 +7,8 @@ Links:
  * home: https://github.com/ponty/pyscreenshot
  * documentation: http://ponty.github.com/pyscreenshot
 
+|Travis| |Coveralls| |Latest Version| |Supported Python versions| |License| |Downloads| |Code Health|
+
 Goal:
   Pyscreenshot tries to allow to take screenshots without installing 3rd party libraries.
   It is cross-platform but useful for Linux based distributions.
@@ -45,7 +47,7 @@ Similar projects:
 
 
 Usage
-============
+=====
 
 Example::
 
@@ -63,7 +65,7 @@ Installation
 ============
 
 General
---------
+-------
 
  * install pip_
  * install PIL_ or Pillow_
@@ -74,7 +76,7 @@ General
     pip install pyscreenshot
 
 Ubuntu
-----------
+------
 ::
 
     sudo apt-get install python-pip
@@ -89,7 +91,7 @@ Ubuntu
     sudo pip install entrypoint2
 
 Uninstall
-----------
+---------
 ::
 
     # as root
@@ -108,3 +110,18 @@ Uninstall
 .. _scrot: http://en.wikipedia.org/wiki/Scrot
 .. _PyQt4: http://www.riverbankcomputing.co.uk/software/pyqt
 .. _wxPython: http://www.wxpython.org/
+.. |Travis| image:: http://img.shields.io/travis/ponty/pyscreenshot.svg
+   :target: https://travis-ci.org/ponty/pyscreenshot/
+.. |Coveralls| image:: http://img.shields.io/coveralls/ponty/pyscreenshot/master.svg
+   :target: https://coveralls.io/r/ponty/pyscreenshot/
+.. |Latest Version| image:: https://pypip.in/version/pyscreenshot/badge.svg?style=flat
+   :target: https://pypi.python.org/pypi/pyscreenshot/
+.. |Supported Python versions| image:: https://pypip.in/py_versions/pyscreenshot/badge.svg?style=flat
+   :target: https://pypi.python.org/pypi/pyscreenshot/
+.. |License| image:: https://pypip.in/license/pyscreenshot/badge.svg?style=flat
+   :target: https://pypi.python.org/pypi/pyscreenshot/
+.. |Downloads| image:: https://pypip.in/download/pyscreenshot/badge.svg?style=flat
+   :target: https://pypi.python.org/pypi/pyscreenshot/
+.. |Code Health| image:: https://landscape.io/github/ponty/pyscreenshot/master/landscape.svg?style=flat
+   :target: https://landscape.io/github/ponty/pyscreenshot/master
+
