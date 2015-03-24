@@ -23,9 +23,12 @@ pip-log.txt
 .version
 nosetests.xml
 
-.*
-!.gitignore
 /distribute_setup.py
+
+.*
+!.git*     
+!.travis*
+!.coveragerc
 
 
 sloccount.sc
