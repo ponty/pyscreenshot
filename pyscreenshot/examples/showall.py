@@ -1,7 +1,7 @@
 from entrypoint2 import entrypoint
 from pyscreenshot import backends
 import time
-
+import pyscreenshot
 import pyscreenshot as ImageGrab
 
 
