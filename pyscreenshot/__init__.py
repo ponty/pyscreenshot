@@ -5,11 +5,11 @@ from pyscreenshot.loader import Loader, FailedBackendError
 import sys
 import tempfile
 
+from pyscreenshot.about import __version__
 
-__version__ = '0.3.3'
 
 log = logging.getLogger(__name__)
-log.debug('version=' + __version__)
+log.debug('version=%s', __version__)
 
 BACKEND_LOADER = None
 
