@@ -3,16 +3,19 @@ python:
  - "2.6"
  - "2.7"
 
+# python-gtk2 python-qt4
+
 install:
- - sudo apt-get install python-dev xvfb x11-utils 
- - sudo apt-get install scrot imagemagick python-gtk2 python-qt4
+ - sudo apt-get install python-dev xvfb x11-utils x11-apps
+ - sudo apt-get install scrot imagemagick 
  - pip install -r requirements-test.txt
  - pip install .
  - pip install coveralls
 
 script:  
  - xauth add :0 . `mcookie`
- - cd tests && nosetests -v --with-coverage --cover-package=pyscreenshot  .
+ - cd tests 
+ - nosetests -v --with-coverage --cover-package=pyscreenshot  anybackend forcebackend/test_scrot.py forcebackend/test_imagemagick.py
   
 after_success:
  - coveralls
