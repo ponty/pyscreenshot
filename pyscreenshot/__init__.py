@@ -46,8 +46,7 @@ def _grab(to_file, childprocess=False, backend=None, bbox=None, filename=None):
                 im = im.crop(bbox)
             return im
     else:
-        if backend:
-            _get_loader().force(backend)
+        _get_loader().force(backend)
         backend_obj = _get_loader().selected()
 
         if to_file:
