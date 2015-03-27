@@ -33,6 +33,8 @@ Features:
      * PIL_ or Pillow_ (only on windows)
      * PyQt4_
      * wxPython_
+     * Quartz (Mac)
+     * screencapture (Mac)
 
 Known problems:
  * different back-ends generate slightly different images from the same desktop,
