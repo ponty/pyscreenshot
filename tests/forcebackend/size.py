@@ -38,8 +38,8 @@ def check_size(backend, bbox):
 def backend_size(backend):
     with Display(visible=0, size=(800, 600)):
         for bbox in bbox_ls:
-            print 'bbox:', bbox
-            print 'backend:', backend
+            print( 'bbox: %s'% (bbox,))
+            print( 'backend: %s'% backend)
             check_size(backend, bbox)
 
 

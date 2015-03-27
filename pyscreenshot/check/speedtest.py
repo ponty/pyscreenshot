@@ -5,8 +5,6 @@ import time
 
 
 def run(force_backend, n, to_file, bbox=None):
-    print '%-20s' % force_backend,
-
     f = tempfile.NamedTemporaryFile(suffix='.png', prefix='test')
     filename = f.name
     start = time.time()
@@ -17,20 +15,34 @@ def run(force_backend, n, to_file, bbox=None):
             pyscreenshot.grab(bbox=bbox, backend=force_backend)
     end = time.time()
     dt = end - start
-    print '%-4.2g sec' % (dt), '(%5d ms per call)' % (1000.0 * dt / n)
+    
+    s=''
+    s+= '%-20s' % force_backend
+    s+='\t'
+    s+='%-4.2g sec' % dt
+    s+='\t'
+    s+='(%5d ms per call)' % (1000.0 * dt / n)
+    print(s)
 
 
 def run_all(n, to_file, bbox=None):
-    print
-    print 'n=%s' % n, ', to_file:', to_file, ', bounding box:', bbox
-    print '------------------------------------------------------'
+    print('')
+    
+    s=''
+    s+= 'n=%s' % n
+    s+='\t'
+    s+= ' to_file: %s'% to_file
+    s+='\t'
+    s+= ' bounding box: %s'% (bbox,)
+    print(s)
+    
+    print( '------------------------------------------------------')
 
     for x in pyscreenshot.backends():
         try:
             run(x, n, to_file, bbox)
-#            print 'grabbing by '+x
         except pyscreenshot.FailedBackendError as e:
-            print e
+            print( e )
 
 
 @entrypoint

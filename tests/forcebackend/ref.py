@@ -75,8 +75,8 @@ def backend_ref(backend):
             with EasyProcess('xlogo'):
                 time.sleep(2)
                 for bbox in bbox_ls:
-                    print 'bbox:', bbox
-                    print 'backend:', backend
+                    print( 'bbox: %s'% (bbox,) )
+                    print( 'backend: %s'% backend)
                     check_ref(backend, bbox)
 
 
