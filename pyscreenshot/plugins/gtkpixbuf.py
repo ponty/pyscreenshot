@@ -39,7 +39,7 @@ class GtkPixbufWrapper(object):
                 w, w.get_colormap(), 0, 0, 0, 0, sz[0], sz[1])
 #       Only capture what we need. The smaller the capture, the faster.
         else:
-            sz = [bbox[2]-bbox[0], bbox[3]-bbox[1]]
+            sz = [bbox[2] - bbox[0], bbox[3] - bbox[1]]
             pb = self.gtk.gdk.Pixbuf(
                 self.gtk.gdk.COLORSPACE_RGB, False, 8, sz[0], sz[1])
             pb = pb.get_from_drawable(

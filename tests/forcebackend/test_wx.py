@@ -6,8 +6,5 @@ def test_size_wx():
     backend_size('wx')
 
 
-
 def test_ref_wx():
     backend_ref('wx')
-
-

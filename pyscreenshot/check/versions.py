@@ -3,7 +3,7 @@ from entrypoint2 import entrypoint
 
 
 def print_name_version(name, version):
-    s= '%-20s %s' % (name, version)
+    s = '%-20s %s' % (name, version)
     print(s)
 
 
@@ -14,7 +14,7 @@ def print_versions():
         pyscreenshot.BACKEND_LOADER.force(name)
         try:
             x = pyscreenshot.BACKEND_LOADER.selected()
-            v= x.backend_version()
+            v = x.backend_version()
         except Exception:
-            v= 'missing'
+            v = 'missing'
         print_name_version(name, v)

@@ -26,7 +26,7 @@ def run_all(bgcolor, display, bbox):
     for x in pyscreenshot.backends():
         try:
             with Display(size=display, bgcolor=bgcolor):
-#                time.sleep(1)
+                #                time.sleep(1)
                 try:
                     run(x, bbox, bgcolor=bgcolor)
                 except pyscreenshot.FailedBackendError as e:

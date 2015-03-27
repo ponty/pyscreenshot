@@ -17,6 +17,7 @@ def display_size():
 
     return screen_width, screen_height
 
+
 def check_size(backend, bbox):
     for childprocess in [True]:
         im = pyscreenshot.grab(
@@ -35,15 +36,10 @@ def check_size(backend, bbox):
         eq_(width, im.size[0])
         eq_(height, im.size[1])
 
+
 def backend_size(backend):
     with Display(visible=0, size=(800, 600)):
         for bbox in bbox_ls:
-            print( 'bbox: %s'% (bbox,))
-            print( 'backend: %s'% backend)
+            print('bbox: %s' % (bbox,))
+            print('backend: %s' % backend)
             check_size(backend, bbox)
-
-
-
-
-
-

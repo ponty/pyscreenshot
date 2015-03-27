@@ -56,7 +56,7 @@ options.paved.dist.manifest.include.add('requirements.txt')
     'nose', 'tox',
 )
 def alltest():
-    'all tasks to check'
+    """all tasks to check."""
     pass
 
 
