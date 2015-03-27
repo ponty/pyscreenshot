@@ -100,6 +100,218 @@ Uninstall
     pip uninstall pyscreenshot
 
 
+Hierarchy
+=========
+
+.. graphviz::
+
+   digraph G {
+   rankdir=LR;
+   node [fontsize=8];
+   fontsize=8;
+   
+   subgraph cluster_0 {
+      label = "pyscreenshot";
+      style=filled;
+      fillcolor=lightgrey;
+      subgraph cluster_1 {
+         label = "API";
+         style=filled;
+         fillcolor=white;
+
+         pyscreenshot;
+      }
+      subgraph cluster_2 {
+         style=filled;
+         fillcolor=white;
+         label = "plugins";
+
+         pyscreenshot -> GtkPixbufWrapper;
+         pyscreenshot -> QtGrabWindowWrapper;
+         pyscreenshot -> PilWrapper;
+         pyscreenshot -> ImagemagickWrapper;
+         pyscreenshot -> WxScreenWrapper;
+            pyscreenshot -> ScrotWrapper;
+      }
+   }
+   QtGrabWindowWrapper -> PyQt -> Qt;
+   PilWrapper -> PIL;
+   ImagemagickWrapper -> Imagemagick;
+   ScrotWrapper -> Scrot;
+   
+   GtkPixbufWrapper -> PyGTK -> "GTK+";
+   WxScreenWrapper -> wxPython -> wxWidgets;
+   wxWidgets -> "GTK+";
+   wxWidgets -> MacOS;
+   wxWidgets -> Windows;
+   //wxWidgets -> "Palm OS";
+   wxWidgets -> X11;
+   
+   application -> pyscreenshot;
+   
+   }
+
+Examples
+========
+
+show a screenshot::
+
+  # <== include('examples/show.py')==>
+  from entrypoint2 import entrypoint
+  from pyscreenshot import grab
+
+
+  @entrypoint
+  def show(backend='auto'):
+      if backend == 'auto':
+          backend = None
+      im = grab(bbox=(100, 200, 300, 400), backend=backend)
+      im.show()
+  # <==end==>
+
+to start:: 
+
+    python -m pyscreenshot.examples.show
+
+
+show screenshots using all back-ends::
+
+  # <== include('examples/showall.py')==>
+  from entrypoint2 import entrypoint
+  from pyscreenshot import backends
+  import time
+  import pyscreenshot
+  import pyscreenshot as ImageGrab
+
+
+  @entrypoint
+  def show():
+      im = []
+
+      for x in backends():
+          try:
+              print('grabbing by ' + x)
+              im.append(ImageGrab.grab(bbox=(500, 400, 800, 600), backend=x))
+          except pyscreenshot.FailedBackendError as e:
+              print(e)
+      print(im)
+      for x in im:
+          x.show()
+          time.sleep(1)
+  # <==end==>
+
+to start:: 
+
+    python -m pyscreenshot.examples.showall
+
+Command line interface
+======================
+
+Back-end performance::
+
+  # <== sh('python -m pyscreenshot.check.speedtest')==>
+
+  n=10	 to_file: True	 bounding box: None
+  ------------------------------------------------------
+  Forced backend not found, or cannot be loaded:pil
+  scrot               	1.5  sec	(  145 ms per call)
+  wx                  	1.4  sec	(  138 ms per call)
+  pygtk               	1.7  sec	(  165 ms per call)
+  pyqt                	1.1  sec	(  112 ms per call)
+  imagemagick         	6.1  sec	(  610 ms per call)
+  Forced backend not found, or cannot be loaded:mac_screencapture
+  Forced backend not found, or cannot be loaded:mac_quartz
+
+  n=10	 to_file: False	 bounding box: None
+  ------------------------------------------------------
+  Forced backend not found, or cannot be loaded:pil
+  scrot               	1.5  sec	(  152 ms per call)
+  wx                  	0.19 sec	(   18 ms per call)
+  pygtk               	1.7  sec	(  166 ms per call)
+  pyqt                	1    sec	(  101 ms per call)
+  imagemagick         	6    sec	(  604 ms per call)
+  Forced backend not found, or cannot be loaded:mac_screencapture
+  Forced backend not found, or cannot be loaded:mac_quartz
+
+  n=10	 to_file: False	 bounding box: (10, 10, 20, 20)
+  ------------------------------------------------------
+  Forced backend not found, or cannot be loaded:pil
+  scrot               	1.9  sec	(  186 ms per call)
+  wx                  	0.19 sec	(   18 ms per call)
+  pygtk               	0.0047 sec	(    0 ms per call)
+  pyqt                	1.4  sec	(  135 ms per call)
+  imagemagick         	4.5  sec	(  449 ms per call)
+  Forced backend not found, or cannot be loaded:mac_screencapture
+  Forced backend not found, or cannot be loaded:mac_quartz
+  # <==end==>
+
+
+Print versions::
+
+  # <== sh('python -m pyscreenshot.check.versions')==>
+  pyscreenshot         0.3.4
+  pil                  missing
+  scrot                0.8
+  wx                   2.8.12.1
+  pygtk                2.28.6
+  pyqt                 not implemented
+  imagemagick          6.7.7
+  mac_screencapture    missing
+  mac_quartz           missing
+  # <==end==>
+
+
+command line help
+=================
+
+::
+
+  # <== sh('python -m pyscreenshot.examples.show --help')==>
+  usage: show.py [-h] [-b BACKEND] [--debug]
+
+  optional arguments:
+    -h, --help            show this help message and exit
+    -b BACKEND, --backend BACKEND
+    --debug               set logging level to DEBUG
+  # <==end==>
+
+::
+
+  # <== sh('python -m pyscreenshot.examples.showall --help')==>
+  usage: showall.py [-h] [--debug]
+
+  optional arguments:
+    -h, --help  show this help message and exit
+    --debug     set logging level to DEBUG
+  # <==end==>
+
+::
+
+  # <== sh('python -m pyscreenshot.check.speedtest --help')==>
+  usage: speedtest.py [-h] [--debug]
+
+  optional arguments:
+    -h, --help  show this help message and exit
+    --debug     set logging level to DEBUG
+  # <==end==>
+
+::
+
+  # <== sh('python -m pyscreenshot.check.versions --help')==>
+  usage: versions.py [-h] [--debug]
+
+  optional arguments:
+    -h, --help  show this help message and exit
+    --debug     set logging level to DEBUG
+  # <==end==>
+
+
+API
+===
+
+.. automodule:: pyscreenshot
+    :members:
+    :undoc-members:
 
 .. _setuptools: http://peak.telecommunity.com/DevCenter/EasyInstall
 .. _pip: http://pip.openplans.org/
