@@ -1,58 +1,71 @@
 from PIL import Image
-from easyprocess import EasyProcess
 import logging
-from pyscreenshot.loader import Loader, FailedBackendError
+from multiprocessing import Process, Queue
+import os
 import sys
-import tempfile
 
 from pyscreenshot.about import __version__
+from pyscreenshot.loader import Loader, FailedBackendError
 
 
 log = logging.getLogger(__name__)
 log.debug('version=%s', __version__)
 
-BACKEND_LOADER = None
+
+def _grab_simple(to_file, backend=None, bbox=None, filename=None):
+    loader = Loader()
+    loader.force(backend)
+    backend_obj = loader.selected()
+
+    if to_file:
+        return backend_obj.grab_to_file(filename)
+    else:
+        return backend_obj.grab(bbox)
 
 
-def _get_loader():
-    global BACKEND_LOADER
-    if not BACKEND_LOADER:
-        BACKEND_LOADER = Loader()
-    return BACKEND_LOADER
+def _grab_subprocess(queue, to_file, backend=None, bbox=None, filename=None):
+    try:
+        r = _grab_simple(to_file, backend, bbox, filename)
+    except FailedBackendError as e:
+        data = {
+            'exception': e
+        }
+        queue.put(data)
+        return
+
+    data = {}
+    if not to_file:
+        if r:
+            im = r
+            data = {
+                'pixels': im.tobytes(),
+                'size': im.size,
+                'mode': im.mode,
+            }
+
+    queue.put(data)
 
 
 def _grab(to_file, childprocess=False, backend=None, bbox=None, filename=None):
-    if childprocess:
+    if not childprocess:
+        return _grab_simple(to_file, backend, bbox, filename)
+    else:
         log.debug('running "%s" in child process' % backend)
 
-        if not to_file:
-            f = tempfile.NamedTemporaryFile(
-                suffix='.png', prefix='pyscreenshot_childprocess_')
-            filename = f.name
+        queue = Queue()
+        p = Process(target=_grab_subprocess, args=(
+            queue, to_file, backend, bbox, filename))
+        p.start()
+        data = queue.get()
+        p.join()
 
-        params = ["'%s'" % (filename), 'childprocess=False']
-        if backend:
-            params += ["backend='%s'" % (backend)]
-        params = ','.join(params)
+        e = data.get('exception')
+        if e:
+            raise e
 
-        EasyProcess([sys.executable,
-                     '-c',
-                     'import pyscreenshot; pyscreenshot.grab_to_file(%s)' % (
-                         params),
-                     ]).check()
         if not to_file:
-            im = Image.open(filename)
-            if bbox:
-                im = im.crop(bbox)
+            im = Image.frombytes(data['mode'], data['size'], data['pixels'])
             return im
-    else:
-        _get_loader().force(backend)
-        backend_obj = _get_loader().selected()
-
-        if to_file:
-            return backend_obj.grab_to_file(filename)
-        else:
-            return backend_obj.grab(bbox)
 
 
 def grab(bbox=None, childprocess=False, backend=None):
@@ -83,4 +96,33 @@ def grab_to_file(filename, childprocess=False, backend=None):
 
 def backends():
     '''Back-end names as a list'''
-    return _get_loader().all_names
+    return Loader().all_names
+
+
+def _backend_version(backend):
+    loader = Loader()
+    loader.force(backend)
+    try:
+        x = loader.selected()
+        v = x.backend_version()
+    except Exception:
+        v = None
+    return v
+
+
+def _backend_version_subprocess(queue, backend):
+    v = _backend_version(backend)
+    queue.put(v)
+
+
+def backend_version(backend, childprocess=False):
+    '''Back-end version'''
+    if not childprocess:
+        return _backend_version(backend)
+    else:
+        queue = Queue()
+        p = Process(target=_backend_version_subprocess, args=(queue,  backend))
+        p.start()
+        v = queue.get()
+        p.join()
+        return v
