@@ -7,7 +7,7 @@ Links:
  * home: https://github.com/ponty/pyscreenshot
  * documentation: http://ponty.github.com/pyscreenshot
 
-|Travis| |Coveralls| |Latest Version| |Supported Python versions| |License| |Downloads| |Code Health|
+|Travis| |Coveralls| |Latest Version| |Supported Python versions| |License| |Downloads| |Code Health| |Documentation|
 
 Goal:
   Pyscreenshot tries to allow to take screenshots without installing 3rd party libraries.
@@ -48,20 +48,46 @@ Similar projects:
  - http://pypi.python.org/pypi/autopy
 
 
-Usage
-=====
+Examples
+========
 
-Example::
+grab and show the whole screen ::
+  
+  # <== include('examples/showgrabfullscreen.py')==>
+  from entrypoint2 import entrypoint
+  from pyscreenshot import grab
 
-    import pyscreenshot as ImageGrab
 
-    # fullscreen
-    im=ImageGrab.grab()
-    im.show()
+  @entrypoint
+  def show(backend='auto'):
+      if backend == 'auto':
+          backend = None
+      im = grab(bbox=(100, 200, 300, 400), backend=backend)
+      im.show()
+  # <==end==>
 
-    # part of the screen
-    im=ImageGrab.grab(bbox=(10,10,510,510)) # X1,Y1,X2,Y2
-    im.show()
+to start the example:: 
+
+    python -m pyscreenshot.examples.showgrabfullscreen
+
+grab and show the part of the screen ::
+
+  # <== include('examples/showgrabbox.py')==>
+  from entrypoint2 import entrypoint
+  from pyscreenshot import grab
+
+
+  @entrypoint
+  def show(backend='auto'):
+      if backend == 'auto':
+          backend = None
+      im = grab(bbox=(100, 200, 300, 400), backend=backend)
+      im.show()
+  # <==end==>
+
+to start the example:: 
+
+    python -m pyscreenshot.examples.showgrabbox
 
 Installation
 ============
@@ -151,58 +177,6 @@ Hierarchy
    
    }
 
-Examples
-========
-
-show a screenshot::
-
-  # <== include('examples/show.py')==>
-  from entrypoint2 import entrypoint
-  from pyscreenshot import grab
-
-
-  @entrypoint
-  def show(backend='auto'):
-      if backend == 'auto':
-          backend = None
-      im = grab(bbox=(100, 200, 300, 400), backend=backend)
-      im.show()
-  # <==end==>
-
-to start:: 
-
-    python -m pyscreenshot.examples.show
-
-
-show screenshots using all back-ends::
-
-  # <== include('examples/showall.py')==>
-  from entrypoint2 import entrypoint
-  from pyscreenshot import backends
-  import time
-  import pyscreenshot
-  import pyscreenshot as ImageGrab
-
-
-  @entrypoint
-  def show():
-      im = []
-
-      for x in backends():
-          try:
-              print('grabbing by ' + x)
-              im.append(ImageGrab.grab(bbox=(500, 400, 800, 600), backend=x))
-          except pyscreenshot.FailedBackendError as e:
-              print(e)
-      print(im)
-      for x in im:
-          x.show()
-          time.sleep(1)
-  # <==end==>
-
-to start:: 
-
-    python -m pyscreenshot.examples.showall
 
 Command line interface
 ======================
@@ -266,27 +240,6 @@ command line help
 
 ::
 
-  # <== sh('python -m pyscreenshot.examples.show --help')==>
-  usage: show.py [-h] [-b BACKEND] [--debug]
-
-  optional arguments:
-    -h, --help            show this help message and exit
-    -b BACKEND, --backend BACKEND
-    --debug               set logging level to DEBUG
-  # <==end==>
-
-::
-
-  # <== sh('python -m pyscreenshot.examples.showall --help')==>
-  usage: showall.py [-h] [--debug]
-
-  optional arguments:
-    -h, --help  show this help message and exit
-    --debug     set logging level to DEBUG
-  # <==end==>
-
-::
-
   # <== sh('python -m pyscreenshot.check.speedtest --help')==>
   usage: speedtest.py [-h] [--debug]
 
@@ -338,4 +291,5 @@ API
    :target: https://pypi.python.org/pypi/pyscreenshot/
 .. |Code Health| image:: https://landscape.io/github/ponty/pyscreenshot/master/landscape.svg?style=flat
    :target: https://landscape.io/github/ponty/pyscreenshot/master
-
+.. |Documentation| image:: https://readthedocs.org/projects/pyscreenshot/badge/?version=latest
+   :target: https://readthedocs.org/projects/pyscreenshot/?badge=latest
