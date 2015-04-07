@@ -10,9 +10,9 @@ def run(force_backend, n, to_file, bbox=None):
     start = time.time()
     for i in range(n):
         if to_file:
-            pyscreenshot.grab_to_file(filename, backend=force_backend)
+            pyscreenshot.grab_to_file(filename, backend=force_backend, childprocess=True)
         else:
-            pyscreenshot.grab(bbox=bbox, backend=force_backend)
+            pyscreenshot.grab(bbox=bbox, backend=force_backend, childprocess=True)
     end = time.time()
     dt = end - start
 

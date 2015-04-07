@@ -4,7 +4,7 @@ from pyvirtualdisplay.display import Display
 
 
 # they make exceptions that can not be catched
-SKIP = ['pygtk', 'wx', 'pyqt']
+SKIP = []
 
 
 def run(force_backend, bbox, bgcolor):
@@ -14,7 +14,7 @@ def run(force_backend, bbox, bgcolor):
         print 'SKIP'
         return
 
-    im = pyscreenshot.grab(bbox=bbox, backend=force_backend)
+    im = pyscreenshot.grab(bbox=bbox, backend=force_backend, childprocess=True)
     ls = list(im.getdata())
     print 'OK' if all([x == color or x == (color, color, color) for x in ls]) else 'FAIL'
 
