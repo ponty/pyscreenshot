@@ -5,7 +5,11 @@ python:
  - "3.2"
  - "3.3"
  - "3.4"
-
+ - "2.7_with_system_site_packages"
+ - "3.2_with_system_site_packages"
+ - "pypy"
+ - "pypy3"
+ 
 # python-gtk2 python-qt4
 
 install:
@@ -18,7 +22,7 @@ install:
 script:  
  - xauth add :0 . `mcookie`
  - cd tests 
- - nosetests -v --with-coverage --cover-package=pyscreenshot  anybackend forcebackend/test_scrot.py forcebackend/test_imagemagick.py
+ - nosetests -v --with-coverage --cover-package=pyscreenshot  test_check.py test_examples.py test_scrot.py test_imagemagick.py
   
 after_success:
  - coveralls
