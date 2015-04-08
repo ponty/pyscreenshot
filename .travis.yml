@@ -7,8 +7,6 @@ python:
  - "3.4"
  - "2.7_with_system_site_packages"
  - "3.2_with_system_site_packages"
- - "pypy"
- - "pypy3"
  
 install:
  - sudo apt-get install python-dev xvfb x11-utils x11-apps
