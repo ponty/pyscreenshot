@@ -23,7 +23,7 @@ def _grab_simple(to_file, backend=None, bbox=None, filename=None):
         return backend_obj.grab(bbox)
 
 
-def coder(im):
+def _coder(im):
     if im:
         data = {
             'pixels': im.tobytes(),
@@ -33,7 +33,7 @@ def coder(im):
         return data
 
 
-def decoder(data):
+def _decoder(data):
     if data:
         im = Image.frombytes(data['mode'], data['size'], data['pixels'])
         return im
@@ -42,7 +42,7 @@ def decoder(data):
 def _grab(to_file, childprocess=False, backend=None, bbox=None, filename=None):
     if childprocess:
         log.debug('running "%s" in child process', backend)
-        return run_in_childprocess(_grab_simple, (coder, decoder), to_file, backend, bbox, filename)
+        return run_in_childprocess(_grab_simple, (_coder, _decoder), to_file, backend, bbox, filename)
     else:
         return _grab_simple(to_file, backend, bbox, filename)
 
@@ -74,7 +74,10 @@ def grab_to_file(filename, childprocess=False, backend=None):
 
 
 def backends():
-    '''Back-end names as a list'''
+    '''Back-end names as a list
+    
+    :return: back-ends as string list
+    '''
     return Loader().all_names
 
 
@@ -90,7 +93,12 @@ def _backend_version(backend):
 
 
 def backend_version(backend, childprocess=False):
-    '''Back-end version'''
+    '''Back-end version
+
+    :param backend: back-end (examples:scrot, wx,..)
+    :param childprocess: see :py:func:`grab`
+    :return: version as string
+    '''
     if not childprocess:
         return _backend_version(backend)
     else:
