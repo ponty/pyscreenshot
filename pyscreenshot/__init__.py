@@ -41,7 +41,7 @@ def decoder(data):
 
 def _grab(to_file, childprocess=False, backend=None, bbox=None, filename=None):
     if childprocess:
-        log.debug('running "%s" in child process' % backend)
+        log.debug('running "%s" in child process', backend)
         return run_in_childprocess(_grab_simple, (coder, decoder), to_file, backend, bbox, filename)
     else:
         return _grab_simple(to_file, backend, bbox, filename)
