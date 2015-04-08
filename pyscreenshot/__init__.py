@@ -102,4 +102,4 @@ def backend_version(backend, childprocess=False):
     if not childprocess:
         return _backend_version(backend)
     else:
-        run_in_childprocess(_backend_version, None, backend)
+        return run_in_childprocess(_backend_version, None, backend)
