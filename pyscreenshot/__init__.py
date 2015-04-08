@@ -1,12 +1,11 @@
 from PIL import Image
 import logging
-import os
-import sys
 
 from pyscreenshot.about import __version__
 from pyscreenshot.loader import Loader, FailedBackendError
 from pyscreenshot.procutil import run_in_childprocess
 
+ADDITIONAL_IMPORTS=[FailedBackendError]
 
 log = logging.getLogger(__name__)
 log.debug('version=%s', __version__)

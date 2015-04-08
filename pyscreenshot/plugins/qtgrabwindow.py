@@ -25,8 +25,10 @@ class QtGrabWindow(object):
         from PyQt4 import QtGui
         from PyQt4 import Qt
         self.app = None
-
-    def grab_to_buffer(self, buffer, file_type='png'):
+        self.QtGui = QtGui
+        self.Qt = Qt
+        
+    def grab_to_buffer(self, buff, file_type='png'):
         QApplication = self.PyQt4.QtGui.QApplication
         QBuffer = self.PyQt4.Qt.QBuffer
         QIODevice = self.PyQt4.Qt.QIODevice
@@ -38,7 +40,7 @@ class QtGrabWindow(object):
         qbuffer.open(QIODevice.ReadWrite)
         QPixmap.grabWindow(
             QApplication.desktop().winId()).save(qbuffer, file_type)
-        buffer.write(qbuffer.data())
+        buff.write(qbuffer.data())
         qbuffer.close()
 #        del app
 
