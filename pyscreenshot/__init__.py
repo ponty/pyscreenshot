@@ -1,11 +1,11 @@
 from PIL import Image
 import logging
-from multiprocessing import Process, Queue
 import os
 import sys
 
 from pyscreenshot.about import __version__
 from pyscreenshot.loader import Loader, FailedBackendError
+from pyscreenshot.procutil import run_in_childprocess
 
 
 log = logging.getLogger(__name__)
@@ -23,49 +23,28 @@ def _grab_simple(to_file, backend=None, bbox=None, filename=None):
         return backend_obj.grab(bbox)
 
 
-def _grab_subprocess(queue, to_file, backend=None, bbox=None, filename=None):
-    try:
-        r = _grab_simple(to_file, backend, bbox, filename)
-    except FailedBackendError as e:
+def coder(im):
+    if im:
         data = {
-            'exception': e
+            'pixels': im.tobytes(),
+            'size': im.size,
+            'mode': im.mode,
         }
-        queue.put(data)
-        return
+        return data
 
-    data = {}
-    if not to_file:
-        if r:
-            im = r
-            data = {
-                'pixels': im.tobytes(),
-                'size': im.size,
-                'mode': im.mode,
-            }
 
-    queue.put(data)
+def decoder(data):
+    if data:
+        im = Image.frombytes(data['mode'], data['size'], data['pixels'])
+        return im
 
 
 def _grab(to_file, childprocess=False, backend=None, bbox=None, filename=None):
-    if not childprocess:
-        return _grab_simple(to_file, backend, bbox, filename)
-    else:
+    if childprocess:
         log.debug('running "%s" in child process' % backend)
-
-        queue = Queue()
-        p = Process(target=_grab_subprocess, args=(
-            queue, to_file, backend, bbox, filename))
-        p.start()
-        data = queue.get()
-        p.join()
-
-        e = data.get('exception')
-        if e:
-            raise e
-
-        if not to_file:
-            im = Image.frombytes(data['mode'], data['size'], data['pixels'])
-            return im
+        return run_in_childprocess(_grab_simple, (coder, decoder), to_file, backend, bbox, filename)
+    else:
+        return _grab_simple(to_file, backend, bbox, filename)
 
 
 def grab(bbox=None, childprocess=False, backend=None):
@@ -110,19 +89,9 @@ def _backend_version(backend):
     return v
 
 
-def _backend_version_subprocess(queue, backend):
-    v = _backend_version(backend)
-    queue.put(v)
-
-
 def backend_version(backend, childprocess=False):
     '''Back-end version'''
     if not childprocess:
         return _backend_version(backend)
     else:
-        queue = Queue()
-        p = Process(target=_backend_version_subprocess, args=(queue,  backend))
-        p.start()
-        v = queue.get()
-        p.join()
-        return v
+        run_in_childprocess(_backend_version, None, backend)
