@@ -2,14 +2,16 @@ from entrypoint2 import entrypoint
 import pyscreenshot
 import tempfile
 import time
+import os
+import shutil
 
 
 def run(force_backend, n, to_file, bbox=None):
-    f = tempfile.NamedTemporaryFile(suffix='.png', prefix='test')
-    filename = f.name
+    tmpdir = tempfile.mkdtemp(prefix='pyscreenshot_speedtest_')
     start = time.time()
-    for i in range(n):
+    for _ in range(n):
         if to_file:
+            filename=os.path.join(tmpdir, 'speedtest.png')
             pyscreenshot.grab_to_file(filename, backend=force_backend, childprocess=True)
         else:
             pyscreenshot.grab(bbox=bbox, backend=force_backend, childprocess=True)
@@ -23,6 +25,8 @@ def run(force_backend, n, to_file, bbox=None):
     s += '\t'
     s += '(%5d ms per call)' % (1000.0 * dt / n)
     print(s)
+    shutil.rmtree(tmpdir)
+    
 
 
 def run_all(n, to_file, bbox=None):
