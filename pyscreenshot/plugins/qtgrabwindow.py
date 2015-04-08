@@ -1,5 +1,14 @@
 from PIL import Image
-from io import BytesIO
+import sys
+PY3 = sys.version_info[0] >= 3
+
+if PY3:
+    import io
+    BytesIO = io.BytesIO
+else:
+    import StringIO
+    BytesIO = StringIO.StringIO
+
 
 class QtGrabWindow(object):
 
