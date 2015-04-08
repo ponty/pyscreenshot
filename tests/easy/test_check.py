@@ -1,4 +1,3 @@
-from pyscreenshot.check import virtualtest
 from pyscreenshot.check.speedtest import speedtest
 from pyscreenshot.check.versions import print_versions
 from pyvirtualdisplay.display import Display
@@ -12,6 +11,3 @@ def test_speedtest():
 def test_print_versions():
     print_versions()
 
-
-def test_virtualtest():
-    virtualtest.main()

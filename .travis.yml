@@ -10,11 +10,11 @@ python:
  - "pypy"
  - "pypy3"
  
-# python-gtk2 python-qt4
-
 install:
  - sudo apt-get install python-dev xvfb x11-utils x11-apps
  - sudo apt-get install scrot imagemagick 
+ - if [ "$TRAVIS_PYTHON_VERSION" == "2.7_with_system_site_packages" ]; then sudo apt-get install python-qt4  python-gtk2 python-wxversion; fi
+ - if [ "$TRAVIS_PYTHON_VERSION" == "3.2_with_system_site_packages" ]; then sudo apt-get install python3-pyqt4; fi
  - pip install -r requirements-test.txt
  - pip install .
  - pip install coveralls
@@ -22,7 +22,10 @@ install:
 script:  
  - xauth add :0 . `mcookie`
  - cd tests 
- - nosetests -v --with-coverage --cover-package=pyscreenshot  test_check.py test_examples.py test_scrot.py test_imagemagick.py
+ - TESTS="easy test_scrot.py test_imagemagick.py"
+ - if [ "$TRAVIS_PYTHON_VERSION" == "2.7_with_system_site_packages" ]; then TESTS="$TESTS test_pyqt.py test_wx.py test_pygtk.py"; fi
+ - if [ "$TRAVIS_PYTHON_VERSION" == "3.2_with_system_site_packages" ]; then TESTS="$TESTS test_pyqt.py"; fi
+ - nosetests -v --with-coverage --cover-package=pyscreenshot  $TESTS
   
 after_success:
  - coveralls
