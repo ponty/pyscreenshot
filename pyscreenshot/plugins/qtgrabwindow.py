@@ -1,6 +1,5 @@
 from PIL import Image
-import StringIO
-
+from io import BytesIO
 
 class QtGrabWindow(object):
 
@@ -35,7 +34,7 @@ class QtGrabWindow(object):
 #        del app
 
     def grab(self, bbox=None):
-        strio = StringIO.StringIO()
+        strio = BytesIO()
         self.grab_to_buffer(strio)
         strio.seek(0)
         im = Image.open(strio)

@@ -1,12 +1,9 @@
-import gtkpixbuf
-import imagemagick
-import pil
-import qtgrabwindow
-import scrot
-import wxscreen
-import mac_screencapture
-import mac_quartz
+
+
 import sys
+
+from pyscreenshot.plugins import wxscreen, gtkpixbuf, qtgrabwindow, scrot, \
+    imagemagick, mac_quartz, mac_screencapture, pil
 
 
 if sys.platform == 'linux2':
