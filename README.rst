@@ -5,7 +5,8 @@ For handling image memory (e.g. saving to file, converting,..) please read PIL_ 
 
 Links:
  * home: https://github.com/ponty/pyscreenshot
- * documentation: http://ponty.github.com/pyscreenshot
+ * documentation: http://pyscreenshot.readthedocs.org
+ * PYPI: https://pypi.python.org/pypi/pyscreenshot
 
 |Travis| |Coveralls| |Latest Version| |Supported Python versions| |License| |Downloads| |Code Health| |Documentation|
 
