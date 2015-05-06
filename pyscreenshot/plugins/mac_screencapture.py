@@ -25,7 +25,7 @@ class ScreencaptureWrapper(object):
         return im
 
     def grab_to_file(self, filename, bbox=None):
-        command = 'screencapture -x'
+        command = 'screencapture -x '
         if filename.endswith('.jpeg'):
             command += ' -t jpg'
         elif filename.endswith('.tiff'):
