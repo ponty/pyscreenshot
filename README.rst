@@ -224,13 +224,13 @@ command line help
    :target: https://travis-ci.org/ponty/pyscreenshot/
 .. |Coveralls| image:: http://img.shields.io/coveralls/ponty/pyscreenshot/master.svg
    :target: https://coveralls.io/r/ponty/pyscreenshot/
-.. |Latest Version| image:: https://pypip.in/version/pyscreenshot/badge.svg?style=flat
+.. |Latest Version| image:: https://img.shields.io/pypi/v/pyscreenshot.svg
    :target: https://pypi.python.org/pypi/pyscreenshot/
-.. |Supported Python versions| image:: https://pypip.in/py_versions/pyscreenshot/badge.svg?style=flat
+.. |Supported Python versions| image:: https://img.shields.io/pypi/pyversions/pyscreenshot.svg
    :target: https://pypi.python.org/pypi/pyscreenshot/
-.. |License| image:: https://pypip.in/license/pyscreenshot/badge.svg?style=flat
+.. |License| image:: https://img.shields.io/pypi/l/pyscreenshot.svg
    :target: https://pypi.python.org/pypi/pyscreenshot/
-.. |Downloads| image:: https://pypip.in/download/pyscreenshot/badge.svg?style=flat
+.. |Downloads| image:: https://img.shields.io/pypi/dm/pyscreenshot.svg
    :target: https://pypi.python.org/pypi/pyscreenshot/
 .. |Code Health| image:: https://landscape.io/github/ponty/pyscreenshot/master/landscape.svg?style=flat
    :target: https://landscape.io/github/ponty/pyscreenshot/master
