@@ -1,7 +1,7 @@
+============
 pyscreenshot
 ============
 
-:Date: |today|
 
 
 About

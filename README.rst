@@ -36,13 +36,11 @@ Features:
      * wxPython_
      * Quartz (Mac)
      * screencapture (Mac)
+ * time: 0.1s - 1.0s
 
 Known problems:
- * different back-ends generate slightly different images from the same desktop,
-   this should be investigated
  * ImageMagick_ creates blackbox_ on some systems
  * PyGTK_ back-end does not check $DISPLAY -> not working with Xvfb
- * slow: 0.2s - 0.7s
 
 Similar projects:
  - http://sourceforge.net/projects/gtkshots/
@@ -52,20 +50,16 @@ Similar projects:
 Examples
 ========
 
-grab and show the whole screen ::
+grab and show the whole screen::
   
-  # <== include('examples/showgrabfullscreen.py')==>
-  from entrypoint2 import entrypoint
-  from pyscreenshot import grab
+  #-- include('examples/showgrabfullscreen.py') --#
+  import pyscreenshot as ImageGrab
 
-
-  @entrypoint
-  def show(backend='auto'):
-      if backend == 'auto':
-          backend = None
-      im = grab(bbox=(100, 200, 300, 400), backend=backend)
+  if __name__ == "__main__":
+      # fullscreen
+      im=ImageGrab.grab()
       im.show()
-  # <==end==>
+  #-#
 
 to start the example:: 
 
@@ -73,18 +67,14 @@ to start the example::
 
 grab and show the part of the screen ::
 
-  # <== include('examples/showgrabbox.py')==>
-  from entrypoint2 import entrypoint
-  from pyscreenshot import grab
+  #-- include('examples/showgrabbox.py')--#
+  import pyscreenshot as ImageGrab
 
-
-  @entrypoint
-  def show(backend='auto'):
-      if backend == 'auto':
-          backend = None
-      im = grab(bbox=(100, 200, 300, 400), backend=backend)
+  if __name__ == "__main__":
+      # part of the screen
+      im=ImageGrab.grab(bbox=(10,10,510,510)) # X1,Y1,X2,Y2
       im.show()
-  # <==end==>
+  #-#
 
 to start the example:: 
 
@@ -132,56 +122,44 @@ Command line interface
 
 Back-end performance::
 
-  # <== sh('python -m pyscreenshot.check.speedtest')==>
+  #-- sh('python -m pyscreenshot.check.speedtest')--#
 
   n=10	 to_file: True	 bounding box: None
   ------------------------------------------------------
-  Forced backend not found, or cannot be loaded:pil
-  scrot               	1.5  sec	(  145 ms per call)
-  wx                  	1.4  sec	(  138 ms per call)
-  pygtk               	1.7  sec	(  165 ms per call)
-  pyqt                	1.1  sec	(  112 ms per call)
-  imagemagick         	6.1  sec	(  610 ms per call)
-  Forced backend not found, or cannot be loaded:mac_screencapture
-  Forced backend not found, or cannot be loaded:mac_quartz
+  wx                  	2.4  sec	(  235 ms per call)
+  pygtk               	2    sec	(  200 ms per call)
+  pyqt                	4.6  sec	(  455 ms per call)
+  scrot               	1.6  sec	(  163 ms per call)
+  imagemagick         	6.4  sec	(  644 ms per call)
 
   n=10	 to_file: False	 bounding box: None
   ------------------------------------------------------
-  Forced backend not found, or cannot be loaded:pil
-  scrot               	1.5  sec	(  152 ms per call)
-  wx                  	0.19 sec	(   18 ms per call)
-  pygtk               	1.7  sec	(  166 ms per call)
-  pyqt                	1    sec	(  101 ms per call)
-  imagemagick         	6    sec	(  604 ms per call)
-  Forced backend not found, or cannot be loaded:mac_screencapture
-  Forced backend not found, or cannot be loaded:mac_quartz
+  wx                  	1    sec	(  104 ms per call)
+  pygtk               	2.6  sec	(  257 ms per call)
+  pyqt                	2.5  sec	(  251 ms per call)
+  scrot               	2.4  sec	(  236 ms per call)
+  imagemagick         	6.5  sec	(  647 ms per call)
 
   n=10	 to_file: False	 bounding box: (10, 10, 20, 20)
   ------------------------------------------------------
-  Forced backend not found, or cannot be loaded:pil
-  scrot               	1.9  sec	(  186 ms per call)
-  wx                  	0.19 sec	(   18 ms per call)
-  pygtk               	0.0047 sec	(    0 ms per call)
-  pyqt                	1.4  sec	(  135 ms per call)
-  imagemagick         	4.5  sec	(  449 ms per call)
-  Forced backend not found, or cannot be loaded:mac_screencapture
-  Forced backend not found, or cannot be loaded:mac_quartz
-  # <==end==>
+  wx                  	0.9  sec	(   90 ms per call)
+  pygtk               	0.39 sec	(   39 ms per call)
+  pyqt                	2.4  sec	(  241 ms per call)
+  scrot               	2    sec	(  197 ms per call)
+  imagemagick         	4.5  sec	(  445 ms per call)
+  #-#
 
 
 Print versions::
 
-  # <== sh('python -m pyscreenshot.check.versions')==>
+  #-- sh('python -m pyscreenshot.check.versions')--#
   pyscreenshot         0.3.4
-  pil                  missing
-  scrot                0.8
   wx                   2.8.12.1
   pygtk                2.28.6
   pyqt                 not implemented
+  scrot                0.8
   imagemagick          6.7.7
-  mac_screencapture    missing
-  mac_quartz           missing
-  # <==end==>
+  #-#
 
 
 command line help
@@ -189,23 +167,23 @@ command line help
 
 ::
 
-  # <== sh('python -m pyscreenshot.check.speedtest --help')==>
+  #-- sh('python -m pyscreenshot.check.speedtest --help')--#
   usage: speedtest.py [-h] [--debug]
 
   optional arguments:
     -h, --help  show this help message and exit
     --debug     set logging level to DEBUG
-  # <==end==>
+  #-#
 
 ::
 
-  # <== sh('python -m pyscreenshot.check.versions --help')==>
+  #-- sh('python -m pyscreenshot.check.versions --help')--#
   usage: versions.py [-h] [--debug]
 
   optional arguments:
     -h, --help  show this help message and exit
     --debug     set logging level to DEBUG
-  # <==end==>
+  #-#
 
 
 
