@@ -49,9 +49,18 @@ def run_all(n, to_file, bbox=None):
             print(e)
 
 
-@entrypoint
 def speedtest():
     n = 10
     run_all(n, True)
     run_all(n, False)
     run_all(n, False, (10, 10, 20, 20))
+    
+@entrypoint
+def main(virtual_display=False):
+    if virtual_display:
+        from pyvirtualdisplay import Display
+        with Display(visible=0):
+            speedtest()
+    else:
+        speedtest()
+        

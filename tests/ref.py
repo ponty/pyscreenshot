@@ -71,8 +71,8 @@ def check_ref(backend, bbox):
 
 def backend_ref(backend):
     with Display(visible=0, size=(800, 600)):
-        with EasyProcess('xmessage -center "%s"' % long_txt):
-            with EasyProcess('xlogo'):
+        with EasyProcess('xlogo'):
+            with EasyProcess('xmessage -center "%s"' % long_txt):
                 time.sleep(2)
                 for bbox in bbox_ls:
                     print('bbox: %s' % (bbox,))
