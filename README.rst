@@ -216,4 +216,4 @@ command line help
 .. |Code Health| image:: https://landscape.io/github/ponty/pyscreenshot/master/landscape.svg?style=flat
    :target: https://landscape.io/github/ponty/pyscreenshot/master
 .. |Documentation| image:: https://readthedocs.org/projects/pyscreenshot/badge/?version=latest
-   :target: https://readthedocs.org/projects/pyscreenshot/?badge=latest
+   :target: http://pyscreenshot.readthedocs.org
