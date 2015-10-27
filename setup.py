@@ -2,14 +2,19 @@ from setuptools import setup
 import os.path
 import sys
 
-
+if os.environ.get('distutils_issue8876_workaround_enabled', False):
+    # sdist_hack: Remove reference to os.link to disable using hardlinks when
+    #             building setup.py's sdist target.  This is done because
+    #             VirtualBox VMs shared filesystems don't support hardlinks.
+    del os.link
+    
 NAME = 'pyscreenshot'
 URL = 'https://github.com/ponty/pyscreenshot'
 DESCRIPTION = 'python screenshot'
-PACKAGES = ['pyscreenshot',
-            'pyscreenshot.plugins',
-            'pyscreenshot.check',
-            'pyscreenshot.examples',
+PACKAGES = [NAME,
+            NAME + '.plugins',
+            NAME + '.check',
+            NAME + '.examples',
             ]
 
 # get __version__
@@ -36,8 +41,8 @@ classifiers = [
     'Programming Language :: Python :: 2.6',
     'Programming Language :: Python :: 2.7',
     #    "Programming Language :: Python :: 2 :: Only",
-    #     "Programming Language :: Python :: 3",
-    'Programming Language :: Python :: 3.0',
+        "Programming Language :: Python :: 3",
+#     'Programming Language :: Python :: 3.0',
     #     "Programming Language :: Python :: 3.1",
 #     'Programming Language :: Python :: 3.2',
     'Programming Language :: Python :: 3.3',

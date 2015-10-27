@@ -1,3 +1,4 @@
+tox
 nose
 coverage
 pyvirtualdisplay
