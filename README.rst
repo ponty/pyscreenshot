@@ -94,18 +94,15 @@ General
     # as root
     pip install pyscreenshot
 
-Ubuntu
-------
+Ubuntu 14.04
+------------
 ::
 
     sudo apt-get install python-pip
+    sudo apt-get install python-pil
     sudo pip install pyscreenshot
-    sudo apt-get install python-imaging
     # optional back-ends
-    sudo apt-get install scrot
-    sudo apt-get install imagemagick
-    sudo apt-get install python-gtk2
-    sudo apt-get install python-qt4
+    sudo apt-get install scrot imagemagick python-gtk2 python-qt4 python-wxgtk2.8
     # optional for examples
     sudo pip install entrypoint2
 
@@ -122,37 +119,41 @@ Command line interface
 
 Back-end performance::
 
-  #-- sh('python -m pyscreenshot.check.speedtest')--#
+  The performance can be checked with pyscreenshot.check.speedtest.
+  
+  Example:
+  
+  #-- sh('python -m pyscreenshot.check.speedtest --virtual-display 2>/dev/null') --#
 
   n=10	 to_file: True	 bounding box: None
   ------------------------------------------------------
-  wx                  	2.4  sec	(  235 ms per call)
-  pygtk               	2    sec	(  200 ms per call)
-  pyqt                	4.6  sec	(  455 ms per call)
-  scrot               	1.6  sec	(  163 ms per call)
-  imagemagick         	6.4  sec	(  644 ms per call)
+  wx                  	1.3  sec	(  130 ms per call)
+  pygtk               	1    sec	(  100 ms per call)
+  pyqt                	1.1  sec	(  109 ms per call)
+  scrot               	0.71 sec	(   70 ms per call)
+  imagemagick         	0.64 sec	(   64 ms per call)
 
   n=10	 to_file: False	 bounding box: None
   ------------------------------------------------------
-  wx                  	1    sec	(  104 ms per call)
-  pygtk               	2.6  sec	(  257 ms per call)
-  pyqt                	2.5  sec	(  251 ms per call)
-  scrot               	2.4  sec	(  236 ms per call)
-  imagemagick         	6.5  sec	(  647 ms per call)
+  wx                  	1.1  sec	(  109 ms per call)
+  pygtk               	1.3  sec	(  126 ms per call)
+  pyqt                	1.4  sec	(  135 ms per call)
+  scrot               	0.94 sec	(   94 ms per call)
+  imagemagick         	0.78 sec	(   78 ms per call)
 
   n=10	 to_file: False	 bounding box: (10, 10, 20, 20)
   ------------------------------------------------------
-  wx                  	0.9  sec	(   90 ms per call)
-  pygtk               	0.39 sec	(   39 ms per call)
-  pyqt                	2.4  sec	(  241 ms per call)
-  scrot               	2    sec	(  197 ms per call)
-  imagemagick         	4.5  sec	(  445 ms per call)
+  wx                  	1    sec	(  101 ms per call)
+  pygtk               	0.62 sec	(   61 ms per call)
+  pyqt                	1.3  sec	(  127 ms per call)
+  scrot               	0.87 sec	(   87 ms per call)
+  imagemagick         	0.58 sec	(   57 ms per call)
   #-#
 
 
 Print versions::
 
-  #-- sh('python -m pyscreenshot.check.versions')--#
+  #-- sh('python -m pyscreenshot.check.versions 2> /dev/null ')--#
   pyscreenshot         0.3.4
   wx                   2.8.12.1
   pygtk                2.28.6
@@ -168,11 +169,12 @@ command line help
 ::
 
   #-- sh('python -m pyscreenshot.check.speedtest --help')--#
-  usage: speedtest.py [-h] [--debug]
+  usage: speedtest.py [-h] [-v] [--debug]
 
   optional arguments:
-    -h, --help  show this help message and exit
-    --debug     set logging level to DEBUG
+    -h, --help            show this help message and exit
+    -v, --virtual-display
+    --debug               set logging level to DEBUG
   #-#
 
 ::
@@ -198,6 +200,7 @@ command line help
 .. _scrot: http://en.wikipedia.org/wiki/Scrot
 .. _PyQt4: http://www.riverbankcomputing.co.uk/software/pyqt
 .. _wxPython: http://www.wxpython.org/
+
 .. |Travis| image:: http://img.shields.io/travis/ponty/pyscreenshot.svg
    :target: https://travis-ci.org/ponty/pyscreenshot/
 .. |Coveralls| image:: http://img.shields.io/coveralls/ponty/pyscreenshot/master.svg
