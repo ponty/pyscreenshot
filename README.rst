@@ -189,8 +189,7 @@ command line help
 
 
 
-.. _setuptools: http://peak.telecommunity.com/DevCenter/EasyInstall
-.. _pip: http://pip.openplans.org/
+.. _pip: https://pypi.python.org/pypi/pip
 .. _ImageGrab: http://pillow.readthedocs.org/en/latest/reference/ImageGrab.html
 .. _PIL: http://www.pythonware.com/library/pil/
 .. _Pillow: http://pillow.readthedocs.org
