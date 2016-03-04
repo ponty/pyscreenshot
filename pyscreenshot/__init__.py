@@ -38,7 +38,7 @@ def _decoder(data):
         return im
 
 
-def _grab(to_file, childprocess=False, backend=None, bbox=None, filename=None):
+def _grab(to_file, childprocess=True, backend=None, bbox=None, filename=None):
     if childprocess:
         log.debug('running "%s" in child process', backend)
         return run_in_childprocess(_grab_simple, (_coder, _decoder), to_file, backend, bbox, filename)
@@ -46,7 +46,7 @@ def _grab(to_file, childprocess=False, backend=None, bbox=None, filename=None):
         return _grab_simple(to_file, backend, bbox, filename)
 
 
-def grab(bbox=None, childprocess=False, backend=None):
+def grab(bbox=None, childprocess=True, backend=None):
     """Copy the contents of the screen to PIL image memory.
 
     :param bbox: optional bounding box (x1,y1,x2,y2)
@@ -61,7 +61,7 @@ def grab(bbox=None, childprocess=False, backend=None):
     return _grab(to_file=False, childprocess=childprocess, backend=backend, bbox=bbox)
 
 
-def grab_to_file(filename, childprocess=False, backend=None):
+def grab_to_file(filename, childprocess=True, backend=None):
     """Copy the contents of the screen to a file.
 
     :param filename: file for saving
@@ -91,7 +91,7 @@ def _backend_version(backend):
     return v
 
 
-def backend_version(backend, childprocess=False):
+def backend_version(backend, childprocess=True):
     '''Back-end version
 
     :param backend: back-end (examples:scrot, wx,..)
