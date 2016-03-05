@@ -4,8 +4,7 @@ from PIL import Image
 import tempfile
 
 PROGRAM = 'import'
-URL = 'http://www.imagemagick.org/'
-PACKAGE = 'imagemagick'
+# http://www.imagemagick.org/
 
 
 class ImagemagickWrapper(object):
@@ -13,8 +12,7 @@ class ImagemagickWrapper(object):
     childprocess = True
 
     def __init__(self):
-        EasyProcess([PROGRAM, '-version'], url=URL,
-                    ubuntu_package=PACKAGE).check_installed()
+        EasyProcess([PROGRAM, '-version']).check_installed()
 
     def grab(self, bbox=None):
         f = tempfile.NamedTemporaryFile(

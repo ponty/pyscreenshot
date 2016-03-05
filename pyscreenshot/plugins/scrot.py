@@ -5,8 +5,6 @@ import tempfile
 
 
 PROGRAM = 'scrot'
-URL = None
-PACKAGE = 'scrot'
 
 
 class ScrotWrapper(object):
@@ -14,8 +12,7 @@ class ScrotWrapper(object):
     childprocess = True
 
     def __init__(self):
-        EasyProcess([PROGRAM, '-version'], url=URL,
-                    ubuntu_package=PACKAGE).check_installed()
+        EasyProcess([PROGRAM, '-version']).check_installed()
 
     def grab(self, bbox=None):
         f = tempfile.NamedTemporaryFile(

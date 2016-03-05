@@ -3,8 +3,6 @@ import tempfile
 
 
 class GtkPixbufWrapper(object):
-    # home_url = 'http://???'
-    ubuntu_package = 'python-gtk2'
     name = 'pygtk'
     childprocess = False
 

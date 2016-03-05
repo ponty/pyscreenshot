@@ -4,8 +4,7 @@ from PIL import Image
 import tempfile
 
 PROGRAM = 'screencapture'
-URL = 'http://support.apple.com/kb/ph11229'
-PACKAGE = 'screencapture'
+# http://support.apple.com/kb/ph11229
 
 
 class ScreencaptureWrapper(object):

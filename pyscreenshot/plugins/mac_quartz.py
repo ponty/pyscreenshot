@@ -10,7 +10,6 @@ import tempfile
 class MacQuartzWrapper(object):
     name = 'mac_quartz'
     childprocess = False
-    home_url = 'https://stackoverflow.com/questions/4524723/take-screenshot-in-python-on-mac-os-x'
 
     def __init__(self):
         import Quartz
