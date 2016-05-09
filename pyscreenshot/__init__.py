@@ -1,9 +1,10 @@
 from PIL import Image
 import logging
-
+from pyscreenshot import imcodec
 from pyscreenshot.about import __version__
 from pyscreenshot.loader import Loader, FailedBackendError
 from pyscreenshot.procutil import run_in_childprocess
+
 
 ADDITIONAL_IMPORTS=[FailedBackendError]
 
@@ -22,26 +23,10 @@ def _grab_simple(to_file, backend=None, bbox=None, filename=None):
         return backend_obj.grab(bbox)
 
 
-def _coder(im):
-    if im:
-        data = {
-            'pixels': im.tobytes(),
-            'size': im.size,
-            'mode': im.mode,
-        }
-        return data
-
-
-def _decoder(data):
-    if data:
-        im = Image.frombytes(data['mode'], data['size'], data['pixels'])
-        return im
-
-
 def _grab(to_file, childprocess=True, backend=None, bbox=None, filename=None):
     if childprocess:
         log.debug('running "%s" in child process', backend)
-        return run_in_childprocess(_grab_simple, (_coder, _decoder), to_file, backend, bbox, filename)
+        return run_in_childprocess(_grab_simple, imcodec.codec, to_file, backend, bbox, filename)
     else:
         return _grab_simple(to_file, backend, bbox, filename)
 
