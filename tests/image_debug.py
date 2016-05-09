@@ -19,7 +19,7 @@ def img_debug(im, text):
         if not os.path.exists(root):
             os.makedirs(root)
         img_dir = mkdtemp(prefix='img_debug_', suffix='', dir=root)
-    fname = img_dir + '/' + str(img_ind) + '_' + text + '.png'
+    fname = img_dir + '/' + str(img_ind).zfill(3) + '_' + text + '.png'
     im.save(fname)
     log.debug('image (%s) was saved:' % im + fname)
     img_ind += 1

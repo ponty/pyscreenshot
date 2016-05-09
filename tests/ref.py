@@ -62,15 +62,15 @@ def check_ref(backend, bbox):
     img_debug(im, backend + str(bbox))
 
     img_diff = ImageChops.difference(img_ref, im)
-    bbox = img_diff.getbbox()
-    if bbox:
-        img_debug(img_diff, 'img_diff' + str(bbox))
-    eq_(bbox, None, 'different image data %s!=%s bbox=%s' %
-        (ref,        backend, bbox))
+    diff_bbox = img_diff.getbbox()
+    if diff_bbox:
+        img_debug(img_diff, 'img_diff' + str(diff_bbox))
+    eq_(diff_bbox, None, 'different image data %s!=%s bbox=%s diff_bbox=%s' %
+        (ref,        backend, bbox, diff_bbox))
 
 
 def backend_ref(backend):
-    with Display(visible=0, size=(800, 600)):
+    with Display(visible=0, size=(400, 500)):
         with EasyProcess('xlogo'):
             with EasyProcess('xmessage -center "%s"' % long_txt):
                 time.sleep(2)
