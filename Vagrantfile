@@ -67,6 +67,7 @@ Vagrant.configure(2) do |config|
   $script = "
   export DEBIAN_FRONTEND=noninteractive
   echo 'export distutils_issue8876_workaround_enabled=1' >> /home/vagrant/.profile
+  echo 'export export LC_ALL=C' >> /home/vagrant/.profile
   
 # install python versions
   sudo add-apt-repository --yes  ppa:fkrull/deadsnakes
