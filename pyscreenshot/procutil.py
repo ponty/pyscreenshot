@@ -1,4 +1,5 @@
 from multiprocessing import Process, Queue
+from queue import Empty
 # import traceback
 
 
@@ -26,7 +27,10 @@ def run_in_childprocess(target, codec=None, *args, **kwargs):
     queue = Queue()
     p = Process(target=_wrapper, args=(target, codec, queue,  args, kwargs))
     p.start()
-    e, r = queue.get()
+    try:
+        e, r = queue.get(timeout=kwargs.get('timeout',5)) # the default timeout is 5 seconds
+    except Empty as exp:
+        raise Exception("The Screenshot child process queue was empty, Looks like the childprocess queue got blocked on something. the error is {}".format(str(exp)))
     p.join()
 
     if e:

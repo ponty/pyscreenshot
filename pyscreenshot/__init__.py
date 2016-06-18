@@ -12,7 +12,7 @@ log = logging.getLogger(__name__)
 log.debug('version=%s', __version__)
 
 
-def _grab_simple(to_file, backend=None, bbox=None, filename=None):
+def _grab_simple(to_file, backend=None, bbox=None, filename=None, timeout=None):
     loader = Loader()
     loader.force(backend)
     backend_obj = loader.selected()
@@ -23,10 +23,10 @@ def _grab_simple(to_file, backend=None, bbox=None, filename=None):
         return backend_obj.grab(bbox)
 
 
-def _grab(to_file, childprocess=True, backend=None, bbox=None, filename=None):
+def _grab(to_file, childprocess=True, backend=None, bbox=None, filename=None, timeout=5):
     if childprocess:
         log.debug('running "%s" in child process', backend)
-        return run_in_childprocess(_grab_simple, imcodec.codec, to_file, backend, bbox, filename)
+        return run_in_childprocess(_grab_simple, imcodec.codec, to_file, backend, bbox, filename, timeout)
     else:
         return _grab_simple(to_file, backend, bbox, filename)
 
@@ -46,7 +46,7 @@ def grab(bbox=None, childprocess=True, backend=None):
     return _grab(to_file=False, childprocess=childprocess, backend=backend, bbox=bbox)
 
 
-def grab_to_file(filename, childprocess=True, backend=None):
+def grab_to_file(filename, childprocess=True, backend=None, timeout=5):
     """Copy the contents of the screen to a file.
 
     :param filename: file for saving
@@ -54,7 +54,7 @@ def grab_to_file(filename, childprocess=True, backend=None):
     :param backend: see :py:func:`grab`
 
     """
-    return _grab(to_file=True, childprocess=childprocess, backend=backend, filename=filename)
+    return _grab(to_file=True, childprocess=childprocess, backend=backend, filename=filename, timeout=timeout)
 
 
 def backends():
