@@ -23,10 +23,10 @@ def _grab_simple(to_file, backend=None, bbox=None, filename=None, timeout=None):
         return backend_obj.grab(bbox)
 
 
-def _grab(to_file, childprocess=True, backend=None, bbox=None, filename=None, timeout=5):
+def _grab(to_file, childprocess=True, backend=None, bbox=None, filename=None, timeout=20):
     if childprocess:
         log.debug('running "%s" in child process', backend)
-        return run_in_childprocess(_grab_simple, imcodec.codec, to_file, backend, bbox, filename, timeout)
+        return run_in_childprocess(_grab_simple, imcodec.codec, to_file, backend, bbox, filename, timeout=timeout)
     else:
         return _grab_simple(to_file, backend, bbox, filename)
 
@@ -46,7 +46,7 @@ def grab(bbox=None, childprocess=True, backend=None):
     return _grab(to_file=False, childprocess=childprocess, backend=backend, bbox=bbox)
 
 
-def grab_to_file(filename, childprocess=True, backend=None, timeout=5):
+def grab_to_file(filename, childprocess=True, backend=None, timeout=20, num_retries=0):
     """Copy the contents of the screen to a file.
 
     :param filename: file for saving
@@ -54,7 +54,13 @@ def grab_to_file(filename, childprocess=True, backend=None, timeout=5):
     :param backend: see :py:func:`grab`
 
     """
-    return _grab(to_file=True, childprocess=childprocess, backend=backend, filename=filename, timeout=timeout)
+    error = ''
+    for turn in range(num_retries+1):
+        try:
+            return _grab(to_file=True, childprocess=childprocess, backend=backend, filename=filename, timeout=timeout)
+        except Exception as e:
+            error += str(e)
+    raise Exception(error)
 
 
 def backends():

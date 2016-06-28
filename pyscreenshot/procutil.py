@@ -28,9 +28,9 @@ def run_in_childprocess(target, codec=None, *args, **kwargs):
     p = Process(target=_wrapper, args=(target, codec, queue,  args, kwargs))
     p.start()
     try:
-        e, r = queue.get(timeout=kwargs.get('timeout',5)) # the default timeout is 5 seconds
+        e, r = queue.get(timeout=kwargs.get('timeout',20)) # the default timeout is 20 seconds
     except Empty as exp:
-        raise Exception("The Screenshot child process queue was empty, Looks like the childprocess queue got blocked on something. the error is {}".format(str(exp)))
+        raise Exception("The Screenshot child process queue was empty, Looks like the childprocess queue got blocked on something. the error is {}\n".format(str(exp)))
     p.join()
 
     if e:
