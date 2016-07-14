@@ -1,4 +1,5 @@
-from multiprocessing import Process, Queue
+from multiprocessing import Queue
+from threading import Thread
 from queue import Empty
 # import traceback
 
@@ -25,7 +26,7 @@ def _wrapper(target, codec, queue, args, kwargs):
 def run_in_childprocess(target, codec=None, *args, **kwargs):
     assert codec is None or len(codec) == 2, codec
     queue = Queue()
-    p = Process(target=_wrapper, args=(target, codec, queue,  args, kwargs))
+    p = Thread(target=_wrapper, args=(target, codec, queue,  args, kwargs))
     p.start()
     try:
         e, r = queue.get(timeout=kwargs.get('timeout',20)) # the default timeout is 20 seconds
