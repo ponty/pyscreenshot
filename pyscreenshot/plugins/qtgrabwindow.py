@@ -25,7 +25,7 @@ class QtGrabWindow(object):
         self.app = None
         self.QtGui = QtGui
         self.Qt = Qt
-        
+
     def grab_to_buffer(self, buff, file_type='png'):
         QApplication = self.PyQt4.QtGui.QApplication
         QBuffer = self.PyQt4.Qt.QBuffer

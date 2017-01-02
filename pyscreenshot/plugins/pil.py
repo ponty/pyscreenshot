@@ -2,6 +2,7 @@ from PIL import Image
 
 
 class PilWrapper(object):
+
     """windows only."""
     name = 'pil'
     childprocess = False

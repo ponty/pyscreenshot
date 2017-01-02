@@ -12,9 +12,9 @@ def print_name_version(name, version):
 @entrypoint
 def print_versions():
     print_name_version('pyscreenshot', pyscreenshot.__version__)
-    
+
     for name in pyscreenshot.backends():
-        v=backend_version(name, childprocess=True)
+        v = backend_version(name, childprocess=True)
         if not v:
             v = 'missing'
         print_name_version(name, v)

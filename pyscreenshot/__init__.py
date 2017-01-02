@@ -6,7 +6,7 @@ from pyscreenshot.loader import Loader, FailedBackendError
 from pyscreenshot.procutil import run_in_childprocess
 
 
-ADDITIONAL_IMPORTS=[FailedBackendError]
+ADDITIONAL_IMPORTS = [FailedBackendError]
 
 log = logging.getLogger(__name__)
 log.debug('version=%s', __version__)
@@ -59,7 +59,7 @@ def grab_to_file(filename, childprocess=True, backend=None):
 
 def backends():
     '''Back-end names as a list
-    
+
     :return: back-ends as string list
     '''
     return Loader().all_names

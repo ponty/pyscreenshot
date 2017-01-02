@@ -11,10 +11,12 @@ def run(force_backend, n, to_file, bbox=None):
     start = time.time()
     for _ in range(n):
         if to_file:
-            filename=os.path.join(tmpdir, 'speedtest.png')
-            pyscreenshot.grab_to_file(filename, backend=force_backend, childprocess=True)
+            filename = os.path.join(tmpdir, 'speedtest.png')
+            pyscreenshot.grab_to_file(
+                filename, backend=force_backend, childprocess=True)
         else:
-            pyscreenshot.grab(bbox=bbox, backend=force_backend, childprocess=True)
+            pyscreenshot.grab(
+                bbox=bbox, backend=force_backend, childprocess=True)
     end = time.time()
     dt = end - start
 
@@ -26,7 +28,6 @@ def run(force_backend, n, to_file, bbox=None):
     s += '(%5d ms per call)' % (1000.0 * dt / n)
     print(s)
     shutil.rmtree(tmpdir)
-    
 
 
 def run_all(n, to_file, bbox=None):
@@ -54,7 +55,8 @@ def speedtest():
     run_all(n, True)
     run_all(n, False)
     run_all(n, False, (10, 10, 20, 20))
-    
+
+
 @entrypoint
 def main(virtual_display=False):
     if virtual_display:
@@ -63,4 +65,3 @@ def main(virtual_display=False):
             speedtest()
     else:
         speedtest()
-        

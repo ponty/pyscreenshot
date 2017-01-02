@@ -9,24 +9,25 @@ import io
 #             'mode': im.mode,
 #         }
 #         return data
-#  
-#  
+#
+#
 # def _decoder(data):
 #     if data:
 #         im = Image.frombytes(data['mode'], data['size'], data['pixels'])
 #         return im
 
+
 def _coder(im):
     if im:
-        b=io.BytesIO()
+        b = io.BytesIO()
         im.save(b, format='png')
         data = b.getvalue()
         return data
- 
- 
+
+
 def _decoder(data):
     if data:
-        b=io.BytesIO(data)
+        b = io.BytesIO(data)
         im = Image.open(b)
         return im
 
