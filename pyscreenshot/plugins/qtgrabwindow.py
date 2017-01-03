@@ -60,5 +60,4 @@ class QtGrabWindow(object):
         buff.close()
 
     def backend_version(self):
-        # TODO:
-        return 'not implemented'
+        return self.PyQt4.Qt.PYQT_VERSION_STR
