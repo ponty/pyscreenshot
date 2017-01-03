@@ -81,7 +81,7 @@ Vagrant.configure(2) do |config|
   sudo apt-get install -y libjpeg-dev zlib1g-dev
 
 # project dependencies
-  sudo apt-get install -y scrot imagemagick python-gtk2 python-qt4 python-wxgtk2.8
+  sudo apt-get install -y scrot imagemagick python-gtk2 python-qt4 python-pyside python-wxgtk2.8
 
 # test dependencies
   sudo apt-get install -y x11-utils #   for: xmessage

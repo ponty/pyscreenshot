@@ -33,6 +33,7 @@ Features:
      * PyGTK_
      * PIL_ or Pillow_ (only on windows)
      * PyQt4_
+     * PySide_
      * wxPython_
      * Quartz (Mac)
      * screencapture (Mac)
@@ -55,9 +56,9 @@ grab and show the whole screen::
   #-- include('examples/showgrabfullscreen.py') --#
   import pyscreenshot as ImageGrab
 
-  if __name__ == "__main__":
+  if __name__ == '__main__':
       # fullscreen
-      im=ImageGrab.grab()
+      im = ImageGrab.grab()
       im.show()
   #-#
 
@@ -70,9 +71,9 @@ grab and show the part of the screen ::
   #-- include('examples/showgrabbox.py')--#
   import pyscreenshot as ImageGrab
 
-  if __name__ == "__main__":
+  if __name__ == '__main__':
       # part of the screen
-      im=ImageGrab.grab(bbox=(10,10,510,510)) # X1,Y1,X2,Y2
+      im = ImageGrab.grab(bbox=(10, 10, 510, 510))  # X1,Y1,X2,Y2
       im.show()
   #-#
 
@@ -102,7 +103,7 @@ Ubuntu 14.04
     sudo apt-get install python-pil
     sudo pip install pyscreenshot
     # optional back-ends
-    sudo apt-get install scrot imagemagick python-gtk2 python-qt4 python-wxgtk2.8
+    sudo apt-get install scrot imagemagick python-gtk2 python-qt4 python-wxgtk2.8 python-pyside
     # optional for examples
     sudo pip install entrypoint2
 
@@ -127,39 +128,43 @@ Back-end performance::
 
   n=10	 to_file: True	 bounding box: None
   ------------------------------------------------------
-  wx                  	1.3  sec	(  130 ms per call)
-  pygtk               	1    sec	(  100 ms per call)
-  pyqt                	1.1  sec	(  109 ms per call)
-  scrot               	0.71 sec	(   70 ms per call)
-  imagemagick         	0.64 sec	(   64 ms per call)
+  wx                  	1.4  sec	(  136 ms per call)
+  pygtk               	1    sec	(  104 ms per call)
+  pyqt                	1.2  sec	(  121 ms per call)
+  scrot               	0.74 sec	(   73 ms per call)
+  imagemagick         	0.67 sec	(   66 ms per call)
+  pyside              	1.2  sec	(  116 ms per call)
 
   n=10	 to_file: False	 bounding box: None
   ------------------------------------------------------
-  wx                  	1.1  sec	(  109 ms per call)
-  pygtk               	1.3  sec	(  126 ms per call)
-  pyqt                	1.4  sec	(  135 ms per call)
-  scrot               	0.94 sec	(   94 ms per call)
-  imagemagick         	0.78 sec	(   78 ms per call)
+  wx                  	1.3  sec	(  127 ms per call)
+  pygtk               	1.3  sec	(  128 ms per call)
+  pyqt                	1.4  sec	(  141 ms per call)
+  scrot               	0.96 sec	(   95 ms per call)
+  imagemagick         	0.72 sec	(   72 ms per call)
+  pyside              	1.4  sec	(  136 ms per call)
 
   n=10	 to_file: False	 bounding box: (10, 10, 20, 20)
   ------------------------------------------------------
-  wx                  	1    sec	(  101 ms per call)
-  pygtk               	0.62 sec	(   61 ms per call)
-  pyqt                	1.3  sec	(  127 ms per call)
-  scrot               	0.87 sec	(   87 ms per call)
-  imagemagick         	0.58 sec	(   57 ms per call)
+  wx                  	1.1  sec	(  113 ms per call)
+  pygtk               	0.56 sec	(   56 ms per call)
+  pyqt                	1.2  sec	(  124 ms per call)
+  scrot               	0.8  sec	(   80 ms per call)
+  imagemagick         	0.52 sec	(   51 ms per call)
+  pyside              	1.2  sec	(  121 ms per call)
   #-#
 
 
 Print versions::
 
   #-- sh('python -m pyscreenshot.check.versions 2> /dev/null ')--#
-  pyscreenshot         0.3.4
+  pyscreenshot         0.4.2
   wx                   2.8.12.1
   pygtk                2.28.6
-  pyqt                 not implemented
+  pyqt                 4.10.4
   scrot                0.8
   imagemagick          6.7.7
+  pyside               1.2.1
   #-#
 
 
@@ -198,6 +203,7 @@ command line help
 .. _blackbox: http://www.imagemagick.org/discourse-server/viewtopic.php?f=3&t=13658
 .. _scrot: http://en.wikipedia.org/wiki/Scrot
 .. _PyQt4: http://www.riverbankcomputing.co.uk/software/pyqt
+.. _PySide: http://www.pyside.org/
 .. _wxPython: http://www.wxpython.org/
 
 .. |Travis| image:: http://img.shields.io/travis/ponty/pyscreenshot.svg

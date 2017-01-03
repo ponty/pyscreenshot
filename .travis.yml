@@ -9,8 +9,8 @@ python:
 install:
  - sudo apt-get install python-dev xvfb x11-utils x11-apps
  - sudo apt-get install scrot imagemagick 
- - if [ "$TRAVIS_PYTHON_VERSION" == "2.7_with_system_site_packages" ]; then sudo apt-get install python-qt4  python-gtk2 python-wxgtk2.8; fi
- - if [ "$TRAVIS_PYTHON_VERSION" == "3.2_with_system_site_packages" ]; then sudo apt-get install python3-pyqt4; fi
+ - if [ "$TRAVIS_PYTHON_VERSION" == "2.7_with_system_site_packages" ]; then sudo apt-get install python-qt4 python-pyside python-gtk2 python-wxgtk2.8; fi
+ - if [ "$TRAVIS_PYTHON_VERSION" == "3.2_with_system_site_packages" ]; then sudo apt-get install python3-pyside python3-pyqt4; fi
  - pip install -r requirements-test.txt
  - pip install .
  - pip install coveralls

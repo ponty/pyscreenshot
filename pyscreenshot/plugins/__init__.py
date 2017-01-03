@@ -3,7 +3,7 @@
 import sys
 
 from pyscreenshot.plugins import wxscreen, gtkpixbuf, qtgrabwindow, scrot, \
-    imagemagick, mac_quartz, mac_screencapture, pil
+    imagemagick, mac_quartz, mac_screencapture, pil, pyside_grabwindow
 
 
 if sys.platform == 'linux2':
@@ -13,6 +13,7 @@ if sys.platform == 'linux2':
         qtgrabwindow.QtGrabWindow,
         scrot.ScrotWrapper,
         imagemagick.ImagemagickWrapper,
+        pyside_grabwindow.PySideGrabWindow,
     ]
 elif sys.platform == 'darwin':
     BACKENDS = [
@@ -23,6 +24,7 @@ elif sys.platform == 'darwin':
         qtgrabwindow.QtGrabWindow,
         scrot.ScrotWrapper,
         imagemagick.ImagemagickWrapper,
+        pyside_grabwindow.PySideGrabWindow,
     ]
 elif sys.platform == 'win32':
     BACKENDS = [
@@ -32,6 +34,7 @@ elif sys.platform == 'win32':
         qtgrabwindow.QtGrabWindow,
         scrot.ScrotWrapper,
         imagemagick.ImagemagickWrapper,
+        pyside_grabwindow.PySideGrabWindow,
     ]
 else:
     BACKENDS = [
@@ -43,6 +46,7 @@ else:
         imagemagick.ImagemagickWrapper,
         mac_screencapture.ScreencaptureWrapper,
         mac_quartz.MacQuartzWrapper,
+        pyside_grabwindow.PySideGrabWindow,
     ]
 
 
