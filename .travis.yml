@@ -19,8 +19,8 @@ script:
  - xauth add :0 . `mcookie`
  - cd tests 
  - TESTS="easy test_scrot.py test_imagemagick.py"
- - if [ "$TRAVIS_PYTHON_VERSION" == "2.7_with_system_site_packages" ]; then TESTS="$TESTS test_pyqt.py test_wx.py test_pygtk.py"; fi
- - if [ "$TRAVIS_PYTHON_VERSION" == "3.2_with_system_site_packages" ]; then TESTS="$TESTS test_pyqt.py"; fi
+ - if [ "$TRAVIS_PYTHON_VERSION" == "2.7_with_system_site_packages" ]; then TESTS="$TESTS test_pyside.py test_pyqt.py test_wx.py test_pygtk.py"; fi
+ - if [ "$TRAVIS_PYTHON_VERSION" == "3.2_with_system_site_packages" ]; then TESTS="$TESTS test_pyside.py test_pyqt.py"; fi
  - nosetests -v --with-coverage --cover-package=pyscreenshot  $TESTS
   
 after_success:
