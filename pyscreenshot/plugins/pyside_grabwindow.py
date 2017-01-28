@@ -51,7 +51,7 @@ class PySideGrabWindow(object):
             im = im.crop(bbox)
         return im
 
-    def grab_to_file(self, filename):
+    def grab_to_file(self, filename, bbox=None):
         file_type = 'png'
         if filename.endswith('.jpeg'):
             file_type = 'jpeg'
