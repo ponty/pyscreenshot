@@ -18,7 +18,7 @@ def _grab_simple(to_file, backend=None, bbox=None, filename=None):
     backend_obj = loader.selected()
 
     if to_file:
-        return backend_obj.grab_to_file(filename)
+        return backend_obj.grab_to_file(filename, bbox=bbox)
     else:
         return backend_obj.grab(bbox)
 

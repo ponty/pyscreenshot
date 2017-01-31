@@ -35,9 +35,12 @@ class WxScreen(object):
             im = im.crop(bbox)
         return im
 
-    def grab_to_file(self, filename):
+    def grab_to_file(self, filename, bbox=None):
         # bmp.SaveFile('screenshot.png', wx.BITMAP_TYPE_PNG)
-        im = self.grab()
+        if bbox:
+            im = self.grab(bbox)
+        else:
+            im = self.grab()
         im.save(filename)
 
     def backend_version(self):

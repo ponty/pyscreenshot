@@ -24,7 +24,7 @@ class ScrotWrapper(object):
             im = im.crop(bbox)
         return im
 
-    def grab_to_file(self, filename):
+    def grab_to_file(self, filename, bbox=None):
         EasyProcess([PROGRAM, filename]).call()
 
     def backend_version(self):
