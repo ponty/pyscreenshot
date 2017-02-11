@@ -15,10 +15,7 @@ class PilWrapper(object):
         return self.ImageGrab.grab(bbox)
 
     def grab_to_file(self, filename, bbox=None):
-        if bbox:
-            im = self.ImageGrab.grab(bbox)
-        else:
-            im = self.grab()
+        im = self.grab(bbox)
         im.save(filename)
 
     def backend_version(self):
