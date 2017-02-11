@@ -57,8 +57,14 @@ grab and show the whole screen::
   import pyscreenshot as ImageGrab
 
   if __name__ == '__main__':
-      # fullscreen
+
+      # grab fullscreen
       im = ImageGrab.grab()
+
+      # save image file
+      im.save('screenshot.png')
+
+      # show image in a window
       im.show()
   #-#
 
@@ -164,7 +170,7 @@ Print versions::
   pyqt                 4.10.4
   scrot                0.8
   imagemagick          6.7.7
-  pyside               1.2.1
+  pyside               missing
   #-#
 
 
