@@ -1,5 +1,7 @@
 from PIL import Image
 import sys
+import logging
+
 PY3 = sys.version_info[0] >= 3
 
 if PY3:
@@ -9,6 +11,8 @@ else:
     import StringIO
     BytesIO = StringIO.StringIO
 
+
+log = logging.getLogger(__name__)
 
 class QtGrabWindow(object):
 
@@ -52,6 +56,8 @@ class QtGrabWindow(object):
         return im
 
     def grab_to_file(self, filename, bbox=None):
+        if bbox:
+            log.info('bbox is not implemented!')
         file_type = 'png'
         if filename.endswith('.jpeg'):
             file_type = 'jpeg'

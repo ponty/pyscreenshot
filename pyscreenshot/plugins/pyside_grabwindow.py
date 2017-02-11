@@ -1,4 +1,5 @@
 from PIL import Image
+import logging
 import sys
 PY3 = sys.version_info[0] >= 3
 
@@ -9,6 +10,8 @@ else:
     import StringIO
     BytesIO = StringIO.StringIO
 
+
+log = logging.getLogger(__name__)
 
 class PySideGrabWindow(object):
 
@@ -52,6 +55,8 @@ class PySideGrabWindow(object):
         return im
 
     def grab_to_file(self, filename, bbox=None):
+        if bbox:
+            log.info('bbox is not implemented!')
         file_type = 'png'
         if filename.endswith('.jpeg'):
             file_type = 'jpeg'
