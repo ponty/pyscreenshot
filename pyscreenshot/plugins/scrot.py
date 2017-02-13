@@ -2,6 +2,9 @@ from easyprocess import EasyProcess
 from easyprocess import extract_version
 from PIL import Image
 import tempfile
+import logging
+
+log = logging.getLogger(__name__)
 
 
 PROGRAM = 'scrot'
@@ -24,7 +27,9 @@ class ScrotWrapper(object):
             im = im.crop(bbox)
         return im
 
-    def grab_to_file(self, filename):
+    def grab_to_file(self, filename, bbox=None):
+        if bbox:
+            log.info('bbox is not implemented!')
         EasyProcess([PROGRAM, filename]).call()
 
     def backend_version(self):

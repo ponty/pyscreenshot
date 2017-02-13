@@ -1,5 +1,7 @@
 from PIL import Image
+import logging
 
+log = logging.getLogger(__name__)
 
 class WxScreen(object):
 
@@ -35,9 +37,9 @@ class WxScreen(object):
             im = im.crop(bbox)
         return im
 
-    def grab_to_file(self, filename):
+    def grab_to_file(self, filename, bbox=None):
         # bmp.SaveFile('screenshot.png', wx.BITMAP_TYPE_PNG)
-        im = self.grab()
+        im = self.grab(bbox)
         im.save(filename)
 
     def backend_version(self):

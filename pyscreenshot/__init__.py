@@ -18,7 +18,7 @@ def _grab_simple(to_file, backend=None, bbox=None, filename=None):
     backend_obj = loader.selected()
 
     if to_file:
-        return backend_obj.grab_to_file(filename)
+        return backend_obj.grab_to_file(filename, bbox=bbox)
     else:
         return backend_obj.grab(bbox)
 
@@ -48,6 +48,8 @@ def grab(bbox=None, childprocess=True, backend=None):
 
 def grab_to_file(filename, childprocess=True, backend=None):
     """Copy the contents of the screen to a file.
+    Internal function! 
+    Use :py:meth:`PIL.Image.save` for saving image to file.
 
     :param filename: file for saving
     :param childprocess: see :py:func:`grab`
