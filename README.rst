@@ -126,32 +126,14 @@ Back-end performance::
   
   #-- sh('python -m pyscreenshot.check.speedtest --virtual-display 2>/dev/null') --#
 
-  n=10	 to_file: True	 bounding box: None
+  n=10
   ------------------------------------------------------
-  wx                  	1.4  sec	(  136 ms per call)
-  pygtk               	1    sec	(  104 ms per call)
-  pyqt                	1.2  sec	(  121 ms per call)
-  scrot               	0.74 sec	(   73 ms per call)
-  imagemagick         	0.67 sec	(   66 ms per call)
-  pyside              	1.2  sec	(  116 ms per call)
-
-  n=10	 to_file: False	 bounding box: None
-  ------------------------------------------------------
-  wx                  	1.3  sec	(  127 ms per call)
-  pygtk               	1.3  sec	(  128 ms per call)
-  pyqt                	1.4  sec	(  141 ms per call)
-  scrot               	0.96 sec	(   95 ms per call)
-  imagemagick         	0.72 sec	(   72 ms per call)
-  pyside              	1.4  sec	(  136 ms per call)
-
-  n=10	 to_file: False	 bounding box: (10, 10, 20, 20)
-  ------------------------------------------------------
-  wx                  	1.1  sec	(  113 ms per call)
-  pygtk               	0.56 sec	(   56 ms per call)
-  pyqt                	1.2  sec	(  124 ms per call)
-  scrot               	0.8  sec	(   80 ms per call)
-  imagemagick         	0.52 sec	(   51 ms per call)
-  pyside              	1.2  sec	(  121 ms per call)
+  wx                  	1.2  sec	(  120 ms per call)
+  pygtk               	1.2  sec	(  124 ms per call)
+  pyqt                	1.4  sec	(  136 ms per call)
+  scrot               	0.93 sec	(   93 ms per call)
+  imagemagick         	0.67 sec	(   67 ms per call)
+  pyside              	1.3  sec	(  133 ms per call)
   #-#
 
 
