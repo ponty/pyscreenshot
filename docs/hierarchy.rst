@@ -25,7 +25,8 @@ Hierarchy
 			label = "plugins";
 
 			pyscreenshot -> GtkPixbufWrapper;
-			pyscreenshot -> QtGrabWindowWrapper;
+         pyscreenshot -> QtGrabWindowWrapper;
+         pyscreenshot -> PySideGrabWindowWrapper;
 			pyscreenshot -> PilWrapper;
 			pyscreenshot -> ImagemagickWrapper;
 			pyscreenshot -> WxScreenWrapper;
@@ -34,7 +35,8 @@ Hierarchy
          pyscreenshot -> ScreencaptureWrapper
 		}
 	}
-	QtGrabWindowWrapper -> PyQt -> Qt;
+   QtGrabWindowWrapper -> PyQt -> Qt;
+   PySideGrabWindowWrapper -> PySide -> Qt;
 	PilWrapper -> PIL -> Windows;
 	ImagemagickWrapper -> Imagemagick -> X11;
 	ScrotWrapper -> Scrot -> X11;
