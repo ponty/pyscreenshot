@@ -152,7 +152,7 @@ Print versions::
   pyqt                 4.10.4
   scrot                0.8
   imagemagick          6.7.7
-  pyside               missing
+  pyside               1.2.1
   #-#
 
 
