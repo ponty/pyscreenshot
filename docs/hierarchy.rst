@@ -35,6 +35,24 @@ Hierarchy
                 pyscreenshot -> ScreencaptureWrapper
             }
         }
+        subgraph cluster_3 {
+            PIL;
+            wxPython;
+            PyQt;
+            PySide;
+            PyGTK;
+            screencapture;
+            Quartz;
+            Scrot;
+            Imagemagick;
+        }
+        subgraph cluster_4 {
+            label = "GUI library";
+            Qt;
+            wxWidgets;
+            "GTK+";
+        }
+
         QtGrabWindowWrapper -> PyQt -> Qt;
         PySideGrabWindowWrapper -> PySide -> Qt;
         Qt -> MacOS;
