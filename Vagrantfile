@@ -89,6 +89,7 @@ Vagrant.configure(2) do |config|
   sudo pip install -r /vagrant/requirements-test.txt
   
 # doc dependencies
+  sudo apt-get install -y graphviz
   sudo pip install -r /vagrant/requirements-doc.txt
   
   "
