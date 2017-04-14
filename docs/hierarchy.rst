@@ -37,11 +37,19 @@ Hierarchy
 	}
    QtGrabWindowWrapper -> PyQt -> Qt;
    PySideGrabWindowWrapper -> PySide -> Qt;
+   Qt -> MacOS;
+   Qt -> Windows;
+   Qt -> X11;
+
 	PilWrapper -> PIL -> Windows;
 	ImagemagickWrapper -> Imagemagick -> X11;
 	ScrotWrapper -> Scrot -> X11;
 	
 	GtkPixbufWrapper -> PyGTK -> "GTK+";
+   "GTK+" -> MacOS;
+   "GTK+" -> Windows;
+   "GTK+" -> X11;
+
 	WxScreenWrapper -> wxPython -> wxWidgets;
 	wxWidgets -> "GTK+";
 	wxWidgets -> MacOS;
