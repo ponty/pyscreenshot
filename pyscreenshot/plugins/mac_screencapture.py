@@ -36,8 +36,10 @@ class ScreencaptureWrapper(object):
         elif filename.endswith('.pdf'):
             command += ' -t pdf'
         if bbox:
+            width = bbox[2] - bbox[0]
+            height = bbox[3] - bbox[1]
             command += ' -R%s,%s,%s,%s ' % (
-                bbox[0], bbox[1], bbox[2] - bbox[0], bbox[3] - bbox[1])
+                bbox[0], bbox[1], width, height)
         command += filename
         EasyProcess(command).call()
 
