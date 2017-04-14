@@ -1,9 +1,12 @@
 from multiprocessing import Process, Queue
-# import traceback
+import traceback
+import logging
+
+log = logging.getLogger(__name__)
 
 
 def _wrapper(target, codec, queue, args, kwargs):
-    exc = None
+    exc = tb = None
     try:
         if args is None:
             args = []
@@ -11,14 +14,14 @@ def _wrapper(target, codec, queue, args, kwargs):
             kwargs = {}
         r = target(*args, **kwargs)
     except Exception as e:
-        #         traceback.print_exc()
         r = None
         exc = e
+        tb = traceback.format_exc()
 
     if codec:
         r = codec[0](r)
 
-    queue.put((exc, r))
+    queue.put((tb, exc, r))
 
 
 def run_in_childprocess(target, codec=None, *args, **kwargs):
@@ -26,10 +29,11 @@ def run_in_childprocess(target, codec=None, *args, **kwargs):
     queue = Queue()
     p = Process(target=_wrapper, args=(target, codec, queue,  args, kwargs))
     p.start()
-    e, r = queue.get()
+    tb, e, r = queue.get()
     p.join()
 
     if e:
+        log.error(tb)
         raise e
 
     if codec:

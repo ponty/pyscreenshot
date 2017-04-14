@@ -1,5 +1,7 @@
 import logging
 from pyscreenshot import plugins
+import traceback
+
 
 log = logging.getLogger(__name__)
 
@@ -49,6 +51,7 @@ class Loader(object):
                 try:
                     plugin = ls[0]()
                 except Exception:
+                    log.debug(traceback.format_exc())
                     plugin = None
             else:
                 plugin = None
