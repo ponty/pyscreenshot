@@ -32,7 +32,12 @@ class MacQuartzWrapper(object):
     def grab_to_file(self, filename, bbox=None, dpi=72):
         # FIXME: Should query dpi from somewhere, e.g for retina displays
 
-        region = self.CG.CGRectMake(*bbox) if bbox else self.CG.CGRectInfinite
+        if bbox:
+            width = bbox[2] - bbox[0]
+            height = bbox[3] - bbox[1]
+            region = self.CG.CGRectMake(bbox[0], bbox[1], width, height)
+        else:
+            region = self.CG.CGRectInfinite
 
         # Create screenshot as CGImage
         image = self.CG.CGWindowListCreateImage(region,
