@@ -1,7 +1,7 @@
 The ``pyscreenshot`` module can be used to copy
 the contents of the screen to a PIL_ or Pillow_ image memory using various back-ends.
 Replacement for the ImageGrab_ Module, which works on Windows only,
-so Windows users don't need this librarary.
+so Windows users don't need this library.
 For handling image memory (e.g. saving to file, converting,..) please read PIL_ or Pillow_ documentation.
 
 Links:
