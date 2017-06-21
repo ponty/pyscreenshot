@@ -1,6 +1,7 @@
 The ``pyscreenshot`` module can be used to copy
-the contents of the screen to a PIL_ or Pillow_ image memory.
-Replacement for the ImageGrab_ Module, which works on Windows only.
+the contents of the screen to a PIL_ or Pillow_ image memory using various back-ends.
+Replacement for the ImageGrab_ Module, which works on Windows only,
+so Windows users don't need this librarary.
 For handling image memory (e.g. saving to file, converting,..) please read PIL_ or Pillow_ documentation.
 
 Links:
@@ -72,7 +73,7 @@ to start the example::
 
     python -m pyscreenshot.examples.showgrabfullscreen
 
-grab and show the part of the screen ::
+grab and show the part of the screen::
 
   #-- include('examples/showgrabbox.py')--#
   import pyscreenshot as ImageGrab
@@ -127,9 +128,9 @@ Command line interface
 Back-end performance::
 
   The performance can be checked with pyscreenshot.check.speedtest.
-  
+
   Example:
-  
+
   #-- sh('python -m pyscreenshot.check.speedtest --virtual-display 2>/dev/null') --#
 
   n=10
