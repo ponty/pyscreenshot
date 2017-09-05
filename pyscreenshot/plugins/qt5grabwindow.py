@@ -14,11 +14,11 @@ else:
 
 log = logging.getLogger(__name__)
 
-class QtGrabWindow(object):
+class Qt5GrabWindow(object):
 
     '''based on: http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
     '''
-    name = 'pyqt'
+    name = 'pyqt5'
     childprocess = False
 
     def __init__(self):
