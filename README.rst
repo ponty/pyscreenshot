@@ -38,6 +38,7 @@ Features:
      * wxPython_
      * Quartz (Mac)
      * screencapture (Mac)
+     * gnome-screenshot_
  * time: 0.1s - 1.0s
 
 Known problems:
@@ -141,6 +142,7 @@ Back-end performance::
   scrot               	0.93 sec	(   93 ms per call)
   imagemagick         	0.67 sec	(   67 ms per call)
   pyside              	1.3  sec	(  133 ms per call)
+  gnome-screenshot      18   sec        ( 1817 ms per call)
   #-#
 
 
@@ -154,6 +156,7 @@ Print versions::
   scrot                0.8
   imagemagick          6.7.7
   pyside               1.2.1
+  gnome-screenshot     3.26.0
   #-#
 
 
@@ -194,6 +197,7 @@ command line help
 .. _PyQt4: http://www.riverbankcomputing.co.uk/software/pyqt
 .. _PySide: http://www.pyside.org/
 .. _wxPython: http://www.wxpython.org/
+.. _gnome-screenshot: https://git.gnome.org/browse/gnome-screenshot/
 
 .. |Travis| image:: http://img.shields.io/travis/ponty/pyscreenshot.svg
    :target: https://travis-ci.org/ponty/pyscreenshot/

@@ -33,6 +33,7 @@ Hierarchy
                 pyscreenshot -> ScrotWrapper;
                 pyscreenshot -> MacQuartzWrapper
                 pyscreenshot -> ScreencaptureWrapper
+                pyscreenshot -> GnomeScreenshotWrapper
             }
         }
         subgraph cluster_3 {
@@ -45,6 +46,7 @@ Hierarchy
             Quartz;
             Scrot;
             Imagemagick;
+            "gnome-screenshot";
         }
         subgraph cluster_4 {
             label = "GUI library";
@@ -62,6 +64,9 @@ Hierarchy
         PilWrapper -> PIL -> Windows;
         ImagemagickWrapper -> Imagemagick -> X11;
         ScrotWrapper -> Scrot -> X11;
+
+        GnomeScreenshotWrapper -> "gnome-screenshot" -> X11;
+        "gnome-screenshot" -> Wayland;
 
         GtkPixbufWrapper -> PyGTK -> "GTK+";
         "GTK+" -> MacOS;
