@@ -21,15 +21,23 @@ class WxScreen(object):
             self.app = wx.App()
         screen = wx.ScreenDC()
         size = screen.GetSize()
-        bmp = wx.EmptyBitmap(size[0], size[1])
+        #Deprecated wx.EmptyBitmap()
+        #bmp = wx.EmptyBitmap(size[0], size[1])
+        bmp = wx.Bitmap(size[0], size[1])
         mem = wx.MemoryDC(bmp)
         mem.Blit(0, 0, size[0], size[1], screen, 0, 0)
         del mem
-        myWxImage = wx.ImageFromBitmap(bmp)
+        #Deprecated wx.ImageFromBitmap()
+        #myWxImage = wx.ImageFromBitmap(bmp)
+        myWxImage = bmp.ConvertToImage()
         im = Image.new('RGB', (myWxImage.GetWidth(), myWxImage.GetHeight()))
         if hasattr(Image, 'frombytes'):
             # for Pillow
-            im.frombytes(myWxImage.GetData())
+            '''Under Arch Linux, using Python 3 and wxpython installed with pip3
+            Any call to pyscreenshot.grab() would return a: 
+                TypeError: argument 1 must be read-only bytes-like object, not bytearray.
+            Therefore, adding bytes() to convert myWxImage.GetData() from bytearray to bytes'''
+            im.frombytes( bytes( myWxImage.GetData()))
         else:
             # for PIL
             im.fromstring(myWxImage.GetData())
