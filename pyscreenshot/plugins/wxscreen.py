@@ -1,7 +1,5 @@
 from PIL import Image
-import logging
-
-log = logging.getLogger(__name__)
+import sys
 
 class WxScreen(object):
 
@@ -21,15 +19,18 @@ class WxScreen(object):
             self.app = wx.App()
         screen = wx.ScreenDC()
         size = screen.GetSize()
-        bmp = wx.EmptyBitmap(size[0], size[1])
+        bmp = wx.Bitmap(size[0], size[1])
         mem = wx.MemoryDC(bmp)
         mem.Blit(0, 0, size[0], size[1], screen, 0, 0)
         del mem
-        myWxImage = wx.ImageFromBitmap(bmp)
+        myWxImage = bmp.ConvertToImage()
         im = Image.new('RGB', (myWxImage.GetWidth(), myWxImage.GetHeight()))
         if hasattr(Image, 'frombytes'):
             # for Pillow
-            im.frombytes(myWxImage.GetData())
+            if not (sys.version_info[0] < 3):
+                im.frombytes( bytes( myWxImage.GetData()))
+            else:
+                im.frombytes( myWxImage.GetData())
         else:
             # for PIL
             im.fromstring(myWxImage.GetData())
@@ -37,9 +38,9 @@ class WxScreen(object):
             im = im.crop(bbox)
         return im
 
-    def grab_to_file(self, filename, bbox=None):
+    def grab_to_file(self, filename):
         # bmp.SaveFile('screenshot.png', wx.BITMAP_TYPE_PNG)
-        im = self.grab(bbox)
+        im = self.grab()
         im.save(filename)
 
     def backend_version(self):
