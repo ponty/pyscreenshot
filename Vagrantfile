@@ -70,9 +70,9 @@ Vagrant.configure(2) do |config|
   echo 'export export LC_ALL=C' >> /home/vagrant/.profile
   
 # install python versions
-  sudo add-apt-repository --yes  ppa:fkrull/deadsnakes
+  sudo add-apt-repository --yes  ppa:deadsnakes/ppa
   sudo apt-get update
-  sudo apt-get install -y python2.7-dev python3.3-dev python3.4-dev python3.5-dev
+  sudo apt-get install -y python2.7-dev python3.4-dev python3.5-dev python3.6-dev python3.7-dev
 
 # tools
   sudo apt-get install -y mc python-pip xvfb
