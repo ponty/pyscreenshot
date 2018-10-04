@@ -21,7 +21,7 @@ class WxScreen(object):
             self.app = wx.App()
         screen = wx.ScreenDC()
         size = screen.GetSize()
-        if hasattr(wx, "Bitmap"):
+        if wx.__version__ >= '4':
             bmp = wx.Bitmap(size[0], size[1])
         else:
             bmp = wx.EmptyBitmap(size[0], size[1])
