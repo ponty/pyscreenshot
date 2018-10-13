@@ -22,27 +22,25 @@ class QtGrabWindow(object):
     childprocess = False
 
     def __init__(self):
-        import PyQt5
-        self.PyQt5 = PyQt5
-        from PyQt5 import QtGui
-        from PyQt5 import Qt
-        from PyQt5 import QtWidgets
+        import PyQt4
+        self.PyQt4 = PyQt4
+        from PyQt4 import QtGui
+        from PyQt4 import Qt
         self.app = None
         self.QtGui = QtGui
         self.Qt = Qt
-        self.QtWidgets = QtWidgets
 
     def grab_to_buffer(self, buff, file_type='png'):
-        QApplication = self.QtWidgets.QApplication
-        QBuffer = self.PyQt5.Qt.QBuffer
-        QIODevice = self.PyQt5.Qt.QIODevice
-        QScreen = self.PyQt5.QtGui.QScreen
+        QApplication = self.PyQt4.QtGui.QApplication
+        QBuffer = self.PyQt4.Qt.QBuffer
+        QIODevice = self.PyQt4.Qt.QIODevice
+        QPixmap = self.PyQt4.QtGui.QPixmap
 
         if not self.app:
             self.app = QApplication([])
         qbuffer = QBuffer()
         qbuffer.open(QIODevice.ReadWrite)
-        QScreen.grabWindow(QApplication.primaryScreen(),
+        QPixmap.grabWindow(
             QApplication.desktop().winId()).save(qbuffer, file_type)
         buff.write(qbuffer.data())
         qbuffer.close()
@@ -68,4 +66,4 @@ class QtGrabWindow(object):
         buff.close()
 
     def backend_version(self):
-        return self.Qt.PYQT_VERSION_STR
+        return self.PyQt4.Qt.PYQT_VERSION_STR
