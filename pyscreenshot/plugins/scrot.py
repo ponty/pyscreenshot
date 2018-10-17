@@ -30,7 +30,7 @@ class ScrotWrapper(object):
     def grab_to_file(self, filename, bbox=None):
         if bbox:
             log.info('bbox is not implemented!')
-        EasyProcess([PROGRAM, filename]).call()
+        EasyProcess([PROGRAM, '--silent', filename]).call()
 
     def backend_version(self):
         return extract_version(EasyProcess([PROGRAM, '-version']).call().stdout)
