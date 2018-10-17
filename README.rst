@@ -43,7 +43,7 @@ Features:
 
 Known problems:
  * ImageMagick_ creates blackbox_ on some systems
- * PyGTK_ back-end does not check $DISPLAY -> not working with Xvfb
+ * gnome-screenshot_ back-end does not check $DISPLAY -> not working with Xvfb
 
 Similar projects:
  - http://sourceforge.net/projects/gtkshots/
