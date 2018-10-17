@@ -34,6 +34,7 @@ Features:
      * PyGTK_
      * PIL_ or Pillow_ (only on windows)
      * PyQt4_
+     * PyQt5_
      * PySide_
      * wxPython_
      * Quartz (Mac)
@@ -192,7 +193,8 @@ command line help
 .. _PyGTK: http://www.pygtk.org/
 .. _blackbox: http://www.imagemagick.org/discourse-server/viewtopic.php?f=3&t=13658
 .. _scrot: http://en.wikipedia.org/wiki/Scrot
-.. _PyQt4: http://www.riverbankcomputing.co.uk/software/pyqt
+.. _PyQt4: http://pyqt.sourceforge.net/Docs/PyQt4/index.html
+.. _PyQt4: http://pyqt.sourceforge.net/Docs/PyQt5/index.html
 .. _PySide: http://www.pyside.org/
 .. _wxPython: http://www.wxpython.org/
 .. _gnome-screenshot: https://git.gnome.org/browse/gnome-screenshot/

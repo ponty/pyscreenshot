@@ -26,6 +26,7 @@ Hierarchy
 
                 pyscreenshot -> GtkPixbufWrapper;
                 pyscreenshot -> QtGrabWindowWrapper;
+                pyscreenshot -> Qt5GrabWindowWrapper;
                 pyscreenshot -> PySideGrabWindowWrapper;
                 pyscreenshot -> PilWrapper;
                 pyscreenshot -> ImagemagickWrapper;
@@ -39,7 +40,8 @@ Hierarchy
         subgraph cluster_3 {
             PIL;
             wxPython;
-            PyQt;
+            PyQt4;
+            PyQt5;
             PySide;
             PyGTK;
             screencapture;
@@ -50,16 +52,22 @@ Hierarchy
         }
         subgraph cluster_4 {
             label = "GUI library";
-            Qt;
+            Qt4;
+            Qt5;
             wxWidgets;
             "GTK+";
         }
 
-        QtGrabWindowWrapper -> PyQt -> Qt;
-        PySideGrabWindowWrapper -> PySide -> Qt;
-        Qt -> MacOS;
-        Qt -> Windows;
-        Qt -> X11;
+        QtGrabWindowWrapper -> PyQt4 -> Qt4;
+        PyQt4 -> Qt5;
+        Qt5GrabWindowWrapper -> PyQt5 -> Qt5;
+        PySideGrabWindowWrapper -> PySide -> Qt4;
+        Qt4 -> MacOS;
+        Qt4 -> Windows;
+        Qt4 -> X11;
+        Qt5 -> MacOS;
+        Qt5 -> Windows;
+        Qt5 -> X11;
 
         PilWrapper -> PIL -> Windows;
         ImagemagickWrapper -> Imagemagick -> X11;
