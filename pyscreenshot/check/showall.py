@@ -1,10 +1,8 @@
-from entrypoint2 import entrypoint
 from pyscreenshot import backends, FailedBackendError
 import time
 import pyscreenshot as ImageGrab
 
 
-@entrypoint
 def show():
     im = []
 
@@ -18,3 +16,6 @@ def show():
     for x in im:
         x.show()
         time.sleep(1)
+
+if __name__ == '__main__':
+    show()

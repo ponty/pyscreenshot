@@ -1,5 +1,3 @@
-from entrypoint2 import entrypoint
-
 from pyscreenshot import backend_version
 import pyscreenshot
 
@@ -9,7 +7,6 @@ def print_name_version(name, version):
     print(s)
 
 
-@entrypoint
 def print_versions():
     print_name_version('pyscreenshot', pyscreenshot.__version__)
 
@@ -18,3 +15,6 @@ def print_versions():
         if not v:
             v = 'missing'
         print_name_version(name, v)
+
+if __name__ == '__main__':
+    print_versions()

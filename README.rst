@@ -112,8 +112,6 @@ Ubuntu 14.04
     sudo pip install pyscreenshot
     # optional back-ends
     sudo apt-get install scrot imagemagick python-gtk2 python-qt4 python-wxgtk2.8 python-pyside
-    # optional for examples
-    sudo pip install entrypoint2
 
 Uninstall
 ---------

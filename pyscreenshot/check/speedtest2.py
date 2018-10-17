@@ -1,4 +1,3 @@
-from entrypoint2 import entrypoint
 import pyscreenshot
 import tempfile
 import time
@@ -57,7 +56,6 @@ def speedtest():
     run_all(n, False, (10, 10, 20, 20))
 
 
-@entrypoint
 def main(virtual_display=False):
     if virtual_display:
         from pyvirtualdisplay import Display
@@ -65,3 +63,6 @@ def main(virtual_display=False):
             speedtest()
     else:
         speedtest()
+
+if __name__ == '__main__':
+    main()

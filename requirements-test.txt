@@ -3,4 +3,3 @@ nose
 coverage
 pyvirtualdisplay
 pillow
-entrypoint2
