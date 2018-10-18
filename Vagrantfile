@@ -12,7 +12,7 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/trusty32"
+  config.vm.box = "ubuntu/bionic64"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -72,7 +72,7 @@ Vagrant.configure(2) do |config|
 # install python versions
   sudo add-apt-repository --yes  ppa:deadsnakes/ppa
   sudo apt-get update
-  sudo apt-get install -y python2.7-dev python3.4-dev python3.5-dev python3.6-dev
+  sudo apt-get install -y python2.7-dev python3.4-dev python3.5-dev python3.6-dev python3-distutils
 
 # tools
   sudo apt-get install -y mc python-pip xvfb
@@ -81,7 +81,17 @@ Vagrant.configure(2) do |config|
   sudo apt-get install -y libjpeg-dev zlib1g-dev
 
 # project dependencies
-  sudo apt-get install -y scrot imagemagick python-gtk2 python-qt4 python-pyside python-wxgtk2.8
+  sudo apt-get install -y scrot 
+  sudo apt-get install -y imagemagick 
+  sudo apt-get install -y python-gtk2 
+  sudo apt-get install -y python-qt4 
+  sudo apt-get install -y python3-pyqt4 
+  sudo apt-get install -y python-pyqt5 
+  sudo apt-get install -y python3-pyqt5 
+  sudo apt-get install -y python-pyside 
+  sudo apt-get install -y python3-pyside 
+  sudo apt-get install -y python-wxversion
+  sudo apt-get install -y python3-wxgtk4.0
 
 # test dependencies
   sudo apt-get install -y x11-utils #   for: xmessage
