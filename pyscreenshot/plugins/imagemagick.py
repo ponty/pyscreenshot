@@ -27,7 +27,7 @@ class ImagemagickWrapper(object):
     def grab_to_file(self, filename, bbox=None):
         command = 'import -silent -window root '
         if bbox:
-            command += " -crop '%sx%s+%s+%s' " % (
+            command += " -crop '{}x{}+{}+{}' ".format(
                 bbox[2] - bbox[0], bbox[3] - bbox[1], bbox[0], bbox[1])
         command += filename
         EasyProcess(command).call()

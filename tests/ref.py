@@ -75,6 +75,6 @@ def backend_ref(backend):
             with EasyProcess('xmessage -center "%s"' % long_txt):
                 time.sleep(2)
                 for bbox in bbox_ls:
-                    print('bbox: %s' % (bbox,))
+                    print('bbox: {}'.format(bbox))
                     print('backend: %s' % backend)
                     check_ref(backend, bbox)
