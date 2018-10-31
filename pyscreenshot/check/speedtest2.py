@@ -37,7 +37,7 @@ def run_all(n, to_file, bbox=None):
     s += '\t'
     s += ' to_file: %s' % to_file
     s += '\t'
-    s += ' bounding box: %s' % (bbox,)
+    s += ' bounding box: {}'.format(bbox)
     print(s)
 
     print('------------------------------------------------------')

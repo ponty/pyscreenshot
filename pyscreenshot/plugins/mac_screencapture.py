@@ -38,7 +38,7 @@ class ScreencaptureWrapper(object):
         if bbox:
             width = bbox[2] - bbox[0]
             height = bbox[3] - bbox[1]
-            command += ' -R%s,%s,%s,%s ' % (
+            command += ' -R{},{},{},{} '.format(
                 bbox[0], bbox[1], width, height)
         command += filename
         EasyProcess(command).call()

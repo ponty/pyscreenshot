@@ -18,4 +18,3 @@ def exc():
 @raises(ValueError)
 def test_exc():
     eq_(3, run_in_childprocess(exc))
-    

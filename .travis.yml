@@ -5,12 +5,18 @@ python:
  - "3.5"
  - "3.6"
  - "2.7_with_system_site_packages"
- 
+
+# Enable 3.7 without globally enabling sudo and dist: xenial for other build jobs
+matrix:
+  include:
+    - python: 3.7
+      dist: xenial
+      sudo: true
+
 install:
  - sudo apt-get install python-dev xvfb x11-utils x11-apps
  - sudo apt-get install scrot imagemagick 
  - if [ "$TRAVIS_PYTHON_VERSION" == "2.7_with_system_site_packages" ]; then sudo apt-get install python-qt4 python-pyqt5 python-pyside python-gtk2 python-wxgtk2.8; fi
- - if [ "$TRAVIS_PYTHON_VERSION" == "3.2_with_system_site_packages" ]; then sudo apt-get install python3-pyside python3-pyqt4 python3-pyqt5; fi
  - pip install -r requirements-test.txt
  - pip install .
  - pip install coveralls
@@ -20,7 +26,6 @@ script:
  - cd tests 
  - TESTS="easy test_scrot.py test_imagemagick.py"
  - if [ "$TRAVIS_PYTHON_VERSION" == "2.7_with_system_site_packages" ]; then TESTS="$TESTS test_pyside.py test_pyqt.py test_pyqt5.py test_wx.py test_pygtk.py"; fi
- - if [ "$TRAVIS_PYTHON_VERSION" == "3.2_with_system_site_packages" ]; then TESTS="$TESTS test_pyside.py test_pyqt.py test_pyqt5.py "; fi
  - nosetests -v --with-coverage --cover-package=pyscreenshot  $TESTS
   
 after_success:

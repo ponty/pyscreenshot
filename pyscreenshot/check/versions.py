@@ -3,7 +3,7 @@ import pyscreenshot
 
 
 def print_name_version(name, version):
-    s = '%-20s %s' % (name, version)
+    s = '{:<20} {}'.format(name, version)
     print(s)
 
 
