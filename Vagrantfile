@@ -72,7 +72,12 @@ Vagrant.configure(2) do |config|
 # install python versions
   sudo add-apt-repository --yes  ppa:deadsnakes/ppa
   sudo apt-get update
-  sudo apt-get install -y python2.7-dev python3.4-dev python3.5-dev python3.6-dev python3-distutils
+  sudo apt-get install -y python2.7-dev
+  sudo apt-get install -y python3.4-dev
+  sudo apt-get install -y python3.5-dev
+  sudo apt-get install -y python3.6-dev
+  sudo apt-get install -y python3.7-dev
+  sudo apt-get install -y python3-distutils
 
 # tools
   sudo apt-get install -y mc python-pip xvfb
