@@ -2,7 +2,7 @@
 
 import sys
 
-from pyscreenshot.plugins import wxscreen, gtkpixbuf, qtgrabwindow, qt5grabwindow, \
+from pyscreenshot.plugins import wxscreen, gtkpixbuf, qt4grabwindow, qt5grabwindow, \
     scrot, imagemagick, mac_quartz, mac_screencapture, pil, pyside_grabwindow, gnome_screenshot
 
 
@@ -10,7 +10,7 @@ if sys.platform == 'linux2':
     BACKENDS = [
         wxscreen.WxScreen,
         gtkpixbuf.GtkPixbufWrapper,
-        qtgrabwindow.QtGrabWindow,
+        qt4grabwindow.Qt4GrabWindow,
         qt5grabwindow.Qt5GrabWindow,
         scrot.ScrotWrapper,
         imagemagick.ImagemagickWrapper,
@@ -23,7 +23,7 @@ elif sys.platform == 'darwin':
         mac_screencapture.ScreencaptureWrapper,
         wxscreen.WxScreen,
         gtkpixbuf.GtkPixbufWrapper,
-        qtgrabwindow.QtGrabWindow,
+        qt4grabwindow.Qt4GrabWindow,
         qt5grabwindow.Qt5GrabWindow,
         scrot.ScrotWrapper,
         imagemagick.ImagemagickWrapper,
@@ -34,7 +34,7 @@ elif sys.platform == 'win32':
         pil.PilWrapper,
         wxscreen.WxScreen,
         gtkpixbuf.GtkPixbufWrapper,
-        qtgrabwindow.QtGrabWindow,
+        qt4grabwindow.Qt4GrabWindow,
         qt5grabwindow.Qt5GrabWindow,
         scrot.ScrotWrapper,
         imagemagick.ImagemagickWrapper,
@@ -45,7 +45,7 @@ else:
         pil.PilWrapper,
         wxscreen.WxScreen,
         gtkpixbuf.GtkPixbufWrapper,
-        qtgrabwindow.QtGrabWindow,
+        qt4grabwindow.Qt4GrabWindow,
         qt5grabwindow.Qt5GrabWindow,
         scrot.ScrotWrapper,
         imagemagick.ImagemagickWrapper,

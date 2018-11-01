@@ -25,7 +25,7 @@ Hierarchy
                 label = "plugins";
 
                 pyscreenshot -> GtkPixbufWrapper;
-                pyscreenshot -> QtGrabWindowWrapper;
+                pyscreenshot -> Qt4GrabWindowWrapper;
                 pyscreenshot -> Qt5GrabWindowWrapper;
                 pyscreenshot -> PySideGrabWindowWrapper;
                 pyscreenshot -> PilWrapper;
@@ -58,7 +58,7 @@ Hierarchy
             "GTK+";
         }
 
-        QtGrabWindowWrapper -> PyQt4 -> Qt4;
+        Qt4GrabWindowWrapper -> PyQt4 -> Qt4;
         PyQt4 -> Qt5;
         Qt5GrabWindowWrapper -> PyQt5 -> Qt5;
         PySideGrabWindowWrapper -> PySide -> Qt4;
