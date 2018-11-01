@@ -5,8 +5,8 @@ from paver.options import Bunch
 from paver.setuputils import setup
 
 
-IMPORTS=[cog, html, setup]
-    
+IMPORTS = [cog, html, setup]
+
 options(
     cog=Bunch(
         basedir='.',

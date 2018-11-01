@@ -7,7 +7,7 @@ if os.environ.get('distutils_issue8876_workaround_enabled', False):
     #             building setup.py's sdist target.  This is done because
     #             VirtualBox VMs shared filesystems don't support hardlinks.
     del os.link
-    
+
 NAME = 'pyscreenshot'
 URL = 'https://github.com/ponty/pyscreenshot'
 DESCRIPTION = 'python screenshot'
@@ -36,7 +36,7 @@ classifiers = [
     'Programming Language :: Python',
     'Programming Language :: Python :: 2',
     'Programming Language :: Python :: 2.7',
-    "Programming Language :: Python :: 3",
+    'Programming Language :: Python :: 3',
     'Programming Language :: Python :: 3.4',
     'Programming Language :: Python :: 3.5',
     'Programming Language :: Python :: 3.6',

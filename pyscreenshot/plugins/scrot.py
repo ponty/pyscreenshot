@@ -33,4 +33,5 @@ class ScrotWrapper(object):
         EasyProcess([PROGRAM, '--silent', filename]).call()
 
     def backend_version(self):
-        return extract_version(EasyProcess([PROGRAM, '-version']).call().stdout)
+        return extract_version(
+            EasyProcess([PROGRAM, '-version']).call().stdout)

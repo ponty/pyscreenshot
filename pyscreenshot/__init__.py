@@ -12,13 +12,16 @@ ADDITIONAL_IMPORTS = [FailedBackendError]
 log = logging.getLogger(__name__)
 log.debug('version=%s', __version__)
 
+
 def childprocess_default_value():
-    '''
-    IDLE has problem with multiprocessing.
-    Therefore the default is False for childprocess
-    if the program was started inside IDLE. 
-    '''
+    """IDLE has problem with multiprocessing.
+
+    Therefore the default is False for childprocess if the program was
+    started inside IDLE.
+
+    """
     return not is_inside_idle()
+
 
 def _grab_simple(to_file, backend=None, bbox=None, filename=None):
     loader = Loader()
@@ -34,7 +37,8 @@ def _grab_simple(to_file, backend=None, bbox=None, filename=None):
 def _grab(to_file, childprocess, backend=None, bbox=None, filename=None):
     if childprocess:
         log.debug('running "%s" in child process', backend)
-        return run_in_childprocess(_grab_simple, imcodec.codec, to_file, backend, bbox, filename)
+        return run_in_childprocess(
+            _grab_simple, imcodec.codec, to_file, backend, bbox, filename)
     else:
         return _grab_simple(to_file, backend, bbox, filename)
 
@@ -55,12 +59,13 @@ def grab(bbox=None, childprocess=None, backend=None):
     """
     if childprocess is None:
         childprocess = childprocess_default_value()
-    return _grab(to_file=False, childprocess=childprocess, backend=backend, bbox=bbox)
+    return _grab(
+        to_file=False, childprocess=childprocess, backend=backend, bbox=bbox)
 
 
 def grab_to_file(filename, childprocess=None, backend=None):
     """Copy the contents of the screen to a file.
-    Internal function! 
+    Internal function!
     Use :py:meth:`PIL.Image.save` for saving image to file.
 
     :param filename: file for saving
@@ -70,7 +75,8 @@ def grab_to_file(filename, childprocess=None, backend=None):
     """
     if childprocess is None:
         childprocess = childprocess_default_value()
-    return _grab(to_file=True, childprocess=childprocess, backend=backend, filename=filename)
+    return _grab(to_file=True, childprocess=childprocess,
+                 backend=backend, filename=filename)
 
 
 def backends():

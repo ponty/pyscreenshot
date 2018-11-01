@@ -14,6 +14,7 @@ else:
 
 log = logging.getLogger(__name__)
 
+
 class Qt4GrabWindow(object):
 
     '''based on: http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux

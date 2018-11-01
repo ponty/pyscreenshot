@@ -13,10 +13,10 @@ else:
 
 log = logging.getLogger(__name__)
 
+
 class PySideGrabWindow(object):
 
-    '''based on pyqt plugin
-    '''
+    """based on pyqt plugin."""
     name = 'pyside'
     childprocess = False
 
@@ -66,4 +66,3 @@ class PySideGrabWindow(object):
 
     def backend_version(self):
         return self.PySide.__version__
-

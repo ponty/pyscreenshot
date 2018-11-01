@@ -1,6 +1,7 @@
 from PIL import ImageChops
 from easyprocess import EasyProcess
-from nose.tools import eq_, with_setup
+from nose.tools import eq_
+from nose.tools import with_setup
 import pyscreenshot
 from pyvirtualdisplay import Display
 import time
@@ -66,7 +67,7 @@ def check_ref(backend, bbox):
     if diff_bbox:
         img_debug(img_diff, 'img_diff' + str(diff_bbox))
     eq_(diff_bbox, None, 'different image data %s!=%s bbox=%s diff_bbox=%s' %
-        (ref,        backend, bbox, diff_bbox))
+        (ref, backend, bbox, diff_bbox))
 
 
 def backend_ref(backend):

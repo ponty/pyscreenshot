@@ -7,6 +7,7 @@ PROGRAM = 'gnome-screenshot'
 
 
 class GnomeScreenshotWrapper(object):
+
     """
     Plugin for ``pyscreenshot`` that uses ``gnome-screenshot``
     https://git.gnome.org/browse/gnome-screenshot/
@@ -45,4 +46,5 @@ class GnomeScreenshotWrapper(object):
             new_im.save(filename)
 
     def backend_version(self):
-        return extract_version(EasyProcess([PROGRAM, '--version']).call().stdout.replace('-', ' '))
+        return extract_version(
+            EasyProcess([PROGRAM, '--version']).call().stdout.replace('-', ' '))

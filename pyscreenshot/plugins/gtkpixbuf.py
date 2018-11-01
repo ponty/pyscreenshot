@@ -29,7 +29,7 @@ class GtkPixbufWrapper(object):
 
         w = self.gtk.gdk.get_default_root_window()
 #       Capture the whole screen.
-        if bbox == None:
+        if bbox is None:
             sz = w.get_size()
             pb = self.gtk.gdk.Pixbuf(
                 self.gtk.gdk.COLORSPACE_RGB, False, 8, sz[0], sz[1])  # 24bit RGB

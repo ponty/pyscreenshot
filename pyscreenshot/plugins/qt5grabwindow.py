@@ -14,6 +14,7 @@ else:
 
 log = logging.getLogger(__name__)
 
+
 class Qt5GrabWindow(object):
 
     '''based on: http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
@@ -43,7 +44,7 @@ class Qt5GrabWindow(object):
         qbuffer = QBuffer()
         qbuffer.open(QIODevice.ReadWrite)
         QScreen.grabWindow(QApplication.primaryScreen(),
-            QApplication.desktop().winId()).save(qbuffer, file_type)
+                           QApplication.desktop().winId()).save(qbuffer, file_type)
         buff.write(qbuffer.data())
         qbuffer.close()
 #        del app

@@ -1,6 +1,7 @@
 from easyprocess import EasyProcess
 from image_debug import img_debug
-from nose.tools import eq_, with_setup
+from nose.tools import eq_
+from nose.tools import with_setup
 from pyvirtualdisplay import Display
 from PIL import ImageChops
 import pyscreenshot

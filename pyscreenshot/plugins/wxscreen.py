@@ -3,6 +3,7 @@ import logging
 
 log = logging.getLogger(__name__)
 
+
 class WxScreen(object):
 
     '''based on: http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
@@ -28,7 +29,7 @@ class WxScreen(object):
         mem = wx.MemoryDC(bmp)
         mem.Blit(0, 0, size[0], size[1], screen, 0, 0)
         del mem
-        if hasattr(bmp, "ConvertToImage"):
+        if hasattr(bmp, 'ConvertToImage'):
             myWxImage = bmp.ConvertToImage()
         else:
             myWxImage = wx.ImageFromBitmap(bmp)

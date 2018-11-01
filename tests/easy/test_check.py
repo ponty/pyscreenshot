@@ -10,4 +10,3 @@ def test_speedtest():
 
 def test_print_versions():
     print_versions()
-
