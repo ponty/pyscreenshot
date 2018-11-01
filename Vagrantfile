@@ -86,17 +86,22 @@ Vagrant.configure(2) do |config|
   sudo apt-get install -y libjpeg-dev zlib1g-dev
 
 # project dependencies
-  sudo apt-get install -y scrot 
-  sudo apt-get install -y imagemagick 
-  sudo apt-get install -y python-gtk2 
-  sudo apt-get install -y python-qt4 
-  sudo apt-get install -y python3-pyqt4 
-  sudo apt-get install -y python-pyqt5 
-  sudo apt-get install -y python3-pyqt5 
-  sudo apt-get install -y python-pyside 
-  sudo apt-get install -y python3-pyside 
-  sudo apt-get install -y python-wxversion
+  sudo apt-get install -y scrot
+  sudo apt-get install -y imagemagick
+  
+  sudo apt-get install -y python-gtk2
+  
+  sudo apt-get install -y python-wxgtk4.0
   sudo apt-get install -y python3-wxgtk4.0
+
+  sudo apt-get install -y python-qt4
+  sudo apt-get install -y python3-pyqt4
+  
+  sudo apt-get install -y python-pyqt5
+  sudo apt-get install -y python3-pyqt5
+  
+  sudo apt-get install -y python-pyside
+  sudo apt-get install -y python3-pyside
 
 # test dependencies
   sudo apt-get install -y x11-utils #   for: xmessage
