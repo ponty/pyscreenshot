@@ -38,9 +38,16 @@ def check_size(backend, bbox):
         eq_(height, im.size[1])
 
 
-def backend_size(backend):
-    with Display(visible=0, size=(800, 600)):
-        for bbox in bbox_ls:
-            print('bbox: {}'.format(bbox))
-            print('backend: %s' % backend)
-            check_size(backend, bbox)
+def _backend_size(backend):
+    for bbox in bbox_ls:
+        print('bbox: {}'.format(bbox))
+        print('backend: %s' % backend)
+        check_size(backend, bbox)
+
+
+def backend_size(backend, virtual_display=True):
+    if virtual_display:
+        with Display(visible=0, size=(800, 600)):
+            _backend_size(backend)
+    else:
+        _backend_size(backend)

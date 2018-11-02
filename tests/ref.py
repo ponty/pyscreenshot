@@ -70,12 +70,19 @@ def check_ref(backend, bbox):
         (ref, backend, bbox, diff_bbox))
 
 
-def backend_ref(backend):
-    with Display(visible=0, size=(400, 500)):
-        with EasyProcess('xlogo'):
-            with EasyProcess('xmessage -center "%s"' % long_txt):
-                time.sleep(2)
-                for bbox in bbox_ls:
-                    print('bbox: {}'.format(bbox))
-                    print('backend: %s' % backend)
-                    check_ref(backend, bbox)
+def _backend_ref(backend):
+    with EasyProcess('xlogo'):
+        with EasyProcess('xmessage -center "%s"' % long_txt):
+            time.sleep(2)
+            for bbox in bbox_ls:
+                print('bbox: {}'.format(bbox))
+                print('backend: %s' % backend)
+                check_ref(backend, bbox)
+
+
+def backend_ref(backend, virtual_display=True):
+    if virtual_display:
+        with Display(visible=0, size=(400, 500)):
+            _backend_ref(backend)
+    else:
+        _backend_ref(backend)
