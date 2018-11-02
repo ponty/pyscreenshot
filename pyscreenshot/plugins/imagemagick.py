@@ -25,11 +25,12 @@ class ImagemagickWrapper(object):
         return im
 
     def grab_to_file(self, filename, bbox=None):
-        command = 'import -silent -window root '
+        command = [PROGRAM, '-silent', '-window', 'root']
         if bbox:
-            command += " -crop '{}x{}+{}+{}' ".format(
+            pbox = "{}x{}+{}+{}".format(
                 bbox[2] - bbox[0], bbox[3] - bbox[1], bbox[0], bbox[1])
-        command += filename
+            command += ['-crop', pbox]
+        command += [filename]
         EasyProcess(command).call()
 
     def backend_version(self):

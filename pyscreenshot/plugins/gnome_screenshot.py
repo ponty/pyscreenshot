@@ -37,7 +37,7 @@ class GnomeScreenshotWrapper(object):
         else:
             tmp_filename = filename
 
-        command = 'gnome-screenshot -f ' + tmp_filename
+        command = [PROGRAM, '-f', tmp_filename]
         EasyProcess(command).call()
 
         if bbox:
