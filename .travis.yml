@@ -8,23 +8,24 @@ python:
 
 # no python3-wx before bionic
 # no pyqt5 before xenial
+# no pygtk for py3
 matrix:
   include:
     - python: "2.7_with_system_site_packages"
       dist: trusty
-      env: DIST="trusty" PACKAGES="python-gtk2 python-wxgtk2.8 python-qt4    python-pyside              "  TESTS2="test_pygtk.py test_wx.py test_pyqt4.py              "
+      env: DIST="trusty" PACKAGES="python-gtk2 python-gi  python-wxgtk2.8 python-qt4    python-pyside              "  TESTS2="test_pygtk.py test_pygdk3.py test_wx.py test_pyqt4.py              "
 
     - python: "2.7_with_system_site_packages"
       dist: xenial
-      env: DIST="xenial" PACKAGES="python-gtk2 python-wxgtk3.0 python-qt4    python-pyside  python-pyqt5"  TESTS2="test_pygtk.py test_wx.py test_pyqt4.py test_pyqt5.py"
+      env: DIST="xenial" PACKAGES="python-gtk2 python-gi  python-wxgtk3.0 python-qt4    python-pyside  python-pyqt5"  TESTS2="test_pygtk.py test_pygdk3.py test_wx.py test_pyqt4.py test_pyqt5.py"
 
     - python: "3.4_with_system_site_packages"
       dist: trusty
-      env: DIST="trusty" PACKAGES="                            python3-pyqt4                            "  TESTS2="                         test_pyqt4.py              "
+      env: DIST="trusty" PACKAGES="            python3-gi                 python3-pyqt4                            "  TESTS2="              test_pygdk3.py            test_pyqt4.py              "
 
     - python: "3.5_with_system_site_packages"
       dist: xenial
-      env: DIST="xenial" PACKAGES="                            python3-pyqt4                python3-pyqt5" TESTS2="                         test_pyqt4.py  test_pyqt5.py"
+      env: DIST="xenial" PACKAGES="            python3-gi                 python3-pyqt4                python3-pyqt5" TESTS2="              test_pygdk3.py            test_pyqt4.py  test_pyqt5.py"
 
     - python: 3.7
       dist: xenial
