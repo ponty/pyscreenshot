@@ -28,7 +28,8 @@ class Gdk3PixbufWrapper(object):
         :param bbox: Optional tuple or list containing (x1, y1, x2, y2) coordinates
             of sub-region to capture.
         :return: PIL RGB image
-        :raises: ValueError, if image data does not have 3 bytes per pixel.
+        :raises: ValueError, if image data does not have 3 channels (RGB), each with 8
+            bits.
         :rtype: Image
         """
         w = Gdk.get_default_root_window()
@@ -37,12 +38,20 @@ class Gdk3PixbufWrapper(object):
         else:
             g = w.get_geometry()
         pb = Gdk.pixbuf_get_from_window(w, *g)
+        if pb.get_bits_per_sample() != 8:
+            raise ValueError("Expected 8 bits per pixel.")
+        elif pb.get_n_channels() != 3:
+            raise ValueError("Expected RGB image.")
+
+        # Read the entire buffer into a python bytes object.
         pixel_bytes = pb.read_pixel_bytes().get_data()  # type: bytes
-        bytes_per_pixel = len(pixel_bytes) // (g[2] * g[3])
-        if bytes_per_pixel != 3:
-            raise ValueError(
-                "Got {} bytes per pixel, expected 3.".format(bytes_per_pixel))
-        return Image.frombytes('RGB', (g.width, g.height), pixel_bytes, 'raw')
+        width, height = g[2], g[3]
+
+        # Probably for SSE alignment reasons, the pixbuf has extra data in each line.
+        # The args after "raw" help handle this; see
+        # http://effbot.org/imagingbook/decoder.htm#the-raw-decoder
+        return Image.frombytes(
+            "RGB", (width, height), pixel_bytes, "raw", "RGB", pb.get_rowstride(), 1)
 
     def grab_to_file(self, filename, bbox=None):
         self.grab(bbox=bbox).save(filename)
