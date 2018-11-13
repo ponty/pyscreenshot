@@ -9,6 +9,11 @@ class GtkPixbufWrapper(object):
     def __init__(self):
         import gtk
         self.gtk = gtk
+        try:
+            gtk.gdk.Pixbuf
+            gtk.gdk.COLORSPACE_RGB
+        except AttributeError:
+            raise ImportError("Incompatible with Python3 / GDK3. Use gdk3pixbuf.")
 
     def grab(self, bbox=None):
         f = tempfile.NamedTemporaryFile(
