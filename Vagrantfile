@@ -93,7 +93,8 @@ Vagrant.configure(2) do |config|
 
   sudo apt-get install -y python-gi
   sudo apt-get install -y python3-gi
-  
+  sudo apt-get install -y gir1.2-gtk-3.0
+    
   sudo apt-get install -y python-wxgtk4.0
   sudo apt-get install -y python3-wxgtk4.0
 
