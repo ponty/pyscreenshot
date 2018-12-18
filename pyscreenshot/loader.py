@@ -49,28 +49,31 @@ class Loader(object):
             ls = list(ls)
             if len(ls):
                 try:
+                    msg = ''
                     plugin = ls[0]()
                 except Exception:
-                    log.debug(traceback.format_exc())
+                    msg = traceback.format_exc()
+                    log.debug(msg)
                     plugin = None
             else:
+                msg = 'unknown backend'
                 plugin = None
-            self.plugins[name] = plugin
+            self.plugins[name] = (plugin, msg)
         return self.plugins[name]
 
     def get_valid_plugin_by_list(self, ls):
         for name in ls:
-            x = self.get_valid_plugin_by_name(name)
+            x, _ = self.get_valid_plugin_by_name(name)
             if x:
                 return x
 
     def selected(self):
         if self.changed:
             if self.is_forced:
-                b = self.get_valid_plugin_by_name(self._force_backend)
+                b, msg = self.get_valid_plugin_by_name(self._force_backend)
                 if not b:
                     raise FailedBackendError(
-                        'Forced backend not found, or cannot be loaded:' + self._force_backend)
+                        'Forced backend not found, or cannot be loaded:' + self._force_backend + '\n' + msg)
             else:
                 biglist = self.preference + \
                     self.default_preference + self.all_names
