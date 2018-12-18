@@ -39,9 +39,9 @@ class Loader(object):
     def is_forced(self):
         return self._force_backend is not None
 
-    @property
-    def loaded_plugins(self):
-        return self.plugins.values()
+#     @property
+#     def loaded_plugins(self):
+#         return self.plugins.values()
 
     def get_valid_plugin_by_name(self, name):
         if name not in self.plugins:
