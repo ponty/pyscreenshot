@@ -150,6 +150,13 @@ Print versions::
   #-#
 
 
+Wayland
+=======
+
+On Wayland only the `gnome-screenshot` back-end works::
+
+ im = ImageGrab.grab(backend='gnome-screenshot')
+ 
 
 
 .. _pip: https://pypi.python.org/pypi/pip
