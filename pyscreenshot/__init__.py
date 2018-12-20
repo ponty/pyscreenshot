@@ -35,6 +35,12 @@ def _grab_simple(to_file, backend=None, bbox=None, filename=None):
 
 
 def _grab(to_file, childprocess, backend=None, bbox=None, filename=None):
+    if bbox:
+        x1, y1, x2, y2 = bbox
+        if x2 <= x1:
+            raise ValueError('bbox x2<=x1')
+        if y2 <= y1:
+            raise ValueError('bbox y2<=y1')
     if childprocess:
         log.debug('running "%s" in child process', backend)
         return run_in_childprocess(
