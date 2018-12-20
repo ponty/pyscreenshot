@@ -18,8 +18,15 @@ class Gdk3PixbufWrapper(object):
         global Gdk, GdkPixbuf
         import gi
         gi.require_version('Gdk', '3.0')
+        #gi.require_version('GdkPixbuf', '2.0')
         from gi.repository import Gdk as _Gdk
         from gi.repository import GdkPixbuf as _GdkPixbuf
+
+        # read_pixel_bytes: New in version 2.32.
+        if _GdkPixbuf.PIXBUF_MAJOR == 2:
+            if _GdkPixbuf.PIXBUF_MINOR < 32:
+                raise ValueError("GdkPixbuf min supported version: 2.32   current:" + _GdkPixbuf.PIXBUF_VERSION) 
+
         Gdk, GdkPixbuf = _Gdk, _GdkPixbuf
 
     def grab(self, bbox=None):
@@ -44,6 +51,7 @@ class Gdk3PixbufWrapper(object):
             raise ValueError("Expected RGB image.")
 
         # Read the entire buffer into a python bytes object.
+        # read_pixel_bytes: New in version 2.32.
         pixel_bytes = pb.read_pixel_bytes().get_data()  # type: bytes
         width, height = g[2], g[3]
 
