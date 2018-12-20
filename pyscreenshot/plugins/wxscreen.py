@@ -3,11 +3,11 @@ import logging
 
 log = logging.getLogger(__name__)
 
+# based on:
+# http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
+
 
 class WxScreen(object):
-
-    '''based on: http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
-    '''
     name = 'wx'
     childprocess = False
 

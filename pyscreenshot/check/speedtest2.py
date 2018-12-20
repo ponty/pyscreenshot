@@ -64,5 +64,6 @@ def main(virtual_display=False):
     else:
         speedtest()
 
+
 if __name__ == '__main__':
     main()

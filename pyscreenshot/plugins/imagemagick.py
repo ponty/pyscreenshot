@@ -27,7 +27,7 @@ class ImagemagickWrapper(object):
     def grab_to_file(self, filename, bbox=None):
         command = [PROGRAM, '-silent', '-window', 'root']
         if bbox:
-            pbox = "{}x{}+{}+{}".format(
+            pbox = '{}x{}+{}+{}'.format(
                 bbox[2] - bbox[0], bbox[3] - bbox[1], bbox[0], bbox[1])
             command += ['-crop', pbox]
         command += [filename]

@@ -31,4 +31,5 @@ def _decoder(data):
         im = Image.open(b)
         return im
 
+
 codec = (_coder, _decoder)

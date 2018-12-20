@@ -25,7 +25,8 @@ class Gdk3PixbufWrapper(object):
         # read_pixel_bytes: New in version 2.32.
         if _GdkPixbuf.PIXBUF_MAJOR == 2:
             if _GdkPixbuf.PIXBUF_MINOR < 32:
-                raise ValueError("GdkPixbuf min supported version: 2.32   current:" + _GdkPixbuf.PIXBUF_VERSION) 
+                raise ValueError(
+                    'GdkPixbuf min supported version: 2.32   current:' + _GdkPixbuf.PIXBUF_VERSION)
 
         Gdk, GdkPixbuf = _Gdk, _GdkPixbuf
 
@@ -46,9 +47,9 @@ class Gdk3PixbufWrapper(object):
             g = w.get_geometry()
         pb = Gdk.pixbuf_get_from_window(w, *g)
         if pb.get_bits_per_sample() != 8:
-            raise ValueError("Expected 8 bits per pixel.")
+            raise ValueError('Expected 8 bits per pixel.')
         elif pb.get_n_channels() != 3:
-            raise ValueError("Expected RGB image.")
+            raise ValueError('Expected RGB image.')
 
         # Read the entire buffer into a python bytes object.
         # read_pixel_bytes: New in version 2.32.
@@ -59,7 +60,7 @@ class Gdk3PixbufWrapper(object):
         # The args after "raw" help handle this; see
         # http://effbot.org/imagingbook/decoder.htm#the-raw-decoder
         return Image.frombytes(
-            "RGB", (width, height), pixel_bytes, "raw", "RGB", pb.get_rowstride(), 1)
+            'RGB', (width, height), pixel_bytes, 'raw', 'RGB', pb.get_rowstride(), 1)
 
     def grab_to_file(self, filename, bbox=None):
         self.grab(bbox=bbox).save(filename)

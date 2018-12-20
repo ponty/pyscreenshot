@@ -18,7 +18,6 @@ def childprocess_default_value():
 
     Therefore the default is False for childprocess if the program was
     started inside IDLE.
-
     """
     return not is_inside_idle()
 
@@ -61,7 +60,6 @@ def grab(bbox=None, childprocess=None, backend=None):
             otherwise it is True.
     :param backend: back-end can be forced if set (examples:scrot, wx,..),
                     otherwise back-end is automatic
-
     """
     if childprocess is None:
         childprocess = childprocess_default_value()
@@ -70,14 +68,12 @@ def grab(bbox=None, childprocess=None, backend=None):
 
 
 def grab_to_file(filename, childprocess=None, backend=None):
-    """Copy the contents of the screen to a file.
-    Internal function!
-    Use :py:meth:`PIL.Image.save` for saving image to file.
+    """Copy the contents of the screen to a file. Internal function! Use
+    PIL.Image.save() for saving image to file.
 
     :param filename: file for saving
     :param childprocess: see :py:func:`grab`
     :param backend: see :py:func:`grab`
-
     """
     if childprocess is None:
         childprocess = childprocess_default_value()
@@ -86,10 +82,10 @@ def grab_to_file(filename, childprocess=None, backend=None):
 
 
 def backends():
-    '''Back-end names as a list
+    """Back-end names as a list.
 
     :return: back-ends as string list
-    '''
+    """
     return Loader().all_names
 
 
@@ -105,12 +101,12 @@ def _backend_version(backend):
 
 
 def backend_version(backend, childprocess=None):
-    '''Back-end version
+    """Back-end version.
 
     :param backend: back-end (examples:scrot, wx,..)
     :param childprocess: see :py:func:`grab`
     :return: version as string
-    '''
+    """
     if childprocess is None:
         childprocess = childprocess_default_value()
     if not childprocess:

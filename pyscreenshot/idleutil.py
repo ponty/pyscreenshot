@@ -9,7 +9,6 @@ def is_inside_idle():
     """True if program was started inside IDLE.
 
     The implementation is a HACK, because there is no correct solution.
-
     """
     idle = 'idlelib.run' in sys.modules
     if idle:

@@ -8,8 +8,7 @@ PROGRAM = 'gnome-screenshot'
 
 class GnomeScreenshotWrapper(object):
 
-    """
-    Plugin for ``pyscreenshot`` that uses ``gnome-screenshot``
+    """Plugin for ``pyscreenshot`` that uses ``gnome-screenshot``
     https://git.gnome.org/browse/gnome-screenshot/
 
     This plugin can take screenshot when system is running Wayland.

@@ -1,6 +1,9 @@
 from PIL import Image
 import tempfile
 
+# based on:
+# http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
+
 
 class GtkPixbufWrapper(object):
     name = 'pygtk'
@@ -13,7 +16,8 @@ class GtkPixbufWrapper(object):
             gtk.gdk.Pixbuf
             gtk.gdk.COLORSPACE_RGB
         except AttributeError:
-            raise ImportError("Incompatible with Python3 / GDK3. Use gdk3pixbuf.")
+            raise ImportError(
+                'Incompatible with Python3 / GDK3. Use gdk3pixbuf.')
 
     def grab(self, bbox=None):
         f = tempfile.NamedTemporaryFile(
@@ -24,13 +28,10 @@ class GtkPixbufWrapper(object):
         return im
 
     def grab_to_file(self, filename, bbox=None):
-        '''
-        based on: http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
-
-        http://www.pygtk.org/docs/pygtk/class-gdkpixbuf.html
+        """http://www.pygtk.org/docs/pygtk/class-gdkpixbuf.html.
 
         only "jpeg" or "png"
-        '''
+        """
 
         w = self.gtk.gdk.get_default_root_window()
 #       Capture the whole screen.
