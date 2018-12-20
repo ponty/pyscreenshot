@@ -18,7 +18,6 @@ Goal:
   Its strategy should work on most Linux distributions:
   a lot of back-ends are wrapped, if at least one exists then it works,
   if not then one back-end should be installed.
-  Performance and interactivity are not important for this library.
 
 Features:
  * Cross-platform wrapper
@@ -28,7 +27,7 @@ Features:
  * some back-ends are based on this discussion: http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
  * pure Python library
  * supported Python versions: 2.7, 3.4, 3.5, 3.6, 3.7
- * Plugin based, it has wrappers for various back-ends:
+ * It has wrappers for various back-ends:
      * scrot_
      * ImageMagick_
      * PyGTK_
@@ -40,7 +39,10 @@ Features:
      * Quartz (Mac)
      * screencapture (Mac)
      * gnome-screenshot_
- * time: 0.1s - 1.0s
+ * time taken: 0.1s - 2.0s
+ * Performance is not a target for this library, but you can benchmark the back-ends and choose the fastest one.
+ * Interactivity is not supported.
+ * Mouse pointer is not visible.
 
 Known problems:
  * ImageMagick_ creates blackbox_ on some systems
@@ -93,32 +95,16 @@ to start the example::
 Installation
 ============
 
-General
--------
-
  * install pip_
- * install PIL_ or Pillow_
+ * install Pillow_ (Ubuntu: ``sudo apt-get install python-pil``)
  * install at least one back-end
  * install the program::
 
-    # as root
     pip install pyscreenshot
 
-Ubuntu 14.04
-------------
-::
 
-    sudo apt-get install python-pip
-    sudo apt-get install python-pil
-    sudo pip install pyscreenshot
-    # optional back-ends
-    sudo apt-get install scrot imagemagick python-gtk2 python-qt4 python-wxgtk2.8 python-pyside
+Uninstall::
 
-Uninstall
----------
-::
-
-    # as root
     pip uninstall pyscreenshot
 
 
@@ -158,30 +144,6 @@ Print versions::
   gnome-screenshot     3.26.0
   #-#
 
-
-command line help
-=================
-
-::
-
-  #-- sh('python -m pyscreenshot.check.speedtest --help')--#
-  usage: speedtest.py [-h] [-v] [--debug]
-
-  optional arguments:
-    -h, --help            show this help message and exit
-    -v, --virtual-display
-    --debug               set logging level to DEBUG
-  #-#
-
-::
-
-  #-- sh('python -m pyscreenshot.check.versions --help')--#
-  usage: versions.py [-h] [--debug]
-
-  optional arguments:
-    -h, --help  show this help message and exit
-    --debug     set logging level to DEBUG
-  #-#
 
 
 

@@ -35,6 +35,7 @@ Hierarchy
                 pyscreenshot -> MacQuartzWrapper
                 pyscreenshot -> ScreencaptureWrapper
                 pyscreenshot -> GnomeScreenshotWrapper
+                pyscreenshot -> Gdk3PixbufWrapper
             }
         }
         subgraph cluster_3 {
@@ -80,6 +81,11 @@ Hierarchy
         "GTK+" -> MacOS;
         "GTK+" -> Windows;
         "GTK+" -> X11;
+
+        Gdk3PixbufWrapper -> PyGObject -> GdkPixbuf;
+        GdkPixbuf -> MacOS;
+        GdkPixbuf -> Windows;
+        GdkPixbuf -> X11;
 
         WxScreenWrapper -> wxPython -> wxWidgets;
         wxWidgets -> "GTK+";
