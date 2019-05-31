@@ -26,12 +26,12 @@ Features:
  * saving to PIL_ or Pillow_ image memory
  * some back-ends are based on this discussion: http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
  * pure Python library
- * supported Python versions: 2.7, 3.4, 3.5, 3.6, 3.7
+ * supported Python versions: 2.7 and 3.5+
  * It has wrappers for various back-ends:
      * scrot_
      * ImageMagick_
      * PyGTK_
-     * PIL_ or Pillow_ (only on windows)
+     * PIL_ or Pillow_ (only on Windows)
      * PyQt4_
      * PyQt5_
      * PySide_
