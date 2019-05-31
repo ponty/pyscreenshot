@@ -183,7 +183,5 @@ On Wayland only the `gnome-screenshot` back-end works::
    :target: https://pypi.python.org/pypi/pyscreenshot/
 .. |License| image:: https://img.shields.io/pypi/l/pyscreenshot.svg
    :target: https://pypi.python.org/pypi/pyscreenshot/
-.. |Code Health| image:: https://landscape.io/github/ponty/pyscreenshot/master/landscape.svg?style=flat
-   :target: https://landscape.io/github/ponty/pyscreenshot/master
 .. |Documentation| image:: https://readthedocs.org/projects/pyscreenshot/badge/?version=latest
    :target: http://pyscreenshot.readthedocs.org
