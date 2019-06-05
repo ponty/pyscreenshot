@@ -9,7 +9,7 @@ Links:
  * documentation: http://pyscreenshot.readthedocs.org
  * PYPI: https://pypi.python.org/pypi/pyscreenshot
 
-|Travis| |Coveralls| |Latest Version| |Supported Python versions| |License| |Code Health| |Documentation|
+|Travis| |Coveralls| |Latest Version| |Supported Python versions| |License| |Documentation|
 
 Goal:
   Pyscreenshot tries to allow to take screenshots without installing 3rd party libraries.
