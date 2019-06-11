@@ -1,6 +1,10 @@
-from PIL import Image
 import logging
+import sys
 
+from PIL import Image
+
+PY3 = sys.version_info[0] >= 3
+to_bytes = bytes if PY3 else buffer
 log = logging.getLogger(__name__)
 
 # based on:
@@ -36,7 +40,7 @@ class WxScreen(object):
         im = Image.new('RGB', (myWxImage.GetWidth(), myWxImage.GetHeight()))
         if hasattr(Image, 'frombytes'):
             # for Pillow
-            im.frombytes(buffer(myWxImage.GetData()))
+            im.frombytes(to_bytes(myWxImage.GetData()))
         else:
             # for PIL
             im.fromstring(myWxImage.GetData())
