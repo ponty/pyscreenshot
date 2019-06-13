@@ -168,7 +168,7 @@ On Wayland only the `gnome-screenshot` back-end works::
 .. _blackbox: http://www.imagemagick.org/discourse-server/viewtopic.php?f=3&t=13658
 .. _scrot: http://en.wikipedia.org/wiki/Scrot
 .. _PyQt4: http://pyqt.sourceforge.net/Docs/PyQt4/index.html
-.. _PyQt4: http://pyqt.sourceforge.net/Docs/PyQt5/index.html
+.. _PyQt5: http://pyqt.sourceforge.net/Docs/PyQt5/index.html
 .. _PySide: http://www.pyside.org/
 .. _wxPython: http://www.wxpython.org/
 .. _gnome-screenshot: https://git.gnome.org/browse/gnome-screenshot/
