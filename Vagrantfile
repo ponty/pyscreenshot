@@ -87,6 +87,7 @@ Vagrant.configure(2) do |config|
 # project dependencies
   sudo apt-get install -y scrot
   sudo apt-get install -y imagemagick
+  sudo apt-get install -y gnome-screenshot
   
   sudo apt-get install -y python-gtk2
 
