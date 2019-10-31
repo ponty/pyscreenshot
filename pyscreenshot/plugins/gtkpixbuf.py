@@ -36,24 +36,36 @@ class GtkPixbufWrapper(object):
         w = self.gtk.gdk.get_default_root_window()
 #       Capture the whole screen.
         if bbox is None:
-            sz = w.get_size()
-            pb = self.gtk.gdk.Pixbuf(
-                self.gtk.gdk.COLORSPACE_RGB, False, 8, sz[0], sz[1])  # 24bit RGB
-            pb = pb.get_from_drawable(
-                w, w.get_colormap(), 0, 0, 0, 0, sz[0], sz[1])
+            try:
+                sz = w.get_size()
+            except AttributeError:
+                sz = (w.get_width(), w.get_height())
+            try:
+                pb = self.gtk.gdk.Pixbuf(
+                    self.gtk.gdk.COLORSPACE_RGB, False, 8, sz[0], sz[1])  # 24bit RGB
+                pb = pb.get_from_drawable(
+                    w, w.get_colormap(), 0, 0, 0, 0, sz[0], sz[1])
+            except TypeError:
+                pb = self.gtk.gdk.pixbuf_get_from_window(w, 0, 0, sz[0], sz[1])
 #       Only capture what we need. The smaller the capture, the faster.
         else:
             sz = [bbox[2] - bbox[0], bbox[3] - bbox[1]]
-            pb = self.gtk.gdk.Pixbuf(
-                self.gtk.gdk.COLORSPACE_RGB, False, 8, sz[0], sz[1])
-            pb = pb.get_from_drawable(
-                w, w.get_colormap(), bbox[0], bbox[1], 0, 0, sz[0], sz[1])
+            try:
+                pb = self.gtk.gdk.Pixbuf(
+                    self.gtk.gdk.COLORSPACE_RGB, False, 8, sz[0], sz[1])
+                pb = pb.get_from_drawable(
+                    w, w.get_colormap(), bbox[0], bbox[1], 0, 0, sz[0], sz[1])
+            except TypeError:
+                pb = self.gtk.gdk.pixbuf_get_from_window(w, bbox[0], bbox[1], sz[0], sz[1])
         assert pb
         ftype = 'png'
         if filename.endswith('.jpeg'):
             ftype = 'jpeg'
 
-        pb.save(filename, ftype)
+        try:
+            pb.save(filename, ftype)
+        except AttributeError:
+            pb.savev(filename, ftype, [], ())
 
     def backend_version(self):
         return '.'.join(map(str, self.gtk.ver))
