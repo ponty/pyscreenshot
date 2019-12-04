@@ -19,11 +19,11 @@ class ScreencaptureWrapper(object):
         f = tempfile.NamedTemporaryFile(
             suffix='.png', prefix='pyscreenshot_screencapture_')
         filename = f.name
-        self.grab_to_file(filename, bbox=bbox)
+        self._grab_to_file(filename, bbox=bbox)
         im = Image.open(filename)
         return im
 
-    def grab_to_file(self, filename, bbox=None):
+    def _grab_to_file(self, filename, bbox=None):
         command = 'screencapture -x '
         if filename.endswith('.jpeg'):
             command += ' -t jpg'

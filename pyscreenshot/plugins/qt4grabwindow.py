@@ -55,15 +55,5 @@ class Qt4GrabWindow(object):
             im = im.crop(bbox)
         return im
 
-    def grab_to_file(self, filename, bbox=None):
-        if bbox:
-            log.info('bbox is not implemented!')
-        file_type = 'png'
-        if filename.endswith('.jpeg'):
-            file_type = 'jpeg'
-        buff = open(filename, 'wb')
-        self.grab_to_buffer(buff, file_type)
-        buff.close()
-
     def backend_version(self):
         return self.PyQt4.Qt.PYQT_VERSION_STR

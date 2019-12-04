@@ -18,13 +18,11 @@ class ImagemagickWrapper(object):
         f = tempfile.NamedTemporaryFile(
             suffix='.png', prefix='pyscreenshot_imagemagick_')
         filename = f.name
-        self.grab_to_file(filename, bbox=bbox)
+        self._grab_to_file(filename, bbox=bbox)
         im = Image.open(filename)
-        # if bbox:
-        #    im = im.crop(bbox)
         return im
 
-    def grab_to_file(self, filename, bbox=None):
+    def _grab_to_file(self, filename, bbox=None):
         command = [PROGRAM, '-silent', '-window', 'root']
         if bbox:
             pbox = '{}x{}+{}+{}'.format(

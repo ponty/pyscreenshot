@@ -62,9 +62,6 @@ class Gdk3PixbufWrapper(object):
         return Image.frombytes(
             'RGB', (width, height), pixel_bytes, 'raw', 'RGB', pb.get_rowstride(), 1)
 
-    def grab_to_file(self, filename, bbox=None):
-        self.grab(bbox=bbox).save(filename)
-
     def backend_version(self):
         import gi
         return '.'.join(map(str, gi.version_info))

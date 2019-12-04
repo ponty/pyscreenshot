@@ -22,18 +22,14 @@ def childprocess_default_value():
     return not is_inside_idle()
 
 
-def _grab_simple(to_file, backend=None, bbox=None, filename=None):
+def _grab_simple(backend=None, bbox=None, filename=None):
     loader = Loader()
     loader.force(backend)
     backend_obj = loader.selected()
-
-    if to_file:
-        return backend_obj.grab_to_file(filename, bbox=bbox)
-    else:
-        return backend_obj.grab(bbox)
+    return backend_obj.grab(bbox)
 
 
-def _grab(to_file, childprocess, backend=None, bbox=None, filename=None):
+def _grab(childprocess, backend=None, bbox=None, filename=None):
     if bbox:
         x1, y1, x2, y2 = bbox
         if x2 <= x1:
@@ -43,9 +39,9 @@ def _grab(to_file, childprocess, backend=None, bbox=None, filename=None):
     if childprocess:
         log.debug('running "%s" in child process', backend)
         return run_in_childprocess(
-            _grab_simple, imcodec.codec, to_file, backend, bbox, filename)
+            _grab_simple, imcodec.codec, backend, bbox, filename)
     else:
-        return _grab_simple(to_file, backend, bbox, filename)
+        return _grab_simple(backend, bbox, filename)
 
 
 def grab(bbox=None, childprocess=None, backend=None):
@@ -64,21 +60,7 @@ def grab(bbox=None, childprocess=None, backend=None):
     if childprocess is None:
         childprocess = childprocess_default_value()
     return _grab(
-        to_file=False, childprocess=childprocess, backend=backend, bbox=bbox)
-
-
-def grab_to_file(filename, childprocess=None, backend=None):
-    """Copy the contents of the screen to a file. Internal function! Use
-    PIL.Image.save() for saving image to file.
-
-    :param filename: file for saving
-    :param childprocess: see :py:func:`grab`
-    :param backend: see :py:func:`grab`
-    """
-    if childprocess is None:
-        childprocess = childprocess_default_value()
-    return _grab(to_file=True, childprocess=childprocess,
-                 backend=backend, filename=filename)
+        childprocess=childprocess, backend=backend, bbox=bbox)
 
 
 def backends():

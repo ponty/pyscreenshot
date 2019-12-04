@@ -23,11 +23,11 @@ class GtkPixbufWrapper(object):
         f = tempfile.NamedTemporaryFile(
             suffix='.png', prefix='pyscreenshot_gtkpixbuf_')
         filename = f.name
-        self.grab_to_file(filename, bbox)
+        self._grab_to_file(filename, bbox)
         im = Image.open(filename)
         return im
 
-    def grab_to_file(self, filename, bbox=None):
+    def _grab_to_file(self, filename, bbox=None):
         """http://www.pygtk.org/docs/pygtk/class-gdkpixbuf.html.
 
         only "jpeg" or "png"
