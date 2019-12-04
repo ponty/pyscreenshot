@@ -5,6 +5,8 @@ import tempfile
 
 PROGRAM = 'gnome-screenshot'
 
+class GnomeScreenshotBackendError(Exception):
+    pass
 
 class GnomeScreenshotWrapper(object):
 
@@ -32,7 +34,10 @@ class GnomeScreenshotWrapper(object):
 
     def _grab_to_file(self, filename):
         command = [PROGRAM, '-f', filename]
-        EasyProcess(command).call()
+        p = EasyProcess(command)
+        p.call()
+        if p.return_code != 0:
+            raise GnomeScreenshotBackendError(p.stderr)
 
     def backend_version(self):
         return extract_version(
