@@ -21,7 +21,7 @@ def run(force_backend, n):
     print(s)
 
 
-def run_all(n):
+def run_all(n, virtual_only=True):
     print('')
 
     s = ''
@@ -31,25 +31,22 @@ def run_all(n):
     print('------------------------------------------------------')
 
     for x in pyscreenshot.backends():
+        if virtual_only and x=='gnome-screenshot' :
+            continue
         try:
             run(x, n)
         except pyscreenshot.FailedBackendError as e:
             print(e)
 
-
-def speedtest():
+def speedtest(virtual_display=False):
     n = 10
-    run_all(n)
-
-
-def main(virtual_display=False):
     if virtual_display:
         from pyvirtualdisplay import Display
         with Display(visible=0):
-            speedtest()
+            run_all(n, virtual_only=True)
     else:
-        speedtest()
+        run_all(n, virtual_only=False)
 
 
 if __name__ == '__main__':
-    main()
+    speedtest()

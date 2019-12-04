@@ -5,7 +5,7 @@ from pyvirtualdisplay.display import Display
 
 def test_speedtest():
     with Display(visible=0, size=(800, 600)):
-        speedtest()
+        speedtest(virtual_display=True)
 
 
 def test_print_versions():
