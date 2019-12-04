@@ -5,7 +5,6 @@ import shutil
 
 
 def run(force_backend, n):
-    tmpdir = tempfile.mkdtemp(prefix='pyscreenshot_speedtest_')
     start = time.time()
     for _ in range(n):
         pyscreenshot.grab(
@@ -20,7 +19,6 @@ def run(force_backend, n):
     s += '\t'
     s += '(%5d ms per call)' % (1000.0 * dt / n)
     print(s)
-    shutil.rmtree(tmpdir)
 
 
 def run_all(n):
