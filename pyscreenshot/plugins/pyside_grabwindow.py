@@ -41,9 +41,9 @@ class PySideGrabWindow(object):
         qbuffer.open(QIODevice.ReadWrite)
         QPixmap.grabWindow(
             QApplication.desktop().winId()).save(qbuffer, file_type)
-        buff.write(qbuffer.data())
+        # https://stackoverflow.com/questions/52291585/pyside2-typeerror-bytes-object-cannot-be-interpreted-as-an-integer
+        buff.write(qbuffer.data().data())
         qbuffer.close()
-#        del app
 
     def grab(self, bbox=None):
         strio = BytesIO()
