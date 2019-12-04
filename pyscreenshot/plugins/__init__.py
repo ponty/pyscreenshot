@@ -20,6 +20,7 @@ if sys.platform.startswith('linux'):
     ]
 elif sys.platform == 'darwin':
     BACKENDS = [
+        pil.PilWrapper,
         mac_quartz.MacQuartzWrapper,
         mac_screencapture.ScreencaptureWrapper,
         wxscreen.WxScreen,
