@@ -5,8 +5,10 @@ import tempfile
 
 PROGRAM = 'gnome-screenshot'
 
+
 class GnomeScreenshotBackendError(Exception):
     pass
+
 
 class GnomeScreenshotWrapper(object):
 

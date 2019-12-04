@@ -7,7 +7,6 @@ if six.PY2:
 
     def test_size_pygtk():
         backend_size('pygtk')
-    
-    
+
     def test_ref_pygtk():
         backend_ref('pygtk')

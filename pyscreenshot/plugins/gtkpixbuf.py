@@ -56,7 +56,8 @@ class GtkPixbufWrapper(object):
                 pb = pb.get_from_drawable(
                     w, w.get_colormap(), bbox[0], bbox[1], 0, 0, sz[0], sz[1])
             except TypeError:
-                pb = self.gtk.gdk.pixbuf_get_from_window(w, bbox[0], bbox[1], sz[0], sz[1])
+                pb = self.gtk.gdk.pixbuf_get_from_window(
+                    w, bbox[0], bbox[1], sz[0], sz[1])
         assert pb
         ftype = 'png'
         if filename.endswith('.jpeg'):

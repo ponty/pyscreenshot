@@ -7,8 +7,8 @@ import os
 def run(force_backend, n, bbox=None):
     start = time.time()
     for _ in range(n):
-            pyscreenshot.grab(
-                bbox=bbox, backend=force_backend, childprocess=True)
+        pyscreenshot.grab(
+            bbox=bbox, backend=force_backend, childprocess=True)
     end = time.time()
     dt = end - start
 

@@ -31,12 +31,13 @@ def run_all(n, virtual_only=True):
     print('------------------------------------------------------')
 
     for x in pyscreenshot.backends():
-        if virtual_only and x=='gnome-screenshot' :
+        if virtual_only and x == 'gnome-screenshot':
             continue
         try:
             run(x, n)
         except pyscreenshot.FailedBackendError as e:
             print(e)
+
 
 def speedtest(virtual_display=False):
     n = 10
