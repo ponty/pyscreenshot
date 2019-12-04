@@ -6,7 +6,7 @@ from pyscreenshot.plugins import wxscreen, gtkpixbuf, qt4grabwindow, qt5grabwind
     scrot, imagemagick, mac_quartz, mac_screencapture, pil, pyside_grabwindow, \
     gnome_screenshot, gdk3pixbuf
 
-if sys.platform == 'linux2':
+if sys.platform.startswith('linux'):
     BACKENDS = [
         wxscreen.WxScreen,
         gtkpixbuf.GtkPixbufWrapper,
