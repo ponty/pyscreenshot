@@ -28,7 +28,7 @@ class ScrotWrapper(object):
         return im
 
     def _grab_to_file(self, filename):
-        EasyProcess([PROGRAM, '--silent', filename]).call()
+        EasyProcess([PROGRAM, '--silent', "--overwrite", filename]).call()
 
     def backend_version(self):
         return extract_version(
