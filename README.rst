@@ -57,7 +57,7 @@ Examples
 ========
 
 grab and show the whole screen::
-  
+
   #-- include('examples/showgrabfullscreen.py') --#
   import pyscreenshot as ImageGrab
 
@@ -73,7 +73,7 @@ grab and show the whole screen::
       im.show()
   #-#
 
-to start the example:: 
+to start the example::
 
     python -m pyscreenshot.examples.showgrabfullscreen
 
@@ -88,7 +88,7 @@ grab and show the part of the screen::
       im.show()
   #-#
 
-to start the example:: 
+to start the example::
 
     python -m pyscreenshot.examples.showgrabbox
 
@@ -156,7 +156,7 @@ Wayland
 On Wayland only the `gnome-screenshot` back-end works::
 
  im = ImageGrab.grab(backend='gnome-screenshot')
- 
+
 
 
 .. _pip: https://pypi.python.org/pypi/pip
