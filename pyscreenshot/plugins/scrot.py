@@ -1,8 +1,8 @@
 from easyprocess import EasyProcess
 from easyprocess import extract_version
 from PIL import Image
-import tempfile
 import logging
+from pyscreenshot.tempexport import read_prog_img
 
 log = logging.getLogger(__name__)
 
@@ -18,17 +18,10 @@ class ScrotWrapper(object):
         EasyProcess([PROGRAM, '-version']).check_installed()
 
     def grab(self, bbox=None):
-        f = tempfile.NamedTemporaryFile(
-            suffix='.png', prefix='pyscreenshot_scrot_')
-        filename = f.name
-        self._grab_to_file(filename)
-        im = Image.open(filename)
+        im = read_prog_img([PROGRAM, '--silent'])
         if bbox:
             im = im.crop(bbox)
         return im
-
-    def _grab_to_file(self, filename):
-        EasyProcess([PROGRAM, '--silent', filename]).call()
 
     def backend_version(self):
         return extract_version(

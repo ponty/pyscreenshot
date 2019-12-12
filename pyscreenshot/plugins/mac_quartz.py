@@ -4,7 +4,7 @@
 # https://stackoverflow.com/questions/4524723/take-screenshot-in-python-on-mac-os-x
 
 from PIL import Image
-import tempfile
+from pyscreenshot.tempexport import read_func_img
 
 
 class MacQuartzWrapper(object):
@@ -22,11 +22,7 @@ class MacQuartzWrapper(object):
         self.CG = CG
 
     def grab(self, bbox=None):
-        f = tempfile.NamedTemporaryFile(
-            suffix='.png', prefix='pyscreenshot_screencapture_')
-        filename = f.name
-        self._grab_to_file(filename, bbox=bbox)
-        im = Image.open(filename)
+        im = read_func_img(self._grab_to_file, bbox)
         return im
 
     def _grab_to_file(self, filename, bbox=None, dpi=72):
@@ -47,16 +43,6 @@ class MacQuartzWrapper(object):
         # XXX: Can add more types:
         # https://developer.apple.com/library/mac/documentation/MobileCoreServices/Reference/UTTypeRef/Reference/reference.html#//apple_ref/doc/uid/TP40008771
         file_type = self.LaunchServices.kUTTypePNG
-        if filename.endswith('.jpeg'):
-            file_type = self.LaunchServices.kUTTypeJPEG
-        elif filename.endswith('.tiff'):
-            file_type = self.LaunchServices.kUTTypeTIFF
-        elif filename.endswith('.bmp'):
-            file_type = self.LaunchServices.kUTTypeBMP
-        elif filename.endswith('.gif'):
-            file_type = self.LaunchServices.kUTTypeGIF
-        elif filename.endswith('.pdf'):
-            file_type = self.LaunchServices.kUTTypePDF
 
         url = self.NSURL.fileURLWithPath_(filename)
 

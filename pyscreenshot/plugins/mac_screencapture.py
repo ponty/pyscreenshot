@@ -1,10 +1,11 @@
 import platform
 from easyprocess import EasyProcess, EasyProcessCheckInstalledError
 from PIL import Image
-import tempfile
+from pyscreenshot.tempexport import read_prog_img
 
 PROGRAM = 'screencapture'
-# http://support.apple.com/kb/ph11229
+# https://ss64.com/osx/screencapture.html
+#  By default screneshots are saved as .png files,
 
 
 class ScreencaptureWrapper(object):
@@ -16,32 +17,14 @@ class ScreencaptureWrapper(object):
             raise EasyProcessCheckInstalledError(self)
 
     def grab(self, bbox=None):
-        f = tempfile.NamedTemporaryFile(
-            suffix='.png', prefix='pyscreenshot_screencapture_')
-        filename = f.name
-        self._grab_to_file(filename, bbox=bbox)
-        im = Image.open(filename)
-        return im
-
-    def _grab_to_file(self, filename, bbox=None):
-        command = 'screencapture -x '
-        if filename.endswith('.jpeg'):
-            command += ' -t jpg'
-        elif filename.endswith('.tiff'):
-            command += ' -t tiff'
-        elif filename.endswith('.bmp'):
-            command += ' -t bmp'
-        elif filename.endswith('.gif'):
-            command += ' -t gif'
-        elif filename.endswith('.pdf'):
-            command += ' -t pdf'
+        command = [PROGRAM, '-x']
         if bbox:
             width = bbox[2] - bbox[0]
             height = bbox[3] - bbox[1]
-            command += ' -R{},{},{},{} '.format(
-                bbox[0], bbox[1], width, height)
-        command += filename
-        EasyProcess(command).call()
+            command += ['-R{},{},{},{}'.format(bbox[0],
+                                               bbox[1], width, height)]
+        im = read_prog_img(command)
+        return im
 
     def backend_version(self):
         # TODO:

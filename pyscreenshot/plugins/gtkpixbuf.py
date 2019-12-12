@@ -1,5 +1,5 @@
 from PIL import Image
-import tempfile
+from pyscreenshot.tempexport import read_func_img
 
 # based on:
 # http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
@@ -20,11 +20,7 @@ class GtkPixbufWrapper(object):
                 'Incompatible with Python3 / GDK3. Use gdk3pixbuf.')
 
     def grab(self, bbox=None):
-        f = tempfile.NamedTemporaryFile(
-            suffix='.png', prefix='pyscreenshot_gtkpixbuf_')
-        filename = f.name
-        self._grab_to_file(filename, bbox)
-        im = Image.open(filename)
+        im = read_func_img(self._grab_to_file, bbox)
         return im
 
     def _grab_to_file(self, filename, bbox=None):
@@ -60,9 +56,6 @@ class GtkPixbufWrapper(object):
                     w, bbox[0], bbox[1], sz[0], sz[1])
         assert pb
         ftype = 'png'
-        if filename.endswith('.jpeg'):
-            ftype = 'jpeg'
-
         try:
             pb.save(filename, ftype)
         except AttributeError:

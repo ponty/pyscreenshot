@@ -1,13 +1,9 @@
 from easyprocess import EasyProcess
 from easyprocess import extract_version
 from PIL import Image
-import tempfile
+from pyscreenshot.tempexport import read_prog_img
 
 PROGRAM = 'gnome-screenshot'
-
-
-class GnomeScreenshotBackendError(Exception):
-    pass
 
 
 class GnomeScreenshotWrapper(object):
@@ -25,21 +21,10 @@ class GnomeScreenshotWrapper(object):
         EasyProcess([PROGRAM, '--version']).check_installed()
 
     def grab(self, bbox=None):
-        f = tempfile.NamedTemporaryFile(
-            suffix='.png', prefix='pyscreenshot_gnome_screenshot_')
-        filename = f.name
-        self._grab_to_file(filename)
-        im = Image.open(filename)
+        im = read_prog_img([PROGRAM, '-f'])
         if bbox:
             im = im.crop(bbox)
         return im
-
-    def _grab_to_file(self, filename):
-        command = [PROGRAM, '-f', filename]
-        p = EasyProcess(command)
-        p.call()
-        if p.return_code != 0:
-            raise GnomeScreenshotBackendError(p.stderr)
 
     def backend_version(self):
         return extract_version(
