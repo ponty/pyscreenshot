@@ -90,10 +90,12 @@ Vagrant.configure(2) do |config|
   sudo apt-get install -y gnome-screenshot
   
   sudo apt-get install -y python-gtk2
+  sudo apt-get install -y libcanberra-gtk-module
 
   sudo apt-get install -y python-gi
   sudo apt-get install -y python3-gi
   sudo apt-get install -y gir1.2-gtk-3.0
+  sudo apt-get install -y libcanberra-gtk3-module
     
   sudo apt-get install -y python-wxgtk3.0
   #sudo apt-get install -y python-wxgtk4.0 # this is for dev only
