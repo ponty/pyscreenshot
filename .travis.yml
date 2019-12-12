@@ -32,6 +32,14 @@ matrix:
       dist: bionic
       env: PACKAGES="            python3-gi gir1.2-gtk-3.0 python3-wxgtk4.0 python3-pyqt4  python3-pyqt5  python3-pyside" TESTS2="              test_pygdk3.py test_wx.py test_pyqt4.py test_pyqt5.py test_pyside.py"
 
+    - name: 3.7_xenial
+      python: 3.7
+      dist: xenial
+
+    - name: 3.8_xenial
+      python: 3.8
+      dist: xenial
+
     - name: 3.7_bionic
       python: 3.7
       dist: bionic
