@@ -80,6 +80,7 @@ Vagrant.configure(2) do |config|
 
 # tools
   sudo apt-get install -y mc python-pip xvfb
+  sudo apt-get install -y tox
 
 # for pillow source install
   sudo apt-get install -y libjpeg-dev zlib1g-dev
@@ -113,11 +114,11 @@ Vagrant.configure(2) do |config|
 # test dependencies
   sudo apt-get install -y x11-utils #   for: xmessage
   sudo apt-get install -y x11-apps  #   for: xlogo
-  sudo pip install -r /vagrant/requirements-test.txt
+  #sudo pip install -r /vagrant/requirements-test.txt
   
 # doc dependencies
   sudo apt-get install -y graphviz
-  sudo pip install -r /vagrant/requirements-doc.txt
+  #sudo pip install -r /vagrant/requirements-doc.txt
   
   "
       config.vm.provision "shell", inline: $script
