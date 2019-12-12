@@ -1,8 +1,7 @@
 from easyprocess import EasyProcess
-from easyprocess import extract_version
 from PIL import Image
 import logging
-from pyscreenshot.tempexport import read_prog_img
+from pyscreenshot.tempexport import read_prog_img, extract_version
 
 log = logging.getLogger(__name__)
 

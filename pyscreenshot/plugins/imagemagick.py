@@ -1,7 +1,6 @@
 from easyprocess import EasyProcess
-from easyprocess import extract_version
 from PIL import Image
-from pyscreenshot.tempexport import read_prog_img
+from pyscreenshot.tempexport import read_prog_img, extract_version
 
 PROGRAM = 'import'
 # http://www.imagemagick.org/
