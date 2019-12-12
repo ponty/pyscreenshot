@@ -12,29 +12,33 @@ python:
 # no python3-pyside before xenial
 matrix:
   include:
-    - python: "2.7_with_system_site_packages"
+    - name: "2.7_trusty_with_system"
+      python: "2.7_with_system_site_packages"
       dist: trusty
-      env: DIST="trusty" PACKAGES="python-gtk2                           python-wxgtk2.8  python-qt4                    python-pyside"  TESTS2="test_pygtk.py                test_wx.py test_pyqt4.py               test_pyside.py"
+      env: PACKAGES="python-gtk2                           python-wxgtk2.8  python-qt4                    python-pyside"  TESTS2="test_pygtk.py                test_wx.py test_pyqt4.py               test_pyside.py"
 
-    - python: "2.7_with_system_site_packages"
+    - name: "2.7_xenial_with_system"
+      python: "2.7_with_system_site_packages"
       dist: xenial
-      env: DIST="xenial" PACKAGES="python-gtk2 python-gi  gir1.2-gtk-3.0 python-wxgtk3.0  python-qt4     python-pyqt5   python-pyside"  TESTS2="test_pygtk.py test_pygdk3.py test_wx.py test_pyqt4.py test_pyqt5.py test_pyside.py"
+      env: PACKAGES="python-gtk2 python-gi  gir1.2-gtk-3.0 python-wxgtk3.0  python-qt4     python-pyqt5   python-pyside"  TESTS2="test_pygtk.py test_pygdk3.py test_wx.py test_pyqt4.py test_pyqt5.py test_pyside.py"
 
-    - python: "3.5_with_system_site_packages"
+    - name: "3.5_xenial_with_system"
+      python: "3.5_with_system_site_packages"
       dist: xenial
-      env: DIST="xenial" PACKAGES="            python3-gi gir1.2-gtk-3.0                  python3-pyqt4  python3-pyqt5  python3-pyside" TESTS2="              test_pygdk3.py            test_pyqt4.py test_pyqt5.py test_pyside.py"
+      env: PACKAGES="            python3-gi gir1.2-gtk-3.0                  python3-pyqt4  python3-pyqt5  python3-pyside" TESTS2="              test_pygdk3.py            test_pyqt4.py test_pyqt5.py test_pyside.py"
 
-    - python: "3.6_with_system_site_packages"
+    - name: "3.6_bionic_with_system"
+      python: "3.6_with_system_site_packages"
       dist: bionic
-      env: DIST="bionic" PACKAGES="            python3-gi gir1.2-gtk-3.0 python3-wxgtk4.0 python3-pyqt4  python3-pyqt5  python3-pyside" TESTS2="              test_pygdk3.py test_wx.py test_pyqt4.py test_pyqt5.py test_pyside.py"
+      env: PACKAGES="            python3-gi gir1.2-gtk-3.0 python3-wxgtk4.0 python3-pyqt4  python3-pyqt5  python3-pyside" TESTS2="              test_pygdk3.py test_wx.py test_pyqt4.py test_pyqt5.py test_pyside.py"
 
-    - python: 3.7
+    - name: 3.7_bionic
+      python: 3.7
       dist: bionic
-      env: DIST="bionic"
 
-    - python: 3.8
+    - name: 3.8_bionic
+      python: 3.8
       dist: bionic
-      env: DIST="bionic"
 
 install:
  - sudo apt-get update -q
