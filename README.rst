@@ -51,6 +51,7 @@ Known problems:
 Similar projects:
  - http://sourceforge.net/projects/gtkshots/
  - http://pypi.python.org/pypi/autopy
+ - https://github.com/asweigart/pyscreeze
 
 
 Examples
