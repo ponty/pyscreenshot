@@ -14,7 +14,10 @@ class ScrotWrapper(object):
     childprocess = True
 
     def __init__(self):
-        EasyProcess([PROGRAM, '-version']).check_installed()
+        p = EasyProcess([PROGRAM, '-version'])
+        p.enable_stdout_log = False
+        p.enable_stderr_log = False
+        p.call()
 
     def grab(self, bbox=None):
         im = read_prog_img([PROGRAM, '--silent'])

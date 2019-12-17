@@ -1,5 +1,5 @@
 import platform
-from easyprocess import EasyProcess, EasyProcessCheckInstalledError
+from easyprocess import EasyProcess
 from PIL import Image
 from pyscreenshot.tempexport import read_prog_img
 
@@ -14,7 +14,11 @@ class ScreencaptureWrapper(object):
 
     def __init__(self):
         if 'Darwin' not in platform.platform():
-            raise EasyProcessCheckInstalledError(self)
+            raise RunProgError('This backend runs only on Darwin')
+        p = EasyProcess([PROGRAM, '-help'])
+        p.enable_stdout_log = False
+        p.enable_stderr_log = False
+        p.call()
 
     def grab(self, bbox=None):
         command = [PROGRAM, '-x']
