@@ -62,7 +62,7 @@ script:
  - cd tests 
  - TESTS1="easy test_scrot.py test_imagemagick.py"
  - nosetests -v --with-coverage --cover-package=pyscreenshot  $TESTS1 $TESTS2
- - nosetests -v $TESTS3
+ - nosetests -v notest.py $TESTS3
   
 after_success:
  - coveralls
