@@ -19,7 +19,8 @@ def childprocess_default_value():
     Therefore the default is False for childprocess if the program was
     started inside IDLE.
     """
-    return not is_inside_idle()
+    # return not is_inside_idle()
+    return False
 
 
 def _grab_simple(backend=None, bbox=None, filename=None):
