@@ -80,8 +80,10 @@ Vagrant.configure(2) do |config|
   sudo apt-get install -y python3-distutils
 
 # tools
-  sudo apt-get install -y mc python-pip xvfb
+  sudo apt-get install -y mc xvfb
   sudo apt-get install -y tox
+  sudo apt-get install -y python-pip
+  sudo apt-get install -y python3-pip
 
 # for pillow source install
   sudo apt-get install -y libjpeg-dev zlib1g-dev
@@ -111,6 +113,14 @@ Vagrant.configure(2) do |config|
   
   sudo apt-get install -y python-pyside
   sudo apt-get install -y python3-pyside
+  
+  #sudo apt-get install -y python-pyside2 # no python-pyside2 before disco (19.04)
+  sudo pip install pyside2 --no-cache-dir
+  #sudo apt-get install -y python3-pyside2 # no python3-pyside2 before disco (19.04)
+  sudo pip3 install pyside2 --no-cache-dir
+  
+  sudo apt-get install -y python-qtpy
+  sudo apt-get install -y python3-qtpy
 
 # test dependencies
   sudo apt-get install -y x11-utils #   for: xmessage

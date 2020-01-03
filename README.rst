@@ -35,6 +35,8 @@ Features:
      * PyQt4_
      * PyQt5_
      * PySide_
+     * PySide2_
+     * QtPy_
      * wxPython_
      * Quartz (Mac)
      * screencapture (Mac)
@@ -76,7 +78,7 @@ grab and show the whole screen::
 
 to start the example::
 
-    python -m pyscreenshot.examples.showgrabfullscreen
+    python3 -m pyscreenshot.examples.showgrabfullscreen
 
 grab and show the part of the screen::
 
@@ -91,22 +93,17 @@ grab and show the part of the screen::
 
 to start the example::
 
-    python -m pyscreenshot.examples.showgrabbox
+    python3 -m pyscreenshot.examples.showgrabbox
 
 Installation
 ============
 
- * install pip_
- * install Pillow_ (Ubuntu: ``sudo apt-get install python-pil``)
+ * install Pillow_ (Ubuntu: ``sudo apt-get install python3-pil``)
  * install at least one back-end
  * install the program::
 
-    pip install pyscreenshot
+    pip3 install pyscreenshot
 
-
-Uninstall::
-
-    pip uninstall pyscreenshot
 
 
 Command line interface
@@ -118,7 +115,7 @@ Back-end performance::
 
   Example:
 
-  #-- sh('python -m pyscreenshot.check.speedtest --virtual-display 2>/dev/null') --#
+  #-- sh('python3 -m pyscreenshot.check.speedtest --virtual-display 2>/dev/null') --#
 
   n=10
   ------------------------------------------------------
@@ -136,7 +133,6 @@ Back-end performance::
 
 Print versions::
 
-  #-- sh('python -m pyscreenshot.check.versions 2> /dev/null ')--#
   python               2.7.15rc1
   pyscreenshot         0.4.2
   wx                   3.0.2.0
@@ -160,17 +156,18 @@ On Wayland only the `gnome-screenshot` back-end works::
 
 
 
-.. _pip: https://pypi.python.org/pypi/pip
 .. _ImageGrab: http://pillow.readthedocs.org/en/latest/reference/ImageGrab.html
 .. _PIL: http://www.pythonware.com/library/pil/
-.. _Pillow: http://pillow.readthedocs.org
+.. _Pillow: https://pypi.org/project/Pillow/
 .. _ImageMagick: http://www.imagemagick.org/
-.. _PyGTK: http://www.pygtk.org/
+.. _PyGTK: https://pypi.org/project/PyGTK/
 .. _blackbox: http://www.imagemagick.org/discourse-server/viewtopic.php?f=3&t=13658
 .. _scrot: http://en.wikipedia.org/wiki/Scrot
-.. _PyQt4: http://pyqt.sourceforge.net/Docs/PyQt4/index.html
-.. _PyQt5: http://pyqt.sourceforge.net/Docs/PyQt5/index.html
-.. _PySide: http://www.pyside.org/
+.. _PyQt4: https://pypi.org/project/PyQt4/
+.. _PyQt5: https://pypi.org/project/PyQt5/
+.. _PySide: https://pypi.org/project/PySide/
+.. _PySide2: https://pypi.org/project/PySide2/
+.. _QtPy: https://github.com/spyder-ide/qtpy
 .. _wxPython: http://www.wxpython.org/
 .. _gnome-screenshot: https://git.gnome.org/browse/gnome-screenshot/
 

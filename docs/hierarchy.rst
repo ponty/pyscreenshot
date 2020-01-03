@@ -28,6 +28,8 @@ Hierarchy
                 pyscreenshot -> Qt4GrabWindowWrapper;
                 pyscreenshot -> Qt5GrabWindowWrapper;
                 pyscreenshot -> PySideGrabWindowWrapper;
+                pyscreenshot -> PySide2GrabWindowWrapper;
+                pyscreenshot -> QtPyGrabWindowWrapper;
                 pyscreenshot -> PilWrapper;
                 pyscreenshot -> ImagemagickWrapper;
                 pyscreenshot -> WxScreenWrapper;
@@ -44,6 +46,8 @@ Hierarchy
             PyQt4;
             PyQt5;
             PySide;
+            PySide2;
+            QtPy;
             PyGTK;
             screencapture;
             Quartz;
@@ -63,6 +67,14 @@ Hierarchy
         PyQt4 -> Qt5;
         Qt5GrabWindowWrapper -> PyQt5 -> Qt5;
         PySideGrabWindowWrapper -> PySide -> Qt4;
+        PySide2GrabWindowWrapper -> PySide2 -> Qt5;
+        
+        QtPyGrabWindowWrapper -> QtPy;
+        QtPy -> PySide;
+        QtPy -> PySide2;
+        QtPy -> PyQt4;
+        QtPy -> PyQt5;
+
         Qt4 -> MacOS;
         Qt4 -> Windows;
         Qt4 -> X11;

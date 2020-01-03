@@ -14,29 +14,29 @@ else:
 
 log = logging.getLogger(__name__)
 
-# based on qt4 backend
+# based on qt5 backend
 
 
-class Qt5GrabWindow(object):
-    name = 'pyqt5'
+class QtPyGrabWindow(object):
+    name = 'qtpy'
     childprocess = False
 
     def __init__(self):
-        import PyQt5
-        self.PyQt5 = PyQt5
-        from PyQt5 import QtGui
-        from PyQt5 import Qt
-        from PyQt5 import QtWidgets
+        import qtpy
+        self.qtpy = qtpy
+        from qtpy import QtGui
+        from qtpy import QtCore
+        from qtpy import QtWidgets
         self.app = None
         self.QtGui = QtGui
-        self.Qt = Qt
+        self.QtCore = QtCore
         self.QtWidgets = QtWidgets
 
     def grab_to_buffer(self, buff, file_type='png'):
         QApplication = self.QtWidgets.QApplication
-        QBuffer = self.PyQt5.Qt.QBuffer
-        QIODevice = self.PyQt5.Qt.QIODevice
-        QScreen = self.PyQt5.QtGui.QScreen
+        QBuffer = self.qtpy.QtCore.QBuffer
+        QIODevice = self.qtpy.QtCore.QIODevice
+        QScreen = self.qtpy.QtGui.QScreen
 
         if not self.app:
             self.app = QApplication([])
@@ -57,4 +57,4 @@ class Qt5GrabWindow(object):
         return im
 
     def backend_version(self):
-        return self.Qt.PYQT_VERSION_STR
+        return self.qtpy.__version__

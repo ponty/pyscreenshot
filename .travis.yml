@@ -10,27 +10,29 @@ python:
 # no pygtk for py3
 # pygdk3 plugin is not compatible with trusty
 # no python3-pyside before xenial
+# no python-pyside2, python3-pyside2 before disco (19.04)
+# no python-qtpy, python3-qtpy before bionic
 matrix:
   include:
     - name: "2.7_trusty_with_system"
       python: "2.7_with_system_site_packages"
       dist: trusty
-      env: PACKAGES="python-gtk2                           python-wxgtk2.8  python-qt4                    python-pyside"  TESTS2="test_pygtk.py                test_wx.py test_pyqt4.py               test_pyside.py"
+      env: PACKAGES="python-gtk2                           python-wxgtk2.8  python-qt4                    python-pyside             "  TESTS2="test_pygtk.py                test_wx.py test_pyqt4.py               test_pyside.py             "
 
     - name: "2.7_xenial_with_system"
       python: "2.7_with_system_site_packages"
       dist: xenial
-      env: PACKAGES="python-gtk2 python-gi  gir1.2-gtk-3.0 python-wxgtk3.0  python-qt4     python-pyqt5   python-pyside"  TESTS2="test_pygtk.py test_pygdk3.py test_wx.py test_pyqt4.py test_pyqt5.py test_pyside.py" TESTS3="test_pygdk3_conflict.py"
+      env: PACKAGES="python-gtk2 python-gi  gir1.2-gtk-3.0 python-wxgtk3.0  python-qt4     python-pyqt5   python-pyside             "  TESTS2="test_pygtk.py test_pygdk3.py test_wx.py test_pyqt4.py test_pyqt5.py test_pyside.py             " TESTS3="test_pygdk3_conflict.py"
 
     - name: "3.5_xenial_with_system"
       python: "3.5_with_system_site_packages"
       dist: xenial
-      env: PACKAGES="            python3-gi gir1.2-gtk-3.0                  python3-pyqt4  python3-pyqt5  python3-pyside" TESTS2="              test_pygdk3.py            test_pyqt4.py test_pyqt5.py test_pyside.py" TESTS3="test_pygdk3_conflict.py"
+      env: PACKAGES="            python3-gi gir1.2-gtk-3.0                  python3-pyqt4  python3-pyqt5  python3-pyside             " TESTS2="              test_pygdk3.py            test_pyqt4.py test_pyqt5.py test_pyside.py             " TESTS3="test_pygdk3_conflict.py"
 
     - name: "3.6_bionic_with_system"
       python: "3.6_with_system_site_packages"
       dist: bionic
-      env: PACKAGES="            python3-gi gir1.2-gtk-3.0 python3-wxgtk4.0 python3-pyqt4  python3-pyqt5  python3-pyside" TESTS2="              test_pygdk3.py test_wx.py test_pyqt4.py test_pyqt5.py test_pyside.py" TESTS3="test_pygdk3_conflict.py"
+      env: PACKAGES="            python3-gi gir1.2-gtk-3.0 python3-wxgtk4.0 python3-pyqt4  python3-pyqt5  python3-pyside python3-qtpy" TESTS2="              test_pygdk3.py test_wx.py test_pyqt4.py test_pyqt5.py test_pyside.py test_qtpy.py" TESTS3="test_pygdk3_conflict.py"
 
     - name: 3.7_xenial
       python: 3.7

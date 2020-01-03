@@ -3,7 +3,7 @@
 import sys
 
 from pyscreenshot.plugins import wxscreen, gtkpixbuf, qt4grabwindow, qt5grabwindow, \
-    scrot, imagemagick, mac_quartz, mac_screencapture, pil, pyside_grabwindow, \
+    scrot, imagemagick, mac_quartz, mac_screencapture, pil, pyside_grabwindow,pyside2_grabwindow,qtpy_grabwindow, \
     gnome_screenshot, gdk3pixbuf
 
 # external processes (scrot,imagemagick) are more safe (less conflicts) than library calls.
@@ -14,8 +14,10 @@ if sys.platform.startswith('linux'):
 
         wxscreen.WxScreen,
         gdk3pixbuf.Gdk3PixbufWrapper,
+        qtpy_grabwindow.QtPyGrabWindow,
         qt5grabwindow.Qt5GrabWindow,
         qt4grabwindow.Qt4GrabWindow,
+        pyside2_grabwindow.PySide2GrabWindow,
         pyside_grabwindow.PySideGrabWindow,
         gtkpixbuf.GtkPixbufWrapper,
 
@@ -32,7 +34,9 @@ elif sys.platform == 'darwin':
         mac_quartz.MacQuartzWrapper,
         wxscreen.WxScreen,
         gdk3pixbuf.Gdk3PixbufWrapper,
+        qtpy_grabwindow.QtPyGrabWindow,
         qt5grabwindow.Qt5GrabWindow,
+        pyside2_grabwindow.PySide2GrabWindow,
         pyside_grabwindow.PySideGrabWindow,
         qt4grabwindow.Qt4GrabWindow,
         gtkpixbuf.GtkPixbufWrapper,
@@ -43,7 +47,9 @@ elif sys.platform == 'win32':
         
         wxscreen.WxScreen,
         gdk3pixbuf.Gdk3PixbufWrapper,
+        qtpy_grabwindow.QtPyGrabWindow,
         qt5grabwindow.Qt5GrabWindow,
+        pyside2_grabwindow.PySide2GrabWindow,
         pyside_grabwindow.PySideGrabWindow,
         qt4grabwindow.Qt4GrabWindow,
         gtkpixbuf.GtkPixbufWrapper,
@@ -61,7 +67,9 @@ else:
 
         wxscreen.WxScreen,
         gdk3pixbuf.Gdk3PixbufWrapper,
+        qtpy_grabwindow.QtPyGrabWindow,
         qt5grabwindow.Qt5GrabWindow,
+        pyside2_grabwindow.PySide2GrabWindow,
         pyside_grabwindow.PySideGrabWindow,
         qt4grabwindow.Qt4GrabWindow,
         gtkpixbuf.GtkPixbufWrapper,
