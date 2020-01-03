@@ -4,23 +4,12 @@ from pyscreenshot import imcodec
 from pyscreenshot.about import __version__
 from pyscreenshot.loader import Loader, FailedBackendError
 from pyscreenshot.procutil import run_in_childprocess
-from pyscreenshot.idleutil import is_inside_idle
 
 
 ADDITIONAL_IMPORTS = [FailedBackendError]
 
 log = logging.getLogger(__name__)
 log.debug('version=%s', __version__)
-
-
-def childprocess_default_value():
-    """IDLE has problem with multiprocessing.
-
-    Therefore the default is False for childprocess if the program was
-    started inside IDLE.
-    """
-    # return not is_inside_idle()
-    return False
 
 
 def _grab_simple(backend=None, bbox=None, filename=None):
@@ -45,21 +34,15 @@ def _grab(childprocess, backend=None, bbox=None, filename=None):
         return _grab_simple(backend, bbox, filename)
 
 
-def grab(bbox=None, childprocess=None, backend=None):
+def grab(bbox=None, childprocess=False, backend=None):
     """Copy the contents of the screen to PIL image memory.
 
     :param bbox: optional bounding box (x1,y1,x2,y2)
-    :param childprocess: pyscreenshot can cause an error,
-            if it is used on more different virtual displays
-            and back-end is not in different process.
-            Some back-ends are always different processes: scrot, imagemagick
-            The default is False if the program was started inside IDLE,
-            otherwise it is True.
+    :param childprocess: run back-end in new process using multiprocessing. 
+        This can isolate back-ends from each other, but not from main process.
     :param backend: back-end can be forced if set (examples:scrot, wx,..),
                     otherwise back-end is automatic
     """
-    if childprocess is None:
-        childprocess = childprocess_default_value()
     return _grab(
         childprocess=childprocess, backend=backend, bbox=bbox)
 
@@ -83,15 +66,13 @@ def _backend_version(backend):
     return v
 
 
-def backend_version(backend, childprocess=None):
+def backend_version(backend, childprocess=False):
     """Back-end version.
 
     :param backend: back-end (examples:scrot, wx,..)
     :param childprocess: see :py:func:`grab`
     :return: version as string
     """
-    if childprocess is None:
-        childprocess = childprocess_default_value()
     if not childprocess:
         return _backend_version(backend)
     else:
