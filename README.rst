@@ -119,31 +119,35 @@ Back-end performance::
 
   n=10
   ------------------------------------------------------
-  wx                  	3.4  sec	(  343 ms per call)
-  pygtk               	5.6  sec	(  558 ms per call)
-  pygdk3              	2.8  sec	(  275 ms per call)
-  pyqt                	5.7  sec	(  565 ms per call)
-  pyqt5               	5.3  sec	(  527 ms per call)
-  scrot               	4.8  sec	(  481 ms per call)
-  imagemagick         	7.5  sec	(  750 ms per call)
-  pyside              	5.6  sec	(  558 ms per call)
-  gnome-screenshot    	13   sec	( 1278 ms per call)
+  scrot               	6.1  sec	(  608 ms per call)
+  imagemagick         	9.7  sec	(  969 ms per call)
+  wx                  	4.1  sec	(  408 ms per call)
+  pygdk3              	3.3  sec	(  328 ms per call)
+  qtpy                	6.9  sec	(  687 ms per call)
+  pyqt5               	6.9  sec	(  687 ms per call)
+  pyqt                	6.4  sec	(  644 ms per call)
+  pyside2             	6.7  sec	(  671 ms per call)
+  pyside              	6.5  sec	(  652 ms per call)
+  gnome-screenshot    	12   sec	( 1209 ms per call)
   #-#
 
 
 Print versions::
 
-  python               2.7.15rc1
-  pyscreenshot         0.4.2
-  wx                   3.0.2.0
-  pygtk                2.28.6
-  pygdk3               3.26.1
+  #-- sh('python3 -m pyscreenshot.check.versions 2> /dev/null ')--#
+  python               3.7.3
+  pyscreenshot         0.7
+  scrot                1.1.1
+  imagemagick          6.9.10
+  wx                   4.0.4
+  pygdk3               3.32.0
+  qtpy                 1.3.1
+  pyqt5                5.12.1
   pyqt                 4.12.1
-  pyqt5                5.10.1
-  scrot                0.8
-  imagemagick          6.9.7
+  pyside2              5.11.2
   pyside               1.2.2
-  gnome-screenshot     3.25.0
+  pygtk                missing
+  gnome-screenshot     3.30.0
   #-#
 
 

@@ -36,7 +36,8 @@ def run_all(n, virtual_only=True):
         try:
             run(x, n)
         except pyscreenshot.FailedBackendError as e:
-            print(e)
+            pass
+            # print(e)
 
 
 def speedtest(virtual_display=False):
