@@ -10,7 +10,7 @@ def test_pygdk3_conflict():
         gi.require_version('Gdk', '3.0')
         from gi.repository import Gdk
         im = pyscreenshot.grab(backend=backend)
-        im = pyscreenshot.grab(backend=backend) # hangs with multiprocessing
+        im = pyscreenshot.grab(backend=backend)  # hangs with multiprocessing
 
 
 test_pygdk3_conflict.isolate_process = 1

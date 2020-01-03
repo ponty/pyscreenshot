@@ -25,6 +25,7 @@ def read_prog_img(cmd):
     im = read_func_img(run_prog)
     return im
 
+
 def extract_version(txt):
     """This function tries to extract the version from the help text of any
     program."""

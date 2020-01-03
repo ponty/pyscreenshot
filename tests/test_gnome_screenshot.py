@@ -6,6 +6,8 @@ from size import backend_size
 
 def test_size_gnome_screenshot():
     backend_size('gnome-screenshot', virtual_display=False)
+
+
 test_size_gnome_screenshot.real_disp_only = 1
 
 # TODO:how to call it on static screen?

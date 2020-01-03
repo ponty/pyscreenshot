@@ -3,7 +3,7 @@
 import sys
 
 from pyscreenshot.plugins import wxscreen, gtkpixbuf, qt4grabwindow, qt5grabwindow, \
-    scrot, imagemagick, mac_quartz, mac_screencapture, pil, pyside_grabwindow,pyside2_grabwindow,qtpy_grabwindow, \
+    scrot, imagemagick, mac_quartz, mac_screencapture, pil, pyside_grabwindow, pyside2_grabwindow, qtpy_grabwindow, \
     gnome_screenshot, gdk3pixbuf
 
 # external processes (scrot,imagemagick) are more safe (less conflicts) than library calls.
@@ -44,7 +44,7 @@ elif sys.platform == 'darwin':
 elif sys.platform == 'win32':
     BACKENDS = [
         pil.PilWrapper,
-        
+
         wxscreen.WxScreen,
         gdk3pixbuf.Gdk3PixbufWrapper,
         qtpy_grabwindow.QtPyGrabWindow,
