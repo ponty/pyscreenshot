@@ -6,19 +6,24 @@ from pyscreenshot.plugins import wxscreen, gtkpixbuf, qt4grabwindow, qt5grabwind
     scrot, imagemagick, mac_quartz, mac_screencapture, pil, pyside_grabwindow, pyside2_grabwindow, qtpy_grabwindow, \
     gnome_screenshot, gdk3pixbuf
 
+_qt_backends = [
+    qtpy_grabwindow.QtPyGrabWindow,
+    qt5grabwindow.Qt5GrabWindow,
+    qt4grabwindow.Qt4GrabWindow,
+    pyside2_grabwindow.PySide2GrabWindow,
+    pyside_grabwindow.PySideGrabWindow,
+]
+
 # external processes (scrot,imagemagick) are more safe (less conflicts) than library calls.
 if sys.platform.startswith('linux'):
     BACKENDS = [
         scrot.ScrotWrapper,
         imagemagick.ImagemagickWrapper,
 
+    ]+_qt_backends+[
+
         wxscreen.WxScreen,
         gdk3pixbuf.Gdk3PixbufWrapper,
-        qtpy_grabwindow.QtPyGrabWindow,
-        qt5grabwindow.Qt5GrabWindow,
-        qt4grabwindow.Qt4GrabWindow,
-        pyside2_grabwindow.PySide2GrabWindow,
-        pyside_grabwindow.PySideGrabWindow,
         gtkpixbuf.GtkPixbufWrapper,
 
         gnome_screenshot.GnomeScreenshotWrapper,
@@ -28,35 +33,29 @@ elif sys.platform == 'darwin':
         pil.PilWrapper,
 
         mac_screencapture.ScreencaptureWrapper,
+        mac_quartz.MacQuartzWrapper,
+
         scrot.ScrotWrapper,
         imagemagick.ImagemagickWrapper,
 
-        mac_quartz.MacQuartzWrapper,
+    ]+_qt_backends+[
+
         wxscreen.WxScreen,
         gdk3pixbuf.Gdk3PixbufWrapper,
-        qtpy_grabwindow.QtPyGrabWindow,
-        qt5grabwindow.Qt5GrabWindow,
-        pyside2_grabwindow.PySide2GrabWindow,
-        pyside_grabwindow.PySideGrabWindow,
-        qt4grabwindow.Qt4GrabWindow,
         gtkpixbuf.GtkPixbufWrapper,
     ]
 elif sys.platform == 'win32':
     BACKENDS = [
         pil.PilWrapper,
 
+    ]+_qt_backends+[
+        gtkpixbuf.GtkPixbufWrapper,
+
         wxscreen.WxScreen,
         gdk3pixbuf.Gdk3PixbufWrapper,
-        qtpy_grabwindow.QtPyGrabWindow,
-        qt5grabwindow.Qt5GrabWindow,
-        pyside2_grabwindow.PySide2GrabWindow,
-        pyside_grabwindow.PySideGrabWindow,
-        qt4grabwindow.Qt4GrabWindow,
-        gtkpixbuf.GtkPixbufWrapper,
 
         scrot.ScrotWrapper,
         imagemagick.ImagemagickWrapper,
-
     ]
 else:
     BACKENDS = [
@@ -65,13 +64,10 @@ else:
         scrot.ScrotWrapper,
         imagemagick.ImagemagickWrapper,
 
+    ]+_qt_backends+[
+
         wxscreen.WxScreen,
         gdk3pixbuf.Gdk3PixbufWrapper,
-        qtpy_grabwindow.QtPyGrabWindow,
-        qt5grabwindow.Qt5GrabWindow,
-        pyside2_grabwindow.PySide2GrabWindow,
-        pyside_grabwindow.PySideGrabWindow,
-        qt4grabwindow.Qt4GrabWindow,
         gtkpixbuf.GtkPixbufWrapper,
 
         mac_screencapture.ScreencaptureWrapper,
