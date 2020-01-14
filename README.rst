@@ -175,7 +175,7 @@ On Wayland only the `gnome-screenshot` back-end works::
 .. _wxPython: http://www.wxpython.org/
 .. _gnome-screenshot: https://git.gnome.org/browse/gnome-screenshot/
 
-.. |Travis| image:: http://img.shields.io/travis/ponty/pyscreenshot.svg
+.. |Travis| image:: https://travis-ci.org/ponty/pyscreenshot.svg?branch=master
    :target: https://travis-ci.org/ponty/pyscreenshot/
 .. |Coveralls| image:: http://img.shields.io/coveralls/ponty/pyscreenshot/master.svg
    :target: https://coveralls.io/r/ponty/pyscreenshot/
