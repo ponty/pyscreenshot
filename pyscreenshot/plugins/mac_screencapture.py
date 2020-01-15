@@ -32,4 +32,4 @@ class ScreencaptureWrapper(object):
 
     def backend_version(self):
         # TODO:
-        return 'not implemented'
+        return 'X.X'
