@@ -26,5 +26,6 @@ class ImagemagickWrapper(object):
         return im
 
     def backend_version(self):
-        return extract_version(
-            EasyProcess([PROGRAM, '-version']).call().stdout.replace('-', ' '))
+        stdout = EasyProcess([PROGRAM, '-version']).call().stdout
+        s = stdout.splitlines()[0]
+        return extract_version(s.replace('-', ' '))
