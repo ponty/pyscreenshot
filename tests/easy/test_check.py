@@ -1,9 +1,11 @@
 from pyscreenshot.check.speedtest import speedtest
 from pyscreenshot.check.versions import print_versions
 from pyvirtualdisplay.display import Display
+import sys
 
+if sys.platform.startswith('linux'):
 
-def test_speedtest():
+ def test_speedtest():
     with Display(visible=0, size=(800, 600)):
         speedtest(virtual_display=True)
 

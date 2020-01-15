@@ -49,20 +49,48 @@ matrix:
       python: 3.8
       dist: bionic
 
+    - name: "Python 3.7 on macOS"
+      os: osx
+      osx_image: xcode11.2  # Python 3.7.4 running on macOS 10.14.4
+      language: shell       # 'language: python' is an error on Travis CI macOS
+      env: PATH=/Users/travis/Library/Python/3.7/bin:$PATH USER=--user
+
+    - name: "Python 3.8 on Windows"
+      os: windows           # Windows 10.0.17134 N/A Build 17134
+      language: shell       # 'language: python' is an error on Travis CI Windows
+      before_install:
+        - choco install python --version 3.8
+        - python -m pip install --upgrade pip
+      env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
+
+addons:
+  apt:
+    packages: 
+      - python-dev 
+      - xvfb 
+      - x11-utils 
+      - x11-apps 
+      - scrot 
+      - imagemagick
+
 install:
- - sudo apt-get update -q
- - sudo apt-get install --no-install-recommends -y python-dev xvfb x11-utils x11-apps
- - sudo apt-get install --no-install-recommends -y scrot imagemagick 
- - sudo apt-get install --no-install-recommends -y $(echo $PACKAGES)
- - pip install -r requirements-test.txt
- - pip install .
- - pip install coveralls
+#  - sudo apt-get update -q
+#  - sudo apt-get install --no-install-recommends -y python-dev xvfb x11-utils x11-apps
+#  - sudo apt-get install --no-install-recommends -y scrot imagemagick 
+ - if [ ${TRAVIS_OS_NAME} == "linux" ]; then sudo apt-get install --no-install-recommends -y $(echo $PACKAGES); fi
+# - echo "TRAVIS_PYTHON_VERSION=$TRAVIS_PYTHON_VERSION"
+ - if [ ${TRAVIS_PYTHON_VERSION:0:1} == "2" ]; then PIP=pip; else PIP=pip3; fi
+ - $PIP install $USER --upgrade -r requirements-test.txt
+ - $PIP install $USER --upgrade .
+ - $PIP install $USER --upgrade coveralls
+ - if [ ${TRAVIS_OS_NAME} == "osx" ]; then $PIP install $USER --upgrade pyobjc-framework-Quartz pyobjc-framework-LaunchServices; fi
 
 script:  
  - cd tests 
- - TESTS1="easy test_scrot.py test_imagemagick.py"
- - nosetests -v --with-coverage --cover-package=pyscreenshot  $TESTS1 $TESTS2
- - nosetests -v notest.py $TESTS3
+ - if [ ${TRAVIS_OS_NAME} == "linux" ]; then TESTS1="test_scrot.py test_imagemagick.py"; fi
+ - if [ ${TRAVIS_OS_NAME} == "osx" ]; then TESTS1="test_mac_screencapture.py test_mac_quartz.py"; fi
+ - nosetests -vv --with-coverage --cover-package=pyscreenshot easy $TESTS1 $TESTS2
+ - nosetests -vv notest.py $TESTS3
 # - xauth add :0 . `mcookie`
   
 after_success:
