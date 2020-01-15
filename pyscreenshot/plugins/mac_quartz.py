@@ -16,10 +16,12 @@ class MacQuartzWrapper(object):
         import LaunchServices
         from Cocoa import NSURL
         import Quartz.CoreGraphics as CG
+        import objc
         self.Quartz = Quartz
         self.LaunchServices = LaunchServices
         self.NSURL = NSURL
         self.CG = CG
+        self.objc = objc
 
     def grab(self, bbox=None):
         im = read_func_img(self._grab_to_file, bbox)
@@ -65,5 +67,4 @@ class MacQuartzWrapper(object):
         self.Quartz.CGImageDestinationFinalize(dest)
 
     def backend_version(self):
-        # TODO:
-        return 'not implemented'
+        return self.objc.__version__
