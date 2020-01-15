@@ -47,10 +47,9 @@ pyscreenshot/plugins/wxscreen.py
 '''
 
 
-def check_ref(backend, bbox):
-    ref = 'scrot'
-    img_ref = pyscreenshot.grab(bbox=bbox, backend=ref, childprocess=True)
-    im = pyscreenshot.grab(bbox=bbox, backend=backend, childprocess=True)
+def check_ref(backend, ref, bbox, childprocess):
+    img_ref = pyscreenshot.grab(bbox=bbox, backend=ref, childprocess=childprocess)
+    im = pyscreenshot.grab(bbox=bbox, backend=backend, childprocess=childprocess)
 
     img_ref = img_ref.convert('RGB')
     im = im.convert('RGB')
@@ -68,20 +67,24 @@ def check_ref(backend, bbox):
     eq_(diff_bbox, None, 'different image data %s!=%s bbox=%s diff_bbox=%s' %
         (ref, backend, bbox, diff_bbox))
 
-
-def _backend_ref(backend):
-    with EasyProcess('xlogo'):
-        with EasyProcess('xmessage -center "%s"' % long_txt):
-            time.sleep(2)
+def check_list(backend, ref, childprocess):
             for bbox in bbox_ls:
                 print('bbox: {}'.format(bbox))
                 print('backend: %s' % backend)
-                check_ref(backend, bbox)
+                check_ref(backend, ref, bbox, childprocess)
 
+def _backend_ref(backend, ref, x11, childprocess):
+  if x11:
+    with EasyProcess('xlogo'):
+        with EasyProcess('xmessage -center "%s"' % long_txt):
+            time.sleep(2)
+            check_list(backend, ref, childprocess)
+  else:
+            check_list(backend, ref, childprocess)
 
-def backend_ref(backend, virtual_display=True):
+def backend_ref(backend, virtual_display=True, ref='scrot', x11=True, childprocess=True):
     if virtual_display:
         with Display(visible=0, size=(400, 500)):
-            _backend_ref(backend)
+            _backend_ref(backend, ref, x11, childprocess)
     else:
-        _backend_ref(backend)
+        _backend_ref(backend, ref, x11, childprocess)

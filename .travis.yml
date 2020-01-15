@@ -74,11 +74,7 @@ addons:
       - imagemagick
 
 install:
-#  - sudo apt-get update -q
-#  - sudo apt-get install --no-install-recommends -y python-dev xvfb x11-utils x11-apps
-#  - sudo apt-get install --no-install-recommends -y scrot imagemagick 
  - if [ ${TRAVIS_OS_NAME} == "linux" ]; then sudo apt-get install --no-install-recommends -y $(echo $PACKAGES); fi
-# - echo "TRAVIS_PYTHON_VERSION=$TRAVIS_PYTHON_VERSION"
  - if [ ${TRAVIS_PYTHON_VERSION:0:1} == "2" ]; then PIP=pip; else PIP=pip3; fi
  - $PIP install $USER --upgrade -r requirements-test.txt
  - $PIP install $USER --upgrade .
@@ -88,7 +84,8 @@ install:
 script:  
  - cd tests 
  - if [ ${TRAVIS_OS_NAME} == "linux" ]; then TESTS1="test_scrot.py test_imagemagick.py"; fi
- - if [ ${TRAVIS_OS_NAME} == "osx" ]; then TESTS1="test_mac_screencapture.py test_mac_quartz.py"; fi
+ - if [ ${TRAVIS_OS_NAME} == "osx" ]; then TESTS1="test_pil.py test_mac_screencapture.py test_mac_quartz.py"; fi
+# - if [ ${TRAVIS_OS_NAME} == "windows" ]; then TESTS1="test_pil.py"; fi
  - nosetests -vv --with-coverage --cover-package=pyscreenshot easy $TESTS1 $TESTS2
  - nosetests -vv notest.py $TESTS3
 # - xauth add :0 . `mcookie`
