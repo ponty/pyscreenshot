@@ -1,4 +1,4 @@
-from PIL import Image
+from PIL import Image, __version__
 
 
 class PilWrapper(object):
@@ -15,4 +15,4 @@ class PilWrapper(object):
         return self.ImageGrab.grab(bbox)
 
     def backend_version(self):
-        return Image.VERSION
+        return __version__
