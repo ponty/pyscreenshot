@@ -14,6 +14,7 @@ DESCRIPTION = 'python screenshot'
 PACKAGES = [NAME,
             NAME + '.plugins',
             NAME + '.check',
+            NAME + '.cli',
             NAME + '.examples',
             ]
 
@@ -42,7 +43,7 @@ classifiers = [
     'Programming Language :: Python :: 3.8',
 ]
 
-install_requires = ['EasyProcess']
+install_requires = ['EasyProcess','entrypoint2']
 
 setup(
     name=NAME,

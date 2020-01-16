@@ -1,9 +1,8 @@
 from PIL import Image
 import logging
-from pyscreenshot import imcodec
 from pyscreenshot.about import __version__
 from pyscreenshot.loader import Loader, FailedBackendError
-from pyscreenshot.procutil import run_in_childprocess
+from pyscreenshot.childproc import childprocess_grab, childprocess_backend_version
 
 
 ADDITIONAL_IMPORTS = [FailedBackendError]
@@ -28,8 +27,7 @@ def _grab(childprocess, backend=None, bbox=None, filename=None):
             raise ValueError('bbox y2<=y1')
     if childprocess:
         log.debug('running "%s" in child process', backend)
-        return run_in_childprocess(
-            _grab_simple, imcodec.codec, backend, bbox, filename)
+        return childprocess_grab(_grab_simple, backend, bbox)
     else:
         return _grab_simple(backend, bbox, filename)
 
@@ -38,8 +36,8 @@ def grab(bbox=None, childprocess=False, backend=None):
     """Copy the contents of the screen to PIL image memory.
 
     :param bbox: optional bounding box (x1,y1,x2,y2)
-    :param childprocess: run back-end in new process using multiprocessing. 
-        This can isolate back-ends from each other, but not from main process.
+    :param childprocess: run back-end in new process using popen. 
+        This can isolate back-ends from each other and from main process.
     :param backend: back-end can be forced if set (examples:scrot, wx,..),
                     otherwise back-end is automatic
     """
@@ -76,4 +74,4 @@ def backend_version(backend, childprocess=False):
     if not childprocess:
         return _backend_version(backend)
     else:
-        return run_in_childprocess(_backend_version, None, backend)
+        return childprocess_backend_version(_backend_version, backend)
