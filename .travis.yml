@@ -76,6 +76,8 @@ addons:
 install:
  - if [ ${TRAVIS_OS_NAME} == "linux" ]; then sudo apt-get install --no-install-recommends -y $(echo $PACKAGES); fi
  - if [ ${TRAVIS_PYTHON_VERSION:0:1} == "2" ]; then PIP=pip; else PIP=pip3; fi
+ - if [ ${TRAVIS_PYTHON_VERSION:0:1} == "2" ]; then PYTHON=python; else PYTHON=python3; fi
+ - if [ ${TRAVIS_OS_NAME} == "windows" ]; then PYTHON=python; fi
  - $PIP install $USER --upgrade -r requirements-test.txt
  - $PIP install $USER --upgrade .
  - $PIP install $USER --upgrade coveralls
@@ -83,6 +85,7 @@ install:
 
 script:  
  - cd tests 
+ - $PYTHON -m pyscreenshot.check.versions
  - if [ ${TRAVIS_OS_NAME} == "linux" ]; then TESTS1="test_scrot.py test_imagemagick.py"; fi
  - if [ ${TRAVIS_OS_NAME} == "osx" ]; then TESTS1="test_pil.py test_mac_screencapture.py test_mac_quartz.py"; fi
 # - if [ ${TRAVIS_OS_NAME} == "windows" ]; then TESTS1="test_pil.py"; fi
