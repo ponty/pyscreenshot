@@ -1,54 +1,67 @@
-import pyscreenshot
+import shutil
+import sys
 import tempfile
 import time
-import shutil
+
+import pyscreenshot
+from easyprocess import EasyProcess
+from entrypoint2 import entrypoint
 
 
-def run(force_backend, n):
-    start = time.time()
-    for _ in range(n):
-        pyscreenshot.grab(
-            backend=force_backend, childprocess=True)
-    end = time.time()
-    dt = end - start
+def run(force_backend, n, childprocess):
+    sys.stdout.write('%-20s\t' % force_backend)
+    sys.stdout.flush() # before any crash
 
-    s = ''
-    s += '%-20s' % force_backend
-    s += '\t'
-    s += '%-4.2g sec' % dt
-    s += '\t'
-    s += '(%5d ms per call)' % (1000.0 * dt / n)
-    print(s)
+    try:
+        start = time.time()
+        for _ in range(n):
+            pyscreenshot.grab(
+                backend=force_backend, 
+                childprocess=childprocess)
+        end = time.time()
+        dt = end - start
+        s = '%-4.2g sec\t' % dt
+        s += '(%5d ms per call)' % (1000.0 * dt / n)
+        sys.stdout.write(s)
+    finally:
+        print('')
 
 
-def run_all(n, virtual_only=True):
+def run_all(n, childprocess, virtual_only=True):
     print('')
-
-    s = ''
-    s += 'n=%s' % n
-    print(s)
-
+    print('n=%s' % n)
     print('------------------------------------------------------')
 
     for x in pyscreenshot.backends():
         if virtual_only and x == 'gnome-screenshot':
             continue
-        try:
-            run(x, n)
-        except pyscreenshot.FailedBackendError as e:
-            pass
-            # print(e)
+        if childprocess:
+            try:
+                run(x, n, True)
+            except pyscreenshot.FailedBackendError:
+                pass
+        else:
+            py=sys.executable
+            cmd=[py,'-m','pyscreenshot.check.speedtest','--backend',x]
+            p=EasyProcess(cmd).call()
+            # if p.return_code==0:
+            print(p.stdout)
 
-
-def speedtest(virtual_display=False):
+@entrypoint
+def speedtest(virtual_display=False, backend='', childprocess=False):
     n = 10
+    def f(virtual_only):
+            if backend:
+                try:
+                    run(backend, n, childprocess)
+                except pyscreenshot.FailedBackendError:
+                    pass
+            else:
+                run_all(n,childprocess, virtual_only=virtual_only)
     if virtual_display:
         from pyvirtualdisplay import Display
         with Display(visible=0):
-            run_all(n, virtual_only=True)
+            f(virtual_only=True)
     else:
-        run_all(n, virtual_only=False)
+            f(virtual_only=False)
 
-
-if __name__ == '__main__':
-    speedtest()
