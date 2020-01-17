@@ -47,7 +47,7 @@ def childprocess_grab_popen(backend,bbox):
         p = EasyProcess(cmd).call()
 
         if p.return_code!=0:
-            log.error(p)
+            #log.debug(p)
             raise FailedBackendError(p)
 
         data = open(filename,'rb').read()
