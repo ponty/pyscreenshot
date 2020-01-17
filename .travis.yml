@@ -92,7 +92,8 @@ install:
 script:  
  - cd tests 
  - $PYTHON -m pyscreenshot.check.versions
- - if [ ${TRAVIS_OS_NAME} == "osx" ]; then $PYTHON -m pyscreenshot.check.speedtest 2> /dev/null; fi
+ - if [ ${TRAVIS_OS_NAME} == "osx" ];   then $PYTHON -m pyscreenshot.check.speedtest 2> /dev/null; fi
+ - if [ ${TRAVIS_OS_NAME} == "linux" ]; then $PYTHON -m pyscreenshot.check.speedtest --virtual-display 2> /dev/null; fi
  - if [ ${TRAVIS_OS_NAME} == "linux" ]; then TESTS1="test_scrot.py test_imagemagick.py"; fi
  - if [ ${TRAVIS_OS_NAME} == "osx" ]; then TESTS1="test_pil.py test_mac_screencapture.py test_mac_quartz.py"; fi
 # - if [ ${TRAVIS_OS_NAME} == "windows" ]; then TESTS1="test_pil.py"; fi
