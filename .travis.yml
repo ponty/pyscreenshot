@@ -72,7 +72,13 @@ addons:
       - x11-apps 
       - scrot 
       - imagemagick
-
+  homebrew:
+    packages:
+      - imagemagick
+      - wxmac
+      - pyqt
+      - pyside
+      
 install:
  - if [ ${TRAVIS_OS_NAME} == "linux" ]; then sudo apt-get install --no-install-recommends -y $(echo $PACKAGES); fi
  - if [ ${TRAVIS_PYTHON_VERSION:0:1} == "2" ]; then PIP=pip; else PIP=pip3; fi
@@ -81,7 +87,7 @@ install:
  - $PIP install $USER --upgrade -r requirements-test.txt
  - $PIP install $USER --upgrade .
  - $PIP install $USER --upgrade coveralls
- - if [ ${TRAVIS_OS_NAME} == "osx" ]; then $PIP install $USER --upgrade pyobjc-framework-Quartz pyobjc-framework-LaunchServices; fi
+ - if [ ${TRAVIS_OS_NAME} == "osx" ]; then $PIP install $USER --upgrade qtpy wxpython pyobjc-framework-Quartz pyobjc-framework-LaunchServices; fi
 
 script:  
  - cd tests 
