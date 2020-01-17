@@ -20,12 +20,12 @@ class PySideGrabWindow(object):
     name = 'pyside'
     childprocess = False
 
+    app = None
     def __init__(self):
         import PySide
         self.PySide = PySide
         from PySide import QtGui
         from PySide import QtCore
-        self.app = None
         self.QtGui = QtGui
         self.QtCore = QtCore
 
@@ -35,8 +35,8 @@ class PySideGrabWindow(object):
         QIODevice = self.PySide.QtCore.QIODevice
         QPixmap = self.PySide.QtGui.QPixmap
 
-        if not self.app:
-            self.app = QApplication([])
+        if not self.__class__.app:
+            self.__class__.app = QApplication([])
         qbuffer = QBuffer()
         qbuffer.open(QIODevice.ReadWrite)
         QPixmap.grabWindow(

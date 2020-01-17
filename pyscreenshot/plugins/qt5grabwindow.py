@@ -21,13 +21,13 @@ class Qt5GrabWindow(object):
     name = 'pyqt5'
     childprocess = False
 
+    app = None
     def __init__(self):
         import PyQt5
         self.PyQt5 = PyQt5
         from PyQt5 import QtGui
         from PyQt5 import Qt
         from PyQt5 import QtWidgets
-        self.app = None
         self.QtGui = QtGui
         self.Qt = Qt
         self.QtWidgets = QtWidgets
@@ -38,8 +38,8 @@ class Qt5GrabWindow(object):
         QIODevice = self.PyQt5.Qt.QIODevice
         QScreen = self.PyQt5.QtGui.QScreen
 
-        if not self.app:
-            self.app = QApplication([])
+        if not self.__class__.app:
+            self.__class__.app = QApplication([])
         qbuffer = QBuffer()
         qbuffer.open(QIODevice.ReadWrite)
         QScreen.grabWindow(QApplication.primaryScreen(),

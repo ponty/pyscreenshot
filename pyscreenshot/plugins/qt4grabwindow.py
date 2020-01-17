@@ -22,12 +22,12 @@ class Qt4GrabWindow(object):
     name = 'pyqt'
     childprocess = False
 
+    app = None
     def __init__(self):
         import PyQt4
         self.PyQt4 = PyQt4
         from PyQt4 import QtGui
         from PyQt4 import Qt
-        self.app = None
         self.QtGui = QtGui
         self.Qt = Qt
 
@@ -37,8 +37,8 @@ class Qt4GrabWindow(object):
         QIODevice = self.PyQt4.Qt.QIODevice
         QPixmap = self.PyQt4.QtGui.QPixmap
 
-        if not self.app:
-            self.app = QApplication([])
+        if not self.__class__.app:
+            self.__class__.app = QApplication([])
         qbuffer = QBuffer()
         qbuffer.open(QIODevice.ReadWrite)
         QPixmap.grabWindow(

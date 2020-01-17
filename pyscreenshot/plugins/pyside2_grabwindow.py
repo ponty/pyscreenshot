@@ -29,6 +29,7 @@ class PySide2GrabWindow(object):
     name = 'pyside2'
     childprocess = False
 
+    app = None
     def __init__(self):
         if PY2:
             raise PySide2BugError()
@@ -37,7 +38,6 @@ class PySide2GrabWindow(object):
         from PySide2 import QtGui
         from PySide2 import QtCore
         from PySide2 import QtWidgets
-        self.app = None
         self.QtGui = QtGui
         self.QtCore = QtCore
         self.QtWidgets = QtWidgets
@@ -47,10 +47,10 @@ class PySide2GrabWindow(object):
         QBuffer = self.PySide2.QtCore.QBuffer
         QIODevice = self.PySide2.QtCore.QIODevice
         QScreen = self.PySide2.QtGui.QScreen
-        QPixmap = self.PySide2.QtGui.QPixmap
+        # QPixmap = self.PySide2.QtGui.QPixmap
 
-        if not self.app:
-            self.app = QApplication([])
+        if not self.__class__.app:
+            self.__class__.app = QApplication([])
         qbuffer = QBuffer()
         qbuffer.open(QIODevice.ReadWrite)
         QScreen.grabWindow(QApplication.primaryScreen(),
