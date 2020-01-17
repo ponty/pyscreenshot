@@ -32,7 +32,7 @@ def _grab(childprocess, backend=None, bbox=None, filename=None):
         return _grab_simple(backend, bbox, filename)
 
 
-def grab(bbox=None, childprocess=False, backend=None):
+def grab(bbox=None, childprocess=True, backend=None):
     """Copy the contents of the screen to PIL image memory.
 
     :param bbox: optional bounding box (x1,y1,x2,y2)
@@ -64,7 +64,7 @@ def _backend_version(backend):
     return v
 
 
-def backend_version(backend, childprocess=False):
+def backend_version(backend, childprocess=True):
     """Back-end version.
 
     :param backend: back-end (examples:scrot, wx,..)
