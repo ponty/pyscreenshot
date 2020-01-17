@@ -1,9 +1,6 @@
 from entrypoint2 import entrypoint
 import pyscreenshot
 from pyscreenshot.imcodec import codec
-import sys
-
-PY3 = sys.version_info[0] >= 3
 
 @entrypoint
 def main(filename, x1,y1,x2,y2, backend=''):

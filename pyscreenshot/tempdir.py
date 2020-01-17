@@ -1,8 +1,8 @@
 import tempfile
 import sys
-PY3 = sys.version_info[0] >= 3
-if PY3:
-    TemporaryDirectory = tempfile.TemporaryDirectory
-else:
+PY2 = sys.version_info[0] == 2
+if PY2:
     from pyscreenshot import tempdir27
     TemporaryDirectory = tempdir27.TemporaryDirectory27
+else:
+    TemporaryDirectory = tempfile.TemporaryDirectory

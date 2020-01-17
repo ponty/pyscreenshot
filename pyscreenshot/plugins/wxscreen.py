@@ -3,8 +3,11 @@ import sys
 
 from PIL import Image
 
-PY3 = sys.version_info[0] >= 3
-to_bytes = bytes if PY3 else buffer
+PY2 = sys.version_info[0] == 2
+if PY2:
+    to_bytes = buffer
+else:
+    to_bytes = bytes
 log = logging.getLogger(__name__)
 
 # based on:

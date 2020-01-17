@@ -2,14 +2,14 @@ from PIL import Image
 import sys
 import logging
 
-PY3 = sys.version_info[0] >= 3
+PY2 = sys.version_info[0] == 2
 
-if PY3:
-    import io
-    BytesIO = io.BytesIO
-else:
+if PY2:
     import StringIO
     BytesIO = StringIO.StringIO
+else:
+    import io
+    BytesIO = io.BytesIO
 
 
 log = logging.getLogger(__name__)

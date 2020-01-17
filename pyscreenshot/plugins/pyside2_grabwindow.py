@@ -1,14 +1,14 @@
 from PIL import Image
 import logging
 import sys
-PY3 = sys.version_info[0] >= 3
+PY2 = sys.version_info[0] == 2
 
-if PY3:
-    import io
-    BytesIO = io.BytesIO
-else:
+if PY2:
     import StringIO
     BytesIO = StringIO.StringIO
+else:
+    import io
+    BytesIO = io.BytesIO
 
 
 log = logging.getLogger(__name__)
@@ -30,7 +30,7 @@ class PySide2GrabWindow(object):
     childprocess = False
 
     def __init__(self):
-        if not PY3:
+        if PY2:
             raise PySide2BugError()
         import PySide2
         self.PySide2 = PySide2
