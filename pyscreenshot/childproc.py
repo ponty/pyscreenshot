@@ -36,6 +36,8 @@ def childprocess_grab(_grab_simple, backend, bbox):
         return run_in_childprocess(_grab_simple, codec, backend, bbox)
 
 def childprocess_grab_popen(backend,bbox):
+    if not backend:
+        backend = ''
     if not bbox:
         bbox=(0,0,0,0)
     x1,y1,x2,y2=map(str,bbox)
