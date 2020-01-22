@@ -2,7 +2,6 @@ from easyprocess import EasyProcess
 from image_debug import img_debug
 from nose.tools import eq_
 from nose.tools import with_setup
-from pyvirtualdisplay import Display
 from PIL import ImageChops
 import sys
 import pyscreenshot
@@ -35,7 +34,7 @@ def check_size(backend, bbox, childprocess=True):
             backend=backend,
             childprocess=childprocess,
         )
-        img_debug(im, backend + str(bbox))
+        img_debug(im, str(backend) + str(bbox))
 
         if bbox:
             width = bbox[2] - bbox[0]
@@ -47,16 +46,8 @@ def check_size(backend, bbox, childprocess=True):
             eq_(height, im.size[1])
 
 
-def _backend_size(backend, childprocess=True):
+def backend_size(backend, childprocess=True):
     for bbox in bbox_ls:
         print('bbox: {}'.format(bbox))
         print('backend: %s' % backend)
         check_size(backend, bbox, childprocess)
-
-
-def backend_size(backend, virtual_display=True, childprocess=True):
-    if virtual_display:
-        with Display(visible=0, size=(800, 600)):
-            _backend_size(backend, childprocess)
-    else:
-        _backend_size(backend, childprocess)

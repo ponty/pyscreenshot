@@ -1,23 +1,21 @@
-from pyscreenshot.check.speedtest import speedtest
-from pyscreenshot.check.versions import print_versions
-from pyvirtualdisplay.display import Display
-import sys
 import os
+from nose.tools import eq_
 
-if sys.platform.startswith('linux'):
+from pyscreenshot.procutil import proc
 
- def test_speedtest():
-    with Display(visible=0, size=(800, 600)):
-        speedtest(virtual_display=True)
+
+def test_speedtest():
+    eq_(proc('pyscreenshot.check.speedtest', ['--childprocess']).return_code,0)
+    eq_(proc('pyscreenshot.check.speedtest').return_code,0)
 
 
 def test_print_versions():
-    print_versions()
+    eq_(proc('pyscreenshot.check.versions').return_code,0)
 
 def test_print_versions_no_path():
     path = os.environ["PATH"]
     os.environ["PATH"] = "xxx"
     try:
-        print_versions()
+        eq_(proc('pyscreenshot.check.versions').return_code,0)
     finally:
         os.environ["PATH"] = path

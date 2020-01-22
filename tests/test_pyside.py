@@ -1,10 +1,5 @@
-from ref import backend_ref
-from size import backend_size
+from ref import backend_check
 
-
-def test_size_pyside():
-    backend_size('pyside')
-
-
-def test_ref_pyside():
-    backend_ref('pyside')
+def test_pyside():
+    backend_check('pyside', childprocess=True)
+    backend_check('pyside', childprocess=False)

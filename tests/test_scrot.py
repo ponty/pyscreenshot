@@ -1,10 +1,5 @@
-from ref import backend_ref
-from size import backend_size
+from ref import backend_check
 
-
-def test_size_scrot():
-    backend_size('scrot')
-
-
-def test_ref_scrot():
-    backend_ref('scrot', ref='imagemagick')
+def test_scrot():
+    backend_check('scrot', ref='imagemagick', childprocess=True)
+    backend_check('scrot', ref='imagemagick', childprocess=False)

@@ -1,24 +1,11 @@
-from pyvirtualdisplay.display import Display
-import sys
-from pyscreenshot.procutil import run_in_childprocess
+from nose.tools import eq_
 
-if sys.platform.startswith('linux'):
-
- def showgrabbox_subprocess():
-    from pyscreenshot.examples import showgrabbox
-    print(showgrabbox)
+from pyscreenshot.procutil import proc
 
 
- def test_showgrabbox():
-    with Display(visible=0, size=(800, 600)):
-        run_in_childprocess(target=showgrabbox_subprocess)
+def test_showgrabbox():
+   eq_(proc('pyscreenshot.examples.showgrabbox').return_code,0)
 
 
- def showgrabfullscreen_subprocess():
-    from pyscreenshot.examples import showgrabfullscreen
-    print(showgrabfullscreen)
-
-
- def test_showgrabfullscreen():
-    with Display(visible=0, size=(800, 600)):
-        run_in_childprocess(target=showgrabfullscreen_subprocess)
+def test_showgrabfullscreen():
+   eq_(proc('pyscreenshot.examples.showgrabfullscreen').return_code,0)

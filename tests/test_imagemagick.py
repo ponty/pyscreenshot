@@ -1,10 +1,6 @@
-from ref import backend_ref
-from size import backend_size
+from ref import backend_check
 
 
-def test_size_imagemagick():
-    backend_size('imagemagick')
-
-
-def test_ref_imagemagick():
-    backend_ref('imagemagick')
+def test_imagemagick():
+    backend_check('imagemagick', childprocess=True)
+    backend_check('imagemagick', childprocess=False)

@@ -1,6 +1,8 @@
 from multiprocessing import Process, Queue
 import traceback
 import logging
+import sys
+from easyprocess import EasyProcess
 
 log = logging.getLogger(__name__)
 
@@ -40,3 +42,9 @@ def run_in_childprocess(target, codec=None, *args, **kwargs):
         r = codec[1](r)
 
     return r
+
+def proc(name, params=[]):
+    python=sys.executable
+    cmd=[python, '-m',name]+params
+    p=EasyProcess(cmd).call()
+    return p

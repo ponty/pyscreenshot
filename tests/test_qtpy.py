@@ -1,10 +1,5 @@
-from ref import backend_ref
-from size import backend_size
+from ref import backend_check
 
-
-def test_size_qtpy():
-    backend_size('qtpy')
-
-
-def test_ref_qtpy():
-    backend_ref('qtpy')
+def test_qtpy():
+    backend_check('qtpy', childprocess=True)
+    backend_check('qtpy', childprocess=False)

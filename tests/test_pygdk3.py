@@ -1,10 +1,6 @@
-from ref import backend_ref
-from size import backend_size
+from ref import backend_check
 
 
-def test_size_pygdk3():
-    backend_size('pygdk3')
-
-
-def test_ref_pygdk3():
-    backend_ref('pygdk3')
+def test_pygdk3():
+    backend_check('pygdk3', childprocess=True)
+    backend_check('pygdk3', childprocess=False)
