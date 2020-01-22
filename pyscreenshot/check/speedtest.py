@@ -4,8 +4,8 @@ import tempfile
 import time
 
 import pyscreenshot
-from easyprocess import EasyProcess
 from entrypoint2 import entrypoint
+from pyscreenshot.procutil import proc
 
 
 def run(force_backend, n, childprocess):
@@ -41,11 +41,9 @@ def run_all(n, childprocess, virtual_only=True):
             except pyscreenshot.FailedBackendError:
                 pass
         else:
-            py=sys.executable
-            cmd=[py,'-m','pyscreenshot.check.speedtest','--backend',x]
-            p=EasyProcess(cmd).call()
-            # if p.return_code==0:
+            p=proc('pyscreenshot.check.speedtest',['--backend',x])
             print(p.stdout)
+
 
 @entrypoint
 def speedtest(virtual_display=False, backend='', childprocess=False):

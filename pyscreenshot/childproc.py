@@ -1,10 +1,10 @@
 from pyscreenshot.imcodec import codec
 from pyscreenshot.procutil import run_in_childprocess
 import os,sys
-from easyprocess import EasyProcess
 import logging
 from pyscreenshot.loader import FailedBackendError
 from pyscreenshot.tempdir import TemporaryDirectory
+from pyscreenshot.procutil import proc
 
 log = logging.getLogger(__name__)
 
@@ -19,10 +19,7 @@ def childprocess_backend_version(_backend_version, backend):
         return run_in_childprocess(_backend_version, None, backend)
 
 def childprocess_backend_version_popen(backend):
-    python=sys.executable
-    cmd=[python,'-m','pyscreenshot.cli.print_backend_version' ,backend]
-    p = EasyProcess(cmd).call()
-
+    p=proc('pyscreenshot.cli.print_backend_version' ,[backend])
     if p.return_code!=0:
         log.error(p)
         raise FailedBackendError(p)
@@ -41,13 +38,10 @@ def childprocess_grab_popen(backend,bbox):
     if not bbox:
         bbox=(0,0,0,0)
     x1,y1,x2,y2=map(str,bbox)
-    python=sys.executable
     with TemporaryDirectory(prefix='pyscreenshot') as tmpdirname:
         filename = os.path.join(tmpdirname, 'screenshot.png')
 
-        cmd=[python,'-m','pyscreenshot.cli.grab_to_file' ,filename ,x1,y1,x2,y2 ,'--backend',backend]
-        p = EasyProcess(cmd).call()
-
+        p=proc('pyscreenshot.cli.grab_to_file' ,[filename ,x1,y1,x2,y2 ,'--backend',backend])
         if p.return_code!=0:
             #log.debug(p)
             raise FailedBackendError(p)
