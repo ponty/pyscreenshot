@@ -35,6 +35,10 @@ matrix:
       python: 3.8
       dist: xenial
 
+    - name: 2.7_bionic
+      python: 2.7
+      dist: bionic
+
     - name: 3.7_bionic
       python: 3.7
       dist: bionic
@@ -56,6 +60,8 @@ matrix:
         - choco install python --version 3.8
         - python -m pip install --upgrade pip
       env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
+
+      # python: "2.7_with_system_site_packages" on bionic doesn't exist
 
 addons:
   apt:
