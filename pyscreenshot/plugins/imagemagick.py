@@ -1,3 +1,5 @@
+from os import sys
+
 from easyprocess import EasyProcess
 from PIL import Image
 from pyscreenshot.tempexport import read_prog_img, extract_version
@@ -5,12 +7,18 @@ from pyscreenshot.tempexport import read_prog_img, extract_version
 PROGRAM = 'import'
 # http://www.imagemagick.org/
 
+class ImagemagickBackendError(Exception):
+    pass
+
 
 class ImagemagickWrapper(object):
     name = 'imagemagick'
     childprocess = True
 
     def __init__(self):
+        if sys.platform == 'darwin':
+            raise ImagemagickBackendError('osx not supported')
+
         p = EasyProcess([PROGRAM, '-version'])
         p.enable_stdout_log = False
         p.enable_stderr_log = False

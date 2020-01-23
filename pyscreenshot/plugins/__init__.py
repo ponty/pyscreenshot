@@ -35,14 +35,14 @@ elif sys.platform == 'darwin':
         mac_screencapture.ScreencaptureWrapper,
         mac_quartz.MacQuartzWrapper,
 
-        scrot.ScrotWrapper,
-        imagemagick.ImagemagickWrapper,
+        # scrot.ScrotWrapper,
+        # imagemagick.ImagemagickWrapper,
 
     ]+_qt_backends+[
 
         wxscreen.WxScreen,
         gdk3pixbuf.Gdk3PixbufWrapper,
-        gtkpixbuf.GtkPixbufWrapper,
+        # gtkpixbuf.GtkPixbufWrapper,
     ]
 elif sys.platform == 'win32':
     BACKENDS = [
@@ -54,7 +54,7 @@ elif sys.platform == 'win32':
         wxscreen.WxScreen,
         gdk3pixbuf.Gdk3PixbufWrapper,
 
-        scrot.ScrotWrapper,
+        # scrot.ScrotWrapper,
         imagemagick.ImagemagickWrapper,
     ]
 else:
