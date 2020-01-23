@@ -1,8 +1,6 @@
 from ref import backend_check
 
 
-
-
 def test_mac_screencapture():
     backend_check('mac_screencapture', childprocess=True)
     backend_check('mac_screencapture', childprocess=False)

@@ -1,5 +1,6 @@
-from PIL import Image
 import io
+
+from PIL import Image
 
 # def _coder(im):
 #     if im:

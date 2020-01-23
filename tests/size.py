@@ -1,9 +1,11 @@
-from easyprocess import EasyProcess
-from image_debug import img_debug
-from nose.tools import eq_
 import sys
+
+from easyprocess import EasyProcess
+from nose.tools import eq_
+
 import pyscreenshot
 from config import bbox_ls
+from image_debug import img_debug
 
 
 def display_size():

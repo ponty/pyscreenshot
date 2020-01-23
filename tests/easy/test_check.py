@@ -1,4 +1,5 @@
 import os
+
 from nose.tools import eq_
 
 from pyscreenshot.procutil import proc

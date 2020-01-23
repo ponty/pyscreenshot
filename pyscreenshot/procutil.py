@@ -1,7 +1,8 @@
-from multiprocessing import Process, Queue
-import traceback
 import logging
 import sys
+import traceback
+from multiprocessing import Process, Queue
+
 from easyprocess import EasyProcess
 
 log = logging.getLogger(__name__)

@@ -1,6 +1,7 @@
-from pyscreenshot import backends, FailedBackendError
 import time
+
 import pyscreenshot as ImageGrab
+from pyscreenshot import FailedBackendError, backends
 
 
 def show():

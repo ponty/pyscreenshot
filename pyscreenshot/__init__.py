@@ -1,8 +1,9 @@
 import logging
-from pyscreenshot.about import __version__
-from pyscreenshot.loader import Loader, FailedBackendError
-from pyscreenshot.childproc import childprocess_grab, childprocess_backend_version
 
+from pyscreenshot.about import __version__
+from pyscreenshot.childproc import (childprocess_backend_version,
+                                    childprocess_grab)
+from pyscreenshot.loader import FailedBackendError, Loader
 
 ADDITIONAL_IMPORTS = [FailedBackendError]
 

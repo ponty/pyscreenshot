@@ -4,8 +4,9 @@
 Adapted from https://stackoverflow.com/a/37768950/81636, but uses
 buffers directly instead of saving intermediate files (which is slow).
 """
-from PIL import Image
 import sys
+
+from PIL import Image
 
 Gdk = None
 GdkPixbuf = None

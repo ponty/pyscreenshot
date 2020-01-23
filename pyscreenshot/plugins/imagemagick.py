@@ -1,7 +1,8 @@
 import sys
 
 from easyprocess import EasyProcess
-from pyscreenshot.tempexport import read_prog_img, extract_version
+
+from pyscreenshot.tempexport import extract_version, read_prog_img
 
 PROGRAM = 'import'
 # http://www.imagemagick.org/

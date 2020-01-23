@@ -1,7 +1,7 @@
 import logging
-from pyscreenshot import plugins
 import traceback
 
+from pyscreenshot import plugins
 
 log = logging.getLogger(__name__)
 

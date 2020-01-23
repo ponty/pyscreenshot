@@ -1,5 +1,6 @@
-from ref import backend_check
 import six
+
+from ref import backend_check
 
 if not six.PY2:
     def test_pyside2():

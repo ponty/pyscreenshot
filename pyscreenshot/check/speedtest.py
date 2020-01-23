@@ -1,8 +1,9 @@
 import sys
 import time
 
-import pyscreenshot
 from entrypoint2 import entrypoint
+
+import pyscreenshot
 from pyscreenshot.procutil import proc
 
 
@@ -60,4 +61,3 @@ def speedtest(virtual_display=False, backend='', childprocess=False):
             f(virtual_only=True)
     else:
             f(virtual_only=False)
-

@@ -1,5 +1,6 @@
-import tempfile
 import sys
+import tempfile
+
 PY2 = sys.version_info[0] == 2
 if PY2:
     from pyscreenshot import tempdir27

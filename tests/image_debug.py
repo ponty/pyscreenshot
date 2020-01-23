@@ -1,7 +1,7 @@
-from logging import DEBUG
-from tempfile import mkdtemp, gettempdir
 import logging
 import os
+from logging import DEBUG
+from tempfile import gettempdir, mkdtemp
 
 log = logging.getLogger(__name__)
 

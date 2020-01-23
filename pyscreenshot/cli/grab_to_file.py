@@ -1,6 +1,8 @@
 from entrypoint2 import entrypoint
+
 import pyscreenshot
 from pyscreenshot.imcodec import codec
+
 
 @entrypoint
 def main(filename, x1,y1,x2,y2, backend=''):
@@ -27,4 +29,3 @@ def main(filename, x1,y1,x2,y2, backend=''):
     b=codec[0](im)
     with open(filename, 'wb') as f:
         f.write(b)
-    

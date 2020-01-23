@@ -1,5 +1,7 @@
 from pyvirtualdisplay import Display
+
 import pyscreenshot
+
 backend = 'pygdk3'
 
 

@@ -1,6 +1,7 @@
 import platform
-from pyscreenshot import backend_version
+
 import pyscreenshot
+from pyscreenshot import backend_version
 
 
 def print_name_version(name, version):

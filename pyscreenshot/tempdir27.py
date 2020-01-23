@@ -1,9 +1,8 @@
 from __future__ import print_function
 
-import warnings as _warnings
 import os as _os
-
 import tempfile
+import warnings as _warnings
 
 # https://stackoverflow.com/questions/19296146/tempfile-temporarydirectory-context-manager-in-python-2-7
 

@@ -2,9 +2,11 @@
 
 import sys
 
-from pyscreenshot.plugins import wxscreen, gtkpixbuf, qt4grabwindow, qt5grabwindow, \
-    scrot, imagemagick, mac_quartz, mac_screencapture, pil, pyside_grabwindow, pyside2_grabwindow, qtpy_grabwindow, \
-    gnome_screenshot, gdk3pixbuf
+from pyscreenshot.plugins import (gdk3pixbuf, gnome_screenshot, gtkpixbuf,
+                                  imagemagick, mac_quartz, mac_screencapture,
+                                  pil, pyside2_grabwindow, pyside_grabwindow,
+                                  qt4grabwindow, qt5grabwindow,
+                                  qtpy_grabwindow, scrot, wxscreen)
 
 _qt_backends = [
     qtpy_grabwindow.QtPyGrabWindow,

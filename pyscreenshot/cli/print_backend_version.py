@@ -1,5 +1,7 @@
 from entrypoint2 import entrypoint
+
 import pyscreenshot
+
 
 @entrypoint
 def main(backend):
@@ -10,4 +12,3 @@ def main(backend):
     backend=backend if backend else None
     v = pyscreenshot.backend_version(backend=backend, childprocess=False)
     print(v)
-    

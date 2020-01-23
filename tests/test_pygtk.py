@@ -1,5 +1,6 @@
-from ref import backend_check
 import six
+
+from ref import backend_check
 
 # no pygtk for py3
 if six.PY2:

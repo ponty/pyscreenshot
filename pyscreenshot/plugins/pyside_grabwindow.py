@@ -1,6 +1,8 @@
-from PIL import Image
 import logging
 import sys
+
+from PIL import Image
+
 PY2 = sys.version_info[0] == 2
 
 if PY2:

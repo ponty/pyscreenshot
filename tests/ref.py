@@ -1,9 +1,9 @@
 import sys
 
-import pyscreenshot
 from nose.tools import eq_
 from PIL import ImageChops
 
+import pyscreenshot
 from config import bbox_ls
 from image_debug import img_debug
 from size import backend_size
