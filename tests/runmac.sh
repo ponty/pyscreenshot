@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+python3 fillscreen.py &
+FILL_PID=$!
+
+sleep 5
+
 nosetests -v test_def.py
 # nosetests -v test_pygdk3_conflict.py
 # nosetests -v test_scrot.py
@@ -20,3 +25,5 @@ nosetests -v test_mac_quartz.py
 nosetests -v test_mac_screencapture.py
 
 nosetests -v easy
+
+kill $FILL_PID
