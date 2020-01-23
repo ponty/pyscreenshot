@@ -51,7 +51,7 @@ matrix:
       os: osx
       osx_image: xcode11.2 # Python 3.7.4 running on macOS 10.14.4
       language: shell # 'language: python' is an error on Travis CI macOS
-      env: PATH=/Users/travis/Library/Python/3.7/bin:$PATH USER=--user PIPINST="pygame qtpy wxpython pyobjc-framework-Quartz pyobjc-framework-LaunchServices"
+      env: PATH=/Users/travis/Library/Python/3.7/bin:$PATH USER=--user PIPINST="qtpy wxpython pyobjc-framework-Quartz pyobjc-framework-LaunchServices"
 
     - name: "Python 3.8 on Windows"
       os: windows # Windows 10.0.17134 N/A Build 17134
@@ -85,7 +85,8 @@ install:
   - if [ ${TRAVIS_OS_NAME} == "windows" ]; then PYTHON=python; fi
   - $PIP install $USER --upgrade -r requirements-test.txt
   - $PIP install $USER --upgrade .
-  - $PIP install $USER --upgrade coveralls ${PIPINST}
+  - $PIP install $USER --upgrade coveralls pygame==2.0.0.dev6 ${PIPINST}
+  # osx error before pygame 2.0.0
 
 script:
   - cd tests
