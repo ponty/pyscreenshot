@@ -1,4 +1,4 @@
-from os import sys
+import sys
 
 from easyprocess import EasyProcess
 from PIL import Image
@@ -17,7 +17,7 @@ class ImagemagickWrapper(object):
 
     def __init__(self):
         if sys.platform == 'darwin':
-            raise ImagemagickBackendError('osx not supported')
+            raise ImagemagickBackendError('osx not supported') # TODO
 
         p = EasyProcess([PROGRAM, '-version'])
         p.enable_stdout_log = False

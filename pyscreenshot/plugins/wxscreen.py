@@ -13,12 +13,16 @@ log = logging.getLogger(__name__)
 # based on:
 # http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
 
+class WxBackendError(Exception):
+    pass
 
 class WxScreen(object):
     name = 'wx'
     childprocess = False
 
     def __init__(self):
+        if sys.platform == 'darwin':
+            raise WxBackendError('osx not supported')  # TODO
         import wx
         self.wx = wx
         self.app = None

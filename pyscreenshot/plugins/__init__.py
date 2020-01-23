@@ -40,8 +40,8 @@ elif sys.platform == 'darwin':
 
     ]+_qt_backends+[
 
-        wxscreen.WxScreen,
-        gdk3pixbuf.Gdk3PixbufWrapper,
+        # wxscreen.WxScreen,    #TODO
+        # gdk3pixbuf.Gdk3PixbufWrapper, #TODO
         # gtkpixbuf.GtkPixbufWrapper,
     ]
 elif sys.platform == 'win32':

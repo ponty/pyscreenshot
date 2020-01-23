@@ -5,16 +5,21 @@ Adapted from https://stackoverflow.com/a/37768950/81636, but uses
 buffers directly instead of saving intermediate files (which is slow).
 """
 from PIL import Image
+import sys
 
 Gdk = None
 GdkPixbuf = None
 
+class Gdk3BackendError(Exception):
+    pass
 
 class Gdk3PixbufWrapper(object):
     name = 'pygdk3'
     childprocess = False
 
     def __init__(self):
+        if sys.platform == 'darwin':
+            raise Gdk3BackendError('osx not supported') # TODO
         global Gdk, GdkPixbuf
         import gi
         gi.require_version('Gdk', '3.0')
