@@ -1,7 +1,7 @@
 import sys
 
 from nose.tools import eq_
-from PIL import ImageChops
+from PIL import ImageChops, Image
 
 import pyscreenshot
 from config import bbox_ls
@@ -9,8 +9,11 @@ from image_debug import img_debug
 from size import backend_size
 
 
-def check_ref(backend, ref, bbox, childprocess):
-    img_ref = pyscreenshot.grab(bbox=bbox, backend=ref, childprocess=childprocess)
+def check_ref(backend, bbox, childprocess):
+    img_ref = Image.open("/tmp/fillscreen.bmp")
+    if bbox:
+        img_ref = img_ref.crop(bbox)
+
     im = pyscreenshot.grab(bbox=bbox, backend=backend, childprocess=childprocess)
 
     img_ref = img_ref.convert("RGB")
@@ -19,7 +22,7 @@ def check_ref(backend, ref, bbox, childprocess):
     eq_("RGB", img_ref.mode)
     eq_("RGB", im.mode)
 
-    img_debug(img_ref, ref + str(bbox))
+    img_debug(img_ref, "ref" + str(bbox))
     img_debug(im, str(backend) + str(bbox))
 
     img_diff = ImageChops.difference(img_ref, im)
@@ -29,29 +32,24 @@ def check_ref(backend, ref, bbox, childprocess):
     eq_(
         diff_bbox,
         None,
-        "different image data %s!=%s bbox=%s diff_bbox=%s"
-        % (ref, backend, bbox, diff_bbox),
+        "different image data %s bbox=%s diff_bbox=%s" % (backend, bbox, diff_bbox),
     )
 
 
-def backend_ref(backend, ref, childprocess=True):
+def backend_ref(backend, childprocess=True):
     for bbox in bbox_ls:
         print("bbox: {}".format(bbox))
         print("backend: %s" % backend)
-        check_ref(backend, ref, bbox, childprocess)
+        check_ref(backend, bbox, childprocess)
 
 
 def _backend_check(backend, childprocess):
-    if sys.platform.startswith("linux"):
-        ref = "scrot"
-    else:
-        ref = "pil"
     enable_ref = True
     if sys.platform == "darwin":
         enable_ref = False  # TODO
     if enable_ref:
         backend_ref(
-            backend, ref=ref, childprocess=childprocess,
+            backend, childprocess=childprocess,
         )
     else:
         backend_size(

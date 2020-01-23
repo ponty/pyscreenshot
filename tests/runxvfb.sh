@@ -1,12 +1,12 @@
 #!/bin/bash
 DIST=$1
 set -e
-xlogo &
-XLOGO_PID=$!
-xmessage -center "`ls -la /`" &
-XMSG_PID=$!
 
-sleep 1
+rm /tmp/fillscreen.bmp || true
+python3 fillscreen.py &
+FILL_PID=$!
+while [ ! -f /tmp/fillscreen.bmp ]; do sleep 1; done
+#sleep 1
 
 nosetests -v test_scrot.py test_imagemagick.py
 nosetests -v test_def.py
@@ -41,5 +41,6 @@ fi
 
 nosetests -v easy
 
-kill $XLOGO_PID
-kill $XMSG_PID
+sleep 1
+
+kill $FILL_PID

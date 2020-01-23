@@ -1,10 +1,12 @@
 #!/bin/bash
 set -e
 
+rm /tmp/fillscreen.bmp || true
 python3 fillscreen.py &
 FILL_PID=$!
+while [ ! -f /tmp/fillscreen.bmp ]; do sleep 1; done
 
-sleep 5
+#sleep 5
 
 nosetests -v test_def.py
 # nosetests -v test_pygdk3_conflict.py
