@@ -11,20 +11,23 @@ from PIL import Image
 Gdk = None
 GdkPixbuf = None
 
+
 class Gdk3BackendError(Exception):
     pass
 
+
 class Gdk3PixbufWrapper(object):
-    name = 'pygdk3'
+    name = "pygdk3"
     childprocess = False
 
     def __init__(self):
-        if sys.platform == 'darwin':
-            raise Gdk3BackendError('osx not supported') # TODO
+        if sys.platform == "darwin":
+            raise Gdk3BackendError("osx not supported")  # TODO
         global Gdk, GdkPixbuf
         import gi
-        gi.require_version('Gdk', '3.0')
-        #gi.require_version('GdkPixbuf', '2.0')
+
+        gi.require_version("Gdk", "3.0")
+        # gi.require_version('GdkPixbuf', '2.0')
         from gi.repository import Gdk as _Gdk
         from gi.repository import GdkPixbuf as _GdkPixbuf
 
@@ -32,7 +35,9 @@ class Gdk3PixbufWrapper(object):
         if _GdkPixbuf.PIXBUF_MAJOR == 2:
             if _GdkPixbuf.PIXBUF_MINOR < 32:
                 raise ValueError(
-                    'GdkPixbuf min supported version: 2.32   current:' + _GdkPixbuf.PIXBUF_VERSION)
+                    "GdkPixbuf min supported version: 2.32   current:"
+                    + _GdkPixbuf.PIXBUF_VERSION
+                )
 
         Gdk, GdkPixbuf = _Gdk, _GdkPixbuf
 
@@ -53,9 +58,9 @@ class Gdk3PixbufWrapper(object):
             g = w.get_geometry()
         pb = Gdk.pixbuf_get_from_window(w, *g)
         if pb.get_bits_per_sample() != 8:
-            raise ValueError('Expected 8 bits per pixel.')
+            raise ValueError("Expected 8 bits per pixel.")
         elif pb.get_n_channels() != 3:
-            raise ValueError('Expected RGB image.')
+            raise ValueError("Expected RGB image.")
 
         # Read the entire buffer into a python bytes object.
         # read_pixel_bytes: New in version 2.32.
@@ -66,8 +71,10 @@ class Gdk3PixbufWrapper(object):
         # The args after "raw" help handle this; see
         # http://effbot.org/imagingbook/decoder.htm#the-raw-decoder
         return Image.frombytes(
-            'RGB', (width, height), pixel_bytes, 'raw', 'RGB', pb.get_rowstride(), 1)
+            "RGB", (width, height), pixel_bytes, "raw", "RGB", pb.get_rowstride(), 1
+        )
 
     def backend_version(self):
         import gi
-        return '.'.join(map(str, gi.version_info))
+
+        return ".".join(map(str, gi.version_info))

@@ -11,7 +11,6 @@ class FailedBackendError(Exception):
 
 
 class Loader(object):
-
     def __init__(self):
         self.plugins = dict()
 
@@ -31,7 +30,7 @@ class Loader(object):
         self.preference = x
 
     def force(self, name):
-        log.debug('forcing:' + str(name))
+        log.debug("forcing:" + str(name))
         self.changed = True
         self._force_backend = name
 
@@ -39,9 +38,9 @@ class Loader(object):
     def is_forced(self):
         return self._force_backend is not None
 
-#     @property
-#     def loaded_plugins(self):
-#         return self.plugins.values()
+    #     @property
+    #     def loaded_plugins(self):
+    #         return self.plugins.values()
 
     def get_valid_plugin_by_name(self, name):
         if name not in self.plugins:
@@ -49,14 +48,14 @@ class Loader(object):
             ls = list(ls)
             if len(ls):
                 try:
-                    msg = ''
+                    msg = ""
                     plugin = ls[0]()
                 except Exception:
                     msg = traceback.format_exc()
                     log.debug(msg)
                     plugin = None
             else:
-                msg = 'unknown backend'
+                msg = "unknown backend"
                 plugin = None
             self.plugins[name] = (plugin, msg)
         return self.plugins[name]
@@ -73,18 +72,21 @@ class Loader(object):
                 b, msg = self.get_valid_plugin_by_name(self._force_backend)
                 if not b:
                     raise FailedBackendError(
-                        'Forced backend not found, or cannot be loaded:' + self._force_backend + '\n' + msg)
+                        "Forced backend not found, or cannot be loaded:"
+                        + self._force_backend
+                        + "\n"
+                        + msg
+                    )
             else:
-                biglist = self.preference + \
-                    self.default_preference + self.all_names
+                biglist = self.preference + self.default_preference + self.all_names
                 b = self.get_valid_plugin_by_list(biglist)
                 if not b:
                     self.raise_exc()
             self.changed = False
             self._backend = b
-            log.debug('selecting plugin:' + self._backend.name)
+            log.debug("selecting plugin:" + self._backend.name)
         return self._backend
 
     def raise_exc(self):
-        message = 'Install at least one backend!'
+        message = "Install at least one backend!"
         raise FailedBackendError(message)

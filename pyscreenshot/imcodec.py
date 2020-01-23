@@ -21,7 +21,7 @@ from PIL import Image
 def _coder(im):
     if im:
         b = io.BytesIO()
-        im.save(b, format='png')
+        im.save(b, format="png")
         data = b.getvalue()
         return data
 

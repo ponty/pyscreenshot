@@ -7,9 +7,11 @@ PY2 = sys.version_info[0] == 2
 
 if PY2:
     import StringIO
+
     BytesIO = StringIO.StringIO
 else:
     import io
+
     BytesIO = io.BytesIO
 
 
@@ -19,21 +21,23 @@ log = logging.getLogger(__name__)
 
 
 class QtPyGrabWindow(object):
-    name = 'qtpy'
+    name = "qtpy"
     childprocess = False
 
     def __init__(self):
         import qtpy
+
         self.qtpy = qtpy
         from qtpy import QtGui
         from qtpy import QtCore
         from qtpy import QtWidgets
+
         self.app = None
         self.QtGui = QtGui
         self.QtCore = QtCore
         self.QtWidgets = QtWidgets
 
-    def grab_to_buffer(self, buff, file_type='png'):
+    def grab_to_buffer(self, buff, file_type="png"):
         QApplication = self.QtWidgets.QApplication
         QBuffer = self.qtpy.QtCore.QBuffer
         QIODevice = self.qtpy.QtCore.QIODevice
@@ -43,8 +47,9 @@ class QtPyGrabWindow(object):
             self.app = QApplication([])
         qbuffer = QBuffer()
         qbuffer.open(QIODevice.ReadWrite)
-        QScreen.grabWindow(QApplication.primaryScreen(),
-                           QApplication.desktop().winId()).save(qbuffer, file_type)
+        QScreen.grabWindow(
+            QApplication.primaryScreen(), QApplication.desktop().winId()
+        ).save(qbuffer, file_type)
         buff.write(qbuffer.data())
         qbuffer.close()
 

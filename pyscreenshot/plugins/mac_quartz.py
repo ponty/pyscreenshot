@@ -7,7 +7,7 @@ from pyscreenshot.tempexport import read_func_img
 
 
 class MacQuartzWrapper(object):
-    name = 'mac_quartz'
+    name = "mac_quartz"
     childprocess = False
 
     def __init__(self):
@@ -16,6 +16,7 @@ class MacQuartzWrapper(object):
         from Cocoa import NSURL
         import Quartz.CoreGraphics as CG
         import objc
+
         self.Quartz = Quartz
         self.LaunchServices = LaunchServices
         self.NSURL = NSURL
@@ -37,9 +38,12 @@ class MacQuartzWrapper(object):
             region = self.CG.CGRectInfinite
 
         # Create screenshot as CGImage
-        image = self.CG.CGWindowListCreateImage(region,
-                                                self.CG.kCGWindowListOptionOnScreenOnly, self.CG.kCGNullWindowID,
-                                                self.CG.kCGWindowImageDefault)
+        image = self.CG.CGWindowListCreateImage(
+            region,
+            self.CG.kCGWindowListOptionOnScreenOnly,
+            self.CG.kCGNullWindowID,
+            self.CG.kCGWindowImageDefault,
+        )
 
         # XXX: Can add more types:
         # https://developer.apple.com/library/mac/documentation/MobileCoreServices/Reference/UTTypeRef/Reference/reference.html#//apple_ref/doc/uid/TP40008771
@@ -47,10 +51,13 @@ class MacQuartzWrapper(object):
 
         url = self.NSURL.fileURLWithPath_(filename)
 
-        dest = self.Quartz.CGImageDestinationCreateWithURL(url, file_type,
-                                                           # 1 image in file
-                                                           1,
-                                                           None)
+        dest = self.Quartz.CGImageDestinationCreateWithURL(
+            url,
+            file_type,
+            # 1 image in file
+            1,
+            None,
+        )
 
         properties = {
             self.Quartz.kCGImagePropertyDPIWidth: dpi,

@@ -7,9 +7,11 @@ PY2 = sys.version_info[0] == 2
 
 if PY2:
     import StringIO
+
     BytesIO = StringIO.StringIO
 else:
     import io
+
     BytesIO = io.BytesIO
 
 
@@ -19,19 +21,22 @@ log = logging.getLogger(__name__)
 
 
 class PySideGrabWindow(object):
-    name = 'pyside'
+    name = "pyside"
     childprocess = False
 
     app = None
+
     def __init__(self):
         import PySide
+
         self.PySide = PySide
         from PySide import QtGui
         from PySide import QtCore
+
         self.QtGui = QtGui
         self.QtCore = QtCore
 
-    def grab_to_buffer(self, buff, file_type='png'):
+    def grab_to_buffer(self, buff, file_type="png"):
         QApplication = self.PySide.QtGui.QApplication
         QBuffer = self.PySide.QtCore.QBuffer
         QIODevice = self.PySide.QtCore.QIODevice
@@ -41,8 +46,7 @@ class PySideGrabWindow(object):
             self.__class__.app = QApplication([])
         qbuffer = QBuffer()
         qbuffer.open(QIODevice.ReadWrite)
-        QPixmap.grabWindow(
-            QApplication.desktop().winId()).save(qbuffer, file_type)
+        QPixmap.grabWindow(QApplication.desktop().winId()).save(qbuffer, file_type)
         # https://stackoverflow.com/questions/52291585/pyside2-typeerror-bytes-object-cannot-be-interpreted-as-an-integer
         buff.write(qbuffer.data().data())
         qbuffer.close()

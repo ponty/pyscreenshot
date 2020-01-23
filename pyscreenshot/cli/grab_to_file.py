@@ -5,7 +5,7 @@ from pyscreenshot.imcodec import codec
 
 
 @entrypoint
-def main(filename, x1,y1,x2,y2, backend=''):
+def main(filename, x1, y1, x2, y2, backend=""):
     """Copy the contents of the screen to file. 
     Full screen is selected if bounding box coordinates are zero: 0,0,0,0
 
@@ -17,15 +17,15 @@ def main(filename, x1,y1,x2,y2, backend=''):
     :param backend: back-end can be forced if set (example:scrot, wx,..),
                     otherwise back-end is automatic
     """
-    backend=backend if backend else None
+    backend = backend if backend else None
 
-    x1,y1,x2,y2=map(int,(x1,y1,x2,y2))
+    x1, y1, x2, y2 = map(int, (x1, y1, x2, y2))
 
-    bbox=None
+    bbox = None
     if x1 or y1 or x2 or y2:
-        bbox=x1,y1,x2,y2
+        bbox = x1, y1, x2, y2
 
     im = pyscreenshot.grab(bbox=bbox, childprocess=False, backend=backend)
-    b=codec[0](im)
-    with open(filename, 'wb') as f:
+    b = codec[0](im)
+    with open(filename, "wb") as f:
         f.write(b)

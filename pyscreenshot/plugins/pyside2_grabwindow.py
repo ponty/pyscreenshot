@@ -7,9 +7,11 @@ PY2 = sys.version_info[0] == 2
 
 if PY2:
     import StringIO
+
     BytesIO = StringIO.StringIO
 else:
     import io
+
     BytesIO = io.BytesIO
 
 
@@ -28,23 +30,26 @@ class PySide2BugError(Exception):
 
 
 class PySide2GrabWindow(object):
-    name = 'pyside2'
+    name = "pyside2"
     childprocess = False
 
     app = None
+
     def __init__(self):
         if PY2:
             raise PySide2BugError()
         import PySide2
+
         self.PySide2 = PySide2
         from PySide2 import QtGui
         from PySide2 import QtCore
         from PySide2 import QtWidgets
+
         self.QtGui = QtGui
         self.QtCore = QtCore
         self.QtWidgets = QtWidgets
 
-    def grab_to_buffer(self, buff, file_type='png'):
+    def grab_to_buffer(self, buff, file_type="png"):
         QApplication = self.PySide2.QtWidgets.QApplication
         QBuffer = self.PySide2.QtCore.QBuffer
         QIODevice = self.PySide2.QtCore.QIODevice
@@ -55,8 +60,9 @@ class PySide2GrabWindow(object):
             self.__class__.app = QApplication([])
         qbuffer = QBuffer()
         qbuffer.open(QIODevice.ReadWrite)
-        QScreen.grabWindow(QApplication.primaryScreen(),
-                           QApplication.desktop().winId()).save(qbuffer, file_type)
+        QScreen.grabWindow(
+            QApplication.primaryScreen(), QApplication.desktop().winId()
+        ).save(qbuffer, file_type)
         # https://stackoverflow.com/questions/52291585/pyside2-typeerror-bytes-object-cannot-be-interpreted-as-an-integer
         buff.write(qbuffer.data().data())
         qbuffer.close()

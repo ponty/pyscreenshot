@@ -1,14 +1,13 @@
 import logging
 
 from pyscreenshot.about import __version__
-from pyscreenshot.childproc import (childprocess_backend_version,
-                                    childprocess_grab)
+from pyscreenshot.childproc import childprocess_backend_version, childprocess_grab
 from pyscreenshot.loader import FailedBackendError, Loader
 
 ADDITIONAL_IMPORTS = [FailedBackendError]
 
 log = logging.getLogger(__name__)
-log.debug('version=%s', __version__)
+log.debug("version=%s", __version__)
 
 
 def _grab_simple(backend=None, bbox=None, filename=None):
@@ -22,9 +21,9 @@ def _grab(childprocess, backend=None, bbox=None, filename=None):
     if bbox:
         x1, y1, x2, y2 = bbox
         if x2 <= x1:
-            raise ValueError('bbox x2<=x1')
+            raise ValueError("bbox x2<=x1")
         if y2 <= y1:
-            raise ValueError('bbox y2<=y1')
+            raise ValueError("bbox y2<=y1")
     if childprocess:
         log.debug('running "%s" in child process', backend)
         return childprocess_grab(_grab_simple, backend, bbox)
@@ -41,8 +40,7 @@ def grab(bbox=None, childprocess=True, backend=None):
     :param backend: back-end can be forced if set (examples:scrot, wx,..),
                     otherwise back-end is automatic
     """
-    return _grab(
-        childprocess=childprocess, backend=backend, bbox=bbox)
+    return _grab(childprocess=childprocess, backend=backend, bbox=bbox)
 
 
 def backends():

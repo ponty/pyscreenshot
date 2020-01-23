@@ -2,8 +2,8 @@ from ref import backend_check
 
 
 def test_mac_quartz():
-    backend_check('mac_quartz', childprocess=True)
-    backend_check('mac_quartz', childprocess=False)
+    backend_check("mac_quartz", childprocess=True)
+    backend_check("mac_quartz", childprocess=False)
 
 
 # from ref import backend_ref

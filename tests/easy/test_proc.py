@@ -4,12 +4,18 @@ from pyscreenshot.procutil import run_in_childprocess
 
 # win error with lambda: Can't pickle local object '...<lambda>'
 
+
 def f3():
     return 3
+
+
 def f3px(x):
     return 3 + x
+
+
 def f4px(x):
     return 4 + x
+
 
 def test():
     eq_(3, run_in_childprocess(f3))
@@ -23,7 +29,7 @@ def test_codec():
 
 
 def exc():
-    raise ValueError('error!')
+    raise ValueError("error!")
 
 
 @raises(ValueError)

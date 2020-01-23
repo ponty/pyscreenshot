@@ -2,25 +2,26 @@ import os.path
 
 from setuptools import setup
 
-if os.environ.get('distutils_issue8876_workaround_enabled', False):
+if os.environ.get("distutils_issue8876_workaround_enabled", False):
     # sdist_hack: Remove reference to os.link to disable using hardlinks when
     #             building setup.py's sdist target.  This is done because
     #             VirtualBox VMs shared filesystems don't support hardlinks.
     del os.link
 
-NAME = 'pyscreenshot'
-URL = 'https://github.com/ponty/pyscreenshot'
-DESCRIPTION = 'python screenshot'
-PACKAGES = [NAME,
-            NAME + '.plugins',
-            NAME + '.check',
-            NAME + '.cli',
-            NAME + '.examples',
-            ]
+NAME = "pyscreenshot"
+URL = "https://github.com/ponty/pyscreenshot"
+DESCRIPTION = "python screenshot"
+PACKAGES = [
+    NAME,
+    NAME + ".plugins",
+    NAME + ".check",
+    NAME + ".cli",
+    NAME + ".examples",
+]
 
 # get __version__
 __version__ = None
-exec(open(os.path.join(NAME, 'about.py')).read())
+exec(open(os.path.join(NAME, "about.py")).read())
 VERSION = __version__
 
 # extra = {}
@@ -31,32 +32,32 @@ VERSION = __version__
 classifiers = [
     # Get more strings from
     # http://www.python.org/pypi?%3Aaction=list_classifiers
-    'License :: OSI Approved :: BSD License',
-    'Natural Language :: English',
-    'Operating System :: OS Independent',
-    'Programming Language :: Python',
-    'Programming Language :: Python :: 2',
-    'Programming Language :: Python :: 2.7',
-    'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.6',
-    'Programming Language :: Python :: 3.7',
-    'Programming Language :: Python :: 3.8',
+    "License :: OSI Approved :: BSD License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 2",
+    "Programming Language :: Python :: 2.7",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
 ]
 
-install_requires = ['EasyProcess','entrypoint2']
+install_requires = ["EasyProcess", "entrypoint2"]
 
 setup(
     name=NAME,
     version=VERSION,
     description=DESCRIPTION,
-    long_description=open('README.rst', 'r').read(),
-    python_requires='>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*',
+    long_description=open("README.rst", "r").read(),
+    python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*",
     classifiers=classifiers,
-    keywords='screenshot',
-    author='ponty',
+    keywords="screenshot",
+    author="ponty",
     # author_email='',
     url=URL,
-    license='BSD',
+    license="BSD",
     packages=PACKAGES,
     #     include_package_data=True,
     #     test_suite='nose.collector',

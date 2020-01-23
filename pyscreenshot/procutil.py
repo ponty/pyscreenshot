@@ -44,8 +44,9 @@ def run_in_childprocess(target, codec=None, *args, **kwargs):
 
     return r
 
+
 def proc(name, params=[]):
-    python=sys.executable
-    cmd=[python, '-m',name]+params
-    p=EasyProcess(cmd).call()
+    python = sys.executable
+    cmd = [python, "-m", name] + params
+    p = EasyProcess(cmd).call()
     return p

@@ -6,5 +6,5 @@ from ref import backend_check
 if six.PY2:
 
     def test_pygtk():
-        backend_check('pygtk', childprocess=True)
-        backend_check('pygtk', childprocess=False)
+        backend_check("pygtk", childprocess=True)
+        backend_check("pygtk", childprocess=False)

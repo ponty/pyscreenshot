@@ -2,8 +2,9 @@ from ref import backend_check
 
 
 def test_pil():
-    backend_check('pil', childprocess=True)
-    backend_check('pil', childprocess=False)
+    backend_check("pil", childprocess=True)
+    backend_check("pil", childprocess=False)
+
 
 # from ref import backend_ref
 # from size import backend_size

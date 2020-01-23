@@ -9,6 +9,6 @@ def main(backend):
 
     :param backend: back-end (example:scrot, wx,..)
     """
-    backend=backend if backend else None
+    backend = backend if backend else None
     v = pyscreenshot.backend_version(backend=backend, childprocess=False)
     print(v)

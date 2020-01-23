@@ -4,8 +4,8 @@ from size import backend_size
 
 
 def test_size_gnome_screenshot():
-    backend_size('gnome-screenshot', childprocess=True)
-    backend_size('gnome-screenshot', childprocess=False)
+    backend_size("gnome-screenshot", childprocess=True)
+    backend_size("gnome-screenshot", childprocess=False)
 
 
 test_size_gnome_screenshot.real_disp_only = 1

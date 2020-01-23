@@ -2,8 +2,9 @@ from ref import backend_check
 
 
 def test_mac_screencapture():
-    backend_check('mac_screencapture', childprocess=True)
-    backend_check('mac_screencapture', childprocess=False)
+    backend_check("mac_screencapture", childprocess=True)
+    backend_check("mac_screencapture", childprocess=False)
+
 
 # from ref import backend_ref
 # from size import backend_size

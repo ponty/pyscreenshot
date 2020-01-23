@@ -9,9 +9,10 @@ def show():
 
     for x in backends():
         try:
-            print('grabbing by ' + x)
-            im.append(ImageGrab.grab(bbox=(500, 400, 800, 600),
-                                     backend=x, childprocess=True))
+            print("grabbing by " + x)
+            im.append(
+                ImageGrab.grab(bbox=(500, 400, 800, 600), backend=x, childprocess=True)
+            )
         except FailedBackendError as e:
             print(e)
     print(im)
@@ -20,5 +21,5 @@ def show():
         time.sleep(1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     show()
