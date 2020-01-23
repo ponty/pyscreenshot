@@ -122,8 +122,6 @@ Vagrant.configure(2) do |config|
   sudo apt-get install -y python3-qtpy
 
 # test dependencies
-  sudo apt-get install -y x11-utils #   for: xmessage
-  sudo apt-get install -y x11-apps  #   for: xlogo
   #sudo pip install -r /vagrant/requirements-test.txt
   
 # doc dependencies

@@ -67,8 +67,6 @@ addons:
   apt:
     packages:
       - xvfb
-      - x11-utils
-      - x11-apps
       - scrot
       - imagemagick
   homebrew:
