@@ -6,7 +6,8 @@ from entrypoint2 import entrypoint
 def main(size=None):
     pygame.init()
     pygame.mixer.quit()  # to avoid 100 CPU load
-
+    pygame.mouse.set_visible(0)
+    
     if size:
         size = map(int, size.split(":"))
         size = tuple(size)
