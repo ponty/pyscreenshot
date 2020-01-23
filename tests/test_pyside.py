@@ -1,6 +1,5 @@
-from ref import backend_check
+from ref import backend_to_check
 
 
 def test_pyside():
-    backend_check("pyside", childprocess=True)
-    backend_check("pyside", childprocess=False)
+    backend_to_check("pyside")

@@ -1,6 +1,5 @@
-from ref import backend_check
+from ref import backend_to_check
 
 
 def test_imagemagick():
-    backend_check("imagemagick", childprocess=True)
-    backend_check("imagemagick", childprocess=False)
+    backend_to_check("imagemagick")

@@ -1,6 +1,5 @@
-from ref import backend_check
+from ref import backend_to_check
 
 
 def test_wx():
-    backend_check("wx", childprocess=True)
-    backend_check("wx", childprocess=False)
+    backend_to_check("wx")

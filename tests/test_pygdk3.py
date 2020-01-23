@@ -1,6 +1,5 @@
-from ref import backend_check
+from ref import backend_to_check
 
 
 def test_pygdk3():
-    backend_check("pygdk3", childprocess=True)
-    backend_check("pygdk3", childprocess=False)
+    backend_to_check("pygdk3")

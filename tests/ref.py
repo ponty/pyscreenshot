@@ -41,12 +41,11 @@ def backend_ref(backend, ref, childprocess=True):
         check_ref(backend, ref, bbox, childprocess)
 
 
-def backend_check(backend, ref=None, childprocess=True):
-    if ref is None:
-        if sys.platform.startswith("linux"):
-            ref = "scrot"
-        else:
-            ref = "pil"
+def _backend_check(backend, childprocess):
+    if sys.platform.startswith("linux"):
+        ref = "scrot"
+    else:
+        ref = "pil"
     enable_ref = True
     if sys.platform == "darwin":
         enable_ref = False  # TODO
@@ -58,3 +57,8 @@ def backend_check(backend, ref=None, childprocess=True):
         backend_size(
             backend, childprocess=childprocess,
         )
+
+
+def backend_to_check(backend):
+    _backend_check(backend, childprocess=True)
+    _backend_check(backend, childprocess=False)

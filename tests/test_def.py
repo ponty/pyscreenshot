@@ -1,6 +1,5 @@
-from ref import backend_check
+from ref import backend_to_check
 
 
 def test_default():
-    backend_check(None, childprocess=True)
-    backend_check(None, childprocess=False)
+    backend_to_check(None)

@@ -1,6 +1,5 @@
-from ref import backend_check
+from ref import backend_to_check
 
 
 def test_pyqt5():
-    backend_check("pyqt5", childprocess=True)
-    backend_check("pyqt5", childprocess=False)
+    backend_to_check("pyqt5")
