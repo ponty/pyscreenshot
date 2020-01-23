@@ -1,8 +1,8 @@
 language: python
 dist: trusty
 python:
- - "2.7"
- - "3.6"
+  - "2.7"
+  - "3.6"
 env: DISTR_PY="general"
 
 matrix:
@@ -49,13 +49,13 @@ matrix:
 
     - name: "Python 3.7 on macOS"
       os: osx
-      osx_image: xcode11.2  # Python 3.7.4 running on macOS 10.14.4
-      language: shell       # 'language: python' is an error on Travis CI macOS
+      osx_image: xcode11.2 # Python 3.7.4 running on macOS 10.14.4
+      language: shell # 'language: python' is an error on Travis CI macOS
       env: PATH=/Users/travis/Library/Python/3.7/bin:$PATH USER=--user PIPINST="pygame qtpy wxpython pyobjc-framework-Quartz pyobjc-framework-LaunchServices"
 
     - name: "Python 3.8 on Windows"
-      os: windows           # Windows 10.0.17134 N/A Build 17134
-      language: shell       # 'language: python' is an error on Travis CI Windows
+      os: windows # Windows 10.0.17134 N/A Build 17134
+      language: shell # 'language: python' is an error on Travis CI Windows
       before_install:
         - choco install python --version 3.8
         - python -m pip install --upgrade pip
@@ -65,11 +65,11 @@ matrix:
 
 addons:
   apt:
-    packages: 
-      - xvfb 
-      - x11-utils 
-      - x11-apps 
-      - scrot 
+    packages:
+      - xvfb
+      - x11-utils
+      - x11-apps
+      - scrot
       - imagemagick
   homebrew:
     packages:
@@ -77,24 +77,24 @@ addons:
       - wxmac
       - pyqt
       - pyside
-      
-install:
- - if [ ${TRAVIS_OS_NAME} == "linux" ]; then sudo apt-get install --no-install-recommends -y xvfb $(./tests/packages.sh ${TRAVIS_DIST} ${TRAVIS_PYTHON_VERSION:0:1} ); fi
- - if [ ${TRAVIS_PYTHON_VERSION:0:1} == "2" ]; then PIP=pip; else PIP=pip3; fi
- - if [ ${TRAVIS_PYTHON_VERSION:0:1} == "2" ]; then PYTHON=python; else PYTHON=python3; fi
- - if [ ${TRAVIS_OS_NAME} == "windows" ]; then PYTHON=python; fi
- - $PIP install $USER --upgrade -r requirements-test.txt
- - $PIP install $USER --upgrade .
- - $PIP install $USER --upgrade coveralls ${PIPINST}
 
-script:  
- - cd tests 
- - $PYTHON -m pyscreenshot.check.versions
- - if [ ${TRAVIS_OS_NAME} == "osx" ];   then $PYTHON -m pyscreenshot.check.speedtest 2> /dev/null; fi
- - if [ ${TRAVIS_OS_NAME} == "linux" ]; then $PYTHON -m pyscreenshot.check.speedtest --virtual-display 2> /dev/null; fi
- - if [ ${TRAVIS_OS_NAME} == "osx" ]; then ./runmac.sh; fi
- - if [ ${TRAVIS_OS_NAME} == "linux" ]; then xvfb-run -s "-br -screen 0 400x500x24" ./runxvfb.sh ${DISTR_PY}; fi
+install:
+  - if [ ${TRAVIS_OS_NAME} == "linux" ]; then sudo apt-get install --no-install-recommends -y xvfb $(./tests/packages.sh ${TRAVIS_DIST} ${TRAVIS_PYTHON_VERSION:0:1} ); fi
+  - if [ ${TRAVIS_PYTHON_VERSION:0:1} == "2" ]; then PIP=pip; else PIP=pip3; fi
+  - if [ ${TRAVIS_PYTHON_VERSION:0:1} == "2" ]; then PYTHON=python; else PYTHON=python3; fi
+  - if [ ${TRAVIS_OS_NAME} == "windows" ]; then PYTHON=python; fi
+  - $PIP install $USER --upgrade -r requirements-test.txt
+  - $PIP install $USER --upgrade .
+  - $PIP install $USER --upgrade coveralls ${PIPINST}
+
+script:
+  - cd tests
+  - $PYTHON -m pyscreenshot.check.versions
+  - if [ ${TRAVIS_OS_NAME} == "osx" ];   then $PYTHON -m pyscreenshot.check.speedtest 2> /dev/null; fi
+  - if [ ${TRAVIS_OS_NAME} == "linux" ]; then $PYTHON -m pyscreenshot.check.speedtest --virtual-display 2> /dev/null; fi
+  - if [ ${TRAVIS_OS_NAME} == "osx" ]; then ./runmac.sh; fi
+  - if [ ${TRAVIS_OS_NAME} == "linux" ]; then xvfb-run -s "-br -screen 0 400x500x24" ./runxvfb.sh ${DISTR_PY}; fi
 # - if [ ${TRAVIS_OS_NAME} == "windows" ]; then TESTS1="test_pil.py"; fi
-  
+
 after_success:
- - coveralls
+  - coveralls
