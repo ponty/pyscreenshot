@@ -1,2 +1,2 @@
 EasyProcess
-
+entrypoint2
