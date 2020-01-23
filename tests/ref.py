@@ -44,12 +44,15 @@ def backend_check(backend, ref=None, childprocess=True):
                         ref='scrot'
                 else:
                         ref='pil'
-        if sys.platform != 'darwin':
-
-            backend_ref(backend,
-                    ref=ref, 
-                    childprocess=childprocess,
-                    )
-        backend_size(backend, 
-                childprocess=childprocess,
-                )
+        enable_ref=True
+        if sys.platform == 'darwin':        
+                enable_ref=False # TODO                
+        if enable_ref:
+                backend_ref(backend,
+                        ref=ref, 
+                        childprocess=childprocess,
+                        )
+        else:
+                backend_size(backend, 
+                        childprocess=childprocess,
+                        )
