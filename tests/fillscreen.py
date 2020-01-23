@@ -1,6 +1,4 @@
 import random
-import sys
-from time import sleep
 
 import pygame
 from entrypoint2 import entrypoint

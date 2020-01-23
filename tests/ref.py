@@ -1,10 +1,7 @@
-import atexit
-import time
 import sys
 
 import pyscreenshot
-from easyprocess import EasyProcess
-from nose.tools import eq_, with_setup
+from nose.tools import eq_
 from PIL import ImageChops
 
 from config import bbox_ls

@@ -1,6 +1,6 @@
 from pyscreenshot.imcodec import codec
 from pyscreenshot.procutil import run_in_childprocess
-import os,sys
+import os
 import logging
 from pyscreenshot.loader import FailedBackendError
 from pyscreenshot.tempdir import TemporaryDirectory

@@ -1,4 +1,4 @@
-from PIL import Image, __version__
+from PIL import __version__
 
 
 class PilWrapper(object):

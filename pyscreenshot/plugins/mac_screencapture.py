@@ -1,6 +1,5 @@
 import platform
 from easyprocess import EasyProcess
-from PIL import Image
 from pyscreenshot.tempexport import read_prog_img
 
 PROGRAM = 'screencapture'

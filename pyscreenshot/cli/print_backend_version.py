@@ -1,7 +1,5 @@
 from entrypoint2 import entrypoint
 import pyscreenshot
-from pyscreenshot.imcodec import codec
-import sys
 
 @entrypoint
 def main(backend):

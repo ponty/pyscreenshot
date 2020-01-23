@@ -1,5 +1,4 @@
 from easyprocess import EasyProcess
-from PIL import Image
 from pyscreenshot.tempexport import read_prog_img, extract_version
 
 PROGRAM = 'gnome-screenshot'

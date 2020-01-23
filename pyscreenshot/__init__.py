@@ -1,4 +1,3 @@
-from PIL import Image
 import logging
 from pyscreenshot.about import __version__
 from pyscreenshot.loader import Loader, FailedBackendError

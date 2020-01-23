@@ -3,7 +3,6 @@
 # from:
 # https://stackoverflow.com/questions/4524723/take-screenshot-in-python-on-mac-os-x
 
-from PIL import Image
 from pyscreenshot.tempexport import read_func_img
 
 

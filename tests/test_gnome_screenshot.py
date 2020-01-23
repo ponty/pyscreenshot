@@ -1,4 +1,3 @@
-from ref import backend_ref
 from size import backend_size
 
 # DISPLAY variable doesn't work -> no Xvfb

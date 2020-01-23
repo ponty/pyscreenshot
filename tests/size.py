@@ -1,8 +1,6 @@
 from easyprocess import EasyProcess
 from image_debug import img_debug
 from nose.tools import eq_
-from nose.tools import with_setup
-from PIL import ImageChops
 import sys
 import pyscreenshot
 from config import bbox_ls

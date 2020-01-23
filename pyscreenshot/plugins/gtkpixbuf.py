@@ -1,4 +1,3 @@
-from PIL import Image
 from pyscreenshot.tempexport import read_func_img
 
 # based on:
