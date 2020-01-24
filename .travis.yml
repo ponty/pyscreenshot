@@ -82,9 +82,7 @@ install:
   - if [ ${TRAVIS_PYTHON_VERSION:0:1} == "2" ]; then PYTHON=python; else PYTHON=python3; fi
   - if [ ${TRAVIS_OS_NAME} == "windows" ]; then PYTHON=python; fi
   - $PIP install $USER --upgrade -r requirements-test.txt
-  - $PIP install $USER --upgrade .
-  - $PIP install $USER --upgrade coveralls pygame==2.0.0.dev6 ${PIPINST}
-  # osx error before pygame 2.0.0
+  - $PIP install $USER --upgrade . ${PIPINST}
 
 script:
   - cd tests
