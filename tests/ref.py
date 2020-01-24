@@ -1,18 +1,19 @@
 import logging
 import sys
 
-import pyscreenshot
 from nose.tools import eq_
+from path import TempDir
 from PIL import Image, ImageChops
 
 import fillscreen
+import pyscreenshot
 from config import bbox_ls
 from image_debug import img_debug
 from size import backend_size
 
 
-def check_ref(backend, bbox, childprocess):
-    img_ref = Image.open("/tmp/fillscreen.bmp")
+def check_ref(backend, bbox, childprocess, refimgpath):
+    img_ref = Image.open(refimgpath)
     if bbox:
         img_ref = img_ref.crop(bbox)
 
@@ -41,20 +42,20 @@ def check_ref(backend, bbox, childprocess):
     )
 
 
-def backend_ref(backend, childprocess=True):
+def backend_ref(backend, childprocess=True, refimgpath=""):
     for bbox in bbox_ls:
         print("bbox: {}".format(bbox))
         print("backend: %s" % backend)
-        check_ref(backend, bbox, childprocess)
+        check_ref(backend, bbox, childprocess, refimgpath)
 
 
-def _backend_check(backend, childprocess):
+def _backend_check(backend, childprocess, refimgpath):
     enable_ref = True
     if sys.platform == "darwin":
         enable_ref = False  # TODO
     if enable_ref:
         backend_ref(
-            backend, childprocess=childprocess,
+            backend, childprocess=childprocess, refimgpath=refimgpath,
         )
     else:
         backend_size(
@@ -63,6 +64,8 @@ def _backend_check(backend, childprocess):
 
 
 def backend_to_check(backend):
-    fillscreen.init()
-    _backend_check(backend, childprocess=True)
-    # _backend_check(backend, childprocess=False) # TODO: test childprocess=False
+    with TempDir() as d:
+        refimgpath = d / "ref.bmp"
+        fillscreen.init(refimgpath)
+        _backend_check(backend, childprocess=True, refimgpath=refimgpath)
+        # _backend_check(backend, childprocess=False) # TODO: test childprocess=False

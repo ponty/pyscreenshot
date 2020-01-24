@@ -6,3 +6,4 @@ pillow
 coveralls
 # osx error before pygame 2.0.0
 pygame>=2.0.0.dev6
+path.py
