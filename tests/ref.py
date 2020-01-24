@@ -1,13 +1,14 @@
+import logging
 import sys
 
-from nose.tools import eq_
-from PIL import ImageChops, Image
-
 import pyscreenshot
+from nose.tools import eq_
+from PIL import Image, ImageChops
+
+import fillscreen
 from config import bbox_ls
 from image_debug import img_debug
 from size import backend_size
-import fillscreen
 
 
 def check_ref(backend, bbox, childprocess):
@@ -27,13 +28,16 @@ def check_ref(backend, bbox, childprocess):
     img_debug(im, str(backend) + str(bbox))
 
     img_diff = ImageChops.difference(img_ref, im)
+    ex = img_diff.getextrema()
+    logging.debug("diff getextrema: %s", ex)
     diff_bbox = img_diff.getbbox()
     if diff_bbox:
         img_debug(img_diff, "img_diff" + str(diff_bbox))
     eq_(
         diff_bbox,
         None,
-        "different image data %s bbox=%s diff_bbox=%s" % (backend, bbox, diff_bbox),
+        "different image data %s bbox=%s extrema:%s diff_bbox=%s"
+        % (backend, bbox, ex, diff_bbox),
     )
 
 
