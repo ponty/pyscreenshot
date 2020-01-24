@@ -1,13 +1,15 @@
 #!/bin/bash
 set -e
-nosetests -v easy \
+nosetests -v  \
     test_def.py     \
     test_pil.py     \
     test_mac_quartz.py      \
     test_mac_screencapture.py   \
     test_pyqt5.py       \
     test_pyside2.py     \
-    test_qtpy.py
+    test_qtpy.py \
+    easy
+    
 # nosetests -v test_pygdk3_conflict.py
 # nosetests -v test_scrot.py
 # nosetests -v test_imagemagick.py # TODO

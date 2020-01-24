@@ -1,18 +1,21 @@
+from time import sleep
+
 import pygame
 from entrypoint2 import entrypoint
 
 
 def init(size=None):
+    rectsize = 50
+
     pygame.display.init()
-    # pygame.mixer.quit()  # to avoid 100% CPU load
     pygame.mouse.set_visible(0)
 
     if size:
         disp = pygame.display.set_mode(size)
     else:
         disp = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+        disp = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)  # TODO: for travis
 
-    rectsize = 50
     w, h = pygame.display.get_surface().get_size()
     i = 0
     for x in range(0, w, rectsize):
@@ -22,12 +25,14 @@ def init(size=None):
             b = (i % 5) * 255 / 5
             pygame.draw.rect(disp, (r, g, b), (x, y, rectsize, rectsize))
             i += 1
+
     pygame.display.update()
     pygame.display.update()
     pygame.display.update()
-    pygame.display.update()
-    pygame.display.update()
+
     pygame.image.save(disp, "/tmp/fillscreen.bmp")  # TODO
+
+    # sleep(1)
 
 
 @entrypoint
