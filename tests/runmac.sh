@@ -1,13 +1,6 @@
 #!/bin/bash
 set -e
 
-rm /tmp/fillscreen.bmp || true
-python3 fillscreen.py &
-FILL_PID=$!
-while [ ! -f /tmp/fillscreen.bmp ]; do sleep 1; done
-
-#sleep 5
-
 nosetests -v test_def.py
 # nosetests -v test_pygdk3_conflict.py
 # nosetests -v test_scrot.py
@@ -27,5 +20,3 @@ nosetests -v test_mac_quartz.py
 nosetests -v test_mac_screencapture.py
 
 nosetests -v easy
-
-kill $FILL_PID

@@ -7,6 +7,7 @@ import pyscreenshot
 from config import bbox_ls
 from image_debug import img_debug
 from size import backend_size
+import fillscreen
 
 
 def check_ref(backend, bbox, childprocess):
@@ -58,5 +59,6 @@ def _backend_check(backend, childprocess):
 
 
 def backend_to_check(backend):
+    fillscreen.init()
     _backend_check(backend, childprocess=True)
     _backend_check(backend, childprocess=False)
