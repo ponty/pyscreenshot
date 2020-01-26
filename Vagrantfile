@@ -135,3 +135,7 @@ Vagrant.configure(2) do |config|
 end
      
 
+# osx:
+# brew install imagemagick wxmac pyqt pyside gdk-pixbuf gtk+3 mc sdl_image sdl_ttf sdl_mixer portmidi 
+# python3 -m pip install pygame==2.0.0.dev6 pillow qtpy wxpython pyobjc-framework-Quartz pyobjc-framework-LaunchServices nose path.py
+# PATH="$PATH:/Users/vagrant/Library/Python/3.7/bin"
