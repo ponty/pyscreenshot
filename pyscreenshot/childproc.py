@@ -37,18 +37,17 @@ def childprocess_grab(_grab_simple, backend, bbox):
 
 
 def childprocess_grab_popen(backend, bbox):
-    if not backend:
-        backend = ""
-    if not bbox:
-        bbox = (0, 0, 0, 0)
-    x1, y1, x2, y2 = map(str, bbox)
     with TemporaryDirectory(prefix="pyscreenshot") as tmpdirname:
         filename = os.path.join(tmpdirname, "screenshot.png")
+        cmd = ["--filename", filename]
+        if bbox:
+            x1, y1, x2, y2 = map(str, bbox)
+            bbox = ":".join(map(str, (x1, y1, x2, y2)))
+            cmd += ["--bbox", bbox]
+        if backend:
+            cmd += ["--backend", backend]
 
-        p = proc(
-            "pyscreenshot.cli.grab_to_file",
-            [filename, x1, y1, x2, y2, "--backend", backend],
-        )
+        p = proc("pyscreenshot.cli.grab", cmd)
         if p.return_code != 0:
             # log.debug(p)
             raise FailedBackendError(p)
