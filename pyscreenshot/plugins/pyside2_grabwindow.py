@@ -28,12 +28,11 @@ log = logging.getLogger(__name__)
 class PySide2BugError(Exception):
     pass
 
+app = None
 
 class PySide2GrabWindow(object):
     name = "pyside2"
     childprocess = False
-
-    app = None
 
     def __init__(self):
         if PY2:
@@ -56,8 +55,9 @@ class PySide2GrabWindow(object):
         QScreen = self.PySide2.QtGui.QScreen
         # QPixmap = self.PySide2.QtGui.QPixmap
 
-        if not self.__class__.app:
-            self.__class__.app = QApplication([])
+        global app
+        if not app:
+            app = QApplication([])
         qbuffer = QBuffer()
         qbuffer.open(QIODevice.ReadWrite)
         QScreen.grabWindow(

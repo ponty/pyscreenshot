@@ -19,12 +19,11 @@ log = logging.getLogger(__name__)
 
 # based on qt4 backend
 
+app=None
 
 class PySideGrabWindow(object):
     name = "pyside"
     childprocess = False
-
-    app = None
 
     def __init__(self):
         import PySide
@@ -41,9 +40,9 @@ class PySideGrabWindow(object):
         QBuffer = self.PySide.QtCore.QBuffer
         QIODevice = self.PySide.QtCore.QIODevice
         QPixmap = self.PySide.QtGui.QPixmap
-
-        if not self.__class__.app:
-            self.__class__.app = QApplication([])
+        global app
+        if not app:
+            app = QApplication([])
         qbuffer = QBuffer()
         qbuffer.open(QIODevice.ReadWrite)
         QPixmap.grabWindow(QApplication.desktop().winId()).save(qbuffer, file_type)

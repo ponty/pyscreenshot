@@ -19,12 +19,12 @@ log = logging.getLogger(__name__)
 
 # based on qt4 backend
 
+app = None
+
 
 class Qt5GrabWindow(object):
     name = "pyqt5"
     childprocess = False
-
-    app = None
 
     def __init__(self):
         import PyQt5
@@ -44,8 +44,9 @@ class Qt5GrabWindow(object):
         QIODevice = self.PyQt5.Qt.QIODevice
         QScreen = self.PyQt5.QtGui.QScreen
 
-        if not self.__class__.app:
-            self.__class__.app = QApplication([])
+        global app
+        if not app:
+            app = QApplication([])
         qbuffer = QBuffer()
         qbuffer.open(QIODevice.ReadWrite)
         QScreen.grabWindow(

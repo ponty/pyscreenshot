@@ -18,6 +18,7 @@ else:
 log = logging.getLogger(__name__)
 
 # based on qt5 backend
+app = None
 
 
 class QtPyGrabWindow(object):
@@ -32,7 +33,6 @@ class QtPyGrabWindow(object):
         from qtpy import QtCore
         from qtpy import QtWidgets
 
-        self.app = None
         self.QtGui = QtGui
         self.QtCore = QtCore
         self.QtWidgets = QtWidgets
@@ -43,8 +43,9 @@ class QtPyGrabWindow(object):
         QIODevice = self.qtpy.QtCore.QIODevice
         QScreen = self.qtpy.QtGui.QScreen
 
-        if not self.app:
-            self.app = QApplication([])
+        global app
+        if not app:
+            app = QApplication([])
         qbuffer = QBuffer()
         qbuffer.open(QIODevice.ReadWrite)
         QScreen.grabWindow(
