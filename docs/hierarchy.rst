@@ -90,7 +90,7 @@ Hierarchy
         "gnome-screenshot" -> Wayland;
 
         GtkPixbufWrapper -> PyGTK -> "GTK+";
-        "GTK+" -> MacOS;
+        //"GTK+" -> MacOS;
         "GTK+" -> Windows;
         "GTK+" -> X11;
 
