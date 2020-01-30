@@ -3,7 +3,7 @@ DIST=$1
 set -e
 #sleep 1
 
-TESTS="test_scrot.py test_imagemagick.py test_def.py"
+TESTS="test_scrot.py test_imagemagick.py test_def.py test_mss.py"
 
 if [[ ${DIST} != "general" ]];then
     PYTHON_VERSION=$2

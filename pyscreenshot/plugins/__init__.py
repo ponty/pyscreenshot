@@ -15,6 +15,7 @@ from pyscreenshot.plugins import (
     qtpy_grabwindow,
     scrot,
     wxscreen,
+    msswrap,
 )
 
 _qt_backends = [
@@ -33,6 +34,7 @@ if sys.platform.startswith("linux"):
         + [
             wxscreen.WxScreen,
             gdk3pixbuf.Gdk3PixbufWrapper,
+            msswrap.MssWrapper,
             gtkpixbuf.GtkPixbufWrapper,
             gnome_screenshot.GnomeScreenshotWrapper,
         ]

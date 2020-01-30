@@ -41,6 +41,7 @@ Features:
      * Quartz (Mac)
      * screencapture (Mac)
      * gnome-screenshot_
+     * Python MSS_
  * time taken: 0.1s - 2.0s
  * Performance is not a target for this library, but you can benchmark the back-ends and choose the fastest one.
  * Interactivity is not supported.
@@ -54,7 +55,7 @@ Similar projects:
  - http://sourceforge.net/projects/gtkshots/
  - http://pypi.python.org/pypi/autopy
  - https://github.com/asweigart/pyscreeze
-
+ - https://github.com/BoboTiG/python-mss
 
 Examples
 ========
@@ -174,6 +175,7 @@ On Wayland only the `gnome-screenshot` back-end works::
 .. _QtPy: https://github.com/spyder-ide/qtpy
 .. _wxPython: http://www.wxpython.org/
 .. _gnome-screenshot: https://git.gnome.org/browse/gnome-screenshot/
+.. _MSS: https://github.com/BoboTiG/python-mss
 
 .. |Travis| image:: https://travis-ci.org/ponty/pyscreenshot.svg?branch=master
    :target: https://travis-ci.org/ponty/pyscreenshot/
