@@ -2,6 +2,7 @@
 set -e
 nosetests -v  \
     test_def.py     \
+    test_mss.py     \
     test_pil.py     \
     test_mac_quartz.py      \
     test_mac_screencapture.py   \

@@ -47,6 +47,7 @@ elif sys.platform == "darwin":
             mac_quartz.MacQuartzWrapper,
             # scrot.ScrotWrapper,
             # imagemagick.ImagemagickWrapper,
+            msswrap.MssWrapper,
         ]
         + _qt_backends
         + [
