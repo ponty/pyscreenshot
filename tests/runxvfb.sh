@@ -16,10 +16,7 @@ if [[ ${DIST} != "general" ]];then
         TESTS="${TESTS} test_wx.py"
     fi
     fi
-    TESTS="${TESTS} test_pyqt4.py test_pyside.py"
-    if [[ ${PY} == "2" ]];then
-        TESTS="${TESTS} test_pygtk.py"
-    fi
+    TESTS="${TESTS} test_pyqt4.py test_pyside.py test_pygtk.py"
 
     if [[ ${DIST} == "bionic" ]];then
         TESTS="${TESTS} test_qtpy.py test_pyside2.py"
