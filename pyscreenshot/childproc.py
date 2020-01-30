@@ -46,6 +46,8 @@ def childprocess_grab_popen(backend, bbox):
             cmd += ["--bbox", bbox]
         if backend:
             cmd += ["--backend", backend]
+        if log.isEnabledFor(logging.DEBUG):
+            cmd += ["--debug"]
 
         p = proc("pyscreenshot.cli.grab", cmd)
         if p.return_code != 0:
