@@ -1,6 +1,10 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+# export VAGRANT_VAGRANTFILE=Vagrantfile.trusty32 
+# export VAGRANT_DOTFILE_PATH=.vagrant_trusty32 
+# vagrant up
+
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
@@ -12,7 +16,7 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/bionic64"
+  config.vm.box = "ubuntu/trusty32"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -80,9 +84,12 @@ Vagrant.configure(2) do |config|
 
 # tools
   sudo apt-get install -y mc xvfb
-  sudo apt-get install -y tox
+  #sudo apt-get install -y tox
+  sudo pip install tox
   sudo apt-get install -y python-pip
+  sudo pip install pip -U
   sudo apt-get install -y python3-pip
+  sudo pip3 install pip -U
 
 # for pillow source install
 #  sudo apt-get install -y libjpeg-dev zlib1g-dev
@@ -107,8 +114,8 @@ Vagrant.configure(2) do |config|
   sudo apt-get install -y python-qt4
   sudo apt-get install -y python3-pyqt4
   
-  sudo apt-get install -y python-pyqt5
-  sudo apt-get install -y python3-pyqt5
+  # sudo apt-get install -y python-pyqt5
+  # sudo apt-get install -y python3-pyqt5
   
   sudo apt-get install -y python-pyside
   sudo apt-get install -y python3-pyside
@@ -134,8 +141,3 @@ Vagrant.configure(2) do |config|
        
 end
      
-
-# osx:
-# brew install imagemagick wxmac pyqt pyside gdk-pixbuf gtk+3 mc sdl_image sdl_ttf sdl_mixer portmidi 
-# python3 -m pip install pygame==2.0.0.dev6 pillow qtpy wxpython pyobjc-framework-Quartz pyobjc-framework-LaunchServices nose path.py
-# PATH="$PATH:/Users/vagrant/Library/Python/3.7/bin"
