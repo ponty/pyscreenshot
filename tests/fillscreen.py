@@ -4,7 +4,7 @@ from path import Path
 from easyprocess import EasyProcess
 from time import sleep
 import atexit
-import logging
+import logging, os
 
 log = logging.getLogger(__name__)
 
@@ -24,8 +24,9 @@ def run(refimgpath, size=None):
         disp = pygame.display.set_mode(size)
     else:
         disp = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-        # TODO: travis fails without 2nd set_mode. No problem in vagrant.
-        disp = pygame.display.set_mode((0, 0), pygame.FULLSCREEN) 
+        if os.environ.get("TRAVIS"):
+            # TODO: travis fails without 2nd set_mode.
+            disp = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
     w, h = pygame.display.get_surface().get_size()
     log.info("w, h: %s,%s", w, h)
