@@ -10,14 +10,14 @@ log = logging.getLogger(__name__)
 log.debug("version=%s", __version__)
 
 
-def _grab_simple(backend=None, bbox=None, filename=None):
+def _grab_simple(backend=None, bbox=None):
     loader = Loader()
     loader.force(backend)
     backend_obj = loader.selected()
     return backend_obj.grab(bbox)
 
 
-def _grab(childprocess, backend=None, bbox=None, filename=None):
+def _grab(childprocess, backend=None, bbox=None):
     if bbox:
         x1, y1, x2, y2 = bbox
         if x2 <= x1:
@@ -28,7 +28,7 @@ def _grab(childprocess, backend=None, bbox=None, filename=None):
         log.debug('running "%s" in child process', backend)
         return childprocess_grab(_grab_simple, backend, bbox)
     else:
-        return _grab_simple(backend, bbox, filename)
+        return _grab_simple(backend, bbox)
 
 
 def grab(bbox=None, childprocess=True, backend=None):
