@@ -46,7 +46,8 @@ def run(refimgpath, size=None):
     if refimgpath:
         log.info("saving %s", refimgpath)
         pygame.image.save(disp, refimgpath)
-
+        ready = refimgpath + ".ready"
+        open(ready, "a").close()
     clock = pygame.time.Clock()
     running = True
     log.info("start loop")
@@ -66,7 +67,7 @@ def init():
         d = tempfile.mkdtemp(prefix="fillscreen")
         d = Path(d)
         atexit.register(d.rmtree)
-        refimgpath = d / "ref.bmp"
+        refimgpath = d / "ref.png"
         python = sys.executable
         cmd = [
             python,
@@ -77,7 +78,8 @@ def init():
         ]
         proc = EasyProcess(cmd).start()
         atexit.register(proc.stop)
-        while not refimgpath.exists():
+        ready = refimgpath + ".ready"
+        while not ready.exists():
             sleep(0.1)
     return refimgpath
 
