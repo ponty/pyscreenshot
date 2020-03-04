@@ -28,17 +28,3 @@ def read_prog_img(cmd):
     im = read_func_img(run_prog)
     return im
 
-
-def extract_version(txt):
-    """This function tries to extract the version from the help text of any
-    program."""
-    words = txt.replace(",", " ").split()
-    version = None
-    for x in reversed(words):
-        if len(x) > 2:
-            if x[0].lower() == "v":
-                x = x[1:]
-            if "." in x and x[0].isdigit():
-                version = x
-                break
-    return version
