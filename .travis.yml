@@ -71,6 +71,7 @@ addons:
       - scrot
       - imagemagick
   homebrew:
+    update: true # https://travis-ci.community/t/macos-build-fails-because-of-homebrew-bundle-unknown-command/7296/10
     packages:
       - imagemagick
       - wxmac
@@ -82,6 +83,7 @@ install:
   - if [ ${TRAVIS_PYTHON_VERSION:0:1} == "2" ]; then PIP=pip; else PIP=pip3; fi
   - if [ ${TRAVIS_PYTHON_VERSION:0:1} == "2" ]; then PYTHON=python; else PYTHON=python3; fi
   - if [ ${TRAVIS_OS_NAME} == "windows" ]; then PYTHON=python; fi
+  - if [ ${TRAVIS_OS_NAME} == "osx" ]; then PYTHON=/usr/local/opt/python/libexec/bin/python; fi
   - $PIP install $PIPUSER --upgrade -r requirements-test.txt
   - $PIP install $PIPUSER --upgrade . ${PIPINST}
 
