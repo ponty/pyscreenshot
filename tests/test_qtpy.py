@@ -1,5 +1,7 @@
-from ref import backend_to_check
+from ref import backend_to_check, check_import
 
 
-def test_qtpy():
-    backend_to_check("qtpy")
+if check_import("qtpy"):
+    def test_qtpy():
+        backend_to_check("qtpy")
+

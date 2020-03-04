@@ -77,3 +77,15 @@ def backend_to_check(backend):
     refimgpath = fillscreen.init()
     _backend_check(backend, childprocess=True, refimgpath=refimgpath)
     # _backend_check(backend, childprocess=False) # TODO: test childprocess=False
+
+
+def check_import(module):
+    # TODO: check without importing, use in plugins also
+    ok = False
+    try:
+        __import__(module)
+
+        ok = True
+    except ImportError:
+        pass
+    return ok

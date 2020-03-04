@@ -1,5 +1,10 @@
-from ref import backend_to_check
+from http.cookiejar import LoadError
 
+from pyscreenshot.util import platform_is_osx
 
-def test_wx():
-    backend_to_check("wx")
+from ref import backend_to_check, check_import
+
+if not platform_is_osx() and check_import("wx"):
+
+    def test_wx():
+        backend_to_check("wx")
