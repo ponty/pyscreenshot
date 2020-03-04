@@ -14,13 +14,16 @@ from size import backend_size
 
 def check_ref(backend, bbox, childprocess, refimgpath):
     img_ref = Image.open(refimgpath)
+    logging.debug("ref full getextrema: %s", img_ref.getextrema())
     if bbox:
         img_ref = img_ref.crop(bbox)
 
     im = pyscreenshot.grab(bbox=bbox, backend=backend, childprocess=childprocess)
 
     img_ref = img_ref.convert("RGB")
+    logging.debug("ref  getextrema: %s", img_ref.getextrema())
     im = im.convert("RGB")
+    logging.debug("shot getextrema: %s", im.getextrema())
 
     eq_("RGB", img_ref.mode)
     eq_("RGB", im.mode)
