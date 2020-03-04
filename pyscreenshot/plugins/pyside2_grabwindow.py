@@ -2,6 +2,7 @@ import logging
 import sys
 
 from PIL import Image
+from pyscreenshot.plugins.backend import CBackend
 
 PY2 = sys.version_info[0] == 2
 
@@ -28,9 +29,10 @@ log = logging.getLogger(__name__)
 class PySide2BugError(Exception):
     pass
 
+
 app = None
 
-class PySide2GrabWindow(object):
+class PySide2GrabWindow(CBackend):
     name = "pyside2"
     childprocess = False
 

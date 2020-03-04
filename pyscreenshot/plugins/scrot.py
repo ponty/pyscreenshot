@@ -1,6 +1,7 @@
 import logging
 
 from easyprocess import EasyProcess
+from pyscreenshot.plugins.backend import CBackend
 
 from pyscreenshot.tempexport import extract_version, read_prog_img
 
@@ -10,7 +11,7 @@ log = logging.getLogger(__name__)
 PROGRAM = "scrot"
 
 
-class ScrotWrapper(object):
+class ScrotWrapper(CBackend):
     name = "scrot"
     childprocess = True
 

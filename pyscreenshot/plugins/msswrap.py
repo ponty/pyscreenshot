@@ -2,6 +2,7 @@
 import sys
 
 from PIL import Image
+from pyscreenshot.plugins.backend import CBackend
 
 # https://python-mss.readthedocs.io/examples.html
 
@@ -20,7 +21,7 @@ sct = None
 # only bits_per_pixel == 32 is supported
 
 
-class MssWrapper(object):
+class MssWrapper(CBackend):
     name = "mss"
     childprocess = False
 

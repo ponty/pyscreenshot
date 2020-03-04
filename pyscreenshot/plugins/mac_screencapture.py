@@ -1,7 +1,7 @@
 import platform
 
 from easyprocess import EasyProcess
-
+from pyscreenshot.plugins.backend import CBackend
 from pyscreenshot.tempexport import read_prog_img
 
 PROGRAM = "screencapture"
@@ -9,7 +9,7 @@ PROGRAM = "screencapture"
 #  By default screneshots are saved as .png files,
 
 
-class ScreencaptureWrapper(object):
+class ScreencaptureWrapper(CBackend):
     name = "mac_screencapture"
     childprocess = True
 

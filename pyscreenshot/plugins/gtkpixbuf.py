@@ -1,10 +1,11 @@
+from pyscreenshot.plugins.backend import CBackend
 from pyscreenshot.tempexport import read_func_img
 
 # based on:
 # http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
 
 
-class GtkPixbufWrapper(object):
+class GtkPixbufWrapper(CBackend):
     name = "pygtk"
     childprocess = False
 

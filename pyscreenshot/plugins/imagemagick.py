@@ -1,6 +1,7 @@
 import sys
 
 from easyprocess import EasyProcess
+from pyscreenshot.plugins.backend import CBackend
 
 from pyscreenshot.tempexport import extract_version, read_prog_img
 
@@ -12,7 +13,7 @@ class ImagemagickBackendError(Exception):
     pass
 
 
-class ImagemagickWrapper(object):
+class ImagemagickWrapper(CBackend):
     name = "imagemagick"
     childprocess = True
 

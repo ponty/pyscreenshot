@@ -2,6 +2,7 @@ import logging
 import sys
 
 from PIL import Image
+from pyscreenshot.plugins.backend import CBackend
 
 PY2 = sys.version_info[0] == 2
 
@@ -22,7 +23,7 @@ log = logging.getLogger(__name__)
 app = None
 
 
-class Qt5GrabWindow(object):
+class Qt5GrabWindow(CBackend):
     name = "pyqt5"
     childprocess = False
 

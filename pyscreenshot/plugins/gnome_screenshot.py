@@ -1,11 +1,12 @@
 from easyprocess import EasyProcess
+from pyscreenshot.plugins.backend import CBackend
 
 from pyscreenshot.tempexport import extract_version, read_prog_img
 
 PROGRAM = "gnome-screenshot"
 
 
-class GnomeScreenshotWrapper(object):
+class GnomeScreenshotWrapper(CBackend):
 
     """Plugin for ``pyscreenshot`` that uses ``gnome-screenshot``
     https://git.gnome.org/browse/gnome-screenshot/

@@ -1,7 +1,8 @@
 from PIL import __version__
+from pyscreenshot.plugins.backend import CBackend
 
 
-class PilWrapper(object):
+class PilWrapper(CBackend):
 
     """windows only."""
 

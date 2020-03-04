@@ -3,10 +3,11 @@
 # from:
 # https://stackoverflow.com/questions/4524723/take-screenshot-in-python-on-mac-os-x
 
+from pyscreenshot.plugins.backend import CBackend
 from pyscreenshot.tempexport import read_func_img
 
 
-class MacQuartzWrapper(object):
+class MacQuartzWrapper(CBackend):
     name = "mac_quartz"
     childprocess = False
 

@@ -7,6 +7,7 @@ buffers directly instead of saving intermediate files (which is slow).
 import sys
 
 from PIL import Image
+from pyscreenshot.plugins.backend import CBackend
 
 Gdk = None
 GdkPixbuf = None
@@ -16,7 +17,7 @@ class Gdk3BackendError(Exception):
     pass
 
 
-class Gdk3PixbufWrapper(object):
+class Gdk3PixbufWrapper(CBackend):
     name = "pygdk3"
     childprocess = False
 

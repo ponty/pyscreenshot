@@ -2,6 +2,7 @@ import logging
 import sys
 
 from PIL import Image
+from pyscreenshot.plugins.backend import CBackend
 
 PY2 = sys.version_info[0] == 2
 if PY2:
@@ -18,7 +19,7 @@ class WxBackendError(Exception):
     pass
 
 
-class WxScreen(object):
+class WxScreen(CBackend):
     name = "wx"
     childprocess = False
 
