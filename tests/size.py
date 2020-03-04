@@ -14,11 +14,11 @@ def display_size():
         from Quartz import CGMainDisplayID
 
         mainMonitor = CGDisplayBounds(CGMainDisplayID())
-        return (mainMonitor.size.width, mainMonitor.size.height)
+        return int(mainMonitor.size.width), int(mainMonitor.size.height)
 
     # http://www.cyberciti.biz/faq/how-do-i-find-out-screen-resolution-of-my-linux-desktop/
     # xdpyinfo  | grep 'dimensions:'
-    screen_width, screen_height = None, None
+    screen_width, screen_height = 0, 0
     xdpyinfo = EasyProcess("xdpyinfo")
     xdpyinfo.enable_stdout_log = False
     for x in xdpyinfo.call().stdout.splitlines():
