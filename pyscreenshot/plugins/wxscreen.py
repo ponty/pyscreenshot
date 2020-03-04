@@ -24,6 +24,7 @@ class WxScreen(CBackend):
     childprocess = False
 
     def __init__(self):
+        # TODO: wx on win?
         if sys.platform == "darwin":
             raise WxBackendError("osx not supported")  # TODO
         import wx

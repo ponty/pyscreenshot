@@ -7,6 +7,8 @@ from easyprocess import EasyProcess
 
 log = logging.getLogger(__name__)
 
+# TODO: remove multiprocessing
+
 
 def _wrapper(target, codec, queue, args, kwargs):
     exc = tb = None

@@ -10,3 +10,6 @@ def missing_RANDR():
         return False
     disp = display.Display()
     return not disp.has_extension("RANDR")
+
+
+# TODO: move x.py to mss
