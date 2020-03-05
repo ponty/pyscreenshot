@@ -1,8 +1,18 @@
 from pyscreenshot.plugins.backend import CBackend
 from pyscreenshot.tempexport import read_func_img
+import logging
+import sys
+
+log = logging.getLogger(__name__)
 
 # based on:
 # http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
+
+PY2 = sys.version_info[0] == 2
+
+
+class GtkError(Exception):
+    pass
 
 
 """
@@ -25,14 +35,19 @@ class GtkPixbufWrapper(CBackend):
     apply_childprocess = True
 
     def __init__(self):
+        # no pygtk for py3
+        if not PY2:
+            raise GtkError()
+
         import gtk
 
         self.gtk = gtk
         try:
             gtk.gdk.Pixbuf
             gtk.gdk.COLORSPACE_RGB
-        except AttributeError:
-            raise ImportError("Incompatible with Python3 / GDK3. Use gdk3pixbuf.")
+        except AttributeError as e:
+            log.info(e)
+            raise GtkError("Incompatible with Python3 / GDK3. Use gdk3pixbuf.")
 
     def grab(self, bbox=None):
         im = read_func_img(self._grab_to_file, bbox)
