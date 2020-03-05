@@ -2,7 +2,8 @@ import logging
 
 from pyscreenshot.about import __version__
 from pyscreenshot.childproc import childprocess_backend_version, childprocess_grab
-from pyscreenshot.loader import FailedBackendError, Loader
+from pyscreenshot.loader import FailedBackendError, backend_grab, backend_version2
+from pyscreenshot.plugins import backend_dict
 
 ADDITIONAL_IMPORTS = [FailedBackendError]
 
@@ -10,11 +11,12 @@ log = logging.getLogger(__name__)
 log.debug("version=%s", __version__)
 
 
-def _grab_simple(backend=None, bbox=None):
-    loader = Loader()
-    loader.force(backend)
-    backend_obj = loader.selected()
-    return backend_obj.grab(bbox)
+def _grab_simple(backend=None, bbox=None, childprocess=False):
+    # loader = Loader()
+    # loader.force(backend)
+    # backend_obj = loader.selected()
+    # return backend_obj.grab(bbox)
+    return backend_grab(backend, bbox, childprocess)
 
 
 def _grab(childprocess, backend=None, bbox=None):
@@ -24,11 +26,11 @@ def _grab(childprocess, backend=None, bbox=None):
             raise ValueError("bbox x2<=x1")
         if y2 <= y1:
             raise ValueError("bbox y2<=y1")
-    if childprocess:
-        log.debug('running "%s" in child process', backend)
-        return childprocess_grab(_grab_simple, backend, bbox)
-    else:
-        return _grab_simple(backend, bbox)
+    # if childprocess:
+    #     log.debug('running "%s" in child process', backend)
+    #     return childprocess_grab(_grab_simple, backend, bbox)
+    # else:
+    return _grab_simple(backend, bbox, childprocess)
 
 
 def grab(bbox=None, childprocess=True, backend=None):
@@ -48,16 +50,18 @@ def backends():
 
     :return: back-ends as string list
     """
-    return Loader().all_names
+    return backend_dict.keys()
 
 
 def _backend_version(backend):
-    loader = Loader()
-    loader.force(backend)
+    # loader = Loader()
+    # loader.force(backend)
     try:
-        x = loader.selected()
-        v = x.backend_version()
-    except Exception:
+        # x = loader.selected()
+        # v = x.backend_version()
+        v = backend_version2(backend)
+    except Exception as e:
+        print(e)
         v = None
     return v
 

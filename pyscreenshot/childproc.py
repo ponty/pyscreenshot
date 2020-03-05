@@ -2,7 +2,7 @@ import logging
 import os
 
 from pyscreenshot.imcodec import codec
-from pyscreenshot.loader import FailedBackendError
+from pyscreenshot.err import FailedBackendError
 from pyscreenshot.procutil import proc, run_in_childprocess
 from pyscreenshot.tempdir import TemporaryDirectory
 

@@ -1,92 +1,146 @@
 import logging
+import os
+import sys
 import traceback
 
+from easyprocess import EasyProcess
 from pyscreenshot import plugins
+from pyscreenshot.childproc import childprocess_grab
+from pyscreenshot.err import FailedBackendError
+from pyscreenshot.plugins import backend_dict
+from pyscreenshot.plugins.gdk3pixbuf import Gdk3PixbufWrapper
+from pyscreenshot.plugins.gnome_dbus import GnomeDBusWrapper
+from pyscreenshot.plugins.gnome_screenshot import GnomeScreenshotWrapper
+from pyscreenshot.plugins.gtkpixbuf import GtkPixbufWrapper
+from pyscreenshot.plugins.imagemagick import ImagemagickWrapper
+from pyscreenshot.plugins.kwin_dbus import KwinDBusWrapper
+from pyscreenshot.plugins.mac_quartz import MacQuartzWrapper
+from pyscreenshot.plugins.mac_screencapture import ScreencaptureWrapper
+from pyscreenshot.plugins.msswrap import MssWrapper
+from pyscreenshot.plugins.pilwrap import PilWrapper
+from pyscreenshot.plugins.pyside2_grabwindow import PySide2GrabWindow
+from pyscreenshot.plugins.pyside_grabwindow import PySideGrabWindow
+from pyscreenshot.plugins.qt4grabwindow import Qt4GrabWindow
+from pyscreenshot.plugins.qt5grabwindow import Qt5GrabWindow
+from pyscreenshot.plugins.qtpy_grabwindow import QtPyGrabWindow
+from pyscreenshot.plugins.scrot import ScrotWrapper
+from pyscreenshot.plugins.wxscreen import WxScreen
+from pyscreenshot.util import (
+    platform_is_linux,
+    platform_is_osx,
+    platform_is_win,
+    use_x_display,
+)
 
 log = logging.getLogger(__name__)
 
 
-class FailedBackendError(Exception):
-    pass
+log = logging.getLogger(__name__)
 
 
-class Loader(object):
-    def __init__(self):
-        self.plugins = dict()
+def qt():
+    yield QtPyGrabWindow
+    yield Qt5GrabWindow
+    yield Qt4GrabWindow
+    yield PySide2GrabWindow
+    yield PySideGrabWindow
 
-        self.all_names = [x.name for x in self.plugin_classes()]
 
-        self.changed = True
-        self._force_backend = None
-        self.preference = []
-        self.default_preference = plugins.default_preference
-        self._backend = None
+def backends():
+    if platform_is_linux():
+        if use_x_display():
+            yield MssWrapper
+            yield ScrotWrapper
+            yield ImagemagickWrapper
+            yield Gdk3PixbufWrapper
+            yield WxScreen
+            yield GtkPixbufWrapper
+            for x in qt():
+                yield x
+        yield GnomeDBusWrapper
 
-    def plugin_classes(self):
-        return plugins.BACKENDS
+        # on screen notification
+        yield KwinDBusWrapper
 
-    def set_preference(self, x):
-        self.changed = True
-        self.preference = x
+        # flash
+        yield GnomeScreenshotWrapper
 
-    def force(self, name):
-        log.debug("forcing:" + str(name))
-        self.changed = True
-        self._force_backend = name
+    elif platform_is_osx():
+        # first check for X
+        if use_x_display():
+            # TODO: yield x
+            pass
+        else:
+            # fast
+            yield MssWrapper
 
-    @property
-    def is_forced(self):
-        return self._force_backend is not None
+            # latest version should work
+            yield PilWrapper
 
-    #     @property
-    #     def loaded_plugins(self):
-    #         return self.plugins.values()
+            # alternatives for older pillow versions
+            yield ScreencaptureWrapper
+            yield MacQuartzWrapper
 
-    def get_valid_plugin_by_name(self, name):
-        if name not in self.plugins:
-            ls = filter(lambda x: x.name == name, self.plugin_classes())
-            ls = list(ls)
-            if len(ls):
-                try:
-                    msg = ""
-                    plugin = ls[0]()
-                except Exception:
-                    msg = traceback.format_exc()
-                    log.debug(msg)
-                    plugin = None
-            else:
-                msg = "unknown backend"
-                plugin = None
-            self.plugins[name] = (plugin, msg)
-        return self.plugins[name]
+            # qt has some color difference
 
-    def get_valid_plugin_by_list(self, ls):
-        for name in ls:
-            x, _ = self.get_valid_plugin_by_name(name)
-            if x:
-                return x
+            # does not work: Gdk3, wx, Imagemagick
 
-    def selected(self):
-        if self.changed:
-            if self.is_forced:
-                b, msg = self.get_valid_plugin_by_name(self._force_backend)
-                if not b:
-                    raise FailedBackendError(
-                        "Forced backend not found, or cannot be loaded:"
-                        + self._force_backend
-                        + "\n"
-                        + msg
-                    )
-            else:
-                biglist = self.preference + self.default_preference + self.all_names
-                b = self.get_valid_plugin_by_list(biglist)
-                if not b:
-                    self.raise_exc()
-            self.changed = False
-            self._backend = b
-            log.debug("selecting plugin:" + self._backend.name)
-        return self._backend
+    elif platform_is_win():
+        # TODO: support X?
 
-    def raise_exc(self):
-        message = "Install at least one backend!"
-        raise FailedBackendError(message)
+        # fast
+        yield MssWrapper
+
+        yield PilWrapper
+    else:
+        for x in backend_dict.values():
+            yield x
+
+
+def auto(bbox, childprocess):
+    im = None
+    for backend_class in backends():
+        backend_name = backend_class.name
+        if backend_class.apply_childprocess and childprocess:
+            log.debug('running "%s" in child process', backend_name)
+            im = childprocess_grab(None, backend_name, bbox)
+        else:
+            try:
+                obj = backend_class()
+
+                im = obj.grab(bbox)
+                break
+            except Exception:
+                msg = traceback.format_exc()
+                log.debug(msg)
+    if not im:
+        msg = "All backends failed!"
+        raise FailedBackendError(msg)
+
+    return im
+
+
+def force(backend_name, bbox, childprocess):
+    backend_class = backend_dict[backend_name]
+    if backend_class.apply_childprocess and childprocess:
+        log.debug('running "%s" in child process', backend_name)
+        return childprocess_grab(None, backend_name, bbox)
+    else:
+        obj = backend_class()
+        im = obj.grab(bbox)
+        return im
+
+
+def backend_grab(backend, bbox, childprocess):
+    if backend:
+        return force(backend, bbox, childprocess)
+    else:
+        return auto(bbox, childprocess)
+
+
+def backend_version2(backend_name):
+    backend_class = backend_dict[backend_name]
+    obj = backend_class()
+    v = obj.backend_version()
+    return v
+

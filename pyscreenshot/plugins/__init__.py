@@ -1,86 +1,39 @@
 import sys
 
-from pyscreenshot.plugins import (
-    gdk3pixbuf,
-    gnome_screenshot,
-    gtkpixbuf,
-    imagemagick,
-    mac_quartz,
-    mac_screencapture,
-    pilwrap,
-    pyside2_grabwindow,
-    pyside_grabwindow,
-    qt4grabwindow,
-    qt5grabwindow,
-    qtpy_grabwindow,
-    scrot,
-    wxscreen,
-    msswrap,
-)
+from pyscreenshot.plugins.gdk3pixbuf import Gdk3PixbufWrapper
+from pyscreenshot.plugins.gnome_dbus import GnomeDBusWrapper
+from pyscreenshot.plugins.gnome_screenshot import GnomeScreenshotWrapper
+from pyscreenshot.plugins.gtkpixbuf import GtkPixbufWrapper
+from pyscreenshot.plugins.imagemagick import ImagemagickWrapper
+from pyscreenshot.plugins.kwin_dbus import KwinDBusWrapper
+from pyscreenshot.plugins.mac_quartz import MacQuartzWrapper
+from pyscreenshot.plugins.mac_screencapture import ScreencaptureWrapper
+from pyscreenshot.plugins.msswrap import MssWrapper
+from pyscreenshot.plugins.pilwrap import PilWrapper
+from pyscreenshot.plugins.pyside2_grabwindow import PySide2GrabWindow
+from pyscreenshot.plugins.pyside_grabwindow import PySideGrabWindow
+from pyscreenshot.plugins.qt4grabwindow import Qt4GrabWindow
+from pyscreenshot.plugins.qt5grabwindow import Qt5GrabWindow
+from pyscreenshot.plugins.qtpy_grabwindow import QtPyGrabWindow
+from pyscreenshot.plugins.scrot import ScrotWrapper
+from pyscreenshot.plugins.wxscreen import WxScreen
 
-_qt_backends = [
-    qtpy_grabwindow.QtPyGrabWindow,
-    qt5grabwindow.Qt5GrabWindow,
-    qt4grabwindow.Qt4GrabWindow,
-    pyside2_grabwindow.PySide2GrabWindow,
-    pyside_grabwindow.PySideGrabWindow,
-]
-
-# external processes (scrot,imagemagick) are more safe (less conflicts) than library calls.
-if sys.platform.startswith("linux"):
-    BACKENDS = (
-        [scrot.ScrotWrapper, imagemagick.ImagemagickWrapper,]
-        + _qt_backends
-        + [
-            wxscreen.WxScreen,
-            gdk3pixbuf.Gdk3PixbufWrapper,
-            msswrap.MssWrapper,
-            gtkpixbuf.GtkPixbufWrapper,
-            gnome_screenshot.GnomeScreenshotWrapper,
-        ]
-    )
-elif sys.platform == "darwin":
-    BACKENDS = (
-        [
-            pilwrap.PilWrapper,
-            mac_screencapture.ScreencaptureWrapper,
-            mac_quartz.MacQuartzWrapper,
-            # scrot.ScrotWrapper,
-            # imagemagick.ImagemagickWrapper,
-            msswrap.MssWrapper,
-        ]
-        + _qt_backends
-        + [
-            # wxscreen.WxScreen,    #TODO
-            # gdk3pixbuf.Gdk3PixbufWrapper, #TODO
-            # gtkpixbuf.GtkPixbufWrapper,
-        ]
-    )
-elif sys.platform == "win32":
-    BACKENDS = (
-        [pilwrap.PilWrapper,]
-        + _qt_backends
-        + [
-            gtkpixbuf.GtkPixbufWrapper,
-            wxscreen.WxScreen,
-            gdk3pixbuf.Gdk3PixbufWrapper,
-            # scrot.ScrotWrapper,
-            imagemagick.ImagemagickWrapper,
-        ]
-    )
-else:
-    BACKENDS = (
-        [pilwrap.PilWrapper, scrot.ScrotWrapper, imagemagick.ImagemagickWrapper,]
-        + _qt_backends
-        + [
-            wxscreen.WxScreen,
-            gdk3pixbuf.Gdk3PixbufWrapper,
-            gtkpixbuf.GtkPixbufWrapper,
-            mac_screencapture.ScreencaptureWrapper,
-            mac_quartz.MacQuartzWrapper,
-            gnome_screenshot.GnomeScreenshotWrapper,
-        ]
-    )
-
-
-default_preference = [x.name for x in BACKENDS]
+backend_dict = {
+    PilWrapper.name: PilWrapper,
+    MssWrapper.name: MssWrapper,
+    ScrotWrapper.name: ScrotWrapper,
+    ImagemagickWrapper.name: ImagemagickWrapper,
+    QtPyGrabWindow.name: QtPyGrabWindow,
+    Qt5GrabWindow.name: Qt5GrabWindow,
+    Qt4GrabWindow.name: Qt4GrabWindow,
+    PySide2GrabWindow.name: PySide2GrabWindow,
+    PySideGrabWindow.name: PySideGrabWindow,
+    WxScreen.name: WxScreen,
+    Gdk3PixbufWrapper.name: Gdk3PixbufWrapper,
+    GtkPixbufWrapper.name: GtkPixbufWrapper,
+    ScreencaptureWrapper.name: ScreencaptureWrapper,
+    MacQuartzWrapper.name: MacQuartzWrapper,
+    # GnomeDBusWrapper.name: GnomeDBusWrapper,
+    # GnomeScreenshotWrapper.name: GnomeScreenshotWrapper,
+    # TODO #KwinDBusWrapper.name: KwinDBusWrapper,
+}
