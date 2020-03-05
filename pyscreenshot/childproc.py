@@ -3,21 +3,14 @@ import os
 
 from pyscreenshot.imcodec import codec
 from pyscreenshot.err import FailedBackendError
-from pyscreenshot.procutil import proc, run_in_childprocess
+from pyscreenshot.util import proc
 from pyscreenshot.tempdir import TemporaryDirectory
 
 log = logging.getLogger(__name__)
 
-# 0 = multiprocessing (fork)
-# 1 = popen (spawn)
-POPEN = 1
-
 
 def childprocess_backend_version(_backend_version, backend):
-    if POPEN:
-        return childprocess_backend_version_popen(backend)
-    else:
-        return run_in_childprocess(_backend_version, None, backend)
+    return childprocess_backend_version_popen(backend)
 
 
 def childprocess_backend_version_popen(backend):
@@ -30,10 +23,7 @@ def childprocess_backend_version_popen(backend):
 
 
 def childprocess_grab(_grab_simple, backend, bbox):
-    if POPEN:
-        return childprocess_grab_popen(backend, bbox)
-    else:
-        return run_in_childprocess(_grab_simple, codec, backend, bbox)
+    return childprocess_grab_popen(backend, bbox)
 
 
 def childprocess_grab_popen(backend, bbox):

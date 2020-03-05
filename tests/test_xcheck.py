@@ -3,7 +3,7 @@ import os
 
 from nose.tools import eq_
 
-from pyscreenshot.procutil import proc
+from pyscreenshot.util import proc
 
 
 def test_speedtest():

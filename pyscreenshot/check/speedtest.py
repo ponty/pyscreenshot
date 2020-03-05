@@ -4,7 +4,7 @@ import time
 from entrypoint2 import entrypoint
 
 import pyscreenshot
-from pyscreenshot.procutil import proc
+from pyscreenshot.util import proc
 
 
 def run(force_backend, n, childprocess, bbox=None):

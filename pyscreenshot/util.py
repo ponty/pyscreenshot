@@ -1,3 +1,4 @@
+from easyprocess import EasyProcess
 import os
 from os import sys
 
@@ -38,3 +39,10 @@ def extract_version(txt):
                 version = x
                 break
     return version
+
+
+def proc(name, params=[]):
+    python = sys.executable
+    cmd = [python, "-m", name] + params
+    p = EasyProcess(cmd).call()
+    return p
