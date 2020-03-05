@@ -22,6 +22,7 @@ class WxBackendError(Exception):
 class WxScreen(CBackend):
     name = "wx"
     childprocess = False
+    apply_childprocess = True
 
     def __init__(self):
         # TODO: wx on win?

@@ -26,6 +26,7 @@ app = None
 class Qt5GrabWindow(CBackend):
     name = "pyqt5"
     childprocess = False
+    apply_childprocess = True
 
     def __init__(self):
         import PyQt5

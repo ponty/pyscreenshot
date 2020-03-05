@@ -20,11 +20,13 @@ log = logging.getLogger(__name__)
 
 # based on qt4 backend
 
-app=None
+app = None
+
 
 class PySideGrabWindow(CBackend):
     name = "pyside"
     childprocess = False
+    apply_childprocess = True
 
     def __init__(self):
         import PySide
