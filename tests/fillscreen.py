@@ -46,7 +46,7 @@ def init():
     if not refimgpath:
         d = tempfile.mkdtemp(prefix="fillscreen")
         d = Path(d)
-        # atexit.register(d.rmtree) # TODO cleanup
+        atexit.register(d.rmtree)
         refimgpath = d / "ref.png"
 
         if not platform_is_win():  # TODO: win image viewer
