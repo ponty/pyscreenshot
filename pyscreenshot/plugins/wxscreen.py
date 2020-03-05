@@ -1,12 +1,10 @@
 import logging
-import sys
 
 from PIL import Image
 from pyscreenshot.plugins.backend import CBackend
-from pyscreenshot.util import platform_is_osx
+from pyscreenshot.util import platform_is_osx, py2
 
-PY2 = sys.version_info[0] == 2
-if PY2:
+if py2():
     to_bytes = buffer
 else:
     to_bytes = bytes

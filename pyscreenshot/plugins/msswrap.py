@@ -1,14 +1,10 @@
 # import atexit
-import sys
 
 from PIL import Image
 from pyscreenshot.plugins.backend import CBackend
+from pyscreenshot.util import py2, py3, py_minor
 
 # https://python-mss.readthedocs.io/examples.html
-
-PY2 = sys.version_info[0] == 2
-PY3 = sys.version_info[0] == 3
-PY_MINOR = sys.version_info[1]
 
 
 class MssError(Exception):
@@ -26,10 +22,10 @@ class MssWrapper(CBackend):
     childprocess = False
 
     def __init__(self):
-        if PY2:
+        if py2():
             raise MssError()
-        if PY3:
-            if PY_MINOR < 5:
+        if py3():
+            if py_minor() < 5:
                 raise MssError()
         import mss
 

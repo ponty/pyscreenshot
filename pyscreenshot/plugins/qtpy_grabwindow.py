@@ -1,12 +1,10 @@
 import logging
-import sys
 
 from PIL import Image
 from pyscreenshot.plugins.backend import CBackend
+from pyscreenshot.util import py2
 
-PY2 = sys.version_info[0] == 2
-
-if PY2:
+if py2():
     import StringIO
 
     BytesIO = StringIO.StringIO

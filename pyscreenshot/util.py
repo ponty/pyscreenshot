@@ -1,6 +1,18 @@
 from easyprocess import EasyProcess
 import os
-from os import sys
+import sys
+
+
+def py2():
+    return sys.version_info[0] == 2
+
+
+def py3():
+    return sys.version_info[0] == 3
+
+
+def py_minor():
+    return sys.version_info[1]
 
 
 def platform_is_osx():

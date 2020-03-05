@@ -1,14 +1,14 @@
+import logging
+
 from pyscreenshot.plugins.backend import CBackend
 from pyscreenshot.tempexport import read_func_img
-import logging
-import sys
+from pyscreenshot.util import py2
 
 log = logging.getLogger(__name__)
 
 # based on:
 # http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
 
-PY2 = sys.version_info[0] == 2
 
 
 class GtkError(Exception):
@@ -36,7 +36,7 @@ class GtkPixbufWrapper(CBackend):
 
     def __init__(self):
         # no pygtk for py3
-        if not PY2:
+        if not py2():
             raise GtkError()
 
         import gtk
