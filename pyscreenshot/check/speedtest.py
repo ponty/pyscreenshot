@@ -43,7 +43,7 @@ def run_all(n, childprocess, virtual_only=True, bbox=None):
         if childprocess:
             try:
                 run(x, n, True, bbox=bbox)
-            except pyscreenshot.FailedBackendError:
+            except Exception:
                 pass
         else:
             p = proc("pyscreenshot.check.speedtest", ["--backend", x] + bboxpar)
