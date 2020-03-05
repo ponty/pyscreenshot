@@ -21,3 +21,11 @@ def test_print_versions_no_path():
         eq_(proc("pyscreenshot.check.versions").return_code, 0)
     finally:
         os.environ["PATH"] = path
+
+
+def test_showgrabbox():
+    eq_(proc("pyscreenshot.examples.showgrabbox").return_code, 0)
+
+
+def test_showgrabfullscreen():
+    eq_(proc("pyscreenshot.examples.showgrabfullscreen").return_code, 0)
