@@ -9,13 +9,17 @@ PROGRAM = "screencapture"
 #  By default screneshots are saved as .png files,
 
 
+class ScreencaptureError(Exception):
+    pass
+
+
 class ScreencaptureWrapper(CBackend):
     name = "mac_screencapture"
     childprocess = True
 
     def __init__(self):
         if "Darwin" not in platform.platform():
-            raise RunProgError("This backend runs only on Darwin")
+            raise ScreencaptureError("This backend runs only on Darwin")
         p = EasyProcess([PROGRAM, "-help"])
         p.enable_stdout_log = False
         p.enable_stderr_log = False
