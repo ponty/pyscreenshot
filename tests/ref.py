@@ -62,7 +62,7 @@ def backend_ref(backend, childprocess=True, refimgpath=""):
 
 
 def _backend_check(backend, childprocess, refimgpath):
-    enable_ref = True
+    enable_ref = bool(refimgpath)
     if enable_ref:
         backend_ref(
             backend, childprocess=childprocess, refimgpath=refimgpath,
