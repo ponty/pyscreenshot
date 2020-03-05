@@ -80,10 +80,12 @@ Vagrant.configure(2) do |config|
 
 # tools
   sudo apt-get install -y mc xvfb
-  sudo apt-get install -y tox
+  #sudo apt-get install -y tox
   sudo apt-get install -y python-pip
   sudo apt-get install -y python3-pip
-
+  sudo pip3 install -U pip
+  sudo pip3 install -U tox
+  
 # for pillow source install
 #  sudo apt-get install -y libjpeg-dev zlib1g-dev
 
