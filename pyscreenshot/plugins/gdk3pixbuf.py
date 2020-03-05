@@ -8,6 +8,7 @@ import sys
 
 from PIL import Image
 from pyscreenshot.plugins.backend import CBackend
+from pyscreenshot.util import platform_is_osx
 
 Gdk = None
 GdkPixbuf = None
@@ -22,7 +23,7 @@ class Gdk3PixbufWrapper(CBackend):
     childprocess = False
 
     def __init__(self):
-        if sys.platform == "darwin":
+        if platform_is_osx():
             raise Gdk3BackendError("osx not supported")  # TODO
         global Gdk, GdkPixbuf
         import gi

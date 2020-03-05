@@ -22,3 +22,5 @@ def print_versions():
 
 if __name__ == "__main__":
     print_versions()
+
+# FIXME: print versions format

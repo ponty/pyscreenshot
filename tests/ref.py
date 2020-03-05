@@ -1,12 +1,13 @@
 import logging
 import sys
 
+import pyscreenshot
 from nose.tools import eq_, ok_
 from path import TempDir
 from PIL import Image, ImageChops
+from pyscreenshot.util import platform_is_osx
 
 import fillscreen
-import pyscreenshot
 from config import bbox_ls
 from image_debug import img_debug
 from size import backend_size
@@ -38,7 +39,7 @@ def check_ref(backend, bbox, childprocess, refimgpath):
     if diff_bbox:
         img_debug(img_diff, "img_diff" + str(diff_bbox))
     if (
-        sys.platform == "darwin"
+        platform_is_osx()
         and backend
         and backend in ["qtpy", "pyqt", "pyqt5", "pyside", "pyside2"]
     ):

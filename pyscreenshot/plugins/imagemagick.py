@@ -3,7 +3,7 @@ import sys
 from easyprocess import EasyProcess
 from pyscreenshot.plugins.backend import CBackend
 from pyscreenshot.tempexport import read_prog_img
-from pyscreenshot.util import extract_version
+from pyscreenshot.util import extract_version, platform_is_osx
 
 PROGRAM = "import"
 # http://www.imagemagick.org/
@@ -18,7 +18,7 @@ class ImagemagickWrapper(CBackend):
     childprocess = True
 
     def __init__(self):
-        if sys.platform == "darwin":
+        if platform_is_osx():
             raise ImagemagickBackendError("osx not supported")  # TODO
 
         p = EasyProcess([PROGRAM, "-version"])

@@ -3,6 +3,7 @@ import platform
 from easyprocess import EasyProcess
 from pyscreenshot.plugins.backend import CBackend
 from pyscreenshot.tempexport import read_prog_img
+from pyscreenshot.util import platform_is_osx
 
 PROGRAM = "screencapture"
 # https://ss64.com/osx/screencapture.html
@@ -18,7 +19,7 @@ class ScreencaptureWrapper(CBackend):
     childprocess = True
 
     def __init__(self):
-        if "Darwin" not in platform.platform():
+        if not platform_is_osx():
             raise ScreencaptureError("This backend runs only on Darwin")
         p = EasyProcess([PROGRAM, "-help"])
         p.enable_stdout_log = False

@@ -1,15 +1,16 @@
 import sys
 
+import pyscreenshot
 from easyprocess import EasyProcess
 from nose.tools import eq_
+from pyscreenshot.util import platform_is_osx
 
-import pyscreenshot
 from config import bbox_ls
 from image_debug import img_debug
 
 
 def display_size():
-    if sys.platform == "darwin":
+    if platform_is_osx():
         from Quartz import CGDisplayBounds
         from Quartz import CGMainDisplayID
 

@@ -2,7 +2,6 @@ import os
 from os import sys
 
 
-# TODO: use platform_is_osx/win/lin
 def platform_is_osx():
     return sys.platform == "darwin"
 

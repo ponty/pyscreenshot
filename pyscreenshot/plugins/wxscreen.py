@@ -3,6 +3,7 @@ import sys
 
 from PIL import Image
 from pyscreenshot.plugins.backend import CBackend
+from pyscreenshot.util import platform_is_osx
 
 PY2 = sys.version_info[0] == 2
 if PY2:
@@ -26,7 +27,7 @@ class WxScreen(CBackend):
 
     def __init__(self):
         # TODO: wx on win?
-        if sys.platform == "darwin":
+        if platform_is_osx():
             raise WxBackendError("osx not supported")  # TODO
         import wx
 
