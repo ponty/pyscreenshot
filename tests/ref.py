@@ -44,7 +44,7 @@ def check_ref(backend, bbox, childprocess, refimgpath):
     ):
         # TODO: qt color problem on osx
         color_diff_max = max([b for (_, b) in ex])
-        ok_(color_diff_max < 60)
+        ok_(color_diff_max < 70)
     else:
         eq_(
             diff_bbox,

@@ -71,6 +71,7 @@ Vagrant.configure(2) do |config|
   
 # install python versions
   sudo add-apt-repository --yes  ppa:deadsnakes/ppa
+  sudo add-apt-repository --yes  ppa:jan-simon/pqiv
   sudo apt-get update
   sudo apt-get install -y python2.7-dev
   sudo apt-get install -y python3.6-dev
@@ -124,6 +125,7 @@ Vagrant.configure(2) do |config|
   sudo apt-get install -y python3-qtpy
 
 # test dependencies
+  sudo apt-get install -y pqiv x11-utils
   #sudo pip install -r /vagrant/requirements-test.txt
   
 # doc dependencies

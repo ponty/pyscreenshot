@@ -66,17 +66,21 @@ matrix:
 
 addons:
   apt:
+    sources:
+      - sourceline: "ppa:jan-simon/pqiv"
     packages:
       - xvfb
       - scrot
       - imagemagick
+      - pqiv
+      - x11-utils
   homebrew:
     update: true # https://travis-ci.community/t/macos-build-fails-because-of-homebrew-bundle-unknown-command/7296/10
     packages:
-      - imagemagick
       - wxmac
       - pyqt
       - pyside
+      - pqiv
 
 install:
   - if [ ${TRAVIS_OS_NAME} == "linux" ]; then sudo apt-get install --no-install-recommends -y xvfb $(./tests/packages.sh ${TRAVIS_DIST} ${TRAVIS_PYTHON_VERSION:0:1} ); fi

@@ -1,94 +1,84 @@
-import pygame, tempfile, sys
+import atexit
+import ctypes
+import logging
+import os
+import sys
+import tempfile
+from time import sleep
+
+import pyscreenshot
+from easyprocess import EasyProcess
 from entrypoint2 import entrypoint
 from path import Path
-from easyprocess import EasyProcess
-from time import sleep
-import atexit
-import logging, os
+from PIL import Image
+from pyscreenshot.util import platform_is_osx, platform_is_win
+
+from size import display_size
 
 log = logging.getLogger(__name__)
 
-rectsize = 50
-first = True
 refimgpath = None
 
 
-def run(refimgpath, size=None):
+class FillscreenError(Exception):
+    pass
 
-    pygame.display.init()
-    pygame.mouse.set_visible(0)
-    log.info("pygame modes:%s", pygame.display.list_modes())
-    log.info("pygame info:%s", pygame.display.Info())
 
-    if size:
-        disp = pygame.display.set_mode(size)
-    else:
-        disp = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-        if os.environ.get("TRAVIS"):
-            # TODO: travis fails without 2nd set_mode.
-            disp = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-
-    w, h = pygame.display.get_surface().get_size()
-    log.info("w, h: %s,%s", w, h)
+def generate_image():
+    w, h = display_size()
+    log.debug("display size: %sx%s", w, h)
+    img = Image.new("RGB", (w, h), "black")  # Create a new black image
+    pixels = img.load()  # Create the pixel map
     i = 0
-    for x in range(0, w, rectsize):
-        for y in range(0, h, rectsize):
-            r = x * 255 / w
-            g = y * 255 / h
-            b = (i % 5) * 255 / 5
-            pygame.draw.rect(disp, (r, g, b), (x, y, rectsize, rectsize))
+    B = 42
+    for x in range(img.size[0]):  # For every pixel:
+        for y in range(img.size[1]):
+            r = int(x * 255 / w)
+            g = int(y * 255 / h)
+            b = int((i % B) * 255 / B)
+            pixels[x, y] = (r, g, b)  # Set the colour accordingly
             i += 1
-
-    pygame.display.update()
-    pygame.display.update()
-    pygame.display.update()
-
-    if refimgpath:
-        log.info("saving %s", refimgpath)
-        pygame.image.save(disp, refimgpath)
-        ready = refimgpath + ".ready"
-        open(ready, "a").close()
-    clock = pygame.time.Clock()
-    running = True
-    log.info("start loop")
-    while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-        pygame.display.update()
-        clock.tick(10)
-    pygame.quit()
+    return img
 
 
 def init():
-    global first, refimgpath
-    if first:
-        first = False
+    global refimgpath
+    if not refimgpath:
         d = tempfile.mkdtemp(prefix="fillscreen")
         d = Path(d)
-        atexit.register(d.rmtree)
+        # atexit.register(d.rmtree) # TODO cleanup
         refimgpath = d / "ref.png"
-        python = sys.executable
-        cmd = [
-            python,
-            "-m",
-            "fillscreen",
-            "--saveimage",
-            refimgpath,
-        ]
-        proc = EasyProcess(cmd).start()
-        atexit.register(proc.stop)
-        ready = refimgpath + ".ready"
-        while not ready.exists():
-            sleep(0.1)
+
+        if not platform_is_win():  # TODO: win image viewer
+            im = generate_image()
+            im.save(refimgpath)
+            cmd = [
+                "pqiv",
+                "--fullscreen",
+                "--hide-info-box",
+                "--disable-scaling",
+                refimgpath,
+            ]
+            proc = EasyProcess(cmd).start()
+            atexit.register(proc.stop)
+            print(refimgpath)
+            sleep(5)  # TODO: check image displayed
+            if not proc.is_alive():
+                raise FillscreenError("pqiv stopped: %s" % proc)
+
+        # if the OS has color correction
+        #  then the screenshot has slighly different color than the original image
+        # TODO: color correction: linux? win?
+        if platform_is_win() or platform_is_osx():
+            refimgpath = refimgpath + ".pil.png"
+            im = pyscreenshot.grab(backend="pil")
+            im.save(refimgpath)
+            log.debug("%s saved", refimgpath)
+
     return refimgpath
 
 
 @entrypoint
-def main(size=None, saveimage=""):
-    if size:
-        size = map(int, size.split(":"))
-        size = tuple(size)
-
-    run(saveimage, size)
-
+def main(saveimage=""):
+    im = generate_image()
+    im.show()
