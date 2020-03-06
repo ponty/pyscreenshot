@@ -27,20 +27,19 @@ class PySideGrabWindow(CBackend):
     apply_childprocess = True
 
     def __init__(self):
+        pass
+
+    def grab_to_buffer(self, buff, file_type="png"):
         import PySide
 
-        self.PySide = PySide
         from PySide import QtGui
         from PySide import QtCore
 
-        self.QtGui = QtGui
-        self.QtCore = QtCore
+        QApplication = QtGui.QApplication
+        QBuffer = QtCore.QBuffer
+        QIODevice = QtCore.QIODevice
+        QPixmap = QtGui.QPixmap
 
-    def grab_to_buffer(self, buff, file_type="png"):
-        QApplication = self.PySide.QtGui.QApplication
-        QBuffer = self.PySide.QtCore.QBuffer
-        QIODevice = self.PySide.QtCore.QIODevice
-        QPixmap = self.PySide.QtGui.QPixmap
         global app
         if not app:
             app = QApplication([])
@@ -61,4 +60,6 @@ class PySideGrabWindow(CBackend):
         return im
 
     def backend_version(self):
-        return self.PySide.__version__
+        import PySide
+
+        return PySide.__version__

@@ -19,14 +19,15 @@ class ScreencaptureWrapper(CBackend):
     childprocess = True
 
     def __init__(self):
+        pass
+    def grab(self, bbox=None):
         if not platform_is_osx():
             raise ScreencaptureError("This backend runs only on Darwin")
-        p = EasyProcess([PROGRAM, "-help"])
-        p.enable_stdout_log = False
-        p.enable_stderr_log = False
-        p.call()
+        # p = EasyProcess([PROGRAM, "-help"])
+        # p.enable_stdout_log = False
+        # p.enable_stderr_log = False
+        # p.call()
 
-    def grab(self, bbox=None):
         command = [PROGRAM, "-x"]
         if bbox:
             width = bbox[2] - bbox[0]

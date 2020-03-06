@@ -29,20 +29,18 @@ class Qt4GrabWindow(CBackend):
     apply_childprocess = True
 
     def __init__(self):
+        pass
+
+    def grab_to_buffer(self, buff, file_type="png"):
         import PyQt4
 
-        self.PyQt4 = PyQt4
         from PyQt4 import QtGui
         from PyQt4 import Qt
 
-        self.QtGui = QtGui
-        self.Qt = Qt
-
-    def grab_to_buffer(self, buff, file_type="png"):
-        QApplication = self.PyQt4.QtGui.QApplication
-        QBuffer = self.PyQt4.Qt.QBuffer
-        QIODevice = self.PyQt4.Qt.QIODevice
-        QPixmap = self.PyQt4.QtGui.QPixmap
+        QApplication = QtGui.QApplication
+        QBuffer = Qt.QBuffer
+        QIODevice = Qt.QIODevice
+        QPixmap = QtGui.QPixmap
 
         global app
         if not app:
@@ -63,4 +61,9 @@ class Qt4GrabWindow(CBackend):
         return im
 
     def backend_version(self):
-        return self.PyQt4.Qt.PYQT_VERSION_STR
+        import PyQt4
+
+        from PyQt4 import Qt
+
+        return Qt.PYQT_VERSION_STR
+

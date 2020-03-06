@@ -12,47 +12,43 @@ class MacQuartzWrapper(CBackend):
     childprocess = False
 
     def __init__(self):
+        pass
+
+    def grab(self, bbox=None):
+
+        im = read_func_img(self._grab_to_file, bbox)
+        return im
+
+    def _grab_to_file(self, filename, bbox=None, dpi=72):
+        # FIXME: Should query dpi from somewhere, e.g for retina displays
         import Quartz
         import LaunchServices
         from Cocoa import NSURL
         import Quartz.CoreGraphics as CG
         import objc
 
-        self.Quartz = Quartz
-        self.LaunchServices = LaunchServices
-        self.NSURL = NSURL
-        self.CG = CG
-        self.objc = objc
-
-    def grab(self, bbox=None):
-        im = read_func_img(self._grab_to_file, bbox)
-        return im
-
-    def _grab_to_file(self, filename, bbox=None, dpi=72):
-        # FIXME: Should query dpi from somewhere, e.g for retina displays
-
         if bbox:
             width = bbox[2] - bbox[0]
             height = bbox[3] - bbox[1]
-            region = self.CG.CGRectMake(bbox[0], bbox[1], width, height)
+            region = CG.CGRectMake(bbox[0], bbox[1], width, height)
         else:
-            region = self.CG.CGRectInfinite
+            region = CG.CGRectInfinite
 
         # Create screenshot as CGImage
-        image = self.CG.CGWindowListCreateImage(
+        image = CG.CGWindowListCreateImage(
             region,
-            self.CG.kCGWindowListOptionOnScreenOnly,
-            self.CG.kCGNullWindowID,
-            self.CG.kCGWindowImageDefault,
+            CG.kCGWindowListOptionOnScreenOnly,
+            CG.kCGNullWindowID,
+            CG.kCGWindowImageDefault,
         )
 
         # XXX: Can add more types:
         # https://developer.apple.com/library/mac/documentation/MobileCoreServices/Reference/UTTypeRef/Reference/reference.html#//apple_ref/doc/uid/TP40008771
-        file_type = self.LaunchServices.kUTTypePNG
+        file_type = LaunchServices.kUTTypePNG
 
-        url = self.NSURL.fileURLWithPath_(filename)
+        url = NSURL.fileURLWithPath_(filename)
 
-        dest = self.Quartz.CGImageDestinationCreateWithURL(
+        dest = Quartz.CGImageDestinationCreateWithURL(
             url,
             file_type,
             # 1 image in file
@@ -61,17 +57,19 @@ class MacQuartzWrapper(CBackend):
         )
 
         properties = {
-            self.Quartz.kCGImagePropertyDPIWidth: dpi,
-            self.Quartz.kCGImagePropertyDPIHeight: dpi,
+            Quartz.kCGImagePropertyDPIWidth: dpi,
+            Quartz.kCGImagePropertyDPIHeight: dpi,
         }
 
         # Add the image to the destination, characterizing the image with
         # the properties dictionary.
-        self.Quartz.CGImageDestinationAddImage(dest, image, properties)
+        Quartz.CGImageDestinationAddImage(dest, image, properties)
 
         # When all the images (only 1 in this example) are added to the destination,
         # finalize the CGImageDestination object.
-        self.Quartz.CGImageDestinationFinalize(dest)
+        Quartz.CGImageDestinationFinalize(dest)
 
     def backend_version(self):
-        return self.objc.__version__
+        import objc
+
+        return objc.__version__

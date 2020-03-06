@@ -24,12 +24,14 @@ class GnomeScreenshotWrapper(CBackend):
     childprocess = True
 
     def __init__(self):
-        p = EasyProcess([PROGRAM, "--version"])
-        p.enable_stdout_log = False
-        p.enable_stderr_log = False
-        p.call()
+        pass
 
     def grab(self, bbox=None):
+        # p = EasyProcess([PROGRAM, "--version"])
+        # p.enable_stdout_log = False
+        # p.enable_stderr_log = False
+        # p.call()
+
         im = read_prog_img([PROGRAM, "-f"])
         if bbox:
             im = im.crop(bbox)

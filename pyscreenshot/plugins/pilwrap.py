@@ -10,12 +10,12 @@ class PilWrapper(CBackend):
     childprocess = False
 
     def __init__(self):
-        from PIL import ImageGrab  # windows and osx only
-
-        self.ImageGrab = ImageGrab
+        pass
 
     def grab(self, bbox=None):
-        return self.ImageGrab.grab(bbox)
+        from PIL import ImageGrab  # windows and osx only
+
+        return ImageGrab.grab(bbox)
 
     def backend_version(self):
         return __version__

@@ -10,7 +10,6 @@ log = logging.getLogger(__name__)
 # http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
 
 
-
 class GtkError(Exception):
     pass
 
@@ -35,21 +34,13 @@ class GtkPixbufWrapper(CBackend):
     apply_childprocess = True
 
     def __init__(self):
+        pass
+
+    def grab(self, bbox=None):
         # no pygtk for py3
         if not py2():
             raise GtkError()
 
-        import gtk
-
-        self.gtk = gtk
-        try:
-            gtk.gdk.Pixbuf
-            gtk.gdk.COLORSPACE_RGB
-        except AttributeError as e:
-            log.info(e)
-            raise GtkError("Incompatible with Python3 / GDK3. Use gdk3pixbuf.")
-
-    def grab(self, bbox=None):
         im = read_func_img(self._grab_to_file, bbox)
         return im
 
@@ -58,8 +49,16 @@ class GtkPixbufWrapper(CBackend):
 
         only "jpeg" or "png"
         """
+        import gtk
 
-        w = self.gtk.gdk.get_default_root_window()
+        try:
+            gtk.gdk.Pixbuf
+            gtk.gdk.COLORSPACE_RGB
+        except AttributeError as e:
+            log.info(e)
+            raise GtkError("Incompatible with Python3 / GDK3. Use gdk3pixbuf.")
+
+        w = gtk.gdk.get_default_root_window()
         #       Capture the whole screen.
         if bbox is None:
             try:
@@ -67,26 +66,22 @@ class GtkPixbufWrapper(CBackend):
             except AttributeError:
                 sz = (w.get_width(), w.get_height())
             try:
-                pb = self.gtk.gdk.Pixbuf(
-                    self.gtk.gdk.COLORSPACE_RGB, False, 8, sz[0], sz[1]
+                pb = gtk.gdk.Pixbuf(
+                    gtk.gdk.COLORSPACE_RGB, False, 8, sz[0], sz[1]
                 )  # 24bit RGB
                 pb = pb.get_from_drawable(w, w.get_colormap(), 0, 0, 0, 0, sz[0], sz[1])
             except TypeError:
-                pb = self.gtk.gdk.pixbuf_get_from_window(w, 0, 0, sz[0], sz[1])
+                pb = gtk.gdk.pixbuf_get_from_window(w, 0, 0, sz[0], sz[1])
         #       Only capture what we need. The smaller the capture, the faster.
         else:
             sz = [bbox[2] - bbox[0], bbox[3] - bbox[1]]
             try:
-                pb = self.gtk.gdk.Pixbuf(
-                    self.gtk.gdk.COLORSPACE_RGB, False, 8, sz[0], sz[1]
-                )
+                pb = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, False, 8, sz[0], sz[1])
                 pb = pb.get_from_drawable(
                     w, w.get_colormap(), bbox[0], bbox[1], 0, 0, sz[0], sz[1]
                 )
             except TypeError:
-                pb = self.gtk.gdk.pixbuf_get_from_window(
-                    w, bbox[0], bbox[1], sz[0], sz[1]
-                )
+                pb = gtk.gdk.pixbuf_get_from_window(w, bbox[0], bbox[1], sz[0], sz[1])
         assert pb
         ftype = "png"
         try:
@@ -95,4 +90,6 @@ class GtkPixbufWrapper(CBackend):
             pb.savev(filename, ftype, [], ())
 
     def backend_version(self):
-        return ".".join(map(str, self.gtk.ver))
+        import gtk
+
+        return ".".join(map(str, gtk.ver))

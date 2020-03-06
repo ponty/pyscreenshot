@@ -34,12 +34,11 @@ class KwinDBusWrapper(CBackend):
     childprocess = True
 
     def __init__(self):
+        pass
+    def grab(self, bbox=None):
         import dbus
 
-        self.dbus = dbus
-
-    def grab(self, bbox=None):
-        # bus = self.dbus.SessionBus()
+        # bus = dbus.SessionBus()
         # proxy = bus.get_object("org.kde.KWin", "/Screenshot")
         # dbus_interface = "org.kde.kwin.Screenshot"
 

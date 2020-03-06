@@ -27,22 +27,19 @@ class Qt5GrabWindow(CBackend):
     apply_childprocess = True
 
     def __init__(self):
+        pass
+
+    def grab_to_buffer(self, buff, file_type="png"):
         import PyQt5
 
-        self.PyQt5 = PyQt5
         from PyQt5 import QtGui
         from PyQt5 import Qt
         from PyQt5 import QtWidgets
 
-        self.QtGui = QtGui
-        self.Qt = Qt
-        self.QtWidgets = QtWidgets
-
-    def grab_to_buffer(self, buff, file_type="png"):
-        QApplication = self.QtWidgets.QApplication
-        QBuffer = self.PyQt5.Qt.QBuffer
-        QIODevice = self.PyQt5.Qt.QIODevice
-        QScreen = self.PyQt5.QtGui.QScreen
+        QApplication = QtWidgets.QApplication
+        QBuffer = PyQt5.Qt.QBuffer
+        QIODevice = PyQt5.Qt.QIODevice
+        QScreen = PyQt5.QtGui.QScreen
 
         global app
         if not app:
@@ -65,4 +62,8 @@ class Qt5GrabWindow(CBackend):
         return im
 
     def backend_version(self):
-        return self.Qt.PYQT_VERSION_STR
+        import PyQt5
+
+        from PyQt5 import Qt
+
+        return Qt.PYQT_VERSION_STR

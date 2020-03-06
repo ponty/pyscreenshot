@@ -10,9 +10,6 @@ from PIL import Image
 from pyscreenshot.plugins.backend import CBackend
 from pyscreenshot.util import platform_is_osx
 
-Gdk = None
-GdkPixbuf = None
-
 
 class Gdk3BackendError(Exception):
     pass
@@ -23,25 +20,7 @@ class Gdk3PixbufWrapper(CBackend):
     childprocess = False
 
     def __init__(self):
-        if platform_is_osx():
-            raise Gdk3BackendError("osx not supported")  # TODO
-        global Gdk, GdkPixbuf
-        import gi
-
-        gi.require_version("Gdk", "3.0")
-        # gi.require_version('GdkPixbuf', '2.0')
-        from gi.repository import Gdk as _Gdk
-        from gi.repository import GdkPixbuf as _GdkPixbuf
-
-        # read_pixel_bytes: New in version 2.32.
-        if _GdkPixbuf.PIXBUF_MAJOR == 2:
-            if _GdkPixbuf.PIXBUF_MINOR < 32:
-                raise ValueError(
-                    "GdkPixbuf min supported version: 2.32   current:"
-                    + _GdkPixbuf.PIXBUF_VERSION
-                )
-
-        Gdk, GdkPixbuf = _Gdk, _GdkPixbuf
+        pass
 
     def grab(self, bbox=None):
         """Grabs an image directly to a buffer.
@@ -53,6 +32,23 @@ class Gdk3PixbufWrapper(CBackend):
             bits.
         :rtype: Image
         """
+        if platform_is_osx():
+            raise Gdk3BackendError("osx not supported")  # TODO
+        import gi
+
+        gi.require_version("Gdk", "3.0")
+        # gi.require_version('GdkPixbuf', '2.0')
+        from gi.repository import Gdk
+        from gi.repository import GdkPixbuf
+
+        # read_pixel_bytes: New in version 2.32.
+        if GdkPixbuf.PIXBUF_MAJOR == 2:
+            if GdkPixbuf.PIXBUF_MINOR < 32:
+                raise ValueError(
+                    "GdkPixbuf min supported version: 2.32   current:"
+                    + GdkPixbuf.PIXBUF_VERSION
+                )
+
         w = Gdk.get_default_root_window()
         if bbox is not None:
             g = [bbox[0], bbox[1], bbox[2] - bbox[0], bbox[3] - bbox[1]]

@@ -27,15 +27,14 @@ class WxScreen(CBackend):
     apply_childprocess = True
 
     def __init__(self):
+        pass
+
+    def grab(self, bbox=None):
         # TODO: wx on win?
         if platform_is_osx():
             raise WxBackendError("osx not supported")  # TODO
         import wx
 
-        self.wx = wx
-
-    def grab(self, bbox=None):
-        wx = self.wx
         global app
         if not app:
             app = wx.App()
@@ -64,4 +63,6 @@ class WxScreen(CBackend):
         return im
 
     def backend_version(self):
-        return self.wx.__version__
+        import wx
+
+        return wx.__version__

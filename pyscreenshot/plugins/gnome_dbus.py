@@ -15,16 +15,16 @@ class GnomeDBusWrapper(CBackend):
     childprocess = True
 
     def __init__(self):
-        import dbus  # TODO: use pure dbus lib
-
-        self.dbus = dbus
+        pass
 
     def grab(self, bbox=None):
         im = read_func_img(self._grab_to_file, bbox)
         return im
 
     def _grab_to_file(self, filename, bbox=None):
-        bus = self.dbus.SessionBus()
+        import dbus  # TODO: use pure dbus lib
+
+        bus = dbus.SessionBus()
         proxy = bus.get_object("org.gnome.Shell", "/org/gnome/Shell/Screenshot")
         dbus_interface = "org.gnome.Shell.Screenshot"
         if bbox:
@@ -45,4 +45,4 @@ class GnomeDBusWrapper(CBackend):
             raise GnomeDBusError()
 
     def backend_version(self):
-        return None  # TODO
+        return None  # TODO: backend_version

@@ -22,6 +22,9 @@ class MssWrapper(CBackend):
     childprocess = False
 
     def __init__(self):
+        pass
+
+    def grab(self, bbox=None):
         if py2():
             raise MssError()
         if py3():
@@ -29,13 +32,11 @@ class MssWrapper(CBackend):
                 raise MssError()
         import mss
 
-        self.mss = mss
         # atexit.register(sct.close())
 
-    def grab(self, bbox=None):
         global sct
         if not sct:
-            sct = self.mss.mss()
+            sct = mss.mss()
 
         # with self.mss.mss() as sct:
         if bbox:
