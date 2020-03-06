@@ -18,6 +18,9 @@ class WxBackendError(Exception):
     pass
 
 
+app = None
+
+
 class WxScreen(CBackend):
     name = "wx"
     childprocess = False
@@ -30,12 +33,12 @@ class WxScreen(CBackend):
         import wx
 
         self.wx = wx
-        self.app = None
 
     def grab(self, bbox=None):
         wx = self.wx
-        if not self.app:
-            self.app = wx.App()
+        global app
+        if not app:
+            app = wx.App()
         screen = wx.ScreenDC()
         size = screen.GetSize()
         if wx.__version__ >= "4":
