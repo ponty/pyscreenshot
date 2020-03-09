@@ -2,6 +2,7 @@ import logging
 import sys
 
 import pyscreenshot
+import six
 from easyprocess import EasyProcess
 from nose.tools import eq_, ok_
 from path import TempDir
@@ -83,14 +84,29 @@ def backend_to_check(backend):
 
 def check_import(module):
     # TODO: check without importing, use in plugins also
-    ok = False
-    try:
-        __import__(module)
+    found = False
+    # try:
+    #     __import__(module)
 
-        ok = True
-    except ImportError:
-        pass
-    return ok
+    #     ok = True
+    # except ImportError:
+    #     pass
+    if six.PY2:
+        import imp
+
+        try:
+            imp.find_module(module)
+            found = True
+        except ImportError:
+            found = False
+    else:
+        import importlib
+
+        spam_spec = importlib.util.find_spec(module)
+        found = spam_spec is not None
+    return found
+
+
 def prog_check(cmd):
     try:
         if EasyProcess(cmd).call().return_code == 0:
