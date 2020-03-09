@@ -22,7 +22,9 @@ def display_size():
     screen_width, screen_height = 0, 0
     xdpyinfo = EasyProcess("xdpyinfo")
     xdpyinfo.enable_stdout_log = False
-    for x in xdpyinfo.call().stdout.splitlines():
+    if xdpyinfo.call().return_code != 0:
+        raise ValueError("xdpyinfo error: %s" % xdpyinfo)
+    for x in xdpyinfo.stdout.splitlines():
         if "dimensions:" in x:
             screen_width, screen_height = map(int, x.strip().split()[1].split("x"))
 

@@ -26,7 +26,9 @@ class FillscreenError(Exception):
 
 def generate_image():
     w, h = display_size()
-    log.debug("display size: %sx%s", w, h)
+    log.debug("display size: %s x %s", w, h)
+    if w <= 0 or h <= 0:
+        raise ValueError("invalid display size %s x %s" % (w, h))
     img = Image.new("RGB", (w, h), "black")  # Create a new black image
     pixels = img.load()  # Create the pixel map
     i = 0
