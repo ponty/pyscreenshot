@@ -55,6 +55,7 @@ Vagrant.configure("2") do |config|
   #
   #   # Customize the amount of memory on the VM:
      vb.memory = "1024"
+     vb.name = "pyscreenshot_arch_kde_wayland"
    end
   #
   # View the documentation for the provider you are using for more
@@ -64,18 +65,17 @@ Vagrant.configure("2") do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
-pacman -Syu  --noconfirm
-pacman -S --noconfirm xorg-server plasma-meta plasma-wayland-session sddm python-pip xorg-server-xvfb xterm mc
-chmod a-x /usr/lib/kscreenlocker_greet
-mkdir /etc/sddm.conf.d
-echo '[Autologin]
+
+  mkdir /etc/sddm.conf.d
+  echo '[Autologin]
 User=vagrant
 #Session=plasma.desktop
 Session=plasmawayland.desktop' > /etc/sddm.conf.d/autologin.conf
-systemctl  enable sddm
-systemctl  start sddm
+
+  /vagrant/tests/vagrant/arch_kde.sh
+
   SHELL
 end
 
-# export VAGRANT_VAGRANTFILE=Vagrantfile.arch.kde.wayland.rb;export VAGRANT_DOTFILE_PATH=.vagrant_arch_kde_wayland 
-# vagrant up
+# export VAGRANT_VAGRANTFILE=Vagrantfile.arch.kde.wayland.rb;export VAGRANT_DOTFILE_PATH=.vagrant_${VAGRANT_VAGRANTFILE} 
+# vagrant up && vagrant ssh

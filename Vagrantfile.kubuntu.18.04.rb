@@ -45,10 +45,10 @@ Vagrant.configure(2) do |config|
   #
    config.vm.provider "virtualbox" do |vb|
      # Display the VirtualBox GUI when booting the machine
-     vb.gui = true
+     #vb.gui = true
   
      # Customize the amount of memory on the VM:
-     vb.memory = "2048"
+     vb.memory = "1024"
 
      vb.name = "pyscreenshot_kubuntu_18.04"
    end
@@ -68,24 +68,14 @@ Vagrant.configure(2) do |config|
   # documentation for more information about their specific syntax and use.
   $script = "
   export DEBIAN_FRONTEND=noninteractive
-  echo 'export distutils_issue8876_workaround_enabled=1' >> /home/vagrant/.profile
-  echo 'export export LC_ALL=C' >> /home/vagrant/.profile
+  /vagrant/tests/vagrant/ubu1804dep.sh
   
-sudo apt-get update
-sudo apt-get dist-upgrade
-sudo apt-get install -y kubuntu-desktop^
-sudo apt-get remove -y sddm
-sudo apt-get install -y gdm3
+  sudo apt-get update
+  sudo apt-get dist-upgrade
+  sudo apt-get install -y kubuntu-desktop^
+  sudo apt-get remove -y sddm
 
-# autologin
-echo '
-[daemon]
-AutomaticLoginEnable = true
-AutomaticLogin = vagrant
-' > /etc/gdm3/custom.conf
-
-sudo systemctl start gdm3
-
+  /vagrant/tests/vagrant/gdm3.sh
 "
       config.vm.provision "shell", inline: $script
           
@@ -93,6 +83,6 @@ sudo systemctl start gdm3
 end
      
 
-# export VAGRANT_VAGRANTFILE=Vagrantfile.kubuntu.18.04.rb;export VAGRANT_DOTFILE_PATH=.vagrant_kubuntu_1804 
-# vagrant up
+# export VAGRANT_VAGRANTFILE=Vagrantfile.kubuntu.18.04.rb;export VAGRANT_DOTFILE_PATH=.vagrant_${VAGRANT_VAGRANTFILE} 
+# vagrant up && vagrant ssh
 

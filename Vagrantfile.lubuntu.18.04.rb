@@ -45,10 +45,10 @@ Vagrant.configure(2) do |config|
   #
    config.vm.provider "virtualbox" do |vb|
      # Display the VirtualBox GUI when booting the machine
-     vb.gui = true
+     #vb.gui = true
   
      # Customize the amount of memory on the VM:
-     vb.memory = "2048"
+     vb.memory = "1024"
 
      vb.name = "pyscreenshot_lubuntu_18.04"
    end
@@ -68,21 +68,14 @@ Vagrant.configure(2) do |config|
   # documentation for more information about their specific syntax and use.
   $script = "
   export DEBIAN_FRONTEND=noninteractive
-  echo 'export distutils_issue8876_workaround_enabled=1' >> /home/vagrant/.profile
-  echo 'export export LC_ALL=C' >> /home/vagrant/.profile
-  
-sudo apt-get update
-sudo apt-get dist-upgrade
-sudo apt-get install -y --no-install-recommends lubuntu-desktop
+  /vagrant/tests/vagrant/ubu1804dep.sh
 
-# autologin
-echo '
-[SeatDefaults]
-autologin-user=vagrant
-' >> /etc/lightdm/lightdm.conf.d/12-autologin.conf
+  # lubuntu
+  sudo apt-get update
+  sudo apt-get dist-upgrade
+  sudo apt-get install -y lubuntu-desktop
 
-sudo systemctl start lightdm
-
+  /vagrant/tests/vagrant/lightdm.sh
 "
       config.vm.provision "shell", inline: $script
           
@@ -90,6 +83,6 @@ sudo systemctl start lightdm
 end
      
 
-# export VAGRANT_VAGRANTFILE=Vagrantfile.lubuntu.18.04.rb;export VAGRANT_DOTFILE_PATH=.vagrant_lubuntu_1804 
-# vagrant up
+# export VAGRANT_VAGRANTFILE=Vagrantfile.lubuntu.18.04.rb;export VAGRANT_DOTFILE_PATH=.vagrant_${VAGRANT_VAGRANTFILE}
+# vagrant up && vagrant ssh
 

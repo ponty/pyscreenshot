@@ -51,12 +51,11 @@ Vagrant.configure("2") do |config|
   #
    config.vm.provider "virtualbox" do |vb|
   #   # Display the VirtualBox GUI when booting the machine
-     #vb.gui = true
+     vb.gui = true
   #
   #   # Customize the amount of memory on the VM:
      vb.memory = "1024"
-
-     vb.name = "pyscreenshot_arch_kde_x11"
+     vb.name = "pyscreenshot_arch_gnome_wayland"
    end
   #
   # View the documentation for the provider you are using for more
@@ -67,16 +66,11 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
 
-  mkdir /etc/sddm.conf.d
-  echo '[Autologin]
-  User=vagrant
-  Session=plasma.desktop
-  #Session=plasmawayland.desktop' > /etc/sddm.conf.d/autologin.conf
 
-  /vagrant/tests/vagrant/arch_kde.sh
+  /vagrant/tests/vagrant/arch_gnome.sh
 
   SHELL
 end
 
-# export VAGRANT_VAGRANTFILE=Vagrantfile.arch.kde.x11.rb;export VAGRANT_DOTFILE_PATH=.vagrant_${VAGRANT_VAGRANTFILE}
+# export VAGRANT_VAGRANTFILE=Vagrantfile.arch.gnome.wayland.rb;export VAGRANT_DOTFILE_PATH=.vagrant_${VAGRANT_VAGRANTFILE} 
 # vagrant up && vagrant ssh

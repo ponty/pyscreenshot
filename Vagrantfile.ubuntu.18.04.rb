@@ -5,14 +5,14 @@
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
-Vagrant.configure("2") do |config|
+Vagrant.configure(2) do |config|
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
 
   # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "archlinux/archlinux"
+  # boxes at https://atlas.hashicorp.com/search.
+  config.vm.box = "ubuntu/bionic64"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -22,13 +22,7 @@ Vagrant.configure("2") do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  # NOTE: This will enable public access to the opened port
   # config.vm.network "forwarded_port", guest: 80, host: 8080
-
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine and only allow access
-  # via 127.0.0.1 to disable public access
-  # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -50,33 +44,44 @@ Vagrant.configure("2") do |config|
   # Example for VirtualBox:
   #
    config.vm.provider "virtualbox" do |vb|
-  #   # Display the VirtualBox GUI when booting the machine
-     #vb.gui = true
-  #
-  #   # Customize the amount of memory on the VM:
-     vb.memory = "1024"
+     # Display the VirtualBox GUI when booting the machine
+     vb.gui = true
+  
+     # Customize the amount of memory on the VM:
+     vb.memory = "2048"
 
-     vb.name = "pyscreenshot_arch_kde_x11"
+     vb.name = "pyscreenshot_ubuntu_18.04"
    end
   #
   # View the documentation for the provider you are using for more
   # information on available options.
 
+  # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
+  # such as FTP and Heroku are also available. See the documentation at
+  # https://docs.vagrantup.com/v2/push/atlas.html for more information.
+  # config.push.define "atlas" do |push|
+  #   push.app = "YOUR_ATLAS_USERNAME/YOUR_APPLICATION_NAME"
+  # end
+
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell", inline: <<-SHELL
+  $script = "
+  export DEBIAN_FRONTEND=noninteractive
+  /vagrant/tests/vagrant/ubu1804dep.sh
 
-  mkdir /etc/sddm.conf.d
-  echo '[Autologin]
-  User=vagrant
-  Session=plasma.desktop
-  #Session=plasmawayland.desktop' > /etc/sddm.conf.d/autologin.conf
+  sudo apt-get update
+  sudo apt-get dist-upgrade
+  sudo apt-get install -y ubuntu-desktop^
 
-  /vagrant/tests/vagrant/arch_kde.sh
-
-  SHELL
+  /vagrant/tests/vagrant/gdm3.sh
+"
+      config.vm.provision "shell", inline: $script
+          
+       
 end
+     
 
-# export VAGRANT_VAGRANTFILE=Vagrantfile.arch.kde.x11.rb;export VAGRANT_DOTFILE_PATH=.vagrant_${VAGRANT_VAGRANTFILE}
+# export VAGRANT_VAGRANTFILE=Vagrantfile.kubuntu.18.04.rb;export VAGRANT_DOTFILE_PATH=.vagrant_${VAGRANT_VAGRANTFILE} 
 # vagrant up && vagrant ssh
+

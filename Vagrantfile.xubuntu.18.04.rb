@@ -48,7 +48,7 @@ Vagrant.configure(2) do |config|
      vb.gui = true
   
      # Customize the amount of memory on the VM:
-     vb.memory = "2048"
+     vb.memory = "1024"
 
      vb.name = "pyscreenshot_xubuntu_18.04"
    end
@@ -71,18 +71,14 @@ Vagrant.configure(2) do |config|
   echo 'export distutils_issue8876_workaround_enabled=1' >> /home/vagrant/.profile
   echo 'export export LC_ALL=C' >> /home/vagrant/.profile
   
-sudo apt-get update
-sudo apt-get dist-upgrade
-sudo apt-get install -y xubuntu-desktop^
+  /vagrant/tests/vagrant/ubu1804dep.sh
 
-# autologin
-echo '
-[SeatDefaults]
-autologin-user=vagrant
-' >> /etc/lightdm/lightdm.conf.d/12-autologin.conf
+  # xubuntu
+  sudo apt-get update
+  sudo apt-get dist-upgrade
+  sudo apt-get install -y xubuntu-desktop^
 
-sudo systemctl start lightdm
-
+  /vagrant/tests/vagrant/lightdm.sh
 "
       config.vm.provision "shell", inline: $script
           
@@ -90,6 +86,6 @@ sudo systemctl start lightdm
 end
      
 
-# export VAGRANT_VAGRANTFILE=Vagrantfile.xubuntu.18.04.rb;export VAGRANT_DOTFILE_PATH=.vagrant_xubuntu_1804 
-# vagrant up
+# export VAGRANT_VAGRANTFILE=Vagrantfile.xubuntu.18.04.rb;export VAGRANT_DOTFILE_PATH=.vagrant_${VAGRANT_VAGRANTFILE}
+# vagrant up && vagrant ssh
 
