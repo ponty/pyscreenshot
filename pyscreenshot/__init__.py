@@ -61,7 +61,7 @@ def _backend_version(backend):
         # v = x.backend_version()
         v = backend_version2(backend)
     except Exception as e:
-        print(e)
+        log.warning(e)
         v = None
     return v
 

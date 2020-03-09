@@ -16,7 +16,7 @@ def print_versions():
     for name in pyscreenshot.backends():
         v = backend_version(name, childprocess=True)
         if not v:
-            v = "missing"
+            v = ""
         print_name_version(name, v)
 
 

@@ -11,4 +11,6 @@ def main(backend):
     """
     backend = backend if backend else None
     v = pyscreenshot.backend_version(backend=backend, childprocess=False)
+    if not v:
+        v = ""
     print(v)
