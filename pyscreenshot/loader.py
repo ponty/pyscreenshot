@@ -103,7 +103,7 @@ def auto(bbox, childprocess):
         backend_name = backend_class.name
         if backend_class.apply_childprocess and childprocess:
             log.debug('running "%s" in child process', backend_name)
-            im = childprocess_grab(None, backend_name, bbox)
+            im = childprocess_grab(backend_name, bbox)
         else:
             try:
                 obj = backend_class()
@@ -124,7 +124,7 @@ def force(backend_name, bbox, childprocess):
     backend_class = backend_dict[backend_name]
     if backend_class.apply_childprocess and childprocess:
         log.debug('running "%s" in child process', backend_name)
-        return childprocess_grab(None, backend_name, bbox)
+        return childprocess_grab(backend_name, bbox)
     else:
         obj = backend_class()
         im = obj.grab(bbox)

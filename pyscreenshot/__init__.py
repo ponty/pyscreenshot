@@ -33,6 +33,8 @@ def _grab(childprocess, backend=None, bbox=None):
     return _grab_simple(backend, bbox, childprocess)
 
 
+# TODO: childprocess=None default
+# TODO: static check: platform, version,...
 def grab(bbox=None, childprocess=True, backend=None):
     """Copy the contents of the screen to PIL image memory.
 
@@ -76,4 +78,4 @@ def backend_version(backend, childprocess=True):
     if not childprocess:
         return _backend_version(backend)
     else:
-        return childprocess_backend_version(_backend_version, backend)
+        return childprocess_backend_version(backend)
