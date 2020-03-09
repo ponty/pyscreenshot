@@ -44,7 +44,11 @@ classifiers = [
     "Programming Language :: Python :: 3.8",
 ]
 
-install_requires = ["EasyProcess", "entrypoint2"]
+install_requires = [
+    "EasyProcess",
+    "entrypoint2",
+    "mss ; python_version > '3.4'",
+]
 
 setup(
     name=NAME,

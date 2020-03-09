@@ -6,4 +6,3 @@ pillow
 coveralls
 path.py
 python-xlib
-mss ; python_version > '3.4'
