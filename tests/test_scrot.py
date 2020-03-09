@@ -1,8 +1,10 @@
 from pyscreenshot.util import use_x_display
 
-from ref import backend_to_check
+from ref import backend_to_check, prog_check
 
 if use_x_display():
+    if prog_check(["scrot", "-version"]):
 
-    def test_scrot():
-        backend_to_check("scrot")
+        def test_scrot():
+            backend_to_check("scrot")
+

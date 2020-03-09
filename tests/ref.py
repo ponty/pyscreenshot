@@ -2,6 +2,7 @@ import logging
 import sys
 
 import pyscreenshot
+from easyprocess import EasyProcess
 from nose.tools import eq_, ok_
 from path import TempDir
 from PIL import Image, ImageChops
@@ -90,3 +91,9 @@ def check_import(module):
     except ImportError:
         pass
     return ok
+def prog_check(cmd):
+    try:
+        if EasyProcess(cmd).call().return_code == 0:
+            return True
+    except Exception:
+        return False
