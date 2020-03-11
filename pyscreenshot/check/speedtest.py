@@ -26,6 +26,7 @@ def run(force_backend, n, childprocess, bbox=None):
         print("")
 
 
+# TODO: add default
 def run_all(n, childprocess, virtual_only=True, bbox=None):
     print("")
     print("n=%s" % n)
@@ -38,7 +39,7 @@ def run_all(n, childprocess, virtual_only=True, bbox=None):
     else:
         bboxpar = []
     for x in pyscreenshot.backends():
-        if virtual_only and x == "gnome-screenshot":
+        if virtual_only and x == "gnome-screenshot":  # TODO: remove
             continue
         if childprocess:
             try:
