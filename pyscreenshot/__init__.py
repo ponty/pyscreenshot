@@ -11,28 +11,6 @@ log = logging.getLogger(__name__)
 log.debug("version=%s", __version__)
 
 
-def _grab_simple(backend=None, bbox=None, childprocess=False):
-    # loader = Loader()
-    # loader.force(backend)
-    # backend_obj = loader.selected()
-    # return backend_obj.grab(bbox)
-    return backend_grab(backend, bbox, childprocess)
-
-
-def _grab(childprocess, backend=None, bbox=None):
-    if bbox:
-        x1, y1, x2, y2 = bbox
-        if x2 <= x1:
-            raise ValueError("bbox x2<=x1")
-        if y2 <= y1:
-            raise ValueError("bbox y2<=y1")
-    # if childprocess:
-    #     log.debug('running "%s" in child process', backend)
-    #     return childprocess_grab(_grab_simple, backend, bbox)
-    # else:
-    return _grab_simple(backend, bbox, childprocess)
-
-
 # TODO: childprocess=None default
 # TODO: static check: platform, version,...
 def grab(bbox=None, childprocess=True, backend=None):
@@ -44,7 +22,13 @@ def grab(bbox=None, childprocess=True, backend=None):
     :param backend: back-end can be forced if set (examples:scrot, wx,..),
                     otherwise back-end is automatic
     """
-    return _grab(childprocess=childprocess, backend=backend, bbox=bbox)
+    if bbox:
+        x1, y1, x2, y2 = bbox
+        if x2 <= x1:
+            raise ValueError("bbox x2<=x1")
+        if y2 <= y1:
+            raise ValueError("bbox y2<=y1")
+    return backend_grab(backend, bbox, childprocess)
 
 
 def backends():
@@ -55,19 +39,6 @@ def backends():
     return backend_dict.keys()
 
 
-def _backend_version(backend):
-    # loader = Loader()
-    # loader.force(backend)
-    try:
-        # x = loader.selected()
-        # v = x.backend_version()
-        v = backend_version2(backend)
-    except Exception as e:
-        log.warning(e)
-        v = None
-    return v
-
-
 def backend_version(backend, childprocess=True):
     """Back-end version.
 
@@ -76,6 +47,11 @@ def backend_version(backend, childprocess=True):
     :return: version as string
     """
     if not childprocess:
-        return _backend_version(backend)
+        try:
+            v = backend_version2(backend)
+        except Exception as e:
+            log.warning(e)
+            v = None
+        return v
     else:
         return childprocess_backend_version(backend)
