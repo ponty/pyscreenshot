@@ -48,6 +48,7 @@ install_requires = [
     "EasyProcess",
     "entrypoint2",
     "mss ; python_version > '3.4'",
+    "jeepney ; python_version > '3.4' and platform_system == 'Linux'",
 ]
 
 setup(
