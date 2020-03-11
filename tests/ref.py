@@ -1,5 +1,6 @@
 import logging
 import sys
+import os
 
 import pyscreenshot
 import six
@@ -113,3 +114,15 @@ def prog_check(cmd):
             return True
     except Exception:
         return False
+
+
+def kde():
+    XDG_CURRENT_DESKTOP = os.environ.get("XDG_CURRENT_DESKTOP")
+    if XDG_CURRENT_DESKTOP:
+        return "kde" in XDG_CURRENT_DESKTOP.lower()
+
+
+def gnome():
+    XDG_CURRENT_DESKTOP = os.environ.get("XDG_CURRENT_DESKTOP")
+    if XDG_CURRENT_DESKTOP:
+        return "gnome" in XDG_CURRENT_DESKTOP.lower()

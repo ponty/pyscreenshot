@@ -5,7 +5,7 @@ from nose.tools import eq_
 
 if gnome():
 
-    def test_gnome_screenshot():
+    def test_gnome_dbus():
         eq_(kde(), False)
-        backend_to_check("gnome-screenshot")
+        backend_to_check("gnome_dbus")
 

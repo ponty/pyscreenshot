@@ -12,7 +12,6 @@ PROGRAM = "gnome-screenshot"
 
 
 class GnomeScreenshotWrapper(CBackend):
-
     """Plugin for ``pyscreenshot`` that uses ``gnome-screenshot``
     https://git.gnome.org/browse/gnome-screenshot/
 
@@ -27,17 +26,14 @@ class GnomeScreenshotWrapper(CBackend):
         pass
 
     def grab(self, bbox=None):
-        # p = EasyProcess([PROGRAM, "--version"])
-        # p.enable_stdout_log = False
-        # p.enable_stderr_log = False
-        # p.call()
-
         im = read_prog_img([PROGRAM, "-f"])
         if bbox:
             im = im.crop(bbox)
         return im
 
     def backend_version(self):
-        return extract_version(
-            EasyProcess([PROGRAM, "--version"]).call().stdout.replace("-", " ")
-        )
+        p = EasyProcess([PROGRAM, "--version"])
+        p.enable_stdout_log = False
+        p.enable_stderr_log = False
+        p.call()
+        return extract_version(p.stdout.replace("-", " "))

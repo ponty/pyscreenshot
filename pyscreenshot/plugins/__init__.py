@@ -33,7 +33,7 @@ backend_dict = {
     GtkPixbufWrapper.name: GtkPixbufWrapper,
     ScreencaptureWrapper.name: ScreencaptureWrapper,
     MacQuartzWrapper.name: MacQuartzWrapper,
-    # GnomeDBusWrapper.name: GnomeDBusWrapper,
-    # GnomeScreenshotWrapper.name: GnomeScreenshotWrapper,
-    # TODO #KwinDBusWrapper.name: KwinDBusWrapper,
+    GnomeDBusWrapper.name: GnomeDBusWrapper,
+    GnomeScreenshotWrapper.name: GnomeScreenshotWrapper,
+    KwinDBusWrapper.name: KwinDBusWrapper,
 }
