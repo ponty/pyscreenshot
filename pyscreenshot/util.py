@@ -32,10 +32,10 @@ def use_x_display():
         return False
     if platform_is_osx():  # TODO: test X on osx
         return False
-    xDisp = os.environ.get("DISPLAY")
-    xdgSession = os.environ.get("XDG_SESSION_TYPE")
+    DISPLAY = os.environ.get("DISPLAY")
+    XDG_SESSION_TYPE = os.environ.get("XDG_SESSION_TYPE")
     # Xwayland can not be used for screenshot
-    return xDisp and xdgSession != "wayland"
+    return DISPLAY and XDG_SESSION_TYPE != "wayland"
 
 
 def extract_version(txt):
