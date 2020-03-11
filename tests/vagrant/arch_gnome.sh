@@ -21,6 +21,7 @@ AutomaticLoginEnable = true
 AutomaticLogin = vagrant
 ' > /etc/gdm/custom.conf
 
+sudo systemctl enable gdm
 sudo systemctl start gdm
 
 
