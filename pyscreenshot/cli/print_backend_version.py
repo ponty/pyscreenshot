@@ -1,6 +1,10 @@
 from entrypoint2 import entrypoint
+import logging
+from pyscreenshot.loader import FailedBackendError, backend_grab, backend_version2
 
 import pyscreenshot
+
+log = logging.getLogger(__name__)
 
 
 @entrypoint
@@ -10,7 +14,10 @@ def main(backend):
     :param backend: back-end (example:scrot, wx,..)
     """
     backend = backend if backend else None
-    v = pyscreenshot.backend_version(backend=backend, childprocess=False)
-    if not v:
+
+    try:
+        v = backend_version2(backend)
+    except Exception as e:
+        log.warning(e)
         v = ""
     print(v)

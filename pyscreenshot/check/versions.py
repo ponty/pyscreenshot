@@ -14,7 +14,7 @@ def print_versions():
     print_name_version("pyscreenshot", pyscreenshot.__version__)
 
     for name in pyscreenshot.backends():
-        v = backend_version(name, childprocess=True)
+        v = backend_version(name)
         if not v:
             v = ""
         print_name_version(name, v)

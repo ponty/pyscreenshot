@@ -41,20 +41,10 @@ def backends():
     return backend_dict.keys()
 
 
-# TODO: childprocess?
-def backend_version(backend, childprocess=True):
+def backend_version(backend):
     """Back-end version.
 
     :param backend: back-end (examples:scrot, wx,..)
-    :param childprocess: see :py:func:`grab`
     :return: version as string
     """
-    if not childprocess:
-        try:
-            v = backend_version2(backend)
-        except Exception as e:
-            log.warning(e)
-            v = None
-        return v
-    else:
-        return childprocess_backend_version(backend)
+    return childprocess_backend_version(backend)
