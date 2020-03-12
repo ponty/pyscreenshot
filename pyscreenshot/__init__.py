@@ -39,6 +39,7 @@ def backends():
     return backend_dict.keys()
 
 
+# TODO: childprocess?
 def backend_version(backend, childprocess=True):
     """Back-end version.
 

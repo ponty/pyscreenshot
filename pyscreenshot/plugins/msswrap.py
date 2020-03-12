@@ -13,7 +13,7 @@ class MssError(Exception):
 
 sct = None
 
-# TODO: not working without xrandr extension
+# not working without xrandr extension
 # only bits_per_pixel == 32 is supported
 
 
