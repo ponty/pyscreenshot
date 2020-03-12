@@ -97,11 +97,19 @@ def backends():
             yield x
 
 
+def select_childprocess(childprocess, backend_class):
+    if childprocess is None:
+        return backend_class.apply_childprocess
+
+    return childprocess
+
+
 def auto(bbox, childprocess):
     im = None
     for backend_class in backends():
         backend_name = backend_class.name
-        if backend_class.apply_childprocess and childprocess:
+
+        if select_childprocess(childprocess, backend_class):
             log.debug('running "%s" in child process', backend_name)
             im = childprocess_grab(backend_name, bbox)
         else:
@@ -122,7 +130,7 @@ def auto(bbox, childprocess):
 
 def force(backend_name, bbox, childprocess):
     backend_class = backend_dict[backend_name]
-    if backend_class.apply_childprocess and childprocess:
+    if select_childprocess(childprocess, backend_class):
         log.debug('running "%s" in child process', backend_name)
         return childprocess_grab(backend_name, bbox)
     else:

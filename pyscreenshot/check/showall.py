@@ -1,6 +1,6 @@
 import time
 
-import pyscreenshot as ImageGrab
+import pyscreenshot
 from entrypoint2 import entrypoint
 from pyscreenshot import FailedBackendError, backends
 
@@ -12,9 +12,7 @@ def show():
     for x in backends():
         try:
             print("--> grabbing by " + x)
-            im.append(
-                ImageGrab.grab(bbox=(500, 400, 800, 600), backend=x, childprocess=True)
-            )
+            im.append(pyscreenshot.grab(bbox=(500, 400, 800, 600), backend=x))
         except Exception as e:
             print(e)
     print(im)

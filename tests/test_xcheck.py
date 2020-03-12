@@ -7,8 +7,9 @@ from pyscreenshot.util import proc
 
 
 def test_speedtest():
-    eq_(proc("pyscreenshot.check.speedtest", ["--childprocess"]).return_code, 0)
     eq_(proc("pyscreenshot.check.speedtest").return_code, 0)
+    eq_(proc("pyscreenshot.check.speedtest", ["--childprocess", "0"]).return_code, 0)
+    eq_(proc("pyscreenshot.check.speedtest", ["--childprocess", "1"]).return_code, 0)
 
 
 def test_print_versions():
