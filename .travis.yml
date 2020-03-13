@@ -69,6 +69,8 @@ addons:
   apt:
     sources:
       - sourceline: "ppa:jan-simon/pqiv"
+      # maim
+      - sourceline: "ppa:nilarimogard/webupd8"
     packages:
       - xvfb
       - scrot
