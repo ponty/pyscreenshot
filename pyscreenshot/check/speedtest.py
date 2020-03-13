@@ -4,6 +4,9 @@ import time
 
 import pyscreenshot
 from entrypoint2 import entrypoint
+from pyscreenshot.plugins.gnome_dbus import GnomeDBusWrapper
+from pyscreenshot.plugins.gnome_screenshot import GnomeScreenshotWrapper
+from pyscreenshot.plugins.kwin_dbus import KwinDBusWrapper
 from pyscreenshot.util import proc
 
 
@@ -28,6 +31,9 @@ def run(force_backend, n, childprocess, bbox=None):
         print("")
 
 
+novirt = [GnomeDBusWrapper.name, KwinDBusWrapper.name, GnomeScreenshotWrapper.name]
+
+
 def run_all(n, childprocess_param, virtual_only=True, bbox=None):
     debug = True
     print("")
@@ -46,7 +52,8 @@ def run_all(n, childprocess_param, virtual_only=True, bbox=None):
         debugpar = []
     for x in ["default"] + pyscreenshot.backends():
         backendpar = ["--backend", x]
-        if virtual_only and x == "gnome-screenshot":  # TODO: remove
+        # skip non X backends
+        if virtual_only and x in novirt:
             continue
         p = proc(
             "pyscreenshot.check.speedtest",
