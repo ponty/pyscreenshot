@@ -34,6 +34,7 @@ Hierarchy
                 pyscreenshot -> ImagemagickWrapper;
                 pyscreenshot -> WxScreenWrapper;
                 pyscreenshot -> ScrotWrapper;
+                pyscreenshot -> MaimWrapper;
                 pyscreenshot -> MacQuartzWrapper
                 pyscreenshot -> ScreencaptureWrapper
                 pyscreenshot -> GnomeScreenshotWrapper
@@ -52,6 +53,7 @@ Hierarchy
             screencapture;
             Quartz;
             Scrot;
+            Maim;
             Imagemagick;
             "gnome-screenshot";
         }
@@ -85,6 +87,7 @@ Hierarchy
         PilWrapper -> PIL -> Windows;
         ImagemagickWrapper -> Imagemagick -> X11;
         ScrotWrapper -> Scrot -> X11;
+        MaimWrapper -> Maim -> X11;
 
         GnomeScreenshotWrapper -> "gnome-screenshot" -> X11;
         "gnome-screenshot" -> Wayland;

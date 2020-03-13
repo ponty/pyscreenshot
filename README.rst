@@ -29,6 +29,7 @@ Features:
  * supported Python versions: 2.7, 3.6, 3.7, 3.8
  * It has wrappers for various back-ends:
      * scrot_
+     * maim_
      * ImageMagick_
      * PyGTK_
      * PIL_ or Pillow_ (only on Windows)
@@ -168,6 +169,7 @@ On Wayland only the `gnome-screenshot` back-end works::
 .. _PyGTK: https://pypi.org/project/PyGTK/
 .. _blackbox: http://www.imagemagick.org/discourse-server/viewtopic.php?f=3&t=13658
 .. _scrot: http://en.wikipedia.org/wiki/Scrot
+.. _maim: https://github.com/naelstrof/maim
 .. _PyQt4: https://pypi.org/project/PyQt4/
 .. _PyQt5: https://pypi.org/project/PyQt5/
 .. _PySide: https://pypi.org/project/PySide/

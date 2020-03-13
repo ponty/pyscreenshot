@@ -16,6 +16,7 @@ from pyscreenshot.plugins.imagemagick import ImagemagickWrapper
 from pyscreenshot.plugins.kwin_dbus import KwinDBusWrapper
 from pyscreenshot.plugins.mac_quartz import MacQuartzWrapper
 from pyscreenshot.plugins.mac_screencapture import ScreencaptureWrapper
+from pyscreenshot.plugins.maim import MaimWrapper
 from pyscreenshot.plugins.msswrap import MssWrapper
 from pyscreenshot.plugins.pilwrap import PilWrapper
 from pyscreenshot.plugins.pyside2_grabwindow import PySide2GrabWindow
@@ -25,12 +26,8 @@ from pyscreenshot.plugins.qt5grabwindow import Qt5GrabWindow
 from pyscreenshot.plugins.qtpy_grabwindow import QtPyGrabWindow
 from pyscreenshot.plugins.scrot import ScrotWrapper
 from pyscreenshot.plugins.wxscreen import WxScreen
-from pyscreenshot.util import (
-    platform_is_linux,
-    platform_is_osx,
-    platform_is_win,
-    use_x_display,
-)
+from pyscreenshot.util import (platform_is_linux, platform_is_osx,
+                               platform_is_win, use_x_display)
 
 log = logging.getLogger(__name__)
 
@@ -51,6 +48,7 @@ def backends():
         if use_x_display():
             yield MssWrapper
             yield ScrotWrapper
+            yield MaimWrapper
             yield ImagemagickWrapper
             yield Gdk3PixbufWrapper
             yield WxScreen
@@ -151,4 +149,3 @@ def backend_version2(backend_name):
     obj = backend_class()
     v = obj.backend_version()
     return v
-
