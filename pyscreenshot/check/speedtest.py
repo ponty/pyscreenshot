@@ -1,9 +1,9 @@
+import logging
 import sys
 import time
 
-from entrypoint2 import entrypoint
-
 import pyscreenshot
+from entrypoint2 import entrypoint
 from pyscreenshot.util import proc
 
 
@@ -11,6 +11,8 @@ def run(force_backend, n, childprocess, bbox=None):
     sys.stdout.write("%-20s\t" % force_backend)
     sys.stdout.flush()  # before any crash
 
+    if force_backend == "default":
+        force_backend = None
     try:
         start = time.time()
         for _ in range(n):
@@ -26,8 +28,8 @@ def run(force_backend, n, childprocess, bbox=None):
         print("")
 
 
-# TODO: add default
 def run_all(n, childprocess_param, virtual_only=True, bbox=None):
+    debug = True
     print("")
     print("n=%s" % n)
     print("------------------------------------------------------")
@@ -38,14 +40,17 @@ def run_all(n, childprocess_param, virtual_only=True, bbox=None):
         bboxpar = ["--bbox", bbox]
     else:
         bboxpar = []
-    debugpar = []
-    debugpar = ["--debug"]
-    for x in pyscreenshot.backends():
+    if debug:
+        debugpar = ["--debug"]
+    else:
+        debugpar = []
+    for x in ["default"] + pyscreenshot.backends():
+        backendpar = ["--backend", x]
         if virtual_only and x == "gnome-screenshot":  # TODO: remove
             continue
         p = proc(
             "pyscreenshot.check.speedtest",
-            ["--backend", x, "--childprocess", childprocess_param] + bboxpar + debugpar,
+            ["--childprocess", childprocess_param] + bboxpar + debugpar + backendpar,
         )
         print(p.stdout)
 
@@ -56,8 +61,8 @@ def speedtest(virtual_display=False, backend="", childprocess="", bbox=""):
     
     :param virtual_display: run with Xvfb
     :param bbox: bounding box coordinates x1:y1:x2:y2
-    :param backend: back-end can be forced if set (example:scrot, wx,..),
-                    otherwise back-end is automatic
+    :param backend: back-end can be forced if set (example:default, scrot, wx,..),
+                    otherwise all back-ends are tested
     :param childprocess: pyscreenshot parameter childprocess (0/1)
     """
     childprocess_param = childprocess
