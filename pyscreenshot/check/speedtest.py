@@ -51,20 +51,25 @@ def run_all(n, childprocess_param, virtual_only=True, bbox=None):
 
 
 @entrypoint
-def speedtest(virtual_display=False, backend="", childprocess="auto", bbox=""):
+def speedtest(virtual_display=False, backend="", childprocess="", bbox=""):
     """Performance test of all back-ends. 
     
     :param virtual_display: run with Xvfb
     :param bbox: bounding box coordinates x1:y1:x2:y2
     :param backend: back-end can be forced if set (example:scrot, wx,..),
                     otherwise back-end is automatic
-    :param childprocess: pyscreenshot parameter childprocess (auto/0/1)
+    :param childprocess: pyscreenshot parameter childprocess (0/1)
     """
     childprocess_param = childprocess
-    if childprocess == "0":
+    if childprocess == "":
+        childprocess = None
+    elif childprocess == "0":
         childprocess = False
-    if childprocess == "1":
+    elif childprocess == "1":
         childprocess = True
+    else:
+        raise ValueError("invalid childprocess value")
+
     n = 10
     if bbox:
         x1, y1, x2, y2 = map(int, bbox.split(":"))
