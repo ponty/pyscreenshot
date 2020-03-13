@@ -36,7 +36,7 @@ def backends():
 
     :return: back-ends as string list
     """
-    return backend_dict.keys()
+    return list(backend_dict.keys())
 
 
 def backend_version(backend):
