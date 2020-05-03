@@ -48,12 +48,14 @@ def run_box(options, vagrantfile, cmds, guiproc):
             v.user_hostname_port(), connect_kwargs={"key_filename": v.keyfile(),},
         ) as conn:
             with conn.cd("/vagrant"):
-                cmds = ["free -h", "env | sort"] + cmds
+                cmds = ["env | sort"] + cmds
                 if guiproc:
                     pid = None
                     while not pid:
                         print(f"waiting for {guiproc}")
-                        pid = conn.run(f"pidof {guiproc} || true").stdout
+                        cmd = f"bash --login -c 'pidof {guiproc} || true'"
+                        print(cmd)
+                        pid = conn.run(cmd).stdout
                         sleep(1)
                     print(f"{guiproc} pid={pid}")
                 sleep(1)
@@ -102,8 +104,12 @@ config = {
         ["tox -e py3-desktop"],
         "Xwayland",
     ),
-    # "win": ("Vagrantfile.win.rb", ["tox -e py3-desktop"]),
-    # "osx": ("Vagrantfile.osx.rb", ["tox -e py3-desktop"]),
+    "win": ("Vagrantfile.win.rb", ["tox -e py3-win"], "",),
+    "osx": (
+        "Vagrantfile.osx.rb",
+        ["bash --login -c 'python3 -m tox -e py3-osx'"],
+        "Dock",
+    ),
     # TODO: ubuntu 20.20
 }
 

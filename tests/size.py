@@ -3,7 +3,7 @@ import sys
 import pyscreenshot
 from easyprocess import EasyProcess
 from nose.tools import eq_
-from pyscreenshot.util import platform_is_osx
+from pyscreenshot.util import platform_is_osx,platform_is_linux,platform_is_win
 
 from config import bbox_ls
 from image_debug import img_debug
@@ -17,18 +17,23 @@ def display_size():
         mainMonitor = CGDisplayBounds(CGMainDisplayID())
         return int(mainMonitor.size.width), int(mainMonitor.size.height)
 
-    # http://www.cyberciti.biz/faq/how-do-i-find-out-screen-resolution-of-my-linux-desktop/
-    # xdpyinfo  | grep 'dimensions:'
-    screen_width, screen_height = 0, 0
-    xdpyinfo = EasyProcess("xdpyinfo")
-    xdpyinfo.enable_stdout_log = False
-    if xdpyinfo.call().return_code != 0:
-        raise ValueError("xdpyinfo error: %s" % xdpyinfo)
-    for x in xdpyinfo.stdout.splitlines():
-        if "dimensions:" in x:
-            screen_width, screen_height = map(int, x.strip().split()[1].split("x"))
+    if platform_is_win():
+        from win32api import GetSystemMetrics
+        return int(GetSystemMetrics(0)), int(GetSystemMetrics(1))
 
-    return screen_width, screen_height
+    if platform_is_linux():
+        # http://www.cyberciti.biz/faq/how-do-i-find-out-screen-resolution-of-my-linux-desktop/
+        # xdpyinfo  | grep 'dimensions:'
+        screen_width, screen_height = 0, 0
+        xdpyinfo = EasyProcess("xdpyinfo")
+        xdpyinfo.enable_stdout_log = False
+        if xdpyinfo.call().return_code != 0:
+            raise ValueError("xdpyinfo error: %s" % xdpyinfo)
+        for x in xdpyinfo.stdout.splitlines():
+            if "dimensions:" in x:
+                screen_width, screen_height = map(int, x.strip().split()[1].split("x"))
+
+        return screen_width, screen_height
 
 
 def check_size(backend, bbox, childprocess=True):

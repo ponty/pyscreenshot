@@ -52,9 +52,15 @@ def init():
         atexit.register(d.rmtree)
         refimgpath = d / "ref.png"
 
-        if not platform_is_win():  # TODO: win image viewer
-            im = generate_image()
-            im.save(refimgpath)
+        im = generate_image()
+        im.save(refimgpath)
+
+        if platform_is_win(): 
+            cmd = [
+                "C:\\Program Files (x86)\\FastStone Image Viewer\\FSViewer.exe",
+                refimgpath,
+            ]
+        else:
             cmd = [
                 "pqiv",
                 "--fullscreen",
@@ -62,12 +68,12 @@ def init():
                 "--disable-scaling",
                 refimgpath,
             ]
-            proc = EasyProcess(cmd).start()
-            atexit.register(proc.stop)
-            print(refimgpath)
-            sleep(5)  # TODO: check image displayed
-            if not proc.is_alive():
-                raise FillscreenError("pqiv stopped: %s" % proc)
+        proc = EasyProcess(cmd).start()
+        atexit.register(proc.stop)
+        print(refimgpath)
+        sleep(5)  # TODO: check image displayed
+        if not proc.is_alive():
+            raise FillscreenError("pqiv stopped: %s" % proc)
 
         # if the OS has color correction
         #  then the screenshot has slighly different color than the original image

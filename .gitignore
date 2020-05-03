@@ -38,3 +38,6 @@ MANIFEST
 docs/api/*
 
 *.log
+
+Vagrantfile.osx.rb
+Vagrantfile.win.rb
