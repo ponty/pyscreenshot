@@ -1,6 +1,5 @@
 #!/bin/sh
 
-echo 'export distutils_issue8876_workaround_enabled=1' >> /home/vagrant/.profile
 echo 'export export LC_ALL=C' >> /home/vagrant/.profile
 
 # test dependencies
