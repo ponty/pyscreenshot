@@ -54,13 +54,13 @@ matrix:
       language: shell # 'language: python' is an error on Travis CI macOS
       env: PATH=/Users/travis/Library/Python/3.7/bin:$PATH PIPUSER=--user PIPINST="qtpy wxpython pyobjc-framework-Quartz pyobjc-framework-LaunchServices"
 
-    - name: "Python 3.8 on Windows"
-      os: windows # Windows 10.0.17134 N/A Build 17134
-      language: shell # 'language: python' is an error on Travis CI Windows
-      before_install:
-        - choco install python --version 3.8
-        - python -m pip install --upgrade pip
-      env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
+    # - name: "Python 3.8 on Windows"
+    #   os: windows # Windows 10.0.17134 N/A Build 17134
+    #   language: shell # 'language: python' is an error on Travis CI Windows
+    #   before_install:
+    #     - choco install python --version 3.8
+    #     - python -m pip install --upgrade pip
+    #   env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
 
       # python: "2.7_with_system_site_packages" on bionic doesn't exist
       # windows has no GUI
@@ -69,7 +69,6 @@ addons:
   apt:
     sources:
       - sourceline: "ppa:jan-simon/pqiv"
-      # maim
       - sourceline: "ppa:nilarimogard/webupd8"
     packages:
       - xvfb
@@ -79,7 +78,7 @@ addons:
       - pqiv
       - x11-utils
   homebrew:
-    update: true # https://travis-ci.community/t/macos-build-fails-because-of-homebrew-bundle-unknown-command/7296/10
+    update: true # TODO: check # https://travis-ci.community/t/macos-build-fails-because-of-homebrew-bundle-unknown-command/7296/10
     packages:
       - wxmac
       - pyqt
@@ -100,6 +99,5 @@ script:
   - $PYTHON -m pyscreenshot.check.versions
   - if [ ${TRAVIS_OS_NAME} == "osx" ];   then $PYTHON -m pyscreenshot.check.speedtest 2> /dev/null; fi
   - if [ ${TRAVIS_OS_NAME} == "linux" ]; then $PYTHON -m pyscreenshot.check.speedtest --virtual-display 2> /dev/null; fi
-  - if [ ${TRAVIS_OS_NAME} == "osx" ]; then nosetests -v . ; fi
-  - if [ ${TRAVIS_OS_NAME} == "linux" ]; then xvfb-run -s "-br -screen 0 900x800x24" nosetests -v . ; fi
-# - if [ ${TRAVIS_OS_NAME} == "windows" ]; then ??; fi
+  - if [ ${TRAVIS_OS_NAME} == "osx" ]; then pytest -v . ; fi
+  - if [ ${TRAVIS_OS_NAME} == "linux" ]; then xvfb-run -s "-br -screen 0 900x800x24" pytest -v . ; fi

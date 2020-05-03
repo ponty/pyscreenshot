@@ -1,5 +1,4 @@
 import six
-from nose.tools import assert_raises
 from pyscreenshot import FailedBackendError
 from pyscreenshot.util import (
     platform_is_linux,

@@ -2,8 +2,7 @@ import sys
 
 import pyscreenshot
 from easyprocess import EasyProcess
-from nose.tools import eq_
-from pyscreenshot.util import platform_is_osx,platform_is_linux,platform_is_win
+from pyscreenshot.util import platform_is_osx, platform_is_linux, platform_is_win
 
 from config import bbox_ls
 from image_debug import img_debug
@@ -19,6 +18,7 @@ def display_size():
 
     if platform_is_win():
         from win32api import GetSystemMetrics
+
         return int(GetSystemMetrics(0)), int(GetSystemMetrics(1))
 
     if platform_is_linux():
@@ -46,8 +46,8 @@ def check_size(backend, bbox, childprocess=True):
     else:
         width, height = display_size()
     if width and height:
-        eq_(width, im.size[0])
-        eq_(height, im.size[1])
+        assert width == im.size[0]
+        assert height == im.size[1]
 
 
 def backend_size(backend, childprocess=True):

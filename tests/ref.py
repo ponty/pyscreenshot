@@ -5,7 +5,6 @@ import os
 import pyscreenshot
 import six
 from easyprocess import EasyProcess
-from nose.tools import eq_, ok_
 from path import TempDir
 from PIL import Image, ImageChops
 from pyscreenshot.util import platform_is_osx
@@ -29,8 +28,8 @@ def check_ref(backend, bbox, childprocess, refimgpath):
     im = im.convert("RGB")
     logging.debug("shot getextrema: %s", im.getextrema())
 
-    eq_("RGB", img_ref.mode)
-    eq_("RGB", im.mode)
+    assert "RGB" == img_ref.mode
+    assert "RGB" == im.mode
 
     img_debug(img_ref, "ref" + str(bbox))
     img_debug(im, str(backend) + str(bbox))
@@ -48,14 +47,14 @@ def check_ref(backend, bbox, childprocess, refimgpath):
     ):
         # TODO: qt color problem on osx
         color_diff_max = max([b for (_, b) in ex])
-        ok_(color_diff_max < 70)
+        assert color_diff_max < 70
     else:
-        eq_(
-            diff_bbox,
-            None,
-            "different image data %s bbox=%s extrema:%s diff_bbox=%s"
-            % (backend, bbox, ex, diff_bbox),
-        )
+        if not diff_bbox is None:
+            print(
+                "different image data %s bbox=%s extrema:%s diff_bbox=%s"
+                % (backend, bbox, ex, diff_bbox)
+            )
+        assert diff_bbox is None
 
 
 def backend_ref(backend, childprocess=True, refimgpath=""):
