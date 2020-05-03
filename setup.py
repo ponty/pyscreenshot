@@ -5,6 +5,9 @@ from setuptools import setup
 NAME = "pyscreenshot"
 URL = "https://github.com/ponty/pyscreenshot"
 DESCRIPTION = "python screenshot"
+LONG_DESCRIPTION = """The pyscreenshot module can be used to copy the contents of the screen to a Pillow image memory using various back-ends. Replacement for the ImageGrab Module.
+
+home: https://github.com/ponty/pyscreenshot"""
 PACKAGES = [
     NAME,
     NAME + ".plugins",
@@ -49,7 +52,7 @@ setup(
     name=NAME,
     version=VERSION,
     description=DESCRIPTION,
-    long_description=open("README.rst", "r").read(),
+    long_description=LONG_DESCRIPTION,
     python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*",
     classifiers=classifiers,
     keywords="screenshot",
