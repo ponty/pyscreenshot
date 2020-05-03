@@ -103,6 +103,3 @@ script:
   - if [ ${TRAVIS_OS_NAME} == "osx" ]; then nosetests -v . ; fi
   - if [ ${TRAVIS_OS_NAME} == "linux" ]; then xvfb-run -s "-br -screen 0 900x800x24" nosetests -v . ; fi
 # - if [ ${TRAVIS_OS_NAME} == "windows" ]; then ??; fi
-
-after_success:
-  - coveralls
