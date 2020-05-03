@@ -1,8 +1,5 @@
-tox
 nose
-coverage
 pyvirtualdisplay
 pillow
-coveralls
 path.py
 python-xlib
