@@ -159,6 +159,11 @@ On Wayland only the `gnome-screenshot` back-end works:
 im = ImageGrab.grab(backend='gnome-screenshot')
 ```
 
+Hierarchy
+=========
+
+![Alt text](https://g.gravizo.com/source/svg?https%3A%2F%2Fraw.githubusercontent.com/ponty/pyscreenshot/master/hierarchy.dot)
+
 [1]: http://en.wikipedia.org/wiki/Scrot
 [2]: https://github.com/naelstrof/maim
 [3]: http://www.imagemagick.org/
