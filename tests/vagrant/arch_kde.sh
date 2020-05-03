@@ -11,7 +11,7 @@ sudo -u vagrant sh -c 'cd /tmp && git clone https://aur.archlinux.org/pqiv.git &
 
 # tools
 pacman --needed -S --noconfirm python-pip xorg-server-xvfb mc xorg-xdpyinfo
-pip install tox
+python -m pip install tox
 
 chmod a-x /usr/lib/kscreenlocker_greet
 
