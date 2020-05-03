@@ -104,7 +104,7 @@ Installation
  * install at least one back-end
  * install the program::
 
-    pip3 install pyscreenshot
+    python3 -m pip install pyscreenshot
 
 
 
