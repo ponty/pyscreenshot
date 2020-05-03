@@ -127,7 +127,6 @@ Vagrant.configure(2) do |config|
   
 # doc dependencies
   sudo apt-get install -y graphviz
-  #sudo pip install -r /vagrant/requirements-doc.txt
   
   "
       config.vm.provision "shell", inline: $script
