@@ -21,6 +21,7 @@ class ImagemagickWrapper(CBackend):
         pass
 
     def grab(self, bbox=None):
+        # TODO: macos/win?
         if platform_is_osx():
             raise ImagemagickBackendError("osx not supported")  # TODO
 
