@@ -6,10 +6,9 @@ For handling image memory (e.g. saving to file, converting,..) please read PIL_ 
 
 Links:
  * home: https://github.com/ponty/pyscreenshot
- * documentation: http://pyscreenshot.readthedocs.org
  * PYPI: https://pypi.python.org/pypi/pyscreenshot
 
-|Travis| |Coveralls| |Latest Version| |Supported Python versions| |License| |Documentation|
+|Travis|
 
 Goal:
   Pyscreenshot tries to allow to take screenshots without installing 3rd party libraries.
@@ -49,14 +48,7 @@ Features:
  * Mouse pointer is not visible.
 
 Known problems:
- * ImageMagick_ creates blackbox_ on some systems
  * gnome-screenshot_ back-end does not check $DISPLAY -> not working with Xvfb
-
-Similar projects:
- - http://sourceforge.net/projects/gtkshots/
- - http://pypi.python.org/pypi/autopy
- - https://github.com/asweigart/pyscreeze
- - https://github.com/BoboTiG/python-mss
 
 Examples
 ========
@@ -167,7 +159,6 @@ On Wayland only the `gnome-screenshot` back-end works::
 .. _Pillow: https://pypi.org/project/Pillow/
 .. _ImageMagick: http://www.imagemagick.org/
 .. _PyGTK: https://pypi.org/project/PyGTK/
-.. _blackbox: http://www.imagemagick.org/discourse-server/viewtopic.php?f=3&t=13658
 .. _scrot: http://en.wikipedia.org/wiki/Scrot
 .. _maim: https://github.com/naelstrof/maim
 .. _PyQt4: https://pypi.org/project/PyQt4/
@@ -181,13 +172,3 @@ On Wayland only the `gnome-screenshot` back-end works::
 
 .. |Travis| image:: https://travis-ci.org/ponty/pyscreenshot.svg?branch=master
    :target: https://travis-ci.org/ponty/pyscreenshot/
-.. |Coveralls| image:: http://img.shields.io/coveralls/ponty/pyscreenshot/master.svg
-   :target: https://coveralls.io/r/ponty/pyscreenshot/
-.. |Latest Version| image:: https://img.shields.io/pypi/v/pyscreenshot.svg
-   :target: https://pypi.python.org/pypi/pyscreenshot/
-.. |Supported Python versions| image:: https://img.shields.io/pypi/pyversions/pyscreenshot.svg
-   :target: https://pypi.python.org/pypi/pyscreenshot/
-.. |License| image:: https://img.shields.io/pypi/l/pyscreenshot.svg
-   :target: https://pypi.python.org/pypi/pyscreenshot/
-.. |Documentation| image:: https://readthedocs.org/projects/pyscreenshot/badge/?version=latest
-   :target: http://pyscreenshot.readthedocs.org
