@@ -115,7 +115,7 @@ The performance can be checked with pyscreenshot.check.speedtest.
 Example:
 
 ```console
-python3 -m pyscreenshot.check.speedtest --virtual-display 2>/dev/null
+$ python3 -m pyscreenshot.check.speedtest --virtual-display 2>/dev/null
 
 n=10
 ------------------------------------------------------
@@ -134,7 +134,7 @@ gnome-screenshot    	12   sec	( 1209 ms per call)
 Print versions:
 
 ```console
-python3 -m pyscreenshot.check.versions 2> /dev/null
+$ python3 -m pyscreenshot.check.versions 2> /dev/null
 python               3.7.3
 pyscreenshot         0.7
 scrot                1.1.1
