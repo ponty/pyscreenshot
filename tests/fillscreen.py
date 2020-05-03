@@ -38,7 +38,7 @@ def generate_image():
             r = int(x * 255 / w)
             g = int(y * 255 / h)
 
-            b = int(((x % B) / B + (y % B) / B) / 2 * 255)
+            b = int(((x % B) * 255 / B + (y % B) * 255 / B) / 2)
             pixels[x, y] = (r, g, b)  # Set the colour accordingly
             i += 1
     return img
