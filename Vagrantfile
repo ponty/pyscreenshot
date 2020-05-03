@@ -80,11 +80,8 @@ Vagrant.configure(2) do |config|
 
 # tools
   sudo apt-get install -y mc xvfb
-  #sudo apt-get install -y tox
-  sudo apt-get install -y python-pip
   sudo apt-get install -y python3-pip
   sudo pip3 install -U pip
-  sudo pip3 install -U tox
   
 # for pillow source install
 #  sudo apt-get install -y libjpeg-dev zlib1g-dev
@@ -126,7 +123,7 @@ Vagrant.configure(2) do |config|
 
 # test dependencies
   sudo apt-get install -y pqiv x11-utils
-  #sudo pip install -r /vagrant/requirements-test.txt
+  sudo pip3 install -U tox
   
 # doc dependencies
   sudo apt-get install -y graphviz
