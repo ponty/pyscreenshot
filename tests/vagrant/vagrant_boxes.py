@@ -102,7 +102,8 @@ config = {
     "arch.gnome.wayland": (
         "Vagrantfile.arch.gnome.wayland.rb",
         ["tox -e py3-desktop"],
-        "Xwayland",
+        "gnome-shell-calendar-server",
+        # "Xwayland",
     ),
     "win": ("Vagrantfile.win.rb", ["tox -e py3-win"], "",),
     "osx": (
