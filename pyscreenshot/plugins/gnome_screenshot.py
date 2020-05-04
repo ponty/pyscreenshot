@@ -8,8 +8,7 @@ PROGRAM = "gnome-screenshot"
 # https://gitlab.gnome.org/GNOME/gnome-screenshot/blob/master/src/screenshot-utils.c
 # DBus is used for screenshot.
 # If it doesn't succeed or $GNOME_SCREENSHOT_FORCE_FALLBACK is set then X DISPLAY is used.
-# Flash effect!
-
+# Flash effect! https://bugzilla.gnome.org/show_bug.cgi?id=672759
 
 class GnomeScreenshotWrapper(CBackend):
     """Plugin for ``pyscreenshot`` that uses ``gnome-screenshot``
