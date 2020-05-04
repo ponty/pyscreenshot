@@ -17,6 +17,7 @@ class ScrotWrapper(CBackend):
 
     def __init__(self):
         pass
+
     def grab(self, bbox=None):
         # p = EasyProcess([PROGRAM, "-version"])
         # p.enable_stdout_log = False

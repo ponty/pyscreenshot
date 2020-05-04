@@ -10,6 +10,7 @@ PROGRAM = "gnome-screenshot"
 # If it doesn't succeed or $GNOME_SCREENSHOT_FORCE_FALLBACK is set then X DISPLAY is used.
 # Flash effect! https://bugzilla.gnome.org/show_bug.cgi?id=672759
 
+
 class GnomeScreenshotWrapper(CBackend):
     """Plugin for ``pyscreenshot`` that uses ``gnome-screenshot``
     https://git.gnome.org/browse/gnome-screenshot/

@@ -66,4 +66,3 @@ class Qt4GrabWindow(CBackend):
         from PyQt4 import Qt
 
         return Qt.PYQT_VERSION_STR
-

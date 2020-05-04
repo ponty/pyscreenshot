@@ -6,4 +6,3 @@ if not platform_is_linux():
 
     def test_pil():
         backend_to_check("pil")
-

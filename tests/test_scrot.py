@@ -7,4 +7,3 @@ if use_x_display():
 
         def test_scrot():
             backend_to_check("scrot")
-

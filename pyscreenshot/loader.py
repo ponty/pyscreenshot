@@ -26,8 +26,12 @@ from pyscreenshot.plugins.qt5grabwindow import Qt5GrabWindow
 from pyscreenshot.plugins.qtpy_grabwindow import QtPyGrabWindow
 from pyscreenshot.plugins.scrot import ScrotWrapper
 from pyscreenshot.plugins.wxscreen import WxScreen
-from pyscreenshot.util import (platform_is_linux, platform_is_osx,
-                               platform_is_win, use_x_display)
+from pyscreenshot.util import (
+    platform_is_linux,
+    platform_is_osx,
+    platform_is_win,
+    use_x_display,
+)
 
 log = logging.getLogger(__name__)
 

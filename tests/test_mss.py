@@ -11,10 +11,11 @@ from ref import backend_to_check, check_import
 import sys
 
 from pyscreenshot.util import platform_is_linux
+
 try:
     from Xlib import display
 except ImportError:
-    display=None
+    display = None
 
 # https://github.com/python-xlib/python-xlib/blob/master/examples/xrandr.py#L44
 def missing_RANDR():

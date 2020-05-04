@@ -55,7 +55,7 @@ def init():
         im = generate_image()
         im.save(refimgpath)
 
-        if platform_is_win(): 
+        if platform_is_win():
             cmd = [
                 "C:\\Program Files (x86)\\FastStone Image Viewer\\FSViewer.exe",
                 refimgpath,

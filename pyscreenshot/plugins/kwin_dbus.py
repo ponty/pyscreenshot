@@ -53,7 +53,6 @@ class KwinDBusWrapper(CBackend):
                     (x, y, width, height, captureCursor),
                 )
 
-
         # https://jeepney.readthedocs.io/en/latest/integrate.html
         connection = connect_and_authenticate(bus="SESSION")
         dbscr = Screenshot()
