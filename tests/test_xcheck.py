@@ -27,9 +27,11 @@ def test_print_versions_no_path():
         os.environ["PATH"] = path
 
 
-def test_showgrabbox():
-    assert proc("pyscreenshot.examples.showgrabbox").return_code == 0
+# TODO:enable
+# def test_showgrabbox():
+#     assert proc("pyscreenshot.examples.showgrabbox").return_code == 0
 
 
-def test_showgrabfullscreen():
-    assert proc("pyscreenshot.examples.showgrabfullscreen").return_code == 0
+# TODO:enable
+# def test_showgrabfullscreen():
+#     assert proc("pyscreenshot.examples.showgrabfullscreen").return_code == 0
