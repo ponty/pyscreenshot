@@ -1,6 +1,6 @@
 #!/bin/sh
 
-pacman -Syu  --noconfirm
+pacman -Syyu  --noconfirm
 
 # kde
 pacman --needed -S --noconfirm xorg-server plasma-meta plasma-wayland-session sddm

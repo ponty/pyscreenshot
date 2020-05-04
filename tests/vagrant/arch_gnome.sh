@@ -1,6 +1,6 @@
 #!/bin/sh
 
-pacman -Syu  --noconfirm
+pacman -Syyu  --noconfirm
 
 # pacman --needed -S --noconfirm xorg-server 
 # gnome
