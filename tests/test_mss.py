@@ -11,13 +11,14 @@ from ref import backend_to_check, check_import
 import sys
 
 from pyscreenshot.util import platform_is_linux
-from Xlib import X, Xutil, display
-from Xlib.ext import randr
-
+try:
+    from Xlib import display
+except ImportError:
+    display=None
 
 # https://github.com/python-xlib/python-xlib/blob/master/examples/xrandr.py#L44
 def missing_RANDR():
-    if not platform_is_linux():
+    if display:
         return False
     disp = display.Display()
     return not disp.has_extension("RANDR")
