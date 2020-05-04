@@ -1,7 +1,7 @@
 import logging
 import sys
 import os
-
+from time import sleep
 import pyscreenshot
 import six
 from easyprocess import EasyProcess
@@ -57,18 +57,20 @@ def check_ref(backend, bbox, childprocess, refimgpath):
         assert diff_bbox is None
 
 
-def backend_ref(backend, childprocess=True, refimgpath=""):
+def backend_ref(backend, childprocess=True, refimgpath="", delay=0):
     for bbox in bbox_ls:
         print("bbox: {}".format(bbox))
         print("backend: %s" % backend)
         check_ref(backend, bbox, childprocess, refimgpath)
+        if delay:
+            sleep(delay)
 
 
-def _backend_check(backend, childprocess, refimgpath):
+def _backend_check(backend, childprocess, refimgpath, delay):
     enable_ref = bool(refimgpath)
     if enable_ref:
         backend_ref(
-            backend, childprocess=childprocess, refimgpath=refimgpath,
+            backend, childprocess=childprocess, refimgpath=refimgpath,delay=delay
         )
     else:
         backend_size(
@@ -76,9 +78,9 @@ def _backend_check(backend, childprocess, refimgpath):
         )
 
 
-def backend_to_check(backend):
+def backend_to_check(backend, delay=0):
     refimgpath = fillscreen.init()
-    _backend_check(backend, childprocess=None, refimgpath=refimgpath)
+    _backend_check(backend, childprocess=None, refimgpath=refimgpath, delay=delay)
     # _backend_check(backend, childprocess=False) # TODO: test childprocess=True/False/auto
 
 

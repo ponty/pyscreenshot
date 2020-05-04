@@ -6,4 +6,7 @@ if gnome():
 
     def test_gnome_screenshot():
         assert not kde()
-        backend_to_check("gnome-screenshot")
+
+        # the flash effect can be seen on the next screenshot,
+        # so some delay is needed
+        backend_to_check("gnome-screenshot", delay=1)
