@@ -106,7 +106,7 @@ config = {
         "gnome-shell-calendar-server",
         # "Xwayland",
     ),
-    "win": ("Vagrantfile.win.rb", ["tox -e py3-win"], "",),
+    # "win": ("Vagrantfile.win.rb", ["tox -e py3-win"], "",),
     "osx": (
         "Vagrantfile.osx.rb",
         ["bash --login -c 'python3 -m tox -e py3-osx'"],
@@ -132,4 +132,3 @@ def main(boxes="all", fast=False, destroy=False):
             options.win = k == "win"
             print("-----> %s %s %s" % (k, v[0], v[1]))
             run_box(options, v[0], v[1], v[2])
-
