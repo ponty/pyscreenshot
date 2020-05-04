@@ -47,8 +47,9 @@ def run_box(options, vagrantfile, cmds, guiproc):
         with fabric.Connection(
             v.user_hostname_port(), connect_kwargs={"key_filename": v.keyfile(),},
         ) as conn:
-            with conn.cd("/vagrant"):
-                cmds = ["env | sort"] + cmds
+            with conn.cd("c:/vagrant" if options.win else "/vagrant"):
+                if not options.win:
+                    cmds = ["env | sort"] + cmds
                 if guiproc:
                     pid = None
                     while not pid:
@@ -128,6 +129,7 @@ def main(boxes="all", fast=False, destroy=False):
         boxes = boxes.split(",")
     for k, v in config.items():
         if k in boxes:
+            options.win = k == "win"
             print("-----> %s %s %s" % (k, v[0], v[1]))
             run_box(options, v[0], v[1], v[2])
 
