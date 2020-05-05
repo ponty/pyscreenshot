@@ -1,6 +1,7 @@
-from pyscreenshot.util import use_x_display
 import os
-from ref import backend_to_check, check_import, kde, gnome
+
+from pyscreenshot.util import use_x_display
+from ref import backend_to_check, check_import, gnome, kde
 
 if kde():
 

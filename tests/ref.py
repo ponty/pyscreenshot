@@ -1,17 +1,18 @@
 import logging
-import sys
 import os
+import sys
 from time import sleep
-import pyscreenshot
+
 import six
 from easyprocess import EasyProcess
 from path import TempDir
 from PIL import Image, ImageChops
-from pyscreenshot.util import platform_is_osx
 
 import fillscreen
+import pyscreenshot
 from config import bbox_ls
 from image_debug import img_debug
+from pyscreenshot.util import platform_is_osx
 from size import backend_size
 
 

@@ -1,8 +1,10 @@
-from entrypoint2 import entrypoint
 import logging
-from pyscreenshot.loader import FailedBackendError, backend_grab, backend_version2
+
+from entrypoint2 import entrypoint
 
 import pyscreenshot
+from pyscreenshot.loader import (FailedBackendError, backend_grab,
+                                 backend_version2)
 
 log = logging.getLogger(__name__)
 

@@ -1,11 +1,12 @@
 import sys
 
-import pyscreenshot
 from easyprocess import EasyProcess
-from pyscreenshot.util import platform_is_osx, platform_is_linux, platform_is_win
 
+import pyscreenshot
 from config import bbox_ls
 from image_debug import img_debug
+from pyscreenshot.util import (platform_is_linux, platform_is_osx,
+                               platform_is_win)
 
 
 def display_size():

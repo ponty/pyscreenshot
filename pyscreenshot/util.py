@@ -1,6 +1,7 @@
-from easyprocess import EasyProcess
 import os
 import sys
+
+from easyprocess import EasyProcess
 
 
 def py2():

@@ -1,10 +1,10 @@
 import logging
 import os
-from pyscreenshot.plugins.backend import CBackend
-from pyscreenshot.tempexport import read_func_img
 
 from PIL import Image
 
+from pyscreenshot.plugins.backend import CBackend
+from pyscreenshot.tempexport import read_func_img
 
 log = logging.getLogger(__name__)
 

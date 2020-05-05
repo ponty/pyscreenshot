@@ -1,6 +1,7 @@
 import logging
 
 from PIL import Image
+
 from pyscreenshot.plugins.backend import CBackend
 from pyscreenshot.util import platform_is_osx, py2
 

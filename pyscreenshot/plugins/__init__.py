@@ -8,6 +8,7 @@ from pyscreenshot.plugins.imagemagick import ImagemagickWrapper
 from pyscreenshot.plugins.kwin_dbus import KwinDBusWrapper
 from pyscreenshot.plugins.mac_quartz import MacQuartzWrapper
 from pyscreenshot.plugins.mac_screencapture import ScreencaptureWrapper
+from pyscreenshot.plugins.maim import MaimWrapper
 from pyscreenshot.plugins.msswrap import MssWrapper
 from pyscreenshot.plugins.pilwrap import PilWrapper
 from pyscreenshot.plugins.pyside2_grabwindow import PySide2GrabWindow
@@ -16,7 +17,6 @@ from pyscreenshot.plugins.qt4grabwindow import Qt4GrabWindow
 from pyscreenshot.plugins.qt5grabwindow import Qt5GrabWindow
 from pyscreenshot.plugins.qtpy_grabwindow import QtPyGrabWindow
 from pyscreenshot.plugins.scrot import ScrotWrapper
-from pyscreenshot.plugins.maim import MaimWrapper
 from pyscreenshot.plugins.wxscreen import WxScreen
 
 backend_dict = {

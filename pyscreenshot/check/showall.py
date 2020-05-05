@@ -1,7 +1,8 @@
 import time
 
-import pyscreenshot
 from entrypoint2 import entrypoint
+
+import pyscreenshot
 from pyscreenshot import FailedBackendError, backends
 
 

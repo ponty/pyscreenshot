@@ -1,10 +1,10 @@
 import logging
 import os
 
-from pyscreenshot.imcodec import codec
 from pyscreenshot.err import FailedBackendError
-from pyscreenshot.util import proc
+from pyscreenshot.imcodec import codec
 from pyscreenshot.tempdir import TemporaryDirectory
+from pyscreenshot.util import proc
 
 log = logging.getLogger(__name__)
 

@@ -7,6 +7,7 @@ buffers directly instead of saving intermediate files (which is slow).
 import sys
 
 from PIL import Image
+
 from pyscreenshot.plugins.backend import CBackend
 from pyscreenshot.util import platform_is_osx
 

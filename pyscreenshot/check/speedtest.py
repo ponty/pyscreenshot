@@ -2,8 +2,9 @@ import logging
 import sys
 import time
 
-import pyscreenshot
 from entrypoint2 import entrypoint
+
+import pyscreenshot
 from pyscreenshot.plugins.gnome_dbus import GnomeDBusWrapper
 from pyscreenshot.plugins.gnome_screenshot import GnomeScreenshotWrapper
 from pyscreenshot.plugins.kwin_dbus import KwinDBusWrapper

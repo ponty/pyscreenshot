@@ -6,13 +6,13 @@ import sys
 import tempfile
 from time import sleep
 
-import pyscreenshot
 from easyprocess import EasyProcess
 from entrypoint2 import entrypoint
 from path import Path
 from PIL import Image
-from pyscreenshot.util import platform_is_osx, platform_is_win
 
+import pyscreenshot
+from pyscreenshot.util import platform_is_osx, platform_is_win
 from size import display_size
 
 log = logging.getLogger(__name__)

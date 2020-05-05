@@ -1,6 +1,7 @@
 # import atexit
 
 from PIL import Image
+
 from pyscreenshot.plugins.backend import CBackend
 from pyscreenshot.util import py2, py3, py_minor
 
