@@ -1,10 +1,9 @@
-import six
-
 from pyscreenshot import FailedBackendError
 from pyscreenshot.util import (
     platform_is_linux,
     platform_is_osx,
     platform_is_win,
+    py2,
     use_x_display,
 )
 from ref import backend_to_check, check_import
@@ -23,7 +22,7 @@ def missing_RANDR():
 
 
 ok = False
-if not six.PY2 and check_import("mss"):
+if not py2() and check_import("mss"):
     if platform_is_osx() and not use_x_display():
         ok = True
     if platform_is_linux() and use_x_display():

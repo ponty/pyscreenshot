@@ -2,7 +2,6 @@ import logging
 import os
 from time import sleep
 
-import six
 from easyprocess import EasyProcess
 from PIL import Image, ImageChops
 
@@ -10,6 +9,7 @@ import fillscreen
 import pyscreenshot
 from config import bbox_ls
 from image_debug import img_debug
+from pyscreenshot.util import py2
 from size import backend_size
 
 
@@ -90,7 +90,7 @@ def check_import(module):
     #     ok = True
     # except ImportError:
     #     pass
-    if six.PY2:
+    if py2():
         import imp
 
         try:
