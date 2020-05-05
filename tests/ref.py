@@ -10,7 +10,6 @@ import fillscreen
 import pyscreenshot
 from config import bbox_ls
 from image_debug import img_debug
-from pyscreenshot.util import platform_is_osx
 from size import backend_size
 
 
@@ -39,21 +38,20 @@ def check_ref(backend, bbox, childprocess, refimgpath):
     diff_bbox = img_diff.getbbox()
     if diff_bbox:
         img_debug(img_diff, "img_diff" + str(diff_bbox))
-    if (
-        platform_is_osx()
-        and backend
-        and backend in ["qtpy", "pyqt", "pyqt5", "pyside", "pyside2"]
-    ):
-        # TODO: qt color problem on osx
-        color_diff_max = max([b for (_, b) in ex])
-        assert color_diff_max < 70
-    else:
-        if not diff_bbox is None:
-            print(
-                "different image data %s bbox=%s extrema:%s diff_bbox=%s"
-                % (backend, bbox, ex, diff_bbox)
-            )
-        assert diff_bbox is None
+    # if (
+    #     platform_is_osx()
+    #     and backend
+    #     and backend in ["qtpy", "pyqt", "pyqt5", "pyside", "pyside2"]
+    # ):
+    #     color_diff_max = max([b for (_, b) in ex])
+    #     assert color_diff_max < 70
+    # else:
+    if not diff_bbox is None:
+        print(
+            "different image data %s bbox=%s extrema:%s diff_bbox=%s"
+            % (backend, bbox, ex, diff_bbox)
+        )
+    assert diff_bbox is None
 
 
 def backend_ref(backend, childprocess=True, refimgpath="", delay=0):

@@ -1,6 +1,10 @@
+from pyscreenshot.util import platform_is_osx
 from ref import backend_to_check, check_import
 
-if check_import("PySide"):
+# qt color problem on osx
+if not platform_is_osx():
 
-    def test_pyside():
-        backend_to_check("pyside")
+    if check_import("PySide"):
+
+        def test_pyside():
+            backend_to_check("pyside")
