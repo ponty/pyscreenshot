@@ -30,8 +30,6 @@ class PySideGrabWindow(CBackend):
         pass
 
     def grab_to_buffer(self, buff, file_type="png"):
-        import PySide
-
         from PySide import QtGui
         from PySide import QtCore
 

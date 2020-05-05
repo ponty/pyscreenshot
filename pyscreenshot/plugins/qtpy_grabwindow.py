@@ -29,8 +29,6 @@ class QtPyGrabWindow(CBackend):
         pass
 
     def grab_to_buffer(self, buff, file_type="png"):
-        import qtpy
-
         from qtpy import QtGui
         from qtpy import QtCore
         from qtpy import QtWidgets

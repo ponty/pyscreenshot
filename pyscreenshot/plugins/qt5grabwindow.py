@@ -30,16 +30,14 @@ class Qt5GrabWindow(CBackend):
         pass
 
     def grab_to_buffer(self, buff, file_type="png"):
-        import PyQt5
-
         from PyQt5 import QtGui
         from PyQt5 import Qt
         from PyQt5 import QtWidgets
 
         QApplication = QtWidgets.QApplication
-        QBuffer = PyQt5.Qt.QBuffer
-        QIODevice = PyQt5.Qt.QIODevice
-        QScreen = PyQt5.QtGui.QScreen
+        QBuffer = Qt.QBuffer
+        QIODevice = Qt.QIODevice
+        QScreen = QtGui.QScreen
 
         global app
         if not app:
@@ -62,8 +60,6 @@ class Qt5GrabWindow(CBackend):
         return im
 
     def backend_version(self):
-        import PyQt5
-
         from PyQt5 import Qt
 
         return Qt.PYQT_VERSION_STR

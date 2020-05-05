@@ -42,8 +42,6 @@ class PySide2GrabWindow(CBackend):
     def grab_to_buffer(self, buff, file_type="png"):
         if py2():
             raise PySide2BugError()
-        import PySide2
-
         from PySide2 import QtGui
         from PySide2 import QtCore
         from PySide2 import QtWidgets

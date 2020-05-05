@@ -32,8 +32,6 @@ class Qt4GrabWindow(CBackend):
         pass
 
     def grab_to_buffer(self, buff, file_type="png"):
-        import PyQt4
-
         from PyQt4 import QtGui
         from PyQt4 import Qt
 
@@ -61,8 +59,6 @@ class Qt4GrabWindow(CBackend):
         return im
 
     def backend_version(self):
-        import PyQt4
-
         from PyQt4 import Qt
 
         return Qt.PYQT_VERSION_STR
