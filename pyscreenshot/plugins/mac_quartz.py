@@ -19,7 +19,7 @@ class MacQuartzWrapper(CBackend):
         return im
 
     def _grab_to_file(self, filename, bbox=None, dpi=72):
-        # FIXME: Should query dpi from somewhere, e.g for retina displays
+        # TODO: Should query dpi from somewhere, e.g for retina displays
         import Quartz
         import LaunchServices
         from Cocoa import NSURL

@@ -1,6 +1,6 @@
 import logging
 
-from pyscreenshot.plugins.backend import CBackend
+from pyscreenshot.plugins.backend import UNKNOWN_VERSION, CBackend
 from pyscreenshot.tempexport import read_func_img
 
 log = logging.getLogger(__name__)
@@ -71,4 +71,4 @@ class GnomeDBusWrapper(CBackend):
             raise GnomeDBusError("dbus error: %s %s" % (msg, result))
 
     def backend_version(self):
-        return None  # TODO: backend_version
+        return UNKNOWN_VERSION

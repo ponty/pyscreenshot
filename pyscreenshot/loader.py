@@ -60,7 +60,7 @@ def backends():
         # on screen notification
         yield KwinDBusWrapper
 
-        # flash
+        # flash effect
         yield GnomeScreenshotWrapper
 
     elif platform_is_osx():

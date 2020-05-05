@@ -3,7 +3,7 @@ import os
 
 from PIL import Image
 
-from pyscreenshot.plugins.backend import CBackend
+from pyscreenshot.plugins.backend import UNKNOWN_VERSION, CBackend
 
 log = logging.getLogger(__name__)
 
@@ -68,5 +68,4 @@ class KwinDBusWrapper(CBackend):
         return im
 
     def backend_version(self):
-        # TODO
-        return None
+        return UNKNOWN_VERSION

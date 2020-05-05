@@ -1,6 +1,6 @@
 from easyprocess import EasyProcess
 
-from pyscreenshot.plugins.backend import CBackend
+from pyscreenshot.plugins.backend import UNKNOWN_VERSION, CBackend
 from pyscreenshot.tempexport import read_prog_img
 from pyscreenshot.util import platform_is_osx
 
@@ -38,5 +38,4 @@ class ScreencaptureWrapper(CBackend):
         p.enable_stderr_log = False
         p.call()
         if p.return_code == 0:
-            # TODO: get real version
-            return "0.0"
+            return UNKNOWN_VERSION
