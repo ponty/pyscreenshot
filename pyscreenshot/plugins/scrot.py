@@ -19,11 +19,6 @@ class ScrotWrapper(CBackend):
         pass
 
     def grab(self, bbox=None):
-        # p = EasyProcess([PROGRAM, "-version"])
-        # p.enable_stdout_log = False
-        # p.enable_stderr_log = False
-        # p.call()
-
         im = read_prog_img([PROGRAM, "--silent"])
         if bbox:
             im = im.crop(bbox)

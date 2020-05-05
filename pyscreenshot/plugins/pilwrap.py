@@ -3,8 +3,7 @@ from pyscreenshot.plugins.backend import CBackend
 
 
 class PilWrapper(CBackend):
-
-    """windows only."""
+    """Windows/MacOS only."""
 
     name = "pil"
     childprocess = False

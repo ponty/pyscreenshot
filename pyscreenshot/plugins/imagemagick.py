@@ -25,11 +25,6 @@ class ImagemagickWrapper(CBackend):
         if platform_is_osx():
             raise ImagemagickBackendError("osx not supported")  # TODO
 
-        # p = EasyProcess([PROGRAM, "-version"])
-        # p.enable_stdout_log = False
-        # p.enable_stderr_log = False
-        # p.call()
-
         command = [PROGRAM, "-silent", "-window", "root"]
         if bbox:
             pbox = "{}x{}+{}+{}".format(

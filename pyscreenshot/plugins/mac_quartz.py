@@ -42,8 +42,6 @@ class MacQuartzWrapper(CBackend):
             CG.kCGWindowImageDefault,
         )
 
-        # XXX: Can add more types:
-        # https://developer.apple.com/library/mac/documentation/MobileCoreServices/Reference/UTTypeRef/Reference/reference.html#//apple_ref/doc/uid/TP40008771
         file_type = LaunchServices.kUTTypePNG
 
         url = NSURL.fileURLWithPath_(filename)

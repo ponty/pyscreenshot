@@ -24,10 +24,6 @@ class ScreencaptureWrapper(CBackend):
     def grab(self, bbox=None):
         if not platform_is_osx():
             raise ScreencaptureError("This backend runs only on Darwin")
-        # p = EasyProcess([PROGRAM, "-help"])
-        # p.enable_stdout_log = False
-        # p.enable_stderr_log = False
-        # p.call()
 
         command = [PROGRAM, "-x"]
         if bbox:
