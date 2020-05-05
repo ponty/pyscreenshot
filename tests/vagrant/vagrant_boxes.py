@@ -4,9 +4,11 @@ from time import sleep
 import fabric
 from entrypoint2 import entrypoint
 from path import Path
-# from fabric.api import env, execute, task, run, sudo, settings
 
 import vagrant
+
+# from fabric.api import env, execute, task, run, sudo, settings
+
 
 # pip3 install fabric vncdotool python-vagrant entrypoint2
 

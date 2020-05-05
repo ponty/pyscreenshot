@@ -1,4 +1,3 @@
-
 from ref import backend_to_check, gnome, kde
 
 if kde():

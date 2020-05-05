@@ -1,4 +1,3 @@
-
 from easyprocess import EasyProcess
 
 from pyscreenshot.plugins.backend import CBackend

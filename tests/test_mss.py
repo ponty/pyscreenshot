@@ -1,9 +1,12 @@
-
 import six
 
 from pyscreenshot import FailedBackendError
-from pyscreenshot.util import (platform_is_linux, platform_is_osx,
-                               platform_is_win, use_x_display)
+from pyscreenshot.util import (
+    platform_is_linux,
+    platform_is_osx,
+    platform_is_win,
+    use_x_display,
+)
 from ref import backend_to_check, check_import
 
 try:
