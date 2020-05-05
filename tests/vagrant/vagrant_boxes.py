@@ -22,8 +22,6 @@ class Options:
 
 
 def wrapcmd(cmd, guiproc):
-    # TODO
-
     if guiproc:
         # copy env vars from graphical session
         cmd = f"sudo cat /proc/`pidof {guiproc}`/environ | tr '\\0' '\\n' > /tmp/x;export $(cat /tmp/x); {cmd}"

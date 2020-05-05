@@ -27,6 +27,3 @@ def read_prog_img(cmd):
 
     im = read_func_img(run_prog)
     return im
-
-
-# TODO: check temp file removal
