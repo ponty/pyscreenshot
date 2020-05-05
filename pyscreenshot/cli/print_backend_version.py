@@ -2,7 +2,6 @@ import logging
 
 from entrypoint2 import entrypoint
 
-import pyscreenshot
 from pyscreenshot.loader import (FailedBackendError, backend_grab,
                                  backend_version2)
 

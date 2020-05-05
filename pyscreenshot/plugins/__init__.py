@@ -1,4 +1,3 @@
-import sys
 
 from pyscreenshot.plugins.gdk3pixbuf import Gdk3PixbufWrapper
 from pyscreenshot.plugins.gnome_dbus import GnomeDBusWrapper

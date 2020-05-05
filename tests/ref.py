@@ -1,11 +1,9 @@
 import logging
 import os
-import sys
 from time import sleep
 
 import six
 from easyprocess import EasyProcess
-from path import TempDir
 from PIL import Image, ImageChops
 
 import fillscreen

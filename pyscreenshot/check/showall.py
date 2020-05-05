@@ -3,7 +3,7 @@ import time
 from entrypoint2 import entrypoint
 
 import pyscreenshot
-from pyscreenshot import FailedBackendError, backends
+from pyscreenshot import backends
 
 
 @entrypoint

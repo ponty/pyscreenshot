@@ -25,7 +25,6 @@ class MacQuartzWrapper(CBackend):
         import LaunchServices
         from Cocoa import NSURL
         import Quartz.CoreGraphics as CG
-        import objc
 
         if bbox:
             width = bbox[2] - bbox[0]

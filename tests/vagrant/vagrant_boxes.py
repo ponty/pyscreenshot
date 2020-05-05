@@ -5,7 +5,6 @@ import fabric
 from entrypoint2 import entrypoint
 from path import Path
 # from fabric.api import env, execute, task, run, sudo, settings
-from vncdotool import api
 
 import vagrant
 

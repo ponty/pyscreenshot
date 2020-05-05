@@ -1,8 +1,5 @@
 import atexit
-import ctypes
 import logging
-import os
-import sys
 import tempfile
 from time import sleep
 

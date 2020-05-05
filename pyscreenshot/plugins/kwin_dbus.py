@@ -4,7 +4,6 @@ import os
 from PIL import Image
 
 from pyscreenshot.plugins.backend import CBackend
-from pyscreenshot.tempexport import read_func_img
 
 log = logging.getLogger(__name__)
 
@@ -23,7 +22,7 @@ class KwinDBusWrapper(CBackend):
         has_jeepney = False
         try:
             from jeepney.wrappers import MessageGenerator, new_method_call
-            from jeepney import DBusAddress, new_method_call
+            from jeepney import new_method_call
             from jeepney.integrate.blocking import connect_and_authenticate
 
             has_jeepney = True

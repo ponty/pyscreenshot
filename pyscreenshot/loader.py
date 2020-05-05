@@ -1,11 +1,7 @@
 import logging
-import os
-import sys
 import traceback
 
-from easyprocess import EasyProcess
 
-from pyscreenshot import plugins
 from pyscreenshot.childproc import childprocess_grab
 from pyscreenshot.err import FailedBackendError
 from pyscreenshot.plugins import backend_dict
