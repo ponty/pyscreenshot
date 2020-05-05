@@ -11,7 +11,6 @@ log = logging.getLogger(__name__)
 log.debug("version=%s", __version__)
 
 
-# TODO: static check: platform, version,...
 def grab(bbox=None, childprocess=None, backend=None):
     """Copy the contents of the screen to PIL image memory.
 

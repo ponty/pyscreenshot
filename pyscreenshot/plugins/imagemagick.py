@@ -22,7 +22,7 @@ class ImagemagickWrapper(CBackend):
     def grab(self, bbox=None):
         # TODO: macos/win?
         if platform_is_osx():
-            raise ImagemagickBackendError("osx not supported")  # TODO
+            raise ImagemagickBackendError("osx not supported")
 
         command = [PROGRAM, "-silent", "-window", "root"]
         if bbox:

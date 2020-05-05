@@ -56,7 +56,7 @@ class TemporaryDirectory27(object):
         # Issue a ResourceWarning if implicit cleanup needed
         self.cleanup(_warn=True)
 
-    # XXX (ncoghlan): The following code attempts to make
+    # (ncoghlan): The following code attempts to make
     # this class tolerant of the module nulling out process
     # that happens during CPython interpreter shutdown
     # Alas, it doesn't actually manage it. See issue #10188
