@@ -15,7 +15,7 @@ class ScreencaptureError(Exception):
 
 class ScreencaptureWrapper(CBackend):
     name = "mac_screencapture"
-    childprocess = True
+    is_subprocess = True
 
     def __init__(self):
         pass

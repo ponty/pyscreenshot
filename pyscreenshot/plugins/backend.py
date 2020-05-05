@@ -1,3 +1,3 @@
 class CBackend(object):
-    childprocess = False
+    is_subprocess = False
     apply_childprocess = False

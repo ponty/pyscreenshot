@@ -24,7 +24,6 @@ app = None
 
 class WxScreen(CBackend):
     name = "wx"
-    childprocess = False
     apply_childprocess = True
 
     def __init__(self):

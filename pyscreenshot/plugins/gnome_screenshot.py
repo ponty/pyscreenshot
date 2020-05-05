@@ -21,7 +21,7 @@ class GnomeScreenshotWrapper(CBackend):
     """
 
     name = "gnome-screenshot"
-    childprocess = True
+    is_subprocess = True
 
     def __init__(self):
         pass

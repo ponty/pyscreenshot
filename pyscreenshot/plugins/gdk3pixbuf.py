@@ -17,7 +17,6 @@ class Gdk3BackendError(Exception):
 
 class Gdk3PixbufWrapper(CBackend):
     name = "pygdk3"
-    childprocess = False
 
     def __init__(self):
         pass

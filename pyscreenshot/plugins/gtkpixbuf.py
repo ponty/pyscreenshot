@@ -30,7 +30,6 @@ Please change all occurrences of "import gobject" to "from gi.repository import 
 
 class GtkPixbufWrapper(CBackend):
     name = "pygtk"
-    childprocess = False
     apply_childprocess = True
 
     def __init__(self):

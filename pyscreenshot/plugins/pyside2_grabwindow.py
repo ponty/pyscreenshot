@@ -34,7 +34,6 @@ app = None
 
 class PySide2GrabWindow(CBackend):
     name = "pyside2"
-    childprocess = False
     apply_childprocess = True
 
     def __init__(self):

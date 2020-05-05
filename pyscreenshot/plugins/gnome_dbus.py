@@ -12,7 +12,6 @@ class GnomeDBusError(Exception):
 
 class GnomeDBusWrapper(CBackend):
     name = "gnome_dbus"
-    childprocess = True
 
     def __init__(self):
         pass

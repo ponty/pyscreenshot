@@ -20,8 +20,6 @@ sct = None
 
 class MssWrapper(CBackend):
     name = "mss"
-    # TODO: rename to is_subprocess
-    childprocess = False
 
     def __init__(self):
         pass

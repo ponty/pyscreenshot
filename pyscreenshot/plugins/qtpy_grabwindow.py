@@ -23,7 +23,6 @@ app = None
 
 class QtPyGrabWindow(CBackend):
     name = "qtpy"
-    childprocess = False
     apply_childprocess = True
 
     def __init__(self):

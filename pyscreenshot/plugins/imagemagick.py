@@ -14,7 +14,7 @@ class ImagemagickBackendError(Exception):
 
 class ImagemagickWrapper(CBackend):
     name = "imagemagick"
-    childprocess = True
+    is_subprocess = True
 
     def __init__(self):
         pass

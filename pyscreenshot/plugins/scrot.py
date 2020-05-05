@@ -14,7 +14,7 @@ PROGRAM = "scrot"
 
 class ScrotWrapper(CBackend):
     name = "scrot"
-    childprocess = True
+    is_subprocess = True
 
     def __init__(self):
         pass

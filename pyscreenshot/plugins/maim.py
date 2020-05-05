@@ -14,7 +14,7 @@ PROGRAM = "maim"
 
 class MaimWrapper(CBackend):
     name = "maim"
-    childprocess = True
+    is_subprocess = True
 
     def __init__(self):
         pass

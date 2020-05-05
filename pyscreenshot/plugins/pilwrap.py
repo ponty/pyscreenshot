@@ -7,7 +7,6 @@ class PilWrapper(CBackend):
     """Windows/MacOS only."""
 
     name = "pil"
-    childprocess = False
 
     def __init__(self):
         pass

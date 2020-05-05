@@ -9,7 +9,6 @@ from pyscreenshot.tempexport import read_func_img
 
 class MacQuartzWrapper(CBackend):
     name = "mac_quartz"
-    childprocess = False
 
     def __init__(self):
         pass

@@ -26,7 +26,6 @@ app = None
 
 class Qt4GrabWindow(CBackend):
     name = "pyqt"
-    childprocess = False
     apply_childprocess = True
 
     def __init__(self):
