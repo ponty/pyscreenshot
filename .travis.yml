@@ -78,7 +78,7 @@ addons:
       - pqiv
       - x11-utils
   homebrew:
-    update: true # TODO: check # https://travis-ci.community/t/macos-build-fails-because-of-homebrew-bundle-unknown-command/7296/10
+    # update: true # https://travis-ci.community/t/macos-build-fails-because-of-homebrew-bundle-unknown-command/7296/10
     packages:
       - wxmac
       - pyqt
