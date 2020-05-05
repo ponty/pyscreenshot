@@ -1,10 +1,11 @@
-from ref import backend_to_check, gnome, kde
+from ref import backend_to_check, gnome, kde, prog_check
 
 if gnome():
 
-    def test_gnome_screenshot():
-        assert not kde()
+    if prog_check(["gnome-screenshot", "--version"]):
 
-        # the flash effect can be seen on the next screenshot,
-        # so some delay is needed
-        backend_to_check("gnome-screenshot", delay=1)
+        def test_gnome_screenshot():
+            assert not kde()
+            # the flash effect can be seen on the next screenshot,
+            # so some delay is needed
+            backend_to_check("gnome-screenshot", delay=1)

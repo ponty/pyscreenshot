@@ -81,12 +81,11 @@ config = {
         ["tox -e py27-desktop", "tox -e py3-desktop"],
         "xfdesktop",
     ),
-    # TODO: fix kubuntu
-    # "kubuntu": (
-    #     "Vagrantfile.kubuntu.18.04.rb",
-    #     ["tox -e py27-desktop", "tox -e py3-desktop"],
-    #     "gnome-shell",
-    # ),
+    "kubuntu": (
+        "Vagrantfile.kubuntu.18.04.rb",
+        ["tox -e py27-desktop", "tox -e py3-desktop"],
+        "gnome-shell",
+    ),
     "ubuntu": ("Vagrantfile.ubuntu.18.04.rb", ["tox -e py3-desktop"], "gnome-shell",),
     "arch.kde.x11": (
         "Vagrantfile.arch.kde.x11.rb",
