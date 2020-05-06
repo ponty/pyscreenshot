@@ -70,7 +70,6 @@ Vagrant.configure(2) do |config|
   # documentation for more information about their specific syntax and use.
   $script = "
   export DEBIAN_FRONTEND=noninteractive
-  /vagrant/tests/vagrant/ubu1804dep.sh
   
   sudo apt-get update
   sudo apt-get dist-upgrade
@@ -78,7 +77,8 @@ Vagrant.configure(2) do |config|
   sudo apt-get remove -y sddm
 
   /vagrant/tests/vagrant/gdm3.sh
-"
+  /vagrant/tests/vagrant/ubu1804dep.sh
+  "
       config.vm.provision "shell", inline: $script
           
        

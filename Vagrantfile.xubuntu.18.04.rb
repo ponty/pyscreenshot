@@ -72,14 +72,13 @@ Vagrant.configure(2) do |config|
   export DEBIAN_FRONTEND=noninteractive
   echo 'export export LC_ALL=C' >> /home/vagrant/.profile
   
-  /vagrant/tests/vagrant/ubu1804dep.sh
-
   # xubuntu
   sudo apt-get update
   sudo apt-get dist-upgrade
   sudo apt-get install -y xubuntu-desktop^
 
   /vagrant/tests/vagrant/lightdm.sh
+  /vagrant/tests/vagrant/ubu1804dep.sh
 "
       config.vm.provision "shell", inline: $script
           

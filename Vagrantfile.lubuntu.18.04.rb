@@ -70,7 +70,6 @@ Vagrant.configure(2) do |config|
   # documentation for more information about their specific syntax and use.
   $script = "
   export DEBIAN_FRONTEND=noninteractive
-  /vagrant/tests/vagrant/ubu1804dep.sh
 
   # lubuntu
   sudo apt-get update
@@ -78,6 +77,7 @@ Vagrant.configure(2) do |config|
   sudo apt-get install -y lubuntu-desktop
 
   /vagrant/tests/vagrant/lightdm.sh
+  /vagrant/tests/vagrant/ubu1804dep.sh
 "
       config.vm.provision "shell", inline: $script
           
