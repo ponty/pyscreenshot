@@ -71,22 +71,47 @@ def run_box(options, vagrantfile, cmds, guiproc):
 
 config = {
     "server": ("Vagrantfile", ["tox"], "",),
-    "lubuntu": (
+    "lubuntu.18.04": (
         "Vagrantfile.lubuntu.18.04.rb",
         ["tox -e py27-desktop", "tox -e py3-desktop"],
         "lxsession",
     ),
-    "xubuntu": (
+    # TODO: add ubuntu 20.04 variants when it becomes stable
+    # "lubuntu.20.04": (
+    #     "Vagrantfile.lubuntu.20.04.rb",
+    #     ["tox -e py27-desktop", "tox -e py3-desktop"],
+    #     "lxsession",
+    # ),
+    "xubuntu.18.04": (
         "Vagrantfile.xubuntu.18.04.rb",
         ["tox -e py27-desktop", "tox -e py3-desktop"],
         "xfdesktop",
     ),
-    "kubuntu": (
+    # "xubuntu.20.04": (
+    #     "Vagrantfile.xubuntu.20.04.rb",
+    #     ["tox -e py27-desktop", "tox -e py3-desktop"],
+    #     "xfdesktop",
+    # ),
+    "kubuntu.18.04": (
         "Vagrantfile.kubuntu.18.04.rb",
         ["tox -e py27-desktop", "tox -e py3-desktop"],
         "gnome-shell",
     ),
-    "ubuntu": ("Vagrantfile.ubuntu.18.04.rb", ["tox -e py3-desktop"], "gnome-shell",),
+    # "kubuntu.20.04": (
+    #     "Vagrantfile.kubuntu.20.04.rb",
+    #     ["tox -e py27-desktop", "tox -e py3-desktop"],
+    #     "gnome-shell",
+    # ),
+    "ubuntu.18.04": (
+        "Vagrantfile.ubuntu.18.04.rb",
+        ["tox -e py3-desktop"],
+        "gnome-shell",
+    ),
+    "ubuntu.20.04": (
+        "Vagrantfile.ubuntu.20.04.rb",
+        ["tox -e py3-desktop"],
+        "gnome-shell",
+    ),
     "arch.kde.x11": (
         "Vagrantfile.arch.kde.x11.rb",
         ["tox -e py3-desktop"],
@@ -110,7 +135,6 @@ config = {
         ["bash --login -c 'python3 -m tox -e py3-osx'"],
         "Dock",
     ),
-    # TODO: ubuntu 20.20
 }
 
 
