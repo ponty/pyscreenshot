@@ -57,7 +57,7 @@ Vagrant.configure("2") do |config|
   #
   #   # Customize the amount of memory on the VM:
      vb.memory = "1024"
-     vb.name = "pyscreenshot_arch_kde_wayland"
+     vb.name = "pyscreenshot_arch.kde.wayland"
    end
   #
   # View the documentation for the provider you are using for more
