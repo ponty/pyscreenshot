@@ -34,11 +34,22 @@ def run_box(options, vagrantfile, cmds, guiproc):
     env["VAGRANT_VAGRANTFILE"] = DIR / vagrantfile
     env["VAGRANT_DOTFILE_PATH"] = DIR / ".vagrant_" + vagrantfile
     v = vagrant.Vagrant(env=env, quiet_stdout=False, quiet_stderr=False)
+    status = v.status()
+    state = status[0].state
+    print(status)
+
     if options.destroy:
         v.destroy()
         return
+
     if options.halt:
         v.halt()  # avoid screensaver
+
+    if state == "not_created":
+        # install programs in box
+        v.up()
+        # restart box
+        v.halt()
 
     try:
         v.up()

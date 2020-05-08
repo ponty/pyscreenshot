@@ -16,4 +16,4 @@ python -m pip install tox
 chmod a-x /usr/lib/kscreenlocker_greet
 
 systemctl  enable sddm
-systemctl  start sddm
+# systemctl  start sddm
