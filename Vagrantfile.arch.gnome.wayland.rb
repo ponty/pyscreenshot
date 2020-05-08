@@ -13,6 +13,7 @@ Vagrant.configure("2") do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "archlinux/archlinux"
+  config.vm.box_version = "2020.02.02"
 
   config.vm.boot_timeout = 600
 
