@@ -10,7 +10,6 @@ import pyscreenshot
 from config import bbox_ls
 from image_debug import img_debug
 from pyscreenshot.util import py2
-from size import backend_size
 
 
 def check_ref(backend, bbox, childprocess, refimgpath):
@@ -63,22 +62,22 @@ def backend_ref(backend, childprocess=True, refimgpath="", delay=0):
             sleep(delay)
 
 
-def _backend_check(backend, childprocess, refimgpath, delay):
-    enable_ref = bool(refimgpath)
-    if enable_ref:
-        backend_ref(
-            backend, childprocess=childprocess, refimgpath=refimgpath, delay=delay
-        )
-    else:
-        backend_size(
-            backend, childprocess=childprocess,
-        )
-
-
 def backend_to_check(backend, delay=0):
     refimgpath = fillscreen.init()
-    _backend_check(backend, childprocess=True, refimgpath=refimgpath, delay=delay)
-    _backend_check(backend, childprocess=None, refimgpath=refimgpath, delay=delay)
+    backend_ref(backend, childprocess=True, refimgpath=refimgpath, delay=delay)
+    backend_ref(backend, childprocess=None, refimgpath=refimgpath, delay=delay)
+
+
+def kde():
+    XDG_CURRENT_DESKTOP = os.environ.get("XDG_CURRENT_DESKTOP")
+    if XDG_CURRENT_DESKTOP:
+        return "kde" in XDG_CURRENT_DESKTOP.lower()
+
+
+def gnome():
+    XDG_CURRENT_DESKTOP = os.environ.get("XDG_CURRENT_DESKTOP")
+    if XDG_CURRENT_DESKTOP:
+        return "gnome" in XDG_CURRENT_DESKTOP.lower()
 
 
 def check_import(module):
@@ -111,15 +110,3 @@ def prog_check(cmd):
             return True
     except Exception:
         return False
-
-
-def kde():
-    XDG_CURRENT_DESKTOP = os.environ.get("XDG_CURRENT_DESKTOP")
-    if XDG_CURRENT_DESKTOP:
-        return "kde" in XDG_CURRENT_DESKTOP.lower()
-
-
-def gnome():
-    XDG_CURRENT_DESKTOP = os.environ.get("XDG_CURRENT_DESKTOP")
-    if XDG_CURRENT_DESKTOP:
-        return "gnome" in XDG_CURRENT_DESKTOP.lower()
