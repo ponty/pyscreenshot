@@ -1,8 +1,8 @@
 The ``pyscreenshot`` module can be used to copy
-the contents of the screen to a PIL_ or Pillow_ image memory using various back-ends.
+the contents of the screen to a [PIL][5] or [Pillow][6]  image memory using various back-ends.
 Replacement for the [ImageGrab][15] Module, which works on Windows and macOS only,
 so Windows/macOS users don't need this library, except if they need better performance.
-For handling image memory (e.g. saving to file, converting,..) please read Pillow_ documentation.
+For handling image memory (e.g. saving to file, converting,..) please read [Pillow][6]  documentation.
 
 Links:
  * home: https://github.com/ponty/pyscreenshot
@@ -21,7 +21,7 @@ Goal:
 Features:
  * Cross-platform wrapper
  * Capturing the whole desktop or an area
- * saving to PIL_ or Pillow_ image memory
+ * saving to [PIL][5] or [Pillow][6]  image memory
  * some back-ends are based on this discussion: http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
  * pure Python library
  * supported Python versions: 2.7, 3.6, 3.7, 3.8
