@@ -170,11 +170,11 @@ Dependencies
 ============
 
 Only pure python modules are used:
-1. EasyProcess for calling programs
-2. entrypoint2 for generating command line interface
-3. MSS backend is added because it is very fast and pure and multiplatform, 
+1. [EasyProcess][17] for calling programs
+2. [entrypoint2][18] for generating command line interface
+3. [MSS][14] backend is added because it is very fast and pure and multiplatform, 
     so it will be the first choice in most cases (Python3 only)
-4. jeepney for D-Bus calls (Python3 only)
+4. [jeepney][16] for D-Bus calls (Python3 only)
 
 Hierarchy
 =========
@@ -196,3 +196,6 @@ Hierarchy
 [13]: https://git.gnome.org/browse/gnome-screenshot/
 [14]: https://github.com/BoboTiG/python-mss
 [15]: http://pillow.readthedocs.org/en/latest/reference/ImageGrab.html
+[16]: https://pypi.org/project/jeepney/
+[17]: https://github.com/ponty/EasyProcess
+[18]: https://github.com/ponty/entrypoint2

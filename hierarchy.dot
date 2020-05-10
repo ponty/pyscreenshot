@@ -32,8 +32,10 @@ digraph G {
             pyscreenshot -> MaimWrapper;
             pyscreenshot -> MacQuartzWrapper
             pyscreenshot -> ScreencaptureWrapper
-            pyscreenshot -> GnomeScreenshotWrapper
             pyscreenshot -> Gdk3PixbufWrapper
+            pyscreenshot -> GnomeScreenshotWrapper
+            pyscreenshot -> GnomeDBusWrapper
+            pyscreenshot -> KwinDBusWrapper
         }
     }
     subgraph cluster_3 {
@@ -85,7 +87,10 @@ digraph G {
     MaimWrapper -> Maim -> X11;
 
     GnomeScreenshotWrapper -> "gnome-screenshot" -> X11;
-    "gnome-screenshot" -> Wayland;
+    "gnome-screenshot" -> D-Bus -> Gnome -> Wayland;
+
+    GnomeDBusWrapper -> jeepney -> D-Bus -> Gnome -> Wayland;
+    KwinDBusWrapper -> jeepney-> D-Bus -> KDE -> Wayland;
 
     GtkPixbufWrapper -> PyGTK -> "GTK+";
     //"GTK+" -> MacOS;
