@@ -15,7 +15,7 @@ except ImportError:
 
 # https://github.com/python-xlib/python-xlib/blob/master/examples/xrandr.py#L44
 def missing_RANDR():
-    if display:
+    if not display:
         return False
     disp = display.Display()
     return not disp.has_extension("RANDR")
