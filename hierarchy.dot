@@ -17,7 +17,7 @@ digraph G {
         subgraph cluster_2 {
             style=filled;
             fillcolor=white;
-            label = "plugins";
+            label = "backends";
 
             pyscreenshot -> GtkPixbufWrapper;
             pyscreenshot -> Qt4GrabWindowWrapper;
@@ -87,11 +87,22 @@ digraph G {
     ScrotWrapper -> Scrot -> X11;
     MaimWrapper -> Maim -> X11;
 
-    GnomeScreenshotWrapper -> "gnome-screenshot" -> X11;
-    "gnome-screenshot" -> "D-Bus" -> Gnome -> Wayland;
+    Gnome -> Wayland;
+    Gnome -> X11;
+    KDE -> Wayland;
+    KDE -> X11;
 
-    GnomeDBusWrapper -> jeepney -> "D-Bus" -> Gnome -> Wayland;
-    KwinDBusWrapper -> jeepney-> "D-Bus" -> KDE -> Wayland;
+    "D-Bus" -> Gnome;
+    "D-Bus" -> KDE;
+
+    jeepney-> "D-Bus";
+
+    GnomeScreenshotWrapper -> "gnome-screenshot";
+    "gnome-screenshot" -> X11;
+    "gnome-screenshot" -> "D-Bus";
+
+    GnomeDBusWrapper -> jeepney;
+    KwinDBusWrapper -> jeepney;
 
     GtkPixbufWrapper -> PyGTK -> "GTK+";
     //"GTK+" -> macOS;
