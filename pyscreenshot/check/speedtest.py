@@ -4,11 +4,11 @@ import time
 from entrypoint2 import entrypoint
 
 import pyscreenshot
+from pyscreenshot.loader import backend_get_apply_childprocess
 from pyscreenshot.plugins.gnome_dbus import GnomeDBusWrapper
 from pyscreenshot.plugins.gnome_screenshot import GnomeScreenshotWrapper
 from pyscreenshot.plugins.kwin_dbus import KwinDBusWrapper
 from pyscreenshot.util import proc
-from pyscreenshot.loader import backend_get_apply_childprocess
 
 
 def run(force_backend, n, childprocess, bbox=None):
