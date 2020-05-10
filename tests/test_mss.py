@@ -6,7 +6,7 @@ from pyscreenshot.util import (
     py2,
     use_x_display,
 )
-from ref import backend_to_check, check_import
+from bt import backend_to_check, check_import
 
 try:
     from Xlib import display

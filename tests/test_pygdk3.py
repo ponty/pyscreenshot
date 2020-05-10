@@ -1,5 +1,5 @@
 from pyscreenshot.util import use_x_display
-from ref import backend_to_check, check_import
+from bt import backend_to_check, check_import
 
 ok = False
 if check_import("gi"):

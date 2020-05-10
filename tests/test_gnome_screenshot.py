@@ -1,4 +1,4 @@
-from ref import backend_to_check, gnome, kde, prog_check
+from bt import backend_to_check, gnome, kde, prog_check
 
 if gnome():
 

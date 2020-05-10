@@ -11,6 +11,8 @@ from config import bbox_ls
 from image_debug import img_debug
 from pyscreenshot.util import py2
 
+# backend tester (bt)
+
 
 def check_ref(backend, bbox, childprocess, refimgpath):
     img_ref = Image.open(refimgpath)
