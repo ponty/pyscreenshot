@@ -24,12 +24,13 @@ Traceback (most recent call last):
 ImportError: When using gi.repository you must not import static modules like "gobject". 
 Please change all occurrences of "import gobject" to "from gi.repository import GObject". See: https://bugzilla.gnome.org/show_bug.cgi?id=709183
 """
-# gdk3pixpuf can not be used after gtk was imported in the same process,
-# so this module will be put in childprocess as gdk3pixpuf is more important.
 
 
 class GtkPixbufWrapper(CBackend):
     name = "pygtk"
+
+    # gdk3pixpuf can not be used after gtk was imported in the same process,
+    # so this module will be put in childprocess as gdk3pixpuf is more important.
     apply_childprocess = True
 
     def __init__(self):

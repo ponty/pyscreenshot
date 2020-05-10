@@ -2,7 +2,7 @@ import logging
 
 from PIL import Image
 
-from pyscreenshot.plugins.backend import CBackend
+from pyscreenshot.plugins.backend import CBackend, qt_apply_childprocess
 from pyscreenshot.util import py2
 
 if py2():
@@ -34,7 +34,7 @@ app = None
 
 class PySide2GrabWindow(CBackend):
     name = "pyside2"
-    apply_childprocess = True
+    apply_childprocess = qt_apply_childprocess
 
     def __init__(self):
         pass
