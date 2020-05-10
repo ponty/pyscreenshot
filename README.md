@@ -1,8 +1,8 @@
 The ``pyscreenshot`` module can be used to copy
 the contents of the screen to a PIL_ or Pillow_ image memory using various back-ends.
-Replacement for the [ImageGrab][15] Module, which works on Windows only,
-so Windows users don't need this library.
-For handling image memory (e.g. saving to file, converting,..) please read PIL_ or Pillow_ documentation.
+Replacement for the [ImageGrab][15] Module, which works on Windows and macOS only,
+so Windows/macOS users don't need this library, except if they need better performance.
+For handling image memory (e.g. saving to file, converting,..) please read Pillow_ documentation.
 
 Links:
  * home: https://github.com/ponty/pyscreenshot
@@ -12,7 +12,7 @@ Links:
 
 Goal:
   Pyscreenshot tries to allow to take screenshots without installing 3rd party libraries.
-  It is cross-platform but useful for Linux based distributions.
+  It is cross-platform but mainly useful for Linux based distributions.
   It is only a pure Python wrapper, a thin layer over existing back-ends.
   Its strategy should work on most Linux distributions:
   a lot of back-ends are wrapped, if at least one exists then it works,
@@ -20,8 +20,7 @@ Goal:
 
 Features:
  * Cross-platform wrapper
- * Capturing the whole desktop
- * Capturing an area
+ * Capturing the whole desktop or an area
  * saving to PIL_ or Pillow_ image memory
  * some back-ends are based on this discussion: http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
  * pure Python library
@@ -42,13 +41,19 @@ Features:
      * screencapture (Mac)
      * [gnome-screenshot][13]
      * Python [MSS][14]
- * time taken: 0.1s - 2.0s
  * Performance is not a target for this library, but you can benchmark the back-ends and choose the fastest one.
  * Interactivity is not supported.
  * Mouse pointer is not visible.
 
 Known problems:
- * gnome-screenshot_ back-end does not check $DISPLAY -> not working with Xvfb
+ * KDE Wayland has on screen notification
+
+Installation:
+
+```console  
+$ python3 -m pip install Pillow pyscreenshot
+```
+
 
 Examples
 ========
@@ -58,22 +63,11 @@ grab and show the whole screen (examples/showgrabfullscreen.py):
 ```python
 import pyscreenshot as ImageGrab
 
-if __name__ == '__main__':
+# grab fullscreen
+im = ImageGrab.grab()
 
-    # grab fullscreen
-    im = ImageGrab.grab()
-
-    # save image file
-    im.save('screenshot.png')
-
-    # show image in a window
-    im.show()
-```
-
-to start the example:
-
-```console
-$ python3 -m pyscreenshot.examples.showgrabfullscreen
+# save image file
+im.save('fullscreen.png')
 ```
 
 grab and show the part of the screen (examples/showgrabbox.py):
@@ -81,83 +75,107 @@ grab and show the part of the screen (examples/showgrabbox.py):
 ```python
 import pyscreenshot as ImageGrab
 
-if __name__ == '__main__':
-    # part of the screen
-    im = ImageGrab.grab(bbox=(10, 10, 510, 510))  # X1,Y1,X2,Y2
-    im.show()
-```
+# part of the screen
+im = ImageGrab.grab(bbox=(10, 10, 510, 510))  # X1,Y1,X2,Y2
 
-to start the example:
-
-```console
-$ python3 -m pyscreenshot.examples.showgrabbox
-```
-
-Installation
-============
-
- * install Pillow_ (Ubuntu: ``sudo apt-get install python3-pil``)
- * install at least one back-end
- * install the program:
-
-```console
-$ python3 -m pip install pyscreenshot
+# save image file
+im.save('box.png')
 ```
 
 
-Command line interface
-======================
-
-Back-end performance:
+Performance
+===========
 
 The performance can be checked with pyscreenshot.check.speedtest.
+Some backends are started in subprocess with default (safest) settings 
+which is necessary to isolate them from the main process. 
+This makes them slower as a disavantage.
 
-Example:
-
+Test on Ubuntu 19.10 X11
 ```console
-$ python3 -m pyscreenshot.check.speedtest --virtual-display 2>/dev/null
+$ python3 -m pyscreenshot.check.speedtest
 
 n=10
 ------------------------------------------------------
-scrot               	6.1  sec	(  608 ms per call)
-imagemagick         	9.7  sec	(  969 ms per call)
-wx                  	4.1  sec	(  408 ms per call)
-pygdk3              	3.3  sec	(  328 ms per call)
-qtpy                	6.9  sec	(  687 ms per call)
-pyqt5               	6.9  sec	(  687 ms per call)
-pyqt                	6.4  sec	(  644 ms per call)
-pyside2             	6.7  sec	(  671 ms per call)
-pyside              	6.5  sec	(  652 ms per call)
-gnome-screenshot    	12   sec	( 1209 ms per call)
+default             	0.16 sec	(   15 ms per call)
+pil                 	
+mss                 	0.16 sec	(   15 ms per call)
+scrot               	0.96 sec	(   95 ms per call)
+maim                	1.4  sec	(  138 ms per call)
+imagemagick         	2.3  sec	(  227 ms per call)
+qtpy                	4.4  sec	(  436 ms per call) [subprocess]
+pyqt5               	4.4  sec	(  435 ms per call) [subprocess]
+pyqt                	3.7  sec	(  368 ms per call) [subprocess]
+pyside2             	4.9  sec	(  486 ms per call) [subprocess]
+pyside              	3.7  sec	(  368 ms per call) [subprocess]
+wx                  	0.31 sec	(   31 ms per call)
+pygdk3              	0.16 sec	(   16 ms per call)
+pygtk               	
+mac_screencapture   	
+mac_quartz          	
+gnome_dbus          	1.5  sec	(  145 ms per call)
+gnome-screenshot    	3.8  sec	(  384 ms per call)
+kwin_dbus           	
 ```
 
-Print versions:
+You can force a backend:
+```python
+import pyscreenshot as ImageGrab
+im = ImageGrab.grab(backend="scrot")
+```
+
+You can even force if subprocess is applied:
+```python
+import pyscreenshot as ImageGrab
+im = ImageGrab.grab(backend="pyqt5", childprocess=False)
+```
+
+Printing beckend versions:
 
 ```console
-$ python3 -m pyscreenshot.check.versions 2> /dev/null
-python               3.7.3
-pyscreenshot         0.7
+$ python3 -m pyscreenshot.check.versions 
+python               3.7.5
+pyscreenshot         2.0
+pil                  7.0.0
+mss                  5.1.0
 scrot                1.1.1
+maim                 5.5
 imagemagick          6.9.10
-wx                   4.0.4
-pygdk3               3.32.0
 qtpy                 1.3.1
-pyqt5                5.12.1
+pyqt5                5.12.3
 pyqt                 4.12.1
-pyside2              5.11.2
+pyside2              5.14.2.1
 pyside               1.2.2
-pygtk                missing
-gnome-screenshot     3.30.0
+wx                   4.0.6
+pygdk3               3.34.0
+pygtk                
+mac_screencapture    
+mac_quartz           
+gnome_dbus           ?.?
+gnome-screenshot     3.33.90
+kwin_dbus            ?.?
 ```
 
 Wayland
 =======
 
-On Wayland only the `gnome-screenshot` back-end works:
+Wayland is supported only on Python3 using D-Bus on Gnome and KDE.
+If both Wayland and X are available then Wayland is preferred
+because Xwayland can not be used for screenshot.
+Rules for decision:
+ 1. use X if DISPLAY variable exists and XDG_SESSION_TYPE variable != "wayland"
+ 2. use Wayland if 1. is not successful
 
-```python
-im = ImageGrab.grab(backend='gnome-screenshot')
-```
+Dependencies
+============
+
+Only pure python modules are used:
+1. EasyProcess for calling programs
+2. entrypoint2 for generating command line interface
+Only on Python3:
+3. MSS backend is added because it is very fast and pure and multiplatform, 
+    so it will be the first choice in most cases
+4. jeepney for D-Bus calls
 
 Hierarchy
 =========
