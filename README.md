@@ -86,7 +86,7 @@ im.save('box.png')
 Performance
 ===========
 
-The performance can be checked with pyscreenshot.check.speedtest.
+The performance can be checked with pyscreenshot.check.speedtest module.
 Some backends are started in subprocess with default (safest) settings 
 which is necessary to isolate them from the main process. 
 This makes them slower as a disavantage.
@@ -172,10 +172,9 @@ Dependencies
 Only pure python modules are used:
 1. EasyProcess for calling programs
 2. entrypoint2 for generating command line interface
-Only on Python3:
 3. MSS backend is added because it is very fast and pure and multiplatform, 
-    so it will be the first choice in most cases
-4. jeepney for D-Bus calls
+    so it will be the first choice in most cases (Python3 only)
+4. jeepney for D-Bus calls (Python3 only)
 
 Hierarchy
 =========
