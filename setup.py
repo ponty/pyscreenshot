@@ -2,12 +2,20 @@ import os.path
 
 from setuptools import setup
 
+# get __version__
+__version__ = None
+exec(open(os.path.join(NAME, "about.py")).read())
+VERSION = __version__
+
+
 NAME = "pyscreenshot"
 URL = "https://github.com/ponty/pyscreenshot"
 DESCRIPTION = "python screenshot"
 LONG_DESCRIPTION = """The pyscreenshot module can be used to copy the contents of the screen to a Pillow image memory using various back-ends. Replacement for the ImageGrab Module.
 
-home: https://github.com/ponty/pyscreenshot"""
+Documentation: https://github.com/ponty/pyscreenshot/tree/"""
+LONG_DESCRIPTION += VERSION
+
 PACKAGES = [
     NAME,
     NAME + ".plugins",
@@ -16,10 +24,6 @@ PACKAGES = [
     NAME + ".examples",
 ]
 
-# get __version__
-__version__ = None
-exec(open(os.path.join(NAME, "about.py")).read())
-VERSION = __version__
 
 # extra = {}
 # if sys.version_info >= (3,):
