@@ -82,7 +82,6 @@ def backend_to_check(backend, delay=0):
 
 
 def check_import(module):
-    # TODO: check without importing, use in plugins also
     found = False
     # try:
     #     __import__(module)

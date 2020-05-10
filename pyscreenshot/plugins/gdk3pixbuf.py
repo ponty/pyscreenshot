@@ -32,7 +32,7 @@ class Gdk3PixbufWrapper(CBackend):
         :rtype: Image
         """
         if platform_is_osx():
-            raise Gdk3BackendError("osx not supported")  # TODO
+            raise Gdk3BackendError("osx not supported") 
         import gi
 
         gi.require_version("Gdk", "3.0")

@@ -17,13 +17,6 @@ else:
 
 log = logging.getLogger(__name__)
 
-# TODO:PY2 error:
-#        TypeError: 'PySide2.QtGui.QScreen.grabWindow' called with wrong argument types:
-#           PySide2.QtGui.QScreen.grabWindow(int)
-#        Supported signatures:
-#           PySide2.QtGui.QScreen.grabWindow(WId, int = 0, int = 0, int = -1, int = -1)
-# https://stackoverflow.com/questions/59118938/type-error-when-calling-qscreen-grabwindow
-
 
 class PySide2BugError(Exception):
     pass
@@ -40,8 +33,16 @@ class PySide2GrabWindow(CBackend):
         pass
 
     def grab_to_buffer(self, buff, file_type="png"):
+
+        # PY2 error:
+        #        TypeError: 'PySide2.QtGui.QScreen.grabWindow' called with wrong argument types:
+        #           PySide2.QtGui.QScreen.grabWindow(int)
+        #        Supported signatures:
+        #           PySide2.QtGui.QScreen.grabWindow(WId, int = 0, int = 0, int = -1, int = -1)
+        # https://stackoverflow.com/questions/59118938/type-error-when-calling-qscreen-grabwindow
         if py2():
             raise PySide2BugError()
+
         from PySide2 import QtGui
         from PySide2 import QtCore
         from PySide2 import QtWidgets

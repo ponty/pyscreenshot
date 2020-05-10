@@ -66,7 +66,6 @@ def backends():
     elif platform_is_osx():
         # first check for X
         if use_x_display():
-            # TODO: yield x
             pass
         else:
             # fast
@@ -84,8 +83,6 @@ def backends():
             # does not work: Gdk3, wx, Imagemagick
 
     elif platform_is_win():
-        # TODO: support X?
-
         # fast
         yield MssWrapper
 

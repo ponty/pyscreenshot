@@ -68,7 +68,7 @@ def init():
         proc = EasyProcess(cmd).start()
         atexit.register(proc.stop)
         print(refimgpath)
-        sleep(5)  # TODO: check image displayed
+        sleep(5)  # wait for image displayed
         if not proc.is_alive():
             raise FillscreenError("pqiv stopped: %s" % proc)
 

@@ -12,8 +12,8 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  # config.vm.box = "ubuntu/focal64" # TODO: set  back if bugs are fixed
-  config.vm.box = "geerlingguy/ubuntu2004"
+  config.vm.box = "ubuntu/focal64"
+  # config.vm.box = "geerlingguy/ubuntu2004"
 
   config.vm.boot_timeout = 600
 

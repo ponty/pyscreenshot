@@ -54,7 +54,8 @@ class KwinDBusWrapper(CBackend):
         # https://jeepney.readthedocs.io/en/latest/integrate.html
         connection = connect_and_authenticate(bus="SESSION")
         dbscr = Screenshot()
-        # TODO:if bbox: msg = dbscr.screenshotArea(bbox[0], bbox[1], bbox[2] - bbox[0], bbox[3] - bbox[1], False)
+        # bbox not working:
+        #   if bbox: msg = dbscr.screenshotArea(bbox[0], bbox[1], bbox[2] - bbox[0], bbox[3] - bbox[1], False)
         msg = dbscr.screenshotFullscreen(False)
         filename = connection.send_and_get_reply(msg)
         filename = filename[0]

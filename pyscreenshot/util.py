@@ -31,7 +31,7 @@ def platform_is_linux():
 def use_x_display():
     if platform_is_win():
         return False
-    if platform_is_osx():  # TODO: test X on osx
+    if platform_is_osx():
         return False
     DISPLAY = os.environ.get("DISPLAY")
     XDG_SESSION_TYPE = os.environ.get("XDG_SESSION_TYPE")
