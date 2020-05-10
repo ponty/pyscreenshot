@@ -93,29 +93,29 @@ This makes them slower as a disavantage.
 
 Test on Ubuntu 19.10 X11
 ```console
-$ python3 -m pyscreenshot.check.speedtest
+$  python3 -m pyscreenshot.check.speedtest
 
 n=10
 ------------------------------------------------------
 default             	0.16 sec	(   15 ms per call)
 pil                 	
 mss                 	0.16 sec	(   15 ms per call)
-scrot               	0.96 sec	(   95 ms per call)
-maim                	1.4  sec	(  138 ms per call)
-imagemagick         	2.3  sec	(  227 ms per call)
-qtpy                	4.4  sec	(  436 ms per call) [subprocess]
-pyqt5               	4.4  sec	(  435 ms per call) [subprocess]
-pyqt                	3.7  sec	(  368 ms per call) [subprocess]
-pyside2             	4.9  sec	(  486 ms per call) [subprocess]
-pyside              	3.7  sec	(  368 ms per call) [subprocess]
-wx                  	0.31 sec	(   31 ms per call)
-pygdk3              	0.16 sec	(   16 ms per call)
+scrot               	1    sec	(  103 ms per call)
+maim                	1.5  sec	(  145 ms per call)
+imagemagick         	2.1  sec	(  214 ms per call)
+qtpy                	4.5  sec	(  452 ms per call) [subprocess]
+pyqt5               	4.3  sec	(  433 ms per call) [subprocess]
+pyqt                	3.8  sec	(  379 ms per call) [subprocess]
+pyside2             	5.1  sec	(  505 ms per call) [subprocess]
+pyside              	3.6  sec	(  360 ms per call) [subprocess]
+wx                  	3.2  sec	(  315 ms per call) [subprocess]
+pygdk3              	0.2  sec	(   19 ms per call)
 pygtk               	
 mac_screencapture   	
 mac_quartz          	
-gnome_dbus          	1.5  sec	(  145 ms per call)
-gnome-screenshot    	3.8  sec	(  384 ms per call)
-kwin_dbus           	
+gnome_dbus          	1.4  sec	(  144 ms per call)
+gnome-screenshot    	3.7  sec	(  369 ms per call)
+kwin_dbus           	  	
 ```
 
 You can force a backend:
