@@ -78,7 +78,6 @@ def _backend_check(backend, childprocess, refimgpath, delay):
 def backend_to_check(backend, delay=0):
     refimgpath = fillscreen.init()
     _backend_check(backend, childprocess=True, refimgpath=refimgpath, delay=delay)
-    # TODO:_backend_check(backend, childprocess=False, refimgpath=refimgpath, delay=delay)
     _backend_check(backend, childprocess=None, refimgpath=refimgpath, delay=delay)
 
 

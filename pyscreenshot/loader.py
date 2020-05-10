@@ -103,19 +103,18 @@ def auto(bbox, childprocess):
     im = None
     for backend_class in backends():
         backend_name = backend_class.name
-
-        if select_childprocess(childprocess, backend_class):
-            log.debug('running "%s" in child process', backend_name)
-            im = childprocess_grab(backend_name, bbox)
-        else:
-            try:
+        try:
+            if select_childprocess(childprocess, backend_class):
+                log.debug('running "%s" in child process', backend_name)
+                im = childprocess_grab(backend_name, bbox)
+            else:
                 obj = backend_class()
 
                 im = obj.grab(bbox)
-                break
-            except Exception:
-                msg = traceback.format_exc()
-                log.debug(msg)
+            break
+        except Exception:
+            msg = traceback.format_exc()
+            log.debug(msg)
     if not im:
         msg = "All backends failed!"
         raise FailedBackendError(msg)
