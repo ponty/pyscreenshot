@@ -36,6 +36,7 @@ digraph G {
             pyscreenshot -> GnomeScreenshotWrapper
             pyscreenshot -> GnomeDBusWrapper
             pyscreenshot -> KwinDBusWrapper
+            pyscreenshot -> MssWrapper
         }
     }
     subgraph cluster_3 {
@@ -74,10 +75,10 @@ digraph G {
     QtPy -> PyQt4;
     QtPy -> PyQt5;
 
-    Qt4 -> MacOS;
+    Qt4 -> macOS;
     Qt4 -> Windows;
     Qt4 -> X11;
-    Qt5 -> MacOS;
+    Qt5 -> macOS;
     Qt5 -> Windows;
     Qt5 -> X11;
 
@@ -93,23 +94,27 @@ digraph G {
     KwinDBusWrapper -> jeepney-> "D-Bus" -> KDE -> Wayland;
 
     GtkPixbufWrapper -> PyGTK -> "GTK+";
-    //"GTK+" -> MacOS;
+    //"GTK+" -> macOS;
     "GTK+" -> Windows;
     "GTK+" -> X11;
 
     Gdk3PixbufWrapper -> PyGObject -> GdkPixbuf;
-    GdkPixbuf -> MacOS;
+    GdkPixbuf -> macOS;
     GdkPixbuf -> Windows;
     GdkPixbuf -> X11;
 
     WxScreenWrapper -> wxPython -> wxWidgets;
     wxWidgets -> "GTK+";
-    wxWidgets -> MacOS;
+    wxWidgets -> macOS;
     wxWidgets -> Windows;
     wxWidgets -> X11;
 
-    MacQuartzWrapper -> Quartz -> MacOS;
-    ScreencaptureWrapper -> screencapture -> MacOS;
+    MacQuartzWrapper -> Quartz -> macOS;
+    ScreencaptureWrapper -> screencapture -> macOS;
+
+    MssWrapper -> X11;
+    MssWrapper -> macOS;
+    MssWrapper -> Windows;
 
     application -> pyscreenshot;
 
