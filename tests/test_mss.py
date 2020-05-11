@@ -15,6 +15,8 @@ except ImportError:
 
 # https://github.com/python-xlib/python-xlib/blob/master/examples/xrandr.py#L44
 def missing_RANDR():
+    if platform_is_osx():
+        return False
     if not display:
         return False
     disp = display.Display()
