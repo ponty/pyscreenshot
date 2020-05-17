@@ -152,8 +152,3 @@ def backend_version2(backend_name):
     obj = backend_class()
     v = obj.backend_version()
     return v
-
-
-def backend_get_apply_childprocess(backend_name):
-    backend_class = backend_dict[backend_name]
-    return backend_class.apply_childprocess

@@ -4,7 +4,6 @@ import time
 from entrypoint2 import entrypoint
 
 import pyscreenshot
-from pyscreenshot.loader import backend_get_apply_childprocess
 from pyscreenshot.plugins.gnome_dbus import GnomeDBusWrapper
 from pyscreenshot.plugins.gnome_screenshot import GnomeScreenshotWrapper
 from pyscreenshot.plugins.kwin_dbus import KwinDBusWrapper
@@ -14,11 +13,8 @@ from pyscreenshot.util import run_mod_as_subproc
 def run(force_backend, n, childprocess, bbox=None):
     sys.stdout.write("%-20s\t" % force_backend)
     sys.stdout.flush()  # before any crash
-    apply_childprocess = None
     if force_backend == "default":
         force_backend = None
-    else:
-        apply_childprocess = backend_get_apply_childprocess(force_backend)
     try:
         start = time.time()
         for _ in range(n):
@@ -29,8 +25,6 @@ def run(force_backend, n, childprocess, bbox=None):
         dt = end - start
         s = "%-4.2g sec\t" % dt
         s += "(%5d ms per call)" % (1000.0 * dt / n)
-        if apply_childprocess:
-            s += " [subprocess]"
         sys.stdout.write(s)
     finally:
         print("")

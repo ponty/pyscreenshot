@@ -25,8 +25,8 @@ app = None
 class WxScreen(CBackend):
     name = "wx"
     # conflict with pygdk3
-    #  wx is never installed by default,  pygdk3 is default on Gnome -> wx is put in subrocess
-    apply_childprocess = True
+    #  wx is never installed by default
+    # pygdk3 is default on Gnome 
 
     def __init__(self):
         pass

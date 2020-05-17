@@ -2,7 +2,7 @@ import logging
 
 from PIL import Image
 
-from pyscreenshot.plugins.backend import CBackend, qt_apply_childprocess
+from pyscreenshot.plugins.backend import CBackend
 from pyscreenshot.util import py2
 
 if py2():
@@ -24,7 +24,8 @@ app = None
 
 class Qt5GrabWindow(CBackend):
     name = "pyqt5"
-    apply_childprocess = qt_apply_childprocess
+
+    # qt backends have conflict with each other in the same process.
 
     def __init__(self):
         pass

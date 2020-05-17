@@ -30,8 +30,6 @@ class GtkPixbufWrapper(CBackend):
     name = "pygtk"
 
     # gdk3pixpuf can not be used after gtk was imported in the same process,
-    # so this module will be put in childprocess as gdk3pixpuf is more important.
-    apply_childprocess = True
 
     def __init__(self):
         pass
