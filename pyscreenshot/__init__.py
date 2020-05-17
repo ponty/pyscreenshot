@@ -11,13 +11,14 @@ log = logging.getLogger(__name__)
 log.debug("version=%s", __version__)
 
 
-def grab(bbox=None, childprocess=None, backend=None):
+def grab(bbox=None, childprocess=True, backend=None):
     """Copy the contents of the screen to PIL image memory.
 
     :param bbox: optional bounding box (x1,y1,x2,y2)
     :param childprocess: run back-end in new process using popen. (bool)
-        This can isolate back-ends from each other and from main process.
-        It can be forced if set, otherwise childprocess is automatic.
+        This isolates back-ends from each other and from main process.
+        Leave it as it is (True) to have a safe setting.
+        Set it False to improve performance, but then conflicts are possible.
     :param backend: back-end can be forced if set (examples:scrot, wx,..),
                     otherwise back-end is automatic
     """

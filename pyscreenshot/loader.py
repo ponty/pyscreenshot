@@ -43,11 +43,17 @@ def qt():
     yield PySideGrabWindow
 
 
-def backends():
+def backends(childprocess):
     if platform_is_linux():
         if use_x_display():
-            yield MssWrapper
-            yield ScrotWrapper
+            if childprocess:
+                # scrot is 2x faster than mss
+                yield ScrotWrapper
+                yield MssWrapper
+            else:
+                # mss is 6x faster than scrot
+                yield MssWrapper
+                yield ScrotWrapper
             yield MaimWrapper
             yield ImagemagickWrapper
             yield Gdk3PixbufWrapper
@@ -93,15 +99,16 @@ def backends():
 
 
 def select_childprocess(childprocess, backend_class):
-    if childprocess is None:
-        return backend_class.apply_childprocess
+    if backend_class.is_subprocess:
+        # backend is always a subprocess -> nothing to do
+        return False
 
     return childprocess
 
 
 def auto(bbox, childprocess):
     im = None
-    for backend_class in backends():
+    for backend_class in backends(childprocess):
         backend_name = backend_class.name
         try:
             if select_childprocess(childprocess, backend_class):
