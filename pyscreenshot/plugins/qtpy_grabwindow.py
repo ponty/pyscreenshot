@@ -24,7 +24,6 @@ app = None
 class QtPyGrabWindow(CBackend):
     name = "qtpy"
 
-
     def __init__(self):
         pass
 

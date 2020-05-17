@@ -4,14 +4,13 @@ from time import sleep
 
 from easyprocess import EasyProcess
 from PIL import Image, ImageChops
-from pyscreenshot.util import platform_is_linux, platform_is_osx, platform_is_win
 
 import fillscreen
 import pyscreenshot
 from config import bbox_ls
 from double_disp import check_double_disp
 from image_debug import img_debug
-from pyscreenshot.util import py2
+from pyscreenshot.util import platform_is_linux, py2
 
 # backend tester (bt)
 

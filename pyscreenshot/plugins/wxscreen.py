@@ -26,7 +26,7 @@ class WxScreen(CBackend):
     name = "wx"
     # conflict with pygdk3
     #  wx is never installed by default
-    # pygdk3 is default on Gnome 
+    # pygdk3 is default on Gnome
 
     def __init__(self):
         pass
