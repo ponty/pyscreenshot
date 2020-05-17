@@ -41,7 +41,7 @@ Features:
      * screencapture (Mac)
      * [gnome-screenshot][13]
      * Python [MSS][14]
- * Performance is not a target for this library, but you can benchmark the back-ends and choose the fastest one.
+ * Performance is not a target for this library, but you can benchmark the possible settings and choose the fastest one.
  * Interactivity is not supported.
  * Mouse pointer is not visible.
 
@@ -87,9 +87,9 @@ Performance
 ===========
 
 The performance can be checked with pyscreenshot.check.speedtest module.
-Some backends are started in subprocess with default (safest) settings 
-which is necessary to isolate them from the main process. 
-This makes them slower as a disavantage.
+Backends are started in a subprocess with default (safest) settings 
+which is necessary to isolate them from the main process and from each other. 
+Disabling this option makes performance much better, but it may cause problems in some cases.
 
 Test on Ubuntu 19.10 X11
 ```console
@@ -97,25 +97,52 @@ $  python3 -m pyscreenshot.check.speedtest
 
 n=10
 ------------------------------------------------------
-default             	0.16 sec	(   15 ms per call)
-pil                 	
-mss                 	0.16 sec	(   15 ms per call)
-scrot               	1    sec	(  103 ms per call)
-maim                	1.5  sec	(  145 ms per call)
-imagemagick         	2.1  sec	(  214 ms per call)
-qtpy                	4.5  sec	(  452 ms per call) [subprocess]
-pyqt5               	4.3  sec	(  433 ms per call) [subprocess]
-pyqt                	3.8  sec	(  379 ms per call) [subprocess]
-pyside2             	5.1  sec	(  505 ms per call) [subprocess]
-pyside              	3.6  sec	(  360 ms per call) [subprocess]
-wx                  	3.2  sec	(  315 ms per call) [subprocess]
-pygdk3              	0.2  sec	(   19 ms per call)
-pygtk               	
-mac_screencapture   	
-mac_quartz          	
-gnome_dbus          	1.4  sec	(  144 ms per call)
-gnome-screenshot    	3.7  sec	(  369 ms per call)
-kwin_dbus           	  	
+default                 0.87 sec        (   87 ms per call)
+pil                 
+mss                     1.9  sec        (  191 ms per call)
+scrot                   0.86 sec        (   85 ms per call)
+maim                    1.2  sec        (  124 ms per call)
+imagemagick             2.1  sec        (  208 ms per call)
+qtpy                    4.1  sec        (  406 ms per call)
+pyqt5                   4.1  sec        (  406 ms per call)
+pyqt                    3.4  sec        (  344 ms per call)
+pyside2                 4.6  sec        (  455 ms per call)
+pyside                  3.5  sec        (  348 ms per call)
+wx                      3    sec        (  300 ms per call)
+pygdk3                  2.1  sec        (  206 ms per call)
+pygtk               
+mac_screencapture   
+mac_quartz          
+gnome_dbus              1.2  sec        (  123 ms per call)
+gnome-screenshot        2.1  sec        (  207 ms per call)
+kwin_dbus           
+
+$  python3 -m pyscreenshot.check.speedtest --childprocess 0
+
+n=10
+------------------------------------------------------
+default                 0.16 sec        (   16 ms per call)
+pil                 
+mss                     0.16 sec        (   15 ms per call)
+scrot                   0.87 sec        (   86 ms per call)
+maim                    1.3  sec        (  125 ms per call)
+imagemagick             2.1  sec        (  209 ms per call)
+qtpy                    0.98 sec        (   98 ms per call)
+pyqt5                   0.99 sec        (   98 ms per call)
+pyqt                    0.96 sec        (   95 ms per call)
+pyside2                 1.1  sec        (  107 ms per call)
+pyside                  0.94 sec        (   94 ms per call)
+wx                      0.3  sec        (   30 ms per call)
+pygdk3                  0.19 sec        (   18 ms per call)
+pygtk               
+mac_screencapture   
+mac_quartz          
+gnome_dbus              1.3  sec        (  131 ms per call)
+gnome-screenshot        2.1  sec        (  207 ms per call)
+kwin_dbus           
+
+
+
 ```
 
 You can force a backend:
@@ -124,11 +151,13 @@ import pyscreenshot as ImageGrab
 im = ImageGrab.grab(backend="scrot")
 ```
 
-You can even force if subprocess is applied:
+You can force if subprocess is applied:
 ```python
 import pyscreenshot as ImageGrab
 im = ImageGrab.grab(backend="pyqt5", childprocess=False)
 ```
+
+
 
 Printing beckend versions:
 
@@ -172,8 +201,7 @@ Dependencies
 Only pure python modules are used:
 1. [EasyProcess][17] for calling programs
 2. [entrypoint2][18] for generating command line interface
-3. [MSS][14] backend is added because it is very fast and pure and multiplatform, 
-    so it will be the first choice in most cases (Python3 only)
+3. [MSS][14] backend is added because it is very fast and pure and multiplatform (Python3 only)
 4. [jeepney][16] for D-Bus calls (Python3 only)
 
 Hierarchy
