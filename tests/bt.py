@@ -8,6 +8,7 @@ from PIL import Image, ImageChops
 import fillscreen
 import pyscreenshot
 from config import bbox_ls
+from double_disp import check_double_disp
 from image_debug import img_debug
 from pyscreenshot.util import py2
 
@@ -68,6 +69,8 @@ def backend_to_check(backend, delay=0):
     refimgpath = fillscreen.init()
     backend_ref(backend, childprocess=True, refimgpath=refimgpath, delay=delay)
     backend_ref(backend, childprocess=None, refimgpath=refimgpath, delay=delay)
+
+    check_double_disp(backend)
 
 
 def kde():
