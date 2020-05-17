@@ -1,3 +1,4 @@
+from bt import backend_to_check, check_import
 from pyscreenshot import FailedBackendError
 from pyscreenshot.util import (
     platform_is_linux,
@@ -6,7 +7,6 @@ from pyscreenshot.util import (
     py2,
     use_x_display,
 )
-from bt import backend_to_check, check_import
 
 try:
     from Xlib import display
