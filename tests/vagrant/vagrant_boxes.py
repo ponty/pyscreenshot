@@ -59,7 +59,12 @@ def run_box(options, vagrantfile, cmds, guiproc):
         ) as conn:
             with conn.cd("c:/vagrant" if options.win else "/vagrant"):
                 if not options.win:
-                    cmds = ["free -h", "env | sort"] + cmds + ["free -h"]
+                    if options.osx:
+                        freecmd = "top -l 1 -s 0 | grep PhysMem"
+                    else:  # linux
+                        freecmd = "free -h"
+                    cmds = [freecmd, "env | sort"] + cmds + [freecmd]
+
                 if guiproc:
                     pid = None
                     while not pid:
@@ -163,5 +168,6 @@ def main(boxes="all", fast=False, destroy=False):
     for k, v in config.items():
         if k in boxes:
             options.win = k == "win"
+            options.osx = k == "osx"
             print("-----> %s %s %s" % (k, v[0], v[1]))
             run_box(options, v[0], v[1], v[2])
