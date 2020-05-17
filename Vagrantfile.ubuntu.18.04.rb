@@ -50,7 +50,7 @@ Vagrant.configure(2) do |config|
      #vb.gui = true
   
      # Customize the amount of memory on the VM:
-     vb.memory = "1024"
+     vb.memory = "2048"
 
      vb.name = "pyscreenshot_ubuntu.18.04"
    end
@@ -84,6 +84,6 @@ Vagrant.configure(2) do |config|
 end
      
 
-# export VAGRANT_VAGRANTFILE=Vagrantfile.kubuntu.18.04.rb;export VAGRANT_DOTFILE_PATH=.vagrant_${VAGRANT_VAGRANTFILE} 
+# export VAGRANT_VAGRANTFILE=Vagrantfile.ubuntu.18.04.rb;export VAGRANT_DOTFILE_PATH=.vagrant_${VAGRANT_VAGRANTFILE} 
 # vagrant up && vagrant ssh
 
