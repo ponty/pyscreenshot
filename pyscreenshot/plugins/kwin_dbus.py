@@ -14,6 +14,7 @@ class KdeDBusError(Exception):
 
 class KwinDBusWrapper(CBackend):
     name = "kwin_dbus"
+    is_subprocess = True
 
     def __init__(self):
         pass
