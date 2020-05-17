@@ -4,6 +4,7 @@ from time import sleep
 
 from easyprocess import EasyProcess
 from PIL import Image, ImageChops
+from pyscreenshot.util import platform_is_linux, platform_is_osx, platform_is_win
 
 import fillscreen
 import pyscreenshot
@@ -68,9 +69,10 @@ def backend_ref(backend, childprocess=True, refimgpath="", delay=0):
 def backend_to_check(backend, delay=0):
     refimgpath = fillscreen.init()
     backend_ref(backend, childprocess=True, refimgpath=refimgpath, delay=delay)
-    backend_ref(backend, childprocess=None, refimgpath=refimgpath, delay=delay)
+    # TODO: backend_ref(backend, childprocess=False, refimgpath=refimgpath, delay=delay)
 
-    check_double_disp(backend)
+    if platform_is_linux() and prog_check(["Xvfb", "-help"]):
+        check_double_disp(backend)
 
 
 def kde():
