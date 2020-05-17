@@ -8,7 +8,7 @@ from pyscreenshot.loader import backend_get_apply_childprocess
 from pyscreenshot.plugins.gnome_dbus import GnomeDBusWrapper
 from pyscreenshot.plugins.gnome_screenshot import GnomeScreenshotWrapper
 from pyscreenshot.plugins.kwin_dbus import KwinDBusWrapper
-from pyscreenshot.util import proc
+from pyscreenshot.util import run_mod_as_subproc
 
 
 def run(force_backend, n, childprocess, bbox=None):
@@ -60,7 +60,7 @@ def run_all(n, childprocess_param, virtual_only=True, bbox=None):
         # skip non X backends
         if virtual_only and x in novirt:
             continue
-        p = proc(
+        p = run_mod_as_subproc(
             "pyscreenshot.check.speedtest",
             ["--childprocess", childprocess_param] + bboxpar + debugpar + backendpar,
         )

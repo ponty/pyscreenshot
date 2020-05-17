@@ -54,7 +54,7 @@ def extract_version(txt):
     return version
 
 
-def proc(name, params=[]):
+def run_mod_as_subproc(name, params=[]):
     python = sys.executable
     cmd = [python, "-m", name] + params
     p = EasyProcess(cmd).call()

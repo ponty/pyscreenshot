@@ -4,13 +4,13 @@ import os
 from pyscreenshot.err import FailedBackendError
 from pyscreenshot.imcodec import codec
 from pyscreenshot.tempdir import TemporaryDirectory
-from pyscreenshot.util import proc
+from pyscreenshot.util import run_mod_as_subproc
 
 log = logging.getLogger(__name__)
 
 
 def childprocess_backend_version(backend):
-    p = proc("pyscreenshot.cli.print_backend_version", [backend])
+    p = run_mod_as_subproc("pyscreenshot.cli.print_backend_version", [backend])
     if p.return_code != 0:
         log.warning(p)
         raise FailedBackendError(p)
@@ -31,7 +31,7 @@ def childprocess_grab(backend, bbox):
         if log.isEnabledFor(logging.DEBUG):
             cmd += ["--debug"]
 
-        p = proc("pyscreenshot.cli.grab", cmd)
+        p = run_mod_as_subproc("pyscreenshot.cli.grab", cmd)
         if p.return_code != 0:
             # log.debug(p)
             raise FailedBackendError(p)
