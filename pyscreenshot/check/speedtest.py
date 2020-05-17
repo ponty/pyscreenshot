@@ -73,7 +73,7 @@ def speedtest(virtual_display=False, backend="", childprocess="", bbox=""):
     """
     childprocess_param = childprocess
     if childprocess == "":
-        childprocess = None
+        childprocess = True  # default
     elif childprocess == "0":
         childprocess = False
     elif childprocess == "1":
