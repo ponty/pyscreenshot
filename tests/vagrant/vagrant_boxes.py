@@ -59,7 +59,7 @@ def run_box(options, vagrantfile, cmds, guiproc):
         ) as conn:
             with conn.cd("c:/vagrant" if options.win else "/vagrant"):
                 if not options.win:
-                    cmds = ["env | sort"] + cmds
+                    cmds = ["free -h", "env | sort"] + cmds + ["free -h"]
                 if guiproc:
                     pid = None
                     while not pid:
