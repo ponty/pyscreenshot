@@ -1,8 +1,10 @@
 import logging
 import os
+import sys
 from time import sleep
 
 from easyprocess import EasyProcess
+from entrypoint2 import entrypoint
 from PIL import Image, ImageChops
 
 import fillscreen
@@ -68,10 +70,29 @@ def backend_ref(backend, childprocess=True, refimgpath="", delay=0):
 def backend_to_check(backend, delay=0):
     refimgpath = fillscreen.init()
     backend_ref(backend, childprocess=True, refimgpath=refimgpath, delay=delay)
-    # TODO: backend_ref(backend, childprocess=False, refimgpath=refimgpath, delay=delay)
+
+    # childprocess=False is tested in a subprocess for isolation
+    cmd = [
+        sys.executable,
+        __file__.rsplit(".", 1)[0] + ".py",
+        backend if backend else "",
+        refimgpath,
+        str(delay),
+        "--debug",
+    ]
+    p = EasyProcess(cmd).call()
+    assert p.return_code == 0
 
     if platform_is_linux() and prog_check(["Xvfb", "-help"]):
         check_double_disp(backend)
+
+
+@entrypoint
+def main(backend, refimgpath, delay):
+    if not backend:
+        backend = None
+    delay = int(delay)
+    backend_ref(backend, childprocess=False, refimgpath=refimgpath, delay=delay)
 
 
 def kde():

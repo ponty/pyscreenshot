@@ -1,3 +1,4 @@
+import os
 import sys
 
 from easyprocess import EasyProcess
@@ -20,9 +21,6 @@ def check_double_disp(backend):
 
 @entrypoint
 def main(backend):
-    import os
-    import sys
-
     if not backend:
         backend = None
 
