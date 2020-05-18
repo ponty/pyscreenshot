@@ -151,10 +151,11 @@ import pyscreenshot as ImageGrab
 im = ImageGrab.grab(backend="scrot")
 ```
 
-You can force if subprocess is applied:
+You can force if subprocess is applied, setting it to False together with mss gives the best performance:
 ```python
+# best performance
 import pyscreenshot as ImageGrab
-im = ImageGrab.grab(backend="pyqt5", childprocess=False)
+im = ImageGrab.grab(backend="mss", childprocess=False)
 ```
 
 
@@ -188,7 +189,7 @@ kwin_dbus            ?.?
 Wayland
 =======
 
-Wayland is supported only on Python3 using D-Bus on Gnome and KDE.
+Wayland is supported only with Python3 using D-Bus on Gnome or KDE.
 If both Wayland and X are available then Wayland is preferred
 because Xwayland can not be used for screenshot.
 Rules for decision:
