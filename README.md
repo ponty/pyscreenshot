@@ -40,7 +40,7 @@ Features:
      * Quartz (Mac)
      * screencapture (Mac)
      * [gnome-screenshot][13]
-     * Python [MSS][14]
+     * [Python MSS][14]
  * Performance is not a target for this library, but you can benchmark the possible settings and choose the fastest one.
  * Interactivity is not supported.
  * Mouse pointer is not visible.
