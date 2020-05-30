@@ -1,32 +1,35 @@
 language: python
-dist: trusty
-python:
-  - "2.7"
-  - "3.5"
-  - "3.6"
-env: DISTR_PY="general"
 
 matrix:
   include:
+    - name: 2.7_trusty
+      python: 2.7
+      dist: trusty
+
+    - name: 3.5_trusty
+      python: 3.5
+      dist: trusty
+
+    - name: 3.6_trusty
+      python: 3.6
+      dist: trusty
+
     - name: "2.7_trusty_with_system"
       python: "2.7_with_system_site_packages"
       dist: trusty
-      env: DISTR_PY="trusty 2"
 
     - name: "2.7_xenial_with_system"
       python: "2.7_with_system_site_packages"
       dist: xenial
-      env: DISTR_PY="xenial 2"
 
     - name: "3.5_xenial_with_system"
       python: "3.5_with_system_site_packages"
       dist: xenial
-      env: DISTR_PY="xenial 3"
 
     - name: "3.6_bionic_with_system"
       python: "3.6_with_system_site_packages"
       dist: bionic
-      env: DISTR_PY="bionic 3"  PIPINST="pyside2"
+      env: PIPINST="pyside2"
 
     - name: 3.7_xenial
       python: 3.7
@@ -87,17 +90,16 @@ addons:
 
 install:
   - if [ ${TRAVIS_OS_NAME} == "linux" ]; then sudo apt-get install --no-install-recommends -y xvfb $(./tests/packages.sh ${TRAVIS_DIST} ${TRAVIS_PYTHON_VERSION:0:1} ); fi
-  - if [ ${TRAVIS_PYTHON_VERSION:0:1} == "2" ]; then PIP=pip; else PIP=pip3; fi
   - if [ ${TRAVIS_PYTHON_VERSION:0:1} == "2" ]; then PYTHON=python; else PYTHON=python3; fi
   - if [ ${TRAVIS_OS_NAME} == "windows" ]; then PYTHON=python; fi
   - if [ ${TRAVIS_OS_NAME} == "osx" ]; then PYTHON=/usr/local/opt/python/libexec/bin/python; fi
-  - $PIP install $PIPUSER --upgrade -r requirements-test.txt
-  - $PIP install $PIPUSER --upgrade . ${PIPINST}
+  - $PYTHON -m pip install $PIPUSER --upgrade -r requirements-test.txt
+  - $PYTHON -m pip install $PIPUSER --upgrade . ${PIPINST}
 
 script:
   - cd tests
   - $PYTHON -m pyscreenshot.check.versions
   - if [ ${TRAVIS_OS_NAME} == "osx" ];   then $PYTHON -m pyscreenshot.check.speedtest 2> /dev/null; fi
   - if [ ${TRAVIS_OS_NAME} == "linux" ]; then $PYTHON -m pyscreenshot.check.speedtest --virtual-display 2> /dev/null; fi
-  - if [ ${TRAVIS_OS_NAME} == "osx" ]; then pytest -v . ; fi
-  - if [ ${TRAVIS_OS_NAME} == "linux" ]; then xvfb-run -s "-br -screen 0 900x800x24" pytest -v . ; fi
+  - if [ ${TRAVIS_OS_NAME} == "osx" ]; then $PYTHON -m pytest -v . ; fi
+  - if [ ${TRAVIS_OS_NAME} == "linux" ]; then xvfb-run -s "-br -screen 0 900x800x24" $PYTHON -m pytest -v . ; fi
