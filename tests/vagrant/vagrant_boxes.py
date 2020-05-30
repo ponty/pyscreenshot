@@ -32,7 +32,11 @@ def wrapcmd(cmd, guiproc):
 def run_box(options, vagrantfile, cmds, guiproc):
     env = os.environ
     env["VAGRANT_VAGRANTFILE"] = DIR / vagrantfile
-    env["VAGRANT_DOTFILE_PATH"] = DIR / ".vagrant_" + vagrantfile
+    if vagrantfile != "Vagrantfile":
+        env["VAGRANT_DOTFILE_PATH"] = DIR / ".vagrant_" + vagrantfile
+    else:
+        env["VAGRANT_DOTFILE_PATH"] = ""
+
     v = vagrant.Vagrant(env=env, quiet_stdout=False, quiet_stderr=False)
     status = v.status()
     state = status[0].state

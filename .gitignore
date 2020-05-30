@@ -39,5 +39,4 @@ docs/api/*
 
 *.log
 
-Vagrantfile.osx.rb
-Vagrantfile.win.rb
+Vagrantfile.*.rb
