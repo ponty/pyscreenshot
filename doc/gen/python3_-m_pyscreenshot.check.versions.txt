@@ -1,0 +1,21 @@
+$ python3 -m pyscreenshot.check.versions
+python               3.7.5
+pyscreenshot         2.2
+pil                  7.0.0
+mss                  5.1.0
+scrot                1.1.1
+maim                 5.5
+imagemagick          6.9.10
+qtpy                 1.3.1
+pyqt5                5.12.3
+pyqt                 4.12.1
+pyside2              5.14.2.1
+pyside               1.2.2
+wx                   4.0.6
+pygdk3               3.34.0
+pygtk                
+mac_screencapture    
+mac_quartz           
+gnome_dbus           ?.?
+gnome-screenshot     3.33.90
+kwin_dbus            ?.?

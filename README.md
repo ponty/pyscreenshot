@@ -58,29 +58,60 @@ $ python3 -m pip install Pillow pyscreenshot
 Examples
 ========
 
-grab and show the whole screen (examples/showgrabfullscreen.py):
+```py
+# pyscreenshot/examples/grabfullscreen.py
 
-```python
+"Grab the whole screen"
 import pyscreenshot as ImageGrab
 
 # grab fullscreen
 im = ImageGrab.grab()
 
 # save image file
-im.save('fullscreen.png')
+im.save("fullscreen.png")
+
 ```
 
-grab and show the part of the screen (examples/showgrabbox.py):
+```py
+# pyscreenshot/examples/grabbox.py
 
-```python
+"Grab the part of the screen"
 import pyscreenshot as ImageGrab
 
 # part of the screen
 im = ImageGrab.grab(bbox=(10, 10, 510, 510))  # X1,Y1,X2,Y2
 
 # save image file
-im.save('box.png')
+im.save("box.png")
+
 ```
+
+
+```py
+# pyscreenshot/examples/virtdisp.py
+
+"Create screenshot of xmessage with Xvfb"
+from time import sleep
+
+from easyprocess import EasyProcess
+from pyvirtualdisplay import Display
+
+import pyscreenshot as ImageGrab
+
+with Display(size=(100, 60)) as disp:  # start Xvfb display
+    # display is available
+    with EasyProcess(["xmessage", "hello"]):  # start xmessage
+        sleep(1)  # wait for diplaying window
+        img = ImageGrab.grab()
+img.save("xmessage.png")
+
+```
+
+Image:
+
+![](/doc/gen/xmessage.png)
+
+
 
 
 Performance
@@ -92,58 +123,59 @@ which is necessary to isolate them from the main process and from each other.
 Disabling this option makes performance much better, but it may cause problems in some cases.
 
 Test on Ubuntu 19.10 X11
+<!-- embedme doc/gen/python3_-m_pyscreenshot.check.speedtest.txt -->
 ```console
-$  python3 -m pyscreenshot.check.speedtest
+$ python3 -m pyscreenshot.check.speedtest
 
 n=10
 ------------------------------------------------------
-default                 0.87 sec        (   87 ms per call)
-pil                 
-mss                     1.9  sec        (  191 ms per call)
-scrot                   0.86 sec        (   85 ms per call)
-maim                    1.2  sec        (  124 ms per call)
-imagemagick             2.1  sec        (  208 ms per call)
-qtpy                    4.1  sec        (  406 ms per call)
-pyqt5                   4.1  sec        (  406 ms per call)
-pyqt                    3.4  sec        (  344 ms per call)
-pyside2                 4.6  sec        (  455 ms per call)
-pyside                  3.5  sec        (  348 ms per call)
-wx                      3    sec        (  300 ms per call)
-pygdk3                  2.1  sec        (  206 ms per call)
-pygtk               
-mac_screencapture   
-mac_quartz          
-gnome_dbus              1.2  sec        (  123 ms per call)
-gnome-screenshot        2.1  sec        (  207 ms per call)
-kwin_dbus           
-
-$  python3 -m pyscreenshot.check.speedtest --childprocess 0
-
-n=10
-------------------------------------------------------
-default                 0.16 sec        (   16 ms per call)
-pil                 
-mss                     0.16 sec        (   15 ms per call)
-scrot                   0.87 sec        (   86 ms per call)
-maim                    1.3  sec        (  125 ms per call)
-imagemagick             2.1  sec        (  209 ms per call)
-qtpy                    0.98 sec        (   98 ms per call)
-pyqt5                   0.99 sec        (   98 ms per call)
-pyqt                    0.96 sec        (   95 ms per call)
-pyside2                 1.1  sec        (  107 ms per call)
-pyside                  0.94 sec        (   94 ms per call)
-wx                      0.3  sec        (   30 ms per call)
-pygdk3                  0.19 sec        (   18 ms per call)
-pygtk               
-mac_screencapture   
-mac_quartz          
-gnome_dbus              1.3  sec        (  131 ms per call)
-gnome-screenshot        2.1  sec        (  207 ms per call)
-kwin_dbus           
-
-
-
+default             	1    sec	(  102 ms per call)
+pil                 	
+mss                 	2.1  sec	(  214 ms per call)
+scrot               	1    sec	(  101 ms per call)
+maim                	1.5  sec	(  147 ms per call)
+imagemagick         	2.5  sec	(  247 ms per call)
+qtpy                	4.4  sec	(  443 ms per call)
+pyqt5               	4.4  sec	(  442 ms per call)
+pyqt                	3.5  sec	(  352 ms per call)
+pyside2             	5    sec	(  495 ms per call)
+pyside              	3.5  sec	(  350 ms per call)
+wx                  	3.3  sec	(  329 ms per call)
+pygdk3              	2.3  sec	(  225 ms per call)
+pygtk               	
+mac_screencapture   	
+mac_quartz          	
+gnome_dbus          	1.7  sec	(  166 ms per call)
+gnome-screenshot    	2.3  sec	(  231 ms per call)
+kwin_dbus           	
 ```
+<!-- embedme doc/gen/python3_-m_pyscreenshot.check.speedtest_--childprocess_0.txt -->
+```console
+$ python3 -m pyscreenshot.check.speedtest --childprocess 0
+
+n=10
+------------------------------------------------------
+default             	0.16 sec	(   16 ms per call)
+pil                 	
+mss                 	0.17 sec	(   17 ms per call)
+scrot               	1    sec	(  104 ms per call)
+maim                	1.5  sec	(  145 ms per call)
+imagemagick         	2.5  sec	(  246 ms per call)
+qtpy                	1.1  sec	(  111 ms per call)
+pyqt5               	1.1  sec	(  110 ms per call)
+pyqt                	1    sec	(  104 ms per call)
+pyside2             	1.2  sec	(  121 ms per call)
+pyside              	1    sec	(  104 ms per call)
+wx                  	0.33 sec	(   32 ms per call)
+pygdk3              	0.2  sec	(   19 ms per call)
+pygtk               	
+mac_screencapture   	
+mac_quartz          	
+gnome_dbus          	1.5  sec	(  152 ms per call)
+gnome-screenshot    	2.3  sec	(  230 ms per call)
+kwin_dbus           	
+```
+
 
 You can force a backend:
 ```python
@@ -161,11 +193,12 @@ im = ImageGrab.grab(backend="mss", childprocess=False)
 
 
 Printing beckend versions:
+<!-- embedme doc/gen/python3_-m_pyscreenshot.check.versions.txt -->
 
 ```console
-$ python3 -m pyscreenshot.check.versions 
+$ python3 -m pyscreenshot.check.versions
 python               3.7.5
-pyscreenshot         2.0
+pyscreenshot         2.2
 pil                  7.0.0
 mss                  5.1.0
 scrot                1.1.1

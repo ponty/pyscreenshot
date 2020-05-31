@@ -1,0 +1,23 @@
+$ python3 -m pyscreenshot.check.speedtest
+
+n=10
+------------------------------------------------------
+default             	1    sec	(  102 ms per call)
+pil                 	
+mss                 	2.1  sec	(  214 ms per call)
+scrot               	1    sec	(  101 ms per call)
+maim                	1.5  sec	(  147 ms per call)
+imagemagick         	2.5  sec	(  247 ms per call)
+qtpy                	4.4  sec	(  443 ms per call)
+pyqt5               	4.4  sec	(  442 ms per call)
+pyqt                	3.5  sec	(  352 ms per call)
+pyside2             	5    sec	(  495 ms per call)
+pyside              	3.5  sec	(  350 ms per call)
+wx                  	3.3  sec	(  329 ms per call)
+pygdk3              	2.3  sec	(  225 ms per call)
+pygtk               	
+mac_screencapture   	
+mac_quartz          	
+gnome_dbus          	1.7  sec	(  166 ms per call)
+gnome-screenshot    	2.3  sec	(  231 ms per call)
+kwin_dbus           	
