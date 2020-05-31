@@ -208,7 +208,7 @@ Only pure python modules are used:
 Hierarchy
 =========
 
-![Alt text](https://g.gravizo.com/source/svg?https%3A%2F%2Fraw.githubusercontent.com/ponty/pyscreenshot/master/hierarchy.dot)
+![Alt text](https://g.gravizo.com/source/svg?https%3A%2F%2Fraw.githubusercontent.com/ponty/pyscreenshot/master/doc/hierarchy.dot)
 
 [1]: http://en.wikipedia.org/wiki/Scrot
 [2]: https://github.com/naelstrof/maim
