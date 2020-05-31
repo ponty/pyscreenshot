@@ -1,25 +1,26 @@
+import atexit
 import logging
 import os
+import shutil
+import tempfile
 from logging import DEBUG
-from tempfile import gettempdir, mkdtemp
 
 log = logging.getLogger(__name__)
 
-img_dir = None
-img_ind = 0
+CLEANUP = True
 
 
-def img_debug(im, text):
-    if not log.isEnabledFor(DEBUG):
-        return
-    global img_dir
-    global img_ind
-    if not img_dir:
-        root = os.path.join(gettempdir(), "img_debug")
-        if not os.path.exists(root):
-            os.makedirs(root)
-        img_dir = mkdtemp(prefix="img_debug_", suffix="", dir=root)
-    fname = os.path.join(img_dir, str(img_ind).zfill(3) + "_" + text + ".png")
-    im.save(fname)
-    log.debug("image (%s) was saved:" % im + fname)
-    img_ind += 1
+class ImageDebug(object):
+    def __init__(self):
+        self.index = 0
+        self.dir = tempfile.mkdtemp(prefix="pyscreenshot_img_")
+        if CLEANUP:
+            atexit.register(shutil.rmtree, self.dir)
+
+    def img_debug(self, im, text):
+        if not log.isEnabledFor(DEBUG):
+            return
+        fname = os.path.join(self.dir, str(self.index).zfill(3) + "_" + text + ".png")
+        im.save(fname)
+        log.debug("image (%s) was saved:" % im + fname)
+        self.index += 1

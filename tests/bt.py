@@ -11,10 +11,12 @@ import fillscreen
 import pyscreenshot
 from config import bbox_ls
 from double_disp import check_double_disp
-from image_debug import img_debug
+from image_debug import ImageDebug
 from pyscreenshot.util import platform_is_linux, py2
 
 # backend tester (bt)
+
+imdbg = ImageDebug()
 
 
 def check_ref(backend, bbox, childprocess, refimgpath):
@@ -33,15 +35,15 @@ def check_ref(backend, bbox, childprocess, refimgpath):
     assert "RGB" == img_ref.mode
     assert "RGB" == im.mode
 
-    img_debug(img_ref, "ref" + str(bbox))
-    img_debug(im, str(backend) + str(bbox))
+    imdbg.img_debug(img_ref, "ref" + str(bbox))
+    imdbg.img_debug(im, str(backend) + str(bbox))
 
     img_diff = ImageChops.difference(img_ref, im)
     ex = img_diff.getextrema()
     logging.debug("diff getextrema: %s", ex)
     diff_bbox = img_diff.getbbox()
     if diff_bbox:
-        img_debug(img_diff, "img_diff" + str(diff_bbox))
+        imdbg.img_debug(img_diff, "img_diff" + str(diff_bbox))
     # if (
     #     platform_is_osx()
     #     and backend
