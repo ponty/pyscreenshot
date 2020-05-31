@@ -3,3 +3,5 @@ pyvirtualdisplay
 pillow
 path.py
 python-xlib
+pyobjc-framework-Quartz ; platform_system == 'Darwin'
+pyobjc-framework-LaunchServices; platform_system == 'Darwin'
