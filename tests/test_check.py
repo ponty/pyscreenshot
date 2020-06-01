@@ -1,7 +1,6 @@
 # this test should come after backend tests
 import os
 
-from pyscreenshot.tempdir import TemporaryDirectory
 from pyscreenshot.util import run_mod_as_subproc
 
 
@@ -32,14 +31,3 @@ def test_print_versions_no_path():
         assert run_mod_as_subproc("pyscreenshot.check.versions").return_code == 0
     finally:
         os.environ["PATH"] = path
-
-
-def test_examples():
-    with TemporaryDirectory(prefix="pyscreenshot") as tmpdirname:
-        os.chdir(tmpdirname)
-
-        assert run_mod_as_subproc("pyscreenshot.examples.grabbox").return_code == 0
-        assert (
-            run_mod_as_subproc("pyscreenshot.examples.grabfullscreen").return_code == 0
-        )
-        assert run_mod_as_subproc("pyscreenshot.examples.virtdisp").return_code == 0
