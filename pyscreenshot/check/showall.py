@@ -22,4 +22,4 @@ def show():
     print(blist)
     for x in im:
         x.show()
-        time.sleep(1)
+        time.sleep(0.5)
