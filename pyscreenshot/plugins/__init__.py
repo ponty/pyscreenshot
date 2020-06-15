@@ -17,6 +17,8 @@ from pyscreenshot.plugins.qtpy_grabwindow import QtPyGrabWindow
 from pyscreenshot.plugins.scrot import ScrotWrapper
 from pyscreenshot.plugins.wxscreen import WxScreen
 
+# from pyscreenshot.plugins.xwd import XwdWrapper
+
 backend_dict = {
     PilWrapper.name: PilWrapper,
     MssWrapper.name: MssWrapper,
@@ -36,4 +38,5 @@ backend_dict = {
     GnomeDBusWrapper.name: GnomeDBusWrapper,
     GnomeScreenshotWrapper.name: GnomeScreenshotWrapper,
     KwinDBusWrapper.name: KwinDBusWrapper,
+    # XwdWrapper.name: XwdWrapper,
 }
