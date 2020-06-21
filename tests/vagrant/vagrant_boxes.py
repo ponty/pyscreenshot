@@ -78,12 +78,12 @@ def run_box(options, vagrantfile, cmds, guiproc):
                         pid = conn.run(cmd).stdout
                         sleep(1)
                     print(f"{guiproc} pid={pid}")
-                sleep(1)
+                sleep(42)
                 for cmd in cmds:
                     if options.recreate:
                         if "tox" in cmd:
                             cmd += " -r"
-                    conn.run(wrapcmd(cmd, guiproc))
+                    conn.run(wrapcmd(cmd, guiproc), echo=True, pty=True)
     finally:
         if options.halt:
             v.halt()
