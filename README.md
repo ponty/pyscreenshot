@@ -29,7 +29,6 @@ Features:
      * [scrot][1]
      * [maim][2]
      * [ImageMagick][3]
-     * [PyGTK][4]
      * [PIL][5] or [Pillow][6] (only on Windows)
      * [PyQt4][7]
      * [PyQt5][8]
@@ -140,7 +139,6 @@ pyside2             	5    sec	(  495 ms per call)
 pyside              	3.5  sec	(  350 ms per call)
 wx                  	3.3  sec	(  329 ms per call)
 pygdk3              	2.3  sec	(  225 ms per call)
-pygtk               	
 mac_screencapture   	
 mac_quartz          	
 gnome_dbus          	1.7  sec	(  166 ms per call)
@@ -165,7 +163,6 @@ pyside2             	1.2  sec	(  121 ms per call)
 pyside              	1    sec	(  104 ms per call)
 wx                  	0.33 sec	(   32 ms per call)
 pygdk3              	0.2  sec	(   19 ms per call)
-pygtk               	
 mac_screencapture   	
 mac_quartz          	
 gnome_dbus          	1.5  sec	(  152 ms per call)
@@ -207,7 +204,6 @@ pyside2              5.14.2.1
 pyside               1.2.2
 wx                   4.0.6
 pygdk3               3.34.0
-pygtk                
 mac_screencapture    
 mac_quartz           
 gnome_dbus           ?.?
@@ -242,7 +238,6 @@ Hierarchy
 [1]: http://en.wikipedia.org/wiki/Scrot
 [2]: https://github.com/naelstrof/maim
 [3]: http://www.imagemagick.org/
-[4]: https://pypi.org/project/PyGTK/
 [5]: http://www.pythonware.com/library/pil/
 [6]: https://pypi.org/project/Pillow/
 [7]: https://pypi.org/project/PyQt4/

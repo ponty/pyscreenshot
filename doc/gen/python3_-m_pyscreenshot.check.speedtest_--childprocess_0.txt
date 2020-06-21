@@ -14,7 +14,6 @@ pyside2             	1.2  sec	(  121 ms per call)
 pyside              	1    sec	(  104 ms per call)
 wx                  	0.33 sec	(   32 ms per call)
 pygdk3              	0.2  sec	(   19 ms per call)
-pygtk               	
 mac_screencapture   	
 mac_quartz          	
 gnome_dbus          	1.5  sec	(  152 ms per call)

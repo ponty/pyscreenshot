@@ -7,7 +7,6 @@ from pyscreenshot.plugins import backend_dict
 from pyscreenshot.plugins.gdk3pixbuf import Gdk3PixbufWrapper
 from pyscreenshot.plugins.gnome_dbus import GnomeDBusWrapper
 from pyscreenshot.plugins.gnome_screenshot import GnomeScreenshotWrapper
-from pyscreenshot.plugins.gtkpixbuf import GtkPixbufWrapper
 from pyscreenshot.plugins.imagemagick import ImagemagickWrapper
 from pyscreenshot.plugins.kwin_dbus import KwinDBusWrapper
 from pyscreenshot.plugins.mac_quartz import MacQuartzWrapper
@@ -56,7 +55,6 @@ def backends(childprocess):
             yield ImagemagickWrapper
             yield Gdk3PixbufWrapper
             yield WxScreen
-            yield GtkPixbufWrapper
             for x in qt():
                 yield x
         yield GnomeDBusWrapper

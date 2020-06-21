@@ -7,15 +7,14 @@ PY=$2
 
 # no python3-wx before bionic
 # no pyqt5 before xenial
-# no pygtk for py3
 # pygdk3 plugin is not compatible with trusty
 # no python3-pyside before xenial
 # no python-pyside2, python3-pyside2 before disco (19.04)
-U1404_PY2="python-gtk2                           python-wxgtk2.8  python-qt4                    python-pyside  "  
-U1604_PY2="python-gtk2  python-gi gir1.2-gtk-3.0 python-wxgtk3.0  python-qt4     python-pyqt5   python-pyside  "  
-U1804_PY2="python-gtk2  python-gi gir1.2-gtk-3.0 python-wxgtk3.0  python-qt4     python-pyqt5   python-pyside  "  
-U1604_PY3="            python3-gi gir1.2-gtk-3.0                  python3-pyqt4  python3-pyqt5  python3-pyside " 
-U1804_PY3="            python3-gi gir1.2-gtk-3.0 python3-wxgtk4.0 python3-pyqt4  python3-pyqt5  python3-pyside " 
+U1404_PY2="                          python-wxgtk2.8  python-qt4                    python-pyside  "  
+U1604_PY2="python-gi  gir1.2-gtk-3.0 python-wxgtk3.0  python-qt4     python-pyqt5   python-pyside  "  
+U1804_PY2="python-gi  gir1.2-gtk-3.0 python-wxgtk3.0  python-qt4     python-pyqt5   python-pyside  "  
+U1604_PY3="python3-gi gir1.2-gtk-3.0                  python3-pyqt4  python3-pyqt5  python3-pyside " 
+U1804_PY3="python3-gi gir1.2-gtk-3.0 python3-wxgtk4.0 python3-pyqt4  python3-pyqt5  python3-pyside " 
 
 if [[ ${DISTRO} == "trusty" ]];then
     if [[ ${PY} == "2" ]];then

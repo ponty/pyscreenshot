@@ -94,7 +94,6 @@ Vagrant.configure(2) do |config|
   sudo apt-get install -y imagemagick
   sudo apt-get install -y gnome-screenshot
   
-  sudo apt-get install -y python-gtk2
   sudo apt-get install -y libcanberra-gtk-module
 
   sudo apt-get install -y python-gi

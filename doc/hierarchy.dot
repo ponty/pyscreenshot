@@ -19,7 +19,6 @@ digraph G {
             fillcolor=white;
             label = "backends";
 
-            pyscreenshot -> GtkPixbufWrapper;
             pyscreenshot -> Qt4GrabWindowWrapper;
             pyscreenshot -> Qt5GrabWindowWrapper;
             pyscreenshot -> PySideGrabWindowWrapper;
@@ -45,7 +44,6 @@ digraph G {
         PyQt5;
         PySide;
         PySide2;
-        PyGTK;
         screencapture;
         Quartz;
         Scrot;
@@ -96,7 +94,6 @@ digraph G {
     GnomeDBusWrapper -> jeepney;
     KwinDBusWrapper -> jeepney;
 
-    GtkPixbufWrapper -> PyGTK -> "GTK+";
     //"GTK+" -> macOS;
     "GTK+" -> Windows;
     "GTK+" -> X11;
