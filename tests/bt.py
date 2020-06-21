@@ -47,7 +47,7 @@ def check_ref(backend, bbox, childprocess, refimgpath):
     # if (
     #     platform_is_osx()
     #     and backend
-    #     and backend in ["qtpy", "pyqt", "pyqt5", "pyside", "pyside2"]
+    #     and backend in ["pyqt", "pyqt5", "pyside", "pyside2"]
     # ):
     #     color_diff_max = max([b for (_, b) in ex])
     #     assert color_diff_max < 70

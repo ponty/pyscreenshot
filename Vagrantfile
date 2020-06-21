@@ -119,9 +119,6 @@ Vagrant.configure(2) do |config|
   sudo pip install pyside2 --no-cache-dir
   #sudo apt-get install -y python3-pyside2 # no python3-pyside2 before disco (19.04)
   sudo pip3 install pyside2 --no-cache-dir
-  
-  sudo apt-get install -y python-qtpy
-  sudo apt-get install -y python3-qtpy
 
 # test dependencies
   sudo apt-get install -y pqiv x11-utils

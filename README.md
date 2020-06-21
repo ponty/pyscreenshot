@@ -35,7 +35,6 @@ Features:
      * [PyQt5][8]
      * [PySide][9]
      * [PySide2][10]
-     * [QtPy][11]
      * [wxPython][12]
      * Quartz (Mac)
      * screencapture (Mac)
@@ -135,7 +134,6 @@ mss                 	2.1  sec	(  214 ms per call)
 scrot               	1    sec	(  101 ms per call)
 maim                	1.5  sec	(  147 ms per call)
 imagemagick         	2.5  sec	(  247 ms per call)
-qtpy                	4.4  sec	(  443 ms per call)
 pyqt5               	4.4  sec	(  442 ms per call)
 pyqt                	3.5  sec	(  352 ms per call)
 pyside2             	5    sec	(  495 ms per call)
@@ -161,7 +159,6 @@ mss                 	0.17 sec	(   17 ms per call)
 scrot               	1    sec	(  104 ms per call)
 maim                	1.5  sec	(  145 ms per call)
 imagemagick         	2.5  sec	(  246 ms per call)
-qtpy                	1.1  sec	(  111 ms per call)
 pyqt5               	1.1  sec	(  110 ms per call)
 pyqt                	1    sec	(  104 ms per call)
 pyside2             	1.2  sec	(  121 ms per call)
@@ -204,7 +201,6 @@ mss                  5.1.0
 scrot                1.1.1
 maim                 5.5
 imagemagick          6.9.10
-qtpy                 1.3.1
 pyqt5                5.12.3
 pyqt                 4.12.1
 pyside2              5.14.2.1
@@ -253,7 +249,6 @@ Hierarchy
 [8]: https://pypi.org/project/PyQt5/
 [9]: https://pypi.org/project/PySide/
 [10]: https://pypi.org/project/PySide2/
-[11]: https://github.com/spyder-ide/qtpy
 [12]: http://www.wxpython.org/
 [13]: https://git.gnome.org/browse/gnome-screenshot/
 [14]: https://github.com/BoboTiG/python-mss

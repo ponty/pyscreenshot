@@ -19,7 +19,6 @@ from pyscreenshot.plugins.pyside2_grabwindow import PySide2GrabWindow
 from pyscreenshot.plugins.pyside_grabwindow import PySideGrabWindow
 from pyscreenshot.plugins.qt4grabwindow import Qt4GrabWindow
 from pyscreenshot.plugins.qt5grabwindow import Qt5GrabWindow
-from pyscreenshot.plugins.qtpy_grabwindow import QtPyGrabWindow
 from pyscreenshot.plugins.scrot import ScrotWrapper
 from pyscreenshot.plugins.wxscreen import WxScreen
 from pyscreenshot.util import (
@@ -36,7 +35,6 @@ log = logging.getLogger(__name__)
 
 
 def qt():
-    yield QtPyGrabWindow
     yield Qt5GrabWindow
     yield Qt4GrabWindow
     yield PySide2GrabWindow

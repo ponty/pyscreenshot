@@ -6,7 +6,6 @@ mss                  5.1.0
 scrot                1.1.1
 maim                 5.5
 imagemagick          6.9.10
-qtpy                 1.3.1
 pyqt5                5.12.3
 pyqt                 4.12.1
 pyside2              5.14.2.1

@@ -25,6 +25,6 @@ sudo systemsetup -setharddisksleep Never
 
 brew install python3 imagemagick wxmac pyqt pyside gdk-pixbuf gtk+3 mc pqiv pidof
 #brew cask install xquartz
-python3 -m pip install --user pillow qtpy wxpython pyobjc-framework-Quartz pyobjc-framework-LaunchServices pytest path.py tox
+python3 -m pip install --user pillow wxpython pyobjc-framework-Quartz pyobjc-framework-LaunchServices pytest path.py tox
 
 sudo chown -R vagrant /vagrant

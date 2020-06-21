@@ -24,7 +24,6 @@ digraph G {
             pyscreenshot -> Qt5GrabWindowWrapper;
             pyscreenshot -> PySideGrabWindowWrapper;
             pyscreenshot -> PySide2GrabWindowWrapper;
-            pyscreenshot -> QtPyGrabWindowWrapper;
             pyscreenshot -> PilWrapper;
             pyscreenshot -> ImagemagickWrapper;
             pyscreenshot -> WxScreenWrapper;
@@ -46,7 +45,6 @@ digraph G {
         PyQt5;
         PySide;
         PySide2;
-        QtPy;
         PyGTK;
         screencapture;
         Quartz;
@@ -69,12 +67,6 @@ digraph G {
     PySideGrabWindowWrapper -> PySide -> Qt4;
     PySide2GrabWindowWrapper -> PySide2 -> Qt5;
     
-    QtPyGrabWindowWrapper -> QtPy;
-    QtPy -> PySide;
-    QtPy -> PySide2;
-    QtPy -> PyQt4;
-    QtPy -> PyQt5;
-
     Qt4 -> macOS;
     Qt4 -> Windows;
     Qt4 -> X11;
