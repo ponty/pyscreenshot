@@ -12,8 +12,8 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  # config.vm.box = "ubuntu/focal64" # TODO: set  back if bugs are fixed
-  config.vm.box = "geerlingguy/ubuntu2004"
+  config.vm.box = "ubuntu/focal64"
+  #config.vm.box = "geerlingguy/ubuntu2004"
 
   config.vm.boot_timeout = 600
 
@@ -54,6 +54,10 @@ Vagrant.configure(2) do |config|
      vb.memory = "2048"
 
      vb.name = "pyscreenshot_ubuntu.20.04"
+
+     # 	https://bugs.launchpad.net/cloud-images/+bug/1829625
+     vb.customize ["modifyvm", :id, "--uart1", "0x3F8", "4"]
+     vb.customize ["modifyvm", :id, "--uartmode1", "file", "./ttyS0.log"]
    end
   #
   # View the documentation for the provider you are using for more
