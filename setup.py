@@ -49,6 +49,7 @@ classifiers = [
 install_requires = [
     "EasyProcess",
     "entrypoint2",
+    "pillow",
     "mss ; python_version > '3.4'",
     "jeepney ; python_version > '3.4' and platform_system == 'Linux'",
 ]
