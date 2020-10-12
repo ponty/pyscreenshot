@@ -95,7 +95,7 @@ def speedtest(virtual_display=False, backend="", childprocess="", bbox="", numbe
             except pyscreenshot.FailedBackendError:
                 pass
         else:
-            run_all(n, childprocess_param, virtual_only=virtual_only, bbox=bbox)
+            run_all(number, childprocess_param, virtual_only=virtual_only, bbox=bbox)
 
     if virtual_display:
         from pyvirtualdisplay import Display
