@@ -235,19 +235,19 @@ Hierarchy
 
 ![Alt text](https://g.gravizo.com/source/svg?https%3A%2F%2Fraw.githubusercontent.com/ponty/pyscreenshot/master/doc/hierarchy.dot)
 
-[1]: http://en.wikipedia.org/wiki/Scrot
+[1]: https://en.wikipedia.org/wiki/Scrot
 [2]: https://github.com/naelstrof/maim
-[3]: http://www.imagemagick.org/
+[3]: https://www.imagemagick.org/
 [5]: http://www.pythonware.com/library/pil/
 [6]: https://pypi.org/project/Pillow/
 [7]: https://pypi.org/project/PyQt4/
 [8]: https://pypi.org/project/PyQt5/
 [9]: https://pypi.org/project/PySide/
 [10]: https://pypi.org/project/PySide2/
-[12]: http://www.wxpython.org/
+[12]: https://www.wxpython.org/
 [13]: https://git.gnome.org/browse/gnome-screenshot/
 [14]: https://github.com/BoboTiG/python-mss
-[15]: http://pillow.readthedocs.org/en/latest/reference/ImageGrab.html
+[15]: https://pillow.readthedocs.org/en/latest/reference/ImageGrab.html
 [16]: https://pypi.org/project/jeepney/
 [17]: https://github.com/ponty/EasyProcess
 [18]: https://github.com/ponty/entrypoint2
