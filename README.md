@@ -39,6 +39,7 @@ Features:
      * screencapture (Mac)
      * [gnome-screenshot][13]
      * [Python MSS][14]
+     * [Grim][19] (Only on Linux. For Wayland environments other than KDE and Gnome, like Sway)
  * Performance is not a target for this library, but you can benchmark the possible settings and choose the fastest one.
  * Interactivity is not supported.
  * Mouse pointer is not visible.
@@ -214,9 +215,12 @@ kwin_dbus            ?.?
 Wayland
 =======
 
-Wayland is supported only with Python3 using D-Bus on Gnome or KDE.
+Wayland is supported with to setups:
+1. D-Bus on Gnome or KDE. Python 3 only.
+2. [Grim][19] on any Wayland compositor.
+
 If both Wayland and X are available then Wayland is preferred
-because Xwayland can not be used for screenshot.
+because Xwayland can not be used for screenshot.  
 Rules for decision:
  1. use X if DISPLAY variable exists and XDG_SESSION_TYPE variable != "wayland"
  2. use Wayland if 1. is not successful
@@ -251,3 +255,4 @@ Hierarchy
 [16]: https://pypi.org/project/jeepney/
 [17]: https://github.com/ponty/EasyProcess
 [18]: https://github.com/ponty/entrypoint2
+[19]: https://github.com/emersion/grim
