@@ -4,7 +4,7 @@ environments other than Gnome and KDE, such as Sway.
 """
 import logging
 
-from pyscreenshot.plugins.backend import CBackend
+from pyscreenshot.plugins.backend import UNKNOWN_VERSION, CBackend
 from pyscreenshot.tempexport import read_prog_img
 
 log = logging.getLogger(__name__)
@@ -40,4 +40,4 @@ class GrimWrapper(CBackend):
 
     def backend_version(self):
         # grim doesn't have a version flag for some reason
-        return "UNKNOWN"
+        return UNKNOWN_VERSION
