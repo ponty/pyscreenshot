@@ -1,5 +1,7 @@
 import logging
 import os
+import os
+import glob
 
 from easyprocess import EasyProcess
 from entrypoint2 import entrypoint
@@ -12,9 +14,17 @@ commands = [
     "python3 -m pyscreenshot.check.speedtest --childprocess 0",
 ]
 
+def empty_dir(dir):
+    files = glob.glob(os.path.join(dir, "*"))
+    for f in files:
+        os.remove(f)
 
 @entrypoint
 def main():
+    gendir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "gen")
+    logging.info("gendir: %s", gendir)
+    os.makedirs(gendir, exist_ok=True)
+    empty_dir(gendir)
     pls = []
     try:
         os.chdir("gen")
