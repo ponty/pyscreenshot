@@ -89,6 +89,6 @@ Vagrant.configure(2) do |config|
 end
      
 
-# export VAGRANT_VAGRANTFILE=Vagrantfile.kubuntu.20.04.rb;export VAGRANT_DOTFILE_PATH=.vagrant_${VAGRANT_VAGRANTFILE} 
+# export VAGRANT_VAGRANTFILE=Vagrantfile.ubuntu.20.04.rb;export VAGRANT_DOTFILE_PATH=.vagrant_${VAGRANT_VAGRANTFILE} 
 # vagrant up && vagrant ssh
 
