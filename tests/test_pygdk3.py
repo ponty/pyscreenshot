@@ -8,9 +8,11 @@ if check_import("gi"):
 
         # Arch: AttributeError: module 'gi' has no attribute 'require_version'
         try:
-            gi.require_version
+            gi.require_version("Gdk", "3.0")
             ok = True
         except AttributeError:
+            pass
+        except ValueError:
             pass
 if ok:
 
