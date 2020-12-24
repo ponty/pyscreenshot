@@ -133,23 +133,24 @@ config = {
         ["tox -e py3-desktop"],
         "gnome-shell",
     ),
-    "arch.kde.x11": (
-        "Vagrantfile.arch.kde.x11.rb",
-        ["tox -e py3-desktop"],
-        "plasma_session",
-    ),
-    "arch.kde.wayland": (
-        "Vagrantfile.arch.kde.wayland.rb",
-        ["tox -e py3-desktop"],
-        "plasma_session",
-        # "Xwayland",
-    ),
-    "arch.gnome.wayland": (
-        "Vagrantfile.arch.gnome.wayland.rb",
-        ["tox -e py3-desktop"],
-        "gnome-shell-calendar-server",
-        # "Xwayland",
-    ),
+    # "arch.kde.x11": (
+    #     "Vagrantfile.arch.kde.x11.rb",
+    #     ["tox -e py3-desktop"],
+    #     "plasmashell",
+    #     # "plasma_session",
+    # ),
+    # "arch.kde.wayland": (
+    #     "Vagrantfile.arch.kde.wayland.rb",
+    #     ["tox -e py3-desktop"],
+    #     "plasma_session",
+    #     # "Xwayland",
+    # ),
+    # "arch.gnome.wayland": (
+    #     "Vagrantfile.arch.gnome.wayland.rb",
+    #     ["tox -e py3-desktop"],
+    #     "gnome-shell-calendar-server",
+    #     # "Xwayland",
+    # ),
     # "win": ("Vagrantfile.win.rb", ["tox -e py3-win"], "",),
     "osx": (
         "Vagrantfile.osx.rb",
