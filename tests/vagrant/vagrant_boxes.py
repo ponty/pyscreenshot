@@ -100,11 +100,11 @@ def run_box(options, vagrantfile, cmds, guiproc):
 
 config = {
     "server": ("Vagrantfile", ["tox"], "",),
-    # "ubuntu.20.10.sway": (
-    #     "Vagrantfile.ubuntu.20.10.sway.rb",
-    #     ["tox -e py3-desktop"],
-    #     "sway",
-    # ),
+    "ubuntu.20.10.sway": (
+        "Vagrantfile.ubuntu.20.10.sway.rb",
+        ["tox -e py3-desktop"],
+        "kitty",
+    ),
     "debian10.gnome.wayland": (
         "Vagrantfile.debian10.gnome.wayland.rb",
         # ["bash -c 'tox -e py3-desktop'"],

@@ -5,7 +5,7 @@ APT="apt-get -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confd
 $APT update
 $APT dist-upgrade
 
-$APT install grim sway
+$APT install grim sway kitty
 
 cd /vagrant/tests/vagrant
 ./ubu1804dep.sh
@@ -18,5 +18,10 @@ echo '
 [Seat:*]
 autologin-user=vagrant
 autologin-session=sway
-' >> /etc/lightdm/lightdm.conf.d/12-autologin.conf
+' > /etc/lightdm/lightdm.conf.d/12-autologin.conf
+
+# autostart terminal
+echo '
+exec kitty
+' >> /etc/sway/config
 
