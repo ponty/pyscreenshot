@@ -215,9 +215,9 @@ kwin_dbus            ?.?
 Wayland
 =======
 
-Wayland is supported with to setups:
-1. D-Bus on Gnome or KDE. Python 3 only.
-2. [Grim][19] on any Wayland compositor.
+Wayland is supported with two setups:
+1. using D-Bus on Gnome or KDE. Python 3 only.
+2. using [Grim][19] on any Wayland compositor with wlr-screencopy-unstable-v1 support. (Gnome:no, KDE:no, Sway:yes)
 
 If both Wayland and X are available then Wayland is preferred
 because Xwayland can not be used for screenshot.  
