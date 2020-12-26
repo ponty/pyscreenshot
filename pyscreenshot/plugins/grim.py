@@ -29,7 +29,7 @@ class GrimWrapper(CBackend):
         x1, y1, x2, y2 = bbox
         width = x2 - x1
         height = y2 - y1
-        return f"{x1},{y1} {width}x{height}"
+        return "{},{} {}x{}".format(x1, y1, width, height)
 
     def grab(self, bbox=None):
         if bbox:
