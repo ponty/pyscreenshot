@@ -19,6 +19,7 @@ from pyscreenshot.plugins.pyside_grabwindow import PySideGrabWindow
 from pyscreenshot.plugins.qt4grabwindow import Qt4GrabWindow
 from pyscreenshot.plugins.qt5grabwindow import Qt5GrabWindow
 from pyscreenshot.plugins.scrot import ScrotWrapper
+from pyscreenshot.plugins.grim import GrimWrapper
 from pyscreenshot.plugins.wxscreen import WxScreen
 from pyscreenshot.util import (
     platform_is_linux,
@@ -64,6 +65,8 @@ def backends(childprocess):
 
         # flash effect
         yield GnomeScreenshotWrapper
+
+        yield GrimWrapper
 
     elif platform_is_osx():
         # first check for X

@@ -13,6 +13,7 @@ from pyscreenshot.plugins.pyside_grabwindow import PySideGrabWindow
 from pyscreenshot.plugins.qt4grabwindow import Qt4GrabWindow
 from pyscreenshot.plugins.qt5grabwindow import Qt5GrabWindow
 from pyscreenshot.plugins.scrot import ScrotWrapper
+from pyscreenshot.plugins.grim import GrimWrapper
 from pyscreenshot.plugins.wxscreen import WxScreen
 
 # from pyscreenshot.plugins.xwd import XwdWrapper
@@ -21,6 +22,7 @@ backend_dict = {
     PilWrapper.name: PilWrapper,
     MssWrapper.name: MssWrapper,
     ScrotWrapper.name: ScrotWrapper,
+    GrimWrapper.name: GrimWrapper,
     MaimWrapper.name: MaimWrapper,
     ImagemagickWrapper.name: ImagemagickWrapper,
     Qt5GrabWindow.name: Qt5GrabWindow,

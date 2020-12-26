@@ -35,6 +35,7 @@ digraph G {
             pyscreenshot -> GnomeDBusWrapper
             pyscreenshot -> KwinDBusWrapper
             pyscreenshot -> MssWrapper
+            pyscreenshot -> GrimWrapper;
         }
     }
     subgraph cluster_3 {
@@ -115,6 +116,8 @@ digraph G {
     MssWrapper -> X11;
     MssWrapper -> macOS;
     MssWrapper -> Windows;
+
+    GrimWrapper -> Grim -> Wayland
 
     application -> pyscreenshot;
 
