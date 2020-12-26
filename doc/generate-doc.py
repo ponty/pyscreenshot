@@ -1,7 +1,6 @@
+import glob
 import logging
 import os
-import os
-import glob
 
 from easyprocess import EasyProcess
 from entrypoint2 import entrypoint
@@ -14,10 +13,12 @@ commands = [
     "python3 -m pyscreenshot.check.speedtest --childprocess 0",
 ]
 
+
 def empty_dir(dir):
     files = glob.glob(os.path.join(dir, "*"))
     for f in files:
         os.remove(f)
+
 
 @entrypoint
 def main():
