@@ -12,8 +12,7 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/focal64" 
-  # config.vm.box = "geerlingguy/ubuntu2004"
+  config.vm.box = "ubuntu/groovy64"
 
   config.vm.boot_timeout = 600
 
@@ -53,7 +52,7 @@ Vagrant.configure(2) do |config|
      # Customize the amount of memory on the VM:
      vb.memory = "2048"
 
-     vb.name = "pyscreenshot_lubuntu.20.04"
+     vb.name = "pyscreenshot.ubuntu.20.10.sway"
 
      # 	https://bugs.launchpad.net/cloud-images/+bug/1829625
      vb.customize ["modifyvm", :id, "--uart1", "0x3F8", "4"]
@@ -74,7 +73,7 @@ Vagrant.configure(2) do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   $script = "
-  /vagrant/tests/vagrant/lubuntu.20.04.sh
+  /vagrant/tests/vagrant/ubuntu.20.10.sway.sh
 "
       config.vm.provision "shell", inline: $script
           
@@ -82,6 +81,6 @@ Vagrant.configure(2) do |config|
 end
      
 
-# export VAGRANT_VAGRANTFILE=Vagrantfile.lubuntu.20.04.rb;export VAGRANT_DOTFILE_PATH=.vagrant_${VAGRANT_VAGRANTFILE}
+# export VAGRANT_VAGRANTFILE=Vagrantfile.ubuntu.20.10.sway.rb;export VAGRANT_DOTFILE_PATH=.vagrant_${VAGRANT_VAGRANTFILE} 
 # vagrant up && vagrant ssh
 

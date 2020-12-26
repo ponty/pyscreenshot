@@ -67,65 +67,7 @@ Vagrant.configure(2) do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   $script = "
-  export DEBIAN_FRONTEND=noninteractive
-  echo 'export export LC_ALL=C' >> /home/vagrant/.profile
-  
-# install python versions
-  sudo add-apt-repository --yes  ppa:deadsnakes/ppa
-  sudo add-apt-repository --yes  ppa:jan-simon/pqiv
-  sudo apt-get update
-  sudo apt-get install -y python2.7-dev
-  sudo apt-get install -y python3.6-dev
-  sudo apt-get install -y python3.7-dev
-  sudo apt-get install -y python3.8-dev
-  sudo apt-get install -y python3-distutils
-
-# tools
-  sudo apt-get install -y mc xvfb
-  sudo apt-get install -y python3-pip
-  sudo pip3 install -U pip
-  
-# for pillow source install
-#  sudo apt-get install -y libjpeg-dev zlib1g-dev
-
-# project dependencies
-  sudo apt-get install -y maim
-  sudo apt-get install -y scrot
-  sudo apt-get install -y imagemagick
-  sudo apt-get install -y gnome-screenshot
-  
-  sudo apt-get install -y libcanberra-gtk-module
-
-  sudo apt-get install -y python-gi
-  sudo apt-get install -y python3-gi
-  sudo apt-get install -y gir1.2-gtk-3.0
-  sudo apt-get install -y libcanberra-gtk3-module
-    
-  sudo apt-get install -y python-wxgtk3.0
-  #sudo apt-get install -y python-wxgtk4.0 # this is for dev only
-  sudo apt-get install -y python3-wxgtk4.0
-
-  sudo apt-get install -y python-qt4
-  sudo apt-get install -y python3-pyqt4
-  
-  sudo apt-get install -y python-pyqt5
-  sudo apt-get install -y python3-pyqt5
-  
-  sudo apt-get install -y python-pyside
-  sudo apt-get install -y python3-pyside
-  
-  #sudo apt-get install -y python-pyside2 # no python-pyside2 before disco (19.04)
-  sudo pip install pyside2 --no-cache-dir
-  #sudo apt-get install -y python3-pyside2 # no python3-pyside2 before disco (19.04)
-  sudo pip3 install pyside2 --no-cache-dir
-
-# test dependencies
-  sudo apt-get install -y pqiv x11-utils
-  sudo pip3 install -U tox
-  
-# doc dependencies
-  sudo apt-get install -y graphviz
-  
+  /vagrant/tests/vagrant/ubuntu.server.sh
   "
       config.vm.provision "shell", inline: $script
 

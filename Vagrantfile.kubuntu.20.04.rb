@@ -48,7 +48,7 @@ Vagrant.configure(2) do |config|
   #
    config.vm.provider "virtualbox" do |vb|
      # Display the VirtualBox GUI when booting the machine
-     #vb.gui = true
+    #  vb.gui = true
   
      # Customize the amount of memory on the VM:
      vb.memory = "2048"
@@ -74,15 +74,7 @@ Vagrant.configure(2) do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   $script = "
-  export DEBIAN_FRONTEND=noninteractive
-  
-  sudo apt-get update
-  sudo apt-get dist-upgrade
-  sudo apt-get install -y kubuntu-desktop^
-  sudo apt-get remove -y sddm
-
-  /vagrant/tests/vagrant/gdm3.sh
-  /vagrant/tests/vagrant/ubu1804dep.sh
+  /vagrant/tests/vagrant/kubuntu.20.04.sh
 "
       config.vm.provision "shell", inline: $script
           

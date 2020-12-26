@@ -69,16 +69,7 @@ Vagrant.configure(2) do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   $script = "
-  export DEBIAN_FRONTEND=noninteractive
-  echo 'export export LC_ALL=C' >> /home/vagrant/.profile
-  
-  # xubuntu
-  sudo apt-get update
-  sudo apt-get dist-upgrade
-  sudo apt-get install -y xubuntu-desktop^
-
-  /vagrant/tests/vagrant/lightdm.sh
-  /vagrant/tests/vagrant/ubu1804dep.sh
+  /vagrant/tests/vagrant/xubuntu.18.04.sh
 "
       config.vm.provision "shell", inline: $script
           

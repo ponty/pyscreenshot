@@ -5,16 +5,14 @@
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
-Vagrant.configure(2) do |config|
+Vagrant.configure("2") do |config|
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
 
   # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/focal64" 
-  # config.vm.box = "geerlingguy/ubuntu2004"
-
+  # boxes at https://vagrantcloud.com/search.
+  config.vm.box = "debian/buster64"
   config.vm.boot_timeout = 600
 
   # Disable automatic box update checking. If you disable this, then
@@ -25,7 +23,13 @@ Vagrant.configure(2) do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
+  # NOTE: This will enable public access to the opened port
   # config.vm.network "forwarded_port", guest: 80, host: 8080
+
+  # Create a forwarded port mapping which allows access to a specific port
+  # within the machine from a port on the host machine and only allow access
+  # via 127.0.0.1 to disable public access
+  # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -47,41 +51,24 @@ Vagrant.configure(2) do |config|
   # Example for VirtualBox:
   #
    config.vm.provider "virtualbox" do |vb|
-     # Display the VirtualBox GUI when booting the machine
+  #   # Display the VirtualBox GUI when booting the machine
     #  vb.gui = true
-  
-     # Customize the amount of memory on the VM:
+  #
+  #   # Customize the amount of memory on the VM:
      vb.memory = "2048"
-
-     vb.name = "pyscreenshot_lubuntu.20.04"
-
-     # 	https://bugs.launchpad.net/cloud-images/+bug/1829625
-     vb.customize ["modifyvm", :id, "--uart1", "0x3F8", "4"]
-     vb.customize ["modifyvm", :id, "--uartmode1", "file", "./ttyS0.log"]
+     vb.name = "pyscreenshot.debian10.gnome.wayland"
    end
   #
   # View the documentation for the provider you are using for more
   # information on available options.
 
-  # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
-  # such as FTP and Heroku are also available. See the documentation at
-  # https://docs.vagrantup.com/v2/push/atlas.html for more information.
-  # config.push.define "atlas" do |push|
-  #   push.app = "YOUR_ATLAS_USERNAME/YOUR_APPLICATION_NAME"
-  # end
-
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  $script = "
-  /vagrant/tests/vagrant/lubuntu.20.04.sh
-"
-      config.vm.provision "shell", inline: $script
-          
-       
+  config.vm.provision "shell", inline: <<-SHELL
+  /vagrant/tests/vagrant/debian10.gnome.wayland.sh
+  SHELL
 end
-     
 
-# export VAGRANT_VAGRANTFILE=Vagrantfile.lubuntu.20.04.rb;export VAGRANT_DOTFILE_PATH=.vagrant_${VAGRANT_VAGRANTFILE}
+# export VAGRANT_VAGRANTFILE=Vagrantfile.debian10.gnome.wayland.rb;export VAGRANT_DOTFILE_PATH=.vagrant_${VAGRANT_VAGRANTFILE} 
 # vagrant up && vagrant ssh
-

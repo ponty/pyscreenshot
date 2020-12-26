@@ -20,6 +20,7 @@ class Options:
     halt = True
     recreate = True
     destroy = False
+    fast = False
 
 
 def wrapcmd(cmd, guiproc):
@@ -53,8 +54,15 @@ def run_box(options, vagrantfile, cmds, guiproc):
     if state == "not_created":
         # install programs in box
         v.up()
+
         # restart box
         v.halt()
+
+        if not options.fast:
+            # go over first boot messages, tasks
+            v.up()
+            sleep(3 * 60)
+            v.halt()
 
     try:
         v.up()
@@ -79,7 +87,7 @@ def run_box(options, vagrantfile, cmds, guiproc):
                         pid = conn.run(cmd).stdout
                         sleep(1)
                     print(f"{guiproc} pid={pid}")
-                sleep(42)
+                sleep(5)
                 for cmd in cmds:
                     if options.recreate:
                         if "tox" in cmd:
@@ -92,42 +100,68 @@ def run_box(options, vagrantfile, cmds, guiproc):
 
 config = {
     "server": ("Vagrantfile", ["tox"], "",),
-    "lubuntu.18.04": (
-        "Vagrantfile.lubuntu.18.04.rb",
-        ["tox -e py27-desktop", "tox -e py3-desktop"],
-        "lxsession",
+    # "ubuntu.20.10.sway": (
+    #     "Vagrantfile.ubuntu.20.10.sway.rb",
+    #     ["tox -e py3-desktop"],
+    #     "sway",
+    # ),
+    "debian10.gnome.wayland": (
+        "Vagrantfile.debian10.gnome.wayland.rb",
+        # ["bash -c 'tox -e py3-desktop'"],
+        ["tox -e py3-desktop"],
+        "gnome-terminal-server",
     ),
-    # TODO: add ubuntu 20.04 variants when it becomes stable
-    # "lubuntu.20.04": (
-    #     "Vagrantfile.lubuntu.20.04.rb",
+    "debian10.gnome.x11": (
+        "Vagrantfile.debian10.gnome.x11.rb",
+        # ["bash -c 'tox -e py3-desktop'"],
+        ["tox -e py3-desktop"],
+        "gnome-terminal-server",
+    ),
+    "debian10.kde.wayland": (
+        "Vagrantfile.debian10.kde.wayland.rb",
+        ["tox -e py3-desktop"],
+        "konsole",
+    ),
+    "debian10.kde.x11": (
+        "Vagrantfile.debian10.kde.x11.rb",
+        ["tox -e py3-desktop"],
+        "konsole",
+    ),
+    # "lubuntu.18.04": (
+    #     "Vagrantfile.lubuntu.18.04.rb",
     #     ["tox -e py27-desktop", "tox -e py3-desktop"],
     #     "lxsession",
     # ),
-    "xubuntu.18.04": (
-        "Vagrantfile.xubuntu.18.04.rb",
-        ["tox -e py27-desktop", "tox -e py3-desktop"],
-        "xfdesktop",
+    "lubuntu.20.04": (
+        "Vagrantfile.lubuntu.20.04.rb",
+        ["tox -e py3-desktop"],
+        "qterminal",
     ),
-    # "xubuntu.20.04": (
-    #     "Vagrantfile.xubuntu.20.04.rb",
+    # "xubuntu.18.04": (
+    #     "Vagrantfile.xubuntu.18.04.rb",
     #     ["tox -e py27-desktop", "tox -e py3-desktop"],
     #     "xfdesktop",
     # ),
-    "kubuntu.18.04": (
-        "Vagrantfile.kubuntu.18.04.rb",
-        ["tox -e py27-desktop", "tox -e py3-desktop"],
-        "gnome-shell",
+    "xubuntu.20.04": (
+        "Vagrantfile.xubuntu.20.04.rb",
+        ["tox -e py3-desktop"],
+        "xfdesktop",
     ),
-    # "kubuntu.20.04": (
-    #     "Vagrantfile.kubuntu.20.04.rb",
+    # "kubuntu.18.04": (
+    #     "Vagrantfile.kubuntu.18.04.rb",
     #     ["tox -e py27-desktop", "tox -e py3-desktop"],
     #     "gnome-shell",
     # ),
-    "ubuntu.18.04": (
-        "Vagrantfile.ubuntu.18.04.rb",
+    "kubuntu.20.04": (
+        "Vagrantfile.kubuntu.20.04.rb",
         ["tox -e py3-desktop"],
-        "gnome-shell",
+        "konsole",
     ),
+    # "ubuntu.18.04": (
+    #     "Vagrantfile.ubuntu.18.04.rb",
+    #     ["tox -e py3-desktop"],
+    #     "gnome-shell",
+    # ),
     "ubuntu.20.04": (
         "Vagrantfile.ubuntu.20.04.rb",
         ["tox -e py3-desktop"],
@@ -166,6 +200,7 @@ def main(boxes="all", fast=False, destroy=False):
     options.halt = not fast
     options.recreate = not fast
     options.destroy = destroy
+    options.fast = fast
 
     if boxes == "all":
         boxes = list(config.keys())
