@@ -1,3 +1,5 @@
+import os
+
 from easyprocess import EasyProcess
 
 from pyscreenshot.util import platform_is_linux, platform_is_osx, platform_is_win
@@ -7,6 +9,8 @@ def display_size_x():
     # http://www.cyberciti.biz/faq/how-do-i-find-out-screen-resolution-of-my-linux-desktop/
     # xdpyinfo  | grep 'dimensions:'
     screen_width, screen_height = 0, 0
+    if not os.environ.get("DISPLAY"):
+        raise ValueError("missing DISPLAY variable")
     xdpyinfo = EasyProcess("xdpyinfo")
     xdpyinfo.enable_stdout_log = False
     if xdpyinfo.call().return_code != 0:
