@@ -34,7 +34,7 @@ Features:
      * [scrot][1]
      * [maim][2]
      * [ImageMagick][3]
-     * [PIL][5] or [Pillow][6] (only on Windows)
+     * [Pillow][6]
      * [PyQt4][7]
      * [PyQt5][8]
      * [PySide][9]
@@ -44,7 +44,8 @@ Features:
      * screencapture (Mac)
      * [gnome-screenshot][13]
      * [Python MSS][14]
-     * [Grim][19] (Only on Linux. For Wayland environments other than KDE and Gnome, like Sway)
+     * [Grim][19]
+     * Old removed backends: QtPy, PyGTK
  * Performance is not the main target for this library, but you can benchmark the possible settings and choose the fastest one.
  * Interactivity is not supported.
  * Mouse pointer is not visible.
@@ -224,8 +225,8 @@ Wayland
 =======
 
 Wayland is supported with two setups:
-1. using D-Bus on Gnome or KDE. Python 3 only.
-2. using [Grim][19] on any Wayland compositor with wlr-screencopy-unstable-v1 support. (Gnome:no, KDE:no, Sway:yes)
+1. using D-Bus on GNOME or KDE. Python 3 only.
+2. using [Grim][19] on any Wayland compositor with wlr-screencopy-unstable-v1 support. (GNOME:no, KDE:no, Sway:yes)
 
 If both Wayland and X are available then Wayland is preferred
 because Xwayland can not be used for screenshot.  
