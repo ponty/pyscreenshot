@@ -70,30 +70,23 @@ def backends(childprocess):
         yield GrimWrapper
 
     elif platform_is_osx():
-        # first check for X
-        if use_x_display():
-            pass
-        else:
-            # fast
-            yield MssWrapper
-
-            # latest version should work
-            yield PilWrapper
-
-            # alternatives for older pillow versions
-            yield ScreencaptureWrapper
-            yield MacQuartzWrapper
-
-            # qt has some color difference
-
-            # does not work: Gdk3, wx, Imagemagick
-
-    elif platform_is_win():
-        # fast
+        yield PilWrapper
         yield MssWrapper
 
+        # alternatives for older pillow versions
+        yield ScreencaptureWrapper
+        yield MacQuartzWrapper
+
+        # qt has some color difference
+
+        # does not work: Gdk3, wx, Imagemagick
+
+    elif platform_is_win():
         yield PilWrapper
+        yield MssWrapper
     else:
+        yield PilWrapper
+        yield MssWrapper
         for x in backend_dict.values():
             yield x
 
