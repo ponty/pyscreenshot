@@ -59,7 +59,13 @@ digraph G {
         wxWidgets;
         "GTK+";
     }
-
+    subgraph cluster_5 {
+        label = "Display";
+        Windows;
+        macOS;
+        X11;
+        Wayland;
+    }
     Qt4GrabWindowWrapper -> PyQt4 -> Qt4;
     PyQt4 -> Qt5;
     Qt5GrabWindowWrapper -> PyQt5 -> Qt5;
@@ -74,6 +80,8 @@ digraph G {
     Qt5 -> X11;
 
     PilWrapper -> PIL -> Windows;
+    PIL -> macOS;
+    PIL -> X11;
     ImagemagickWrapper -> Imagemagick -> X11;
     ScrotWrapper -> Scrot -> X11;
     MaimWrapper -> Maim -> X11;
@@ -83,17 +91,18 @@ digraph G {
     KDE -> Wayland;
     KDE -> X11;
 
-    "D-Bus" -> Gnome;
-    "D-Bus" -> KDE;
+    "D-Bus (GNOME)" -> Gnome;
+    "D-Bus (KDE)" -> KDE;
 
-    jeepney-> "D-Bus";
+    "jeepney (GNOME)"-> "D-Bus (GNOME)";
+    "jeepney (KDE)"-> "D-Bus (KDE)";
 
     GnomeScreenshotWrapper -> "gnome-screenshot";
     "gnome-screenshot" -> X11;
-    "gnome-screenshot" -> "D-Bus";
+    "gnome-screenshot" -> "D-Bus (GNOME)";
 
-    GnomeDBusWrapper -> jeepney;
-    KwinDBusWrapper -> jeepney;
+    GnomeDBusWrapper -> "jeepney (GNOME)";
+    KwinDBusWrapper -> "jeepney (KDE)";
 
     //"GTK+" -> macOS;
     "GTK+" -> Windows;
