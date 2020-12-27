@@ -1,11 +1,12 @@
 import atexit
 import logging
 import tempfile
+from os.path import join
+from shutil import rmtree
 from time import sleep
 
 from easyprocess import EasyProcess
 from entrypoint2 import entrypoint
-from path import Path
 from PIL import Image
 
 import pyscreenshot
@@ -45,9 +46,8 @@ def init():
     global refimgpath
     if not refimgpath:
         d = tempfile.mkdtemp(prefix="fillscreen")
-        d = Path(d)
-        atexit.register(d.rmtree)
-        refimgpath = d / "ref.png"
+        atexit.register(lambda: rmtree(d))
+        refimgpath = join(d, "ref.png")
 
         im = generate_image()
         im.save(refimgpath)

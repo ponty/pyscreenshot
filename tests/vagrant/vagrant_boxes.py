@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 import os
+from os.path import dirname, join
 from time import sleep
 
 import fabric
 from entrypoint2 import entrypoint
-from path import Path
 
 import vagrant
 
@@ -13,7 +13,7 @@ import vagrant
 
 # pip3 install fabric vncdotool python-vagrant entrypoint2
 
-DIR = Path(__file__).parent.parent.parent
+DIR = dirname(dirname(dirname(__file__)))
 
 
 class Options:
@@ -33,9 +33,9 @@ def wrapcmd(cmd, guiproc):
 
 def run_box(options, vagrantfile, cmds, guiproc):
     env = os.environ
-    env["VAGRANT_VAGRANTFILE"] = DIR / vagrantfile
+    env["VAGRANT_VAGRANTFILE"] = join(DIR, vagrantfile)
     if vagrantfile != "Vagrantfile":
-        env["VAGRANT_DOTFILE_PATH"] = DIR / ".vagrant_" + vagrantfile
+        env["VAGRANT_DOTFILE_PATH"] = join(DIR, ".vagrant_" + vagrantfile)
     else:
         env["VAGRANT_DOTFILE_PATH"] = ""
 
