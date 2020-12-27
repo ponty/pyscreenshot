@@ -161,23 +161,23 @@ $ python3 -m pyscreenshot.check.speedtest
 
 n=10
 ------------------------------------------------------
-default             	0.98 sec	(   98 ms per call)
-pil                 	1.7  sec	(  169 ms per call)
-mss                 	2    sec	(  196 ms per call)
-scrot               	1    sec	(  102 ms per call)
+default             	1    sec	(  101 ms per call)
+pil                 	1.7  sec	(  166 ms per call)
+mss                 	1.9  sec	(  191 ms per call)
+scrot               	0.97 sec	(   97 ms per call)
 grim                	
-maim                	1.6  sec	(  156 ms per call)
-imagemagick         	2.5  sec	(  246 ms per call)
-pyqt5               	4.3  sec	(  432 ms per call)
+maim                	1.4  sec	(  144 ms per call)
+imagemagick         	2.4  sec	(  235 ms per call)
+pyqt5               	4.3  sec	(  429 ms per call)
 pyqt                	
 pyside2             	4.2  sec	(  423 ms per call)
 pyside              	
-wx                  	4.4  sec	(  435 ms per call)
-pygdk3              	2.1  sec	(  205 ms per call)
+wx                  	4.1  sec	(  412 ms per call)
+pygdk3              	2    sec	(  204 ms per call)
 mac_screencapture   	
 mac_quartz          	
-gnome_dbus          	1.5  sec	(  147 ms per call)
-gnome-screenshot    	4    sec	(  397 ms per call)
+gnome_dbus          	1.4  sec	(  144 ms per call)
+gnome-screenshot    	3.8  sec	(  381 ms per call)
 kwin_dbus           	
 ```
 <!-- embedme doc/gen/python3_-m_pyscreenshot.check.speedtest_--childprocess_0.txt -->
@@ -186,23 +186,23 @@ $ python3 -m pyscreenshot.check.speedtest --childprocess 0
 
 n=10
 ------------------------------------------------------
-default             	0.15 sec	(   15 ms per call)
+default             	0.11 sec	(   10 ms per call)
 pil                 	0.09 sec	(    8 ms per call)
-mss                 	0.17 sec	(   17 ms per call)
-scrot               	0.96 sec	(   95 ms per call)
+mss                 	0.15 sec	(   15 ms per call)
+scrot               	0.95 sec	(   95 ms per call)
 grim                	
-maim                	1.4  sec	(  143 ms per call)
-imagemagick         	2.3  sec	(  233 ms per call)
-pyqt5               	1.1  sec	(  113 ms per call)
+maim                	1.5  sec	(  145 ms per call)
+imagemagick         	2.4  sec	(  235 ms per call)
+pyqt5               	1.1  sec	(  114 ms per call)
 pyqt                	
-pyside2             	1.1  sec	(  108 ms per call)
+pyside2             	1.2  sec	(  118 ms per call)
 pyside              	
-wx                  	0.47 sec	(   46 ms per call)
-pygdk3              	0.18 sec	(   17 ms per call)
+wx                  	0.43 sec	(   43 ms per call)
+pygdk3              	0.16 sec	(   15 ms per call)
 mac_screencapture   	
 mac_quartz          	
-gnome_dbus          	1.5  sec	(  149 ms per call)
-gnome-screenshot    	3.8  sec	(  384 ms per call)
+gnome_dbus          	1.5  sec	(  147 ms per call)
+gnome-screenshot    	3.8  sec	(  383 ms per call)
 kwin_dbus           	
 ```
 

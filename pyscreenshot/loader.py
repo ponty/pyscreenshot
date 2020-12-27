@@ -42,14 +42,15 @@ def qt():
 
 
 def backends(childprocess):
+    # the order is based on performance
     if platform_is_linux():
         if use_x_display():
             if childprocess:
-                # scrot is 2x faster than mss
                 yield ScrotWrapper
+                yield PilWrapper
                 yield MssWrapper
             else:
-                # mss is 6x faster than scrot
+                yield PilWrapper
                 yield MssWrapper
                 yield ScrotWrapper
             yield MaimWrapper
