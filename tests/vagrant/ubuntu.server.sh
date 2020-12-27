@@ -12,8 +12,9 @@ sudo apt-get install -y python2.7-dev
 sudo apt-get install -y python3.6-dev
 sudo apt-get install -y python3.7-dev
 sudo apt-get install -y python3.8-dev
-sudo apt-get install -y python3.9-dev
 sudo apt-get install -y python3-distutils
+sudo apt-get install -y python3.9-dev
+sudo apt-get install -y python3.9-distutils
 
 # tools
 sudo apt-get install -y mc xvfb
@@ -24,6 +25,7 @@ sudo pip3 install -U pip
 #  sudo apt-get install -y libjpeg-dev zlib1g-dev
 
 # project dependencies
+sudo apt-get install -y grim
 sudo apt-get install -y maim
 sudo apt-get install -y scrot
 sudo apt-get install -y imagemagick
