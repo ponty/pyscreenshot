@@ -134,23 +134,24 @@ Versions:
 
 ```console
 $ python3 -m pyscreenshot.check.versions
-python               3.7.5
-pyscreenshot         2.2
-pil                  7.0.0
-mss                  5.1.0
-scrot                1.1.1
-maim                 5.5
+python               3.8.5
+pyscreenshot         2.3
+pil                  8.0.1
+mss                  6.1.0
+scrot                1.2
+grim                 ?.?
+maim                 5.5.3
 imagemagick          6.9.10
-pyqt5                5.12.3
-pyqt                 4.12.1
-pyside2              5.14.2.1
-pyside               1.2.2
-wx                   4.0.6
-pygdk3               3.34.0
+pyqt5                5.14.1
+pyqt                 
+pyside2              5.14.0
+pyside               
+wx                   4.0.7
+pygdk3               3.36.0
 mac_screencapture    
 mac_quartz           
 gnome_dbus           ?.?
-gnome-screenshot     3.33.90
+gnome-screenshot     3.36.0
 kwin_dbus            ?.?
 ```
 
@@ -160,22 +161,23 @@ $ python3 -m pyscreenshot.check.speedtest
 
 n=10
 ------------------------------------------------------
-default             	1    sec	(  102 ms per call)
-pil                 	
-mss                 	2.1  sec	(  214 ms per call)
-scrot               	1    sec	(  101 ms per call)
-maim                	1.5  sec	(  147 ms per call)
-imagemagick         	2.5  sec	(  247 ms per call)
-pyqt5               	4.4  sec	(  442 ms per call)
-pyqt                	3.5  sec	(  352 ms per call)
-pyside2             	5    sec	(  495 ms per call)
-pyside              	3.5  sec	(  350 ms per call)
-wx                  	3.3  sec	(  329 ms per call)
-pygdk3              	2.3  sec	(  225 ms per call)
+default             	0.98 sec	(   98 ms per call)
+pil                 	1.7  sec	(  169 ms per call)
+mss                 	2    sec	(  196 ms per call)
+scrot               	1    sec	(  102 ms per call)
+grim                	
+maim                	1.6  sec	(  156 ms per call)
+imagemagick         	2.5  sec	(  246 ms per call)
+pyqt5               	4.3  sec	(  432 ms per call)
+pyqt                	
+pyside2             	4.2  sec	(  423 ms per call)
+pyside              	
+wx                  	4.4  sec	(  435 ms per call)
+pygdk3              	2.1  sec	(  205 ms per call)
 mac_screencapture   	
 mac_quartz          	
-gnome_dbus          	1.7  sec	(  166 ms per call)
-gnome-screenshot    	2.3  sec	(  231 ms per call)
+gnome_dbus          	1.5  sec	(  147 ms per call)
+gnome-screenshot    	4    sec	(  397 ms per call)
 kwin_dbus           	
 ```
 <!-- embedme doc/gen/python3_-m_pyscreenshot.check.speedtest_--childprocess_0.txt -->
@@ -184,22 +186,23 @@ $ python3 -m pyscreenshot.check.speedtest --childprocess 0
 
 n=10
 ------------------------------------------------------
-default             	0.16 sec	(   16 ms per call)
-pil                 	
+default             	0.15 sec	(   15 ms per call)
+pil                 	0.09 sec	(    8 ms per call)
 mss                 	0.17 sec	(   17 ms per call)
-scrot               	1    sec	(  104 ms per call)
-maim                	1.5  sec	(  145 ms per call)
-imagemagick         	2.5  sec	(  246 ms per call)
-pyqt5               	1.1  sec	(  110 ms per call)
-pyqt                	1    sec	(  104 ms per call)
-pyside2             	1.2  sec	(  121 ms per call)
-pyside              	1    sec	(  104 ms per call)
-wx                  	0.33 sec	(   32 ms per call)
-pygdk3              	0.2  sec	(   19 ms per call)
+scrot               	0.96 sec	(   95 ms per call)
+grim                	
+maim                	1.4  sec	(  143 ms per call)
+imagemagick         	2.3  sec	(  233 ms per call)
+pyqt5               	1.1  sec	(  113 ms per call)
+pyqt                	
+pyside2             	1.1  sec	(  108 ms per call)
+pyside              	
+wx                  	0.47 sec	(   46 ms per call)
+pygdk3              	0.18 sec	(   17 ms per call)
 mac_screencapture   	
 mac_quartz          	
-gnome_dbus          	1.5  sec	(  152 ms per call)
-gnome-screenshot    	2.3  sec	(  230 ms per call)
+gnome_dbus          	1.5  sec	(  149 ms per call)
+gnome-screenshot    	3.8  sec	(  384 ms per call)
 kwin_dbus           	
 ```
 
