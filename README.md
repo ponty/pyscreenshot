@@ -1,7 +1,12 @@
-The ``pyscreenshot`` module can be used to copy
-the contents of the screen to a [PIL][5] or [Pillow][6]  image memory using various back-ends.
-Replacement for the [ImageGrab][15] Module, which works on Windows and macOS only,
-so Windows/macOS users don't need this library, except if they need better performance.
+The ``pyscreenshot`` module is obsolete in most cases.
+It was created because [PIL][5] ImageGrab module worked on Windows only,
+but now Linux and macOS are also [supported][15].
+There are some features in ``pyscreenshot`` which can be useful in special cases:
+flexible backends, Wayland support, sometimes better performance, optional subprocessing.
+
+The module can be used to copy the contents of the screen to a [Pillow][6] image memory 
+using various back-ends. Replacement for the [ImageGrab][15] Module.
+
 For handling image memory (e.g. saving to file, converting,..) please read [Pillow][6]  documentation.
 
 Links:
@@ -12,7 +17,7 @@ Links:
 
 Goal:
   Pyscreenshot tries to allow to take screenshots without installing 3rd party libraries.
-  It is cross-platform but mainly useful for Linux based distributions.
+  It is cross-platform.
   It is only a pure Python wrapper, a thin layer over existing back-ends.
   Its strategy should work on most Linux distributions:
   a lot of back-ends are wrapped, if at least one exists then it works,
@@ -21,7 +26,7 @@ Goal:
 Features:
  * Cross-platform wrapper
  * Capturing the whole desktop or an area
- * saving to [PIL][5] or [Pillow][6]  image memory
+ * saving to [Pillow][6] image memory
  * some back-ends are based on this discussion: http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
  * pure Python library
  * supported Python versions: 2.7, 3.6, 3.7, 3.8, 3.9
@@ -40,12 +45,13 @@ Features:
      * [gnome-screenshot][13]
      * [Python MSS][14]
      * [Grim][19] (Only on Linux. For Wayland environments other than KDE and Gnome, like Sway)
- * Performance is not a target for this library, but you can benchmark the possible settings and choose the fastest one.
+ * Performance is not the main target for this library, but you can benchmark the possible settings and choose the fastest one.
  * Interactivity is not supported.
  * Mouse pointer is not visible.
 
 Known problems:
  * KDE Wayland has on screen notification
+ * gnome-screenshot has Flash effect (https://bugzilla.gnome.org/show_bug.cgi?id=672759)
 
 Installation:
 
@@ -116,12 +122,38 @@ Image:
 Performance
 ===========
 
-The performance can be checked with pyscreenshot.check.speedtest module.
+The performance can be checked with `pyscreenshot.check.speedtest` module.
 Backends are started in a subprocess with default (safest) settings 
 which is necessary to isolate them from the main process and from each other. 
 Disabling this option makes performance much better, but it may cause problems in some cases.
 
-Test on Ubuntu 19.10 X11
+Test on Ubuntu 20.04 X11
+
+Versions:
+<!-- embedme doc/gen/python3_-m_pyscreenshot.check.versions.txt -->
+
+```console
+$ python3 -m pyscreenshot.check.versions
+python               3.7.5
+pyscreenshot         2.2
+pil                  7.0.0
+mss                  5.1.0
+scrot                1.1.1
+maim                 5.5
+imagemagick          6.9.10
+pyqt5                5.12.3
+pyqt                 4.12.1
+pyside2              5.14.2.1
+pyside               1.2.2
+wx                   4.0.6
+pygdk3               3.34.0
+mac_screencapture    
+mac_quartz           
+gnome_dbus           ?.?
+gnome-screenshot     3.33.90
+kwin_dbus            ?.?
+```
+
 <!-- embedme doc/gen/python3_-m_pyscreenshot.check.speedtest.txt -->
 ```console
 $ python3 -m pyscreenshot.check.speedtest
@@ -178,38 +210,11 @@ import pyscreenshot as ImageGrab
 im = ImageGrab.grab(backend="scrot")
 ```
 
-You can force if subprocess is applied, setting it to False together with mss gives the best performance:
+You can force if subprocess is applied, setting it to False together with `mss` gives the best performance in most cases:
 ```python
 # best performance
 import pyscreenshot as ImageGrab
 im = ImageGrab.grab(backend="mss", childprocess=False)
-```
-
-
-
-Printing beckend versions:
-<!-- embedme doc/gen/python3_-m_pyscreenshot.check.versions.txt -->
-
-```console
-$ python3 -m pyscreenshot.check.versions
-python               3.7.5
-pyscreenshot         2.2
-pil                  7.0.0
-mss                  5.1.0
-scrot                1.1.1
-maim                 5.5
-imagemagick          6.9.10
-pyqt5                5.12.3
-pyqt                 4.12.1
-pyside2              5.14.2.1
-pyside               1.2.2
-wx                   4.0.6
-pygdk3               3.34.0
-mac_screencapture    
-mac_quartz           
-gnome_dbus           ?.?
-gnome-screenshot     3.33.90
-kwin_dbus            ?.?
 ```
 
 Wayland
@@ -242,7 +247,7 @@ Hierarchy
 [1]: https://en.wikipedia.org/wiki/Scrot
 [2]: https://github.com/naelstrof/maim
 [3]: https://www.imagemagick.org/
-[5]: http://www.pythonware.com/library/pil/
+[5]: https://en.wikipedia.org/wiki/Python_Imaging_Library
 [6]: https://pypi.org/project/Pillow/
 [7]: https://pypi.org/project/PyQt4/
 [8]: https://pypi.org/project/PyQt5/
