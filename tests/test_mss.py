@@ -4,7 +4,6 @@ from pyscreenshot.util import (
     platform_is_linux,
     platform_is_osx,
     platform_is_win,
-    py2,
     use_x_display,
 )
 
@@ -24,7 +23,7 @@ def missing_RANDR():
 
 
 ok = False
-if not py2() and check_import("mss"):
+if check_import("mss"):
     if platform_is_osx() and not use_x_display():
         ok = True
     if platform_is_linux() and use_x_display():

@@ -29,7 +29,7 @@ Features:
  * saving to [Pillow][6] image memory
  * some back-ends are based on this discussion: http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
  * pure Python library
- * supported Python versions: 2.7, 3.6, 3.7, 3.8, 3.9
+ * supported Python versions: 3.6, 3.7, 3.8, 3.9
  * It has wrappers for various back-ends:
      * [scrot][1]
      * [maim][2]
@@ -240,8 +240,8 @@ Dependencies
 Only pure python modules are used:
 1. [EasyProcess][17] for calling programs
 2. [entrypoint2][18] for generating command line interface
-3. [MSS][14] backend is added because it is very fast and pure and multiplatform (Python3 only)
-4. [jeepney][16] for D-Bus calls (Python3 only)
+3. [MSS][14] backend is added because it is very fast and pure and multiplatform
+4. [jeepney][16] for D-Bus calls
 
 Hierarchy
 =========

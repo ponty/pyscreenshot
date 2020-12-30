@@ -1,9 +1,9 @@
 import logging
 import os
+from tempfile import TemporaryDirectory
 
 from pyscreenshot.err import FailedBackendError
 from pyscreenshot.imcodec import codec
-from pyscreenshot.tempdir import TemporaryDirectory
 from pyscreenshot.util import run_mod_as_subproc
 
 log = logging.getLogger(__name__)

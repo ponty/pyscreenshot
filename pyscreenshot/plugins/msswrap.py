@@ -3,7 +3,7 @@
 from PIL import Image
 
 from pyscreenshot.plugins.backend import CBackend
-from pyscreenshot.util import py2, py3, py_minor
+from pyscreenshot.util import py_minor
 
 # https://python-mss.readthedocs.io/examples.html
 
@@ -25,11 +25,8 @@ class MssWrapper(CBackend):
         pass
 
     def grab(self, bbox=None):
-        if py2():
+        if py_minor() < 5:
             raise MssError()
-        if py3():
-            if py_minor() < 5:
-                raise MssError()
         import mss
 
         # atexit.register(sct.close())

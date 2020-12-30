@@ -129,7 +129,7 @@ config = {
     ),
     # "lubuntu.18.04": (
     #     "Vagrantfile.lubuntu.18.04.rb",
-    #     ["tox -e py27-desktop", "tox -e py3-desktop"],
+    #     ["tox -e py3-desktop"],
     #     "lxsession",
     # ),
     "lubuntu.20.04": (
@@ -139,7 +139,7 @@ config = {
     ),
     # "xubuntu.18.04": (
     #     "Vagrantfile.xubuntu.18.04.rb",
-    #     ["tox -e py27-desktop", "tox -e py3-desktop"],
+    #     ["tox -e py3-desktop"],
     #     "xfdesktop",
     # ),
     "xubuntu.20.04": (
@@ -149,7 +149,7 @@ config = {
     ),
     # "kubuntu.18.04": (
     #     "Vagrantfile.kubuntu.18.04.rb",
-    #     ["tox -e py27-desktop", "tox -e py3-desktop"],
+    #     ["tox -e py3-desktop"],
     #     "gnome-shell",
     # ),
     "kubuntu.20.04": (

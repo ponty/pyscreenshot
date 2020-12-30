@@ -1,19 +1,9 @@
+import io
 import logging
 
 from PIL import Image
 
 from pyscreenshot.plugins.backend import CBackend
-from pyscreenshot.util import py2
-
-if py2():
-    import StringIO
-
-    BytesIO = StringIO.StringIO
-else:
-    import io
-
-    BytesIO = io.BytesIO
-
 
 log = logging.getLogger(__name__)
 
@@ -49,7 +39,7 @@ class Qt4GrabWindow(CBackend):
         qbuffer.close()
 
     def grab(self, bbox=None):
-        strio = BytesIO()
+        strio = io.BytesIO()
         self.grab_to_buffer(strio)
         strio.seek(0)
         im = Image.open(strio)

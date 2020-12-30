@@ -2,25 +2,9 @@ language: python
 
 matrix:
   include:
-    - name: 2.7_trusty
-      python: 2.7
-      dist: trusty
-
-    - name: "2.7_trusty_with_system"
-      python: "2.7_with_system_site_packages"
-      dist: trusty
-
-    - name: 3.5_trusty
-      python: 3.5
-      dist: trusty
-
     - name: 3.6_trusty
       python: 3.6
       dist: trusty
-
-    - name: "2.7_xenial_with_system"
-      python: "2.7_with_system_site_packages"
-      dist: xenial
 
     - name: "3.5_xenial_with_system"
       python: "3.5_with_system_site_packages"
@@ -33,10 +17,6 @@ matrix:
     - name: 3.8_xenial
       python: 3.8
       dist: xenial
-
-    - name: 2.7_bionic
-      python: 2.7
-      dist: bionic
 
     - name: "3.6_bionic_with_system"
       python: "3.6_with_system_site_packages"
@@ -73,7 +53,6 @@ matrix:
     #     - python -m pip install --upgrade pip
     #   env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
 
-      # python: "2.7_with_system_site_packages" on bionic doesn't exist
       # windows has no GUI
 
 addons:
@@ -99,8 +78,8 @@ addons:
 install:
   - if [ ${TRAVIS_OS_NAME} == "linux" ] && [ ${TRAVIS_DIST} != "focal" ]; then sudo add-apt-repository -y ppa:jan-simon/pqiv; fi # error in focal
   - if [ ${TRAVIS_OS_NAME} == "linux" ]; then sudo apt-get -q update; fi
-  - if [ ${TRAVIS_OS_NAME} == "linux" ]; then sudo apt-get install --no-install-recommends -y --allow-unauthenticated pqiv $(./tests/packages.sh ${TRAVIS_DIST} ${TRAVIS_PYTHON_VERSION:0:1} ); fi
-  - if [ ${TRAVIS_PYTHON_VERSION:0:1} == "2" ]; then PYTHON=python; else PYTHON=python3; fi
+  - if [ ${TRAVIS_OS_NAME} == "linux" ]; then sudo apt-get install --no-install-recommends -y --allow-unauthenticated pqiv $(./tests/packages.sh ${TRAVIS_DIST} ); fi
+  - PYTHON=python3
   - if [ ${TRAVIS_OS_NAME} == "windows" ]; then PYTHON=python; fi
   - if [ ${TRAVIS_OS_NAME} == "osx" ]; then PYTHON=/usr/local/opt/python/libexec/bin/python; fi
   - $PYTHON -m pip install $PIPUSER --upgrade -r requirements-test.txt

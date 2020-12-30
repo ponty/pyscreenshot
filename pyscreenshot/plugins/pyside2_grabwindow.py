@@ -1,19 +1,9 @@
+import io
 import logging
 
 from PIL import Image
 
 from pyscreenshot.plugins.backend import CBackend
-from pyscreenshot.util import py2
-
-if py2():
-    import StringIO
-
-    BytesIO = StringIO.StringIO
-else:
-    import io
-
-    BytesIO = io.BytesIO
-
 
 log = logging.getLogger(__name__)
 
@@ -32,16 +22,6 @@ class PySide2GrabWindow(CBackend):
         pass
 
     def grab_to_buffer(self, buff, file_type="png"):
-
-        # PY2 error:
-        #        TypeError: 'PySide2.QtGui.QScreen.grabWindow' called with wrong argument types:
-        #           PySide2.QtGui.QScreen.grabWindow(int)
-        #        Supported signatures:
-        #           PySide2.QtGui.QScreen.grabWindow(WId, int = 0, int = 0, int = -1, int = -1)
-        # https://stackoverflow.com/questions/59118938/type-error-when-calling-qscreen-grabwindow
-        if py2():
-            raise PySide2BugError()
-
         from PySide2 import QtGui
         from PySide2 import QtCore
         from PySide2 import QtWidgets
@@ -65,7 +45,7 @@ class PySide2GrabWindow(CBackend):
         qbuffer.close()
 
     def grab(self, bbox=None):
-        strio = BytesIO()
+        strio = io.BytesIO()
         self.grab_to_buffer(strio)
         strio.seek(0)
         im = Image.open(strio)

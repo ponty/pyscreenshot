@@ -12,7 +12,7 @@ import pyscreenshot
 from config import bbox_ls
 from double_disp import check_double_disp
 from image_debug import ImageDebug
-from pyscreenshot.util import platform_is_linux, py2
+from pyscreenshot.util import platform_is_linux
 
 # backend tester (bt)
 
@@ -117,19 +117,11 @@ def check_import(module):
     #     ok = True
     # except ImportError:
     #     pass
-    if py2():
-        import imp
 
-        try:
-            imp.find_module(module)
-            found = True
-        except ImportError:
-            found = False
-    else:
-        import importlib
+    import importlib
 
-        spam_spec = importlib.util.find_spec(module)
-        found = spam_spec is not None
+    spam_spec = importlib.util.find_spec(module)
+    found = spam_spec is not None
     return found
 
 

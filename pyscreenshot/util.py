@@ -4,14 +4,6 @@ import sys
 from easyprocess import EasyProcess
 
 
-def py2():
-    return sys.version_info[0] == 2
-
-
-def py3():
-    return sys.version_info[0] == 3
-
-
 def py_minor():
     return sys.version_info[1]
 

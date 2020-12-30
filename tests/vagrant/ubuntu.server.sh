@@ -8,7 +8,6 @@ echo 'export export LC_ALL=C' >> /home/vagrant/.profile
 sudo add-apt-repository --yes  ppa:deadsnakes/ppa
 sudo add-apt-repository --yes  ppa:jan-simon/pqiv
 sudo apt-get update
-sudo apt-get install -y python2.7-dev
 sudo apt-get install -y python3.6-dev
 sudo apt-get install -y python3.7-dev
 sudo apt-get install -y python3.8-dev
@@ -33,26 +32,16 @@ sudo apt-get install -y gnome-screenshot
 
 sudo apt-get install -y libcanberra-gtk-module
 
-sudo apt-get install -y python-gi
 sudo apt-get install -y python3-gi
 sudo apt-get install -y gir1.2-gtk-3.0
 sudo apt-get install -y libcanberra-gtk3-module
 
-sudo apt-get install -y python-wxgtk3.0
-#sudo apt-get install -y python-wxgtk4.0 # this is for dev only
 sudo apt-get install -y python3-wxgtk4.0
 
-sudo apt-get install -y python-qt4
 sudo apt-get install -y python3-pyqt4
-
-sudo apt-get install -y python-pyqt5
 sudo apt-get install -y python3-pyqt5
-
-sudo apt-get install -y python-pyside
 sudo apt-get install -y python3-pyside
 
-#sudo apt-get install -y python-pyside2 # no python-pyside2 before disco (19.04)
-sudo pip install pyside2 --no-cache-dir
 #sudo apt-get install -y python3-pyside2 # no python3-pyside2 before disco (19.04)
 sudo pip3 install pyside2 --no-cache-dir
 

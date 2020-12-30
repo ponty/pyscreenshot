@@ -3,12 +3,8 @@ import logging
 from PIL import Image
 
 from pyscreenshot.plugins.backend import CBackend
-from pyscreenshot.util import platform_is_osx, py2
+from pyscreenshot.util import platform_is_osx
 
-if py2():
-    to_bytes = buffer
-else:
-    to_bytes = bytes
 log = logging.getLogger(__name__)
 
 # based on:
@@ -55,7 +51,7 @@ class WxScreen(CBackend):
         im = Image.new("RGB", (myWxImage.GetWidth(), myWxImage.GetHeight()))
         if hasattr(Image, "frombytes"):
             # for Pillow
-            im.frombytes(to_bytes(myWxImage.GetData()))
+            im.frombytes(bytes(myWxImage.GetData()))
         else:
             # for PIL
             im.fromstring(myWxImage.GetData())

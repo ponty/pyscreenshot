@@ -31,12 +31,6 @@ PACKAGES = [
     NAME + ".examples",
 ]
 
-
-# extra = {}
-# if sys.version_info >= (3,):
-#     extra['use_2to3'] = True
-#     extra['use_2to3_exclude_fixers'] = ['lib2to3.fixes.fix_import']
-
 classifiers = [
     # Get more strings from
     # http://www.python.org/pypi?%3Aaction=list_classifiers
@@ -44,9 +38,8 @@ classifiers = [
     "Natural Language :: English",
     "Operating System :: OS Independent",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 2",
-    "Programming Language :: Python :: 2.7",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
@@ -66,7 +59,7 @@ setup(
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/x-rst",
-    python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*",
+    python_requires=">=3.4",
     classifiers=classifiers,
     keywords="screenshot",
     author="ponty",

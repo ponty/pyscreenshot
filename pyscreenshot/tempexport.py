@@ -1,9 +1,8 @@
 import os.path
+from tempfile import TemporaryDirectory
 
 from easyprocess import EasyProcess
 from PIL import Image
-
-from pyscreenshot.tempdir import TemporaryDirectory
 
 
 class RunProgError(Exception):

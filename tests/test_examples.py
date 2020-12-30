@@ -1,7 +1,7 @@
 import os
+from tempfile import TemporaryDirectory
 
 from bt import prog_check
-from pyscreenshot.tempdir import TemporaryDirectory
 from pyscreenshot.util import run_mod_as_subproc
 
 
