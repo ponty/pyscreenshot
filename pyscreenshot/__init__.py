@@ -2,8 +2,7 @@ import logging
 
 from pyscreenshot.about import __version__
 from pyscreenshot.childproc import childprocess_backend_version
-from pyscreenshot.loader import FailedBackendError, backend_grab
-from pyscreenshot.plugins import backend_dict
+from pyscreenshot.loader import FailedBackendError, backend_dict, backend_grab
 
 ADDITIONAL_IMPORTS = [FailedBackendError]
 

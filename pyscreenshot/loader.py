@@ -3,7 +3,6 @@ import traceback
 
 from pyscreenshot.childproc import childprocess_grab
 from pyscreenshot.err import FailedBackendError
-from pyscreenshot.plugins import backend_dict
 from pyscreenshot.plugins.gdk3pixbuf import Gdk3PixbufWrapper
 from pyscreenshot.plugins.gnome_dbus import GnomeDBusWrapper
 from pyscreenshot.plugins.gnome_screenshot import GnomeScreenshotWrapper
@@ -31,7 +30,26 @@ from pyscreenshot.util import (
 log = logging.getLogger(__name__)
 
 
-log = logging.getLogger(__name__)
+backend_dict = {
+    PilWrapper.name: PilWrapper,
+    MssWrapper.name: MssWrapper,
+    ScrotWrapper.name: ScrotWrapper,
+    GrimWrapper.name: GrimWrapper,
+    MaimWrapper.name: MaimWrapper,
+    ImagemagickWrapper.name: ImagemagickWrapper,
+    Qt5GrabWindow.name: Qt5GrabWindow,
+    Qt4GrabWindow.name: Qt4GrabWindow,
+    PySide2GrabWindow.name: PySide2GrabWindow,
+    PySideGrabWindow.name: PySideGrabWindow,
+    WxScreen.name: WxScreen,
+    Gdk3PixbufWrapper.name: Gdk3PixbufWrapper,
+    ScreencaptureWrapper.name: ScreencaptureWrapper,
+    MacQuartzWrapper.name: MacQuartzWrapper,
+    GnomeDBusWrapper.name: GnomeDBusWrapper,
+    GnomeScreenshotWrapper.name: GnomeScreenshotWrapper,
+    KwinDBusWrapper.name: KwinDBusWrapper,
+    # XwdWrapper.name: XwdWrapper,
+}
 
 
 def qt():
