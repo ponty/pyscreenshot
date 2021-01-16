@@ -10,9 +10,6 @@ from pyscreenshot.tempexport import read_func_img
 class MacQuartzWrapper(CBackend):
     name = "mac_quartz"
 
-    def __init__(self):
-        pass
-
     def grab(self, bbox=None):
 
         im = read_func_img(self._grab_to_file, bbox)

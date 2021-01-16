@@ -38,9 +38,6 @@ class XwdWrapper(CBackend):
     name = "xwd"
     is_subprocess = True
 
-    def __init__(self):
-        pass
-
     def grab(self, bbox=None):
         im = read_xwd_img()
         if bbox:

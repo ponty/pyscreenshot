@@ -17,9 +17,6 @@ app = None
 class Qt4GrabWindow(CBackend):
     name = "pyqt"
 
-    def __init__(self):
-        pass
-
     def grab_to_buffer(self, buff, file_type="png"):
         from PyQt4 import QtGui
         from PyQt4 import Qt

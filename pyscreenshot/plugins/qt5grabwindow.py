@@ -17,9 +17,6 @@ class Qt5GrabWindow(CBackend):
 
     # qt backends have conflict with each other in the same process.
 
-    def __init__(self):
-        pass
-
     def grab_to_buffer(self, buff, file_type="png"):
         from PyQt5 import QtGui
         from PyQt5 import Qt

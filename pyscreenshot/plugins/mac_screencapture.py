@@ -17,9 +17,6 @@ class ScreencaptureWrapper(CBackend):
     name = "mac_screencapture"
     is_subprocess = True
 
-    def __init__(self):
-        pass
-
     def grab(self, bbox=None):
         if not platform_is_osx():
             raise ScreencaptureError("This backend runs only on Darwin")

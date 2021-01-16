@@ -21,9 +21,6 @@ sct = None
 class MssWrapper(CBackend):
     name = "mss"
 
-    def __init__(self):
-        pass
-
     def grab(self, bbox=None):
         if py_minor() < 5:
             raise MssError()

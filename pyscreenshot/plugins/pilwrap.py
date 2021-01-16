@@ -8,9 +8,6 @@ class PilWrapper(CBackend):
 
     name = "pil"
 
-    def __init__(self):
-        pass
-
     def grab(self, bbox=None):
         from PIL import ImageGrab  # windows and osx only
 

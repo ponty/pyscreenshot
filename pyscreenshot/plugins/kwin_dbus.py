@@ -16,9 +16,6 @@ class KwinDBusWrapper(CBackend):
     name = "kwin_dbus"
     is_subprocess = True
 
-    def __init__(self):
-        pass
-
     def grab(self, bbox=None):
         has_jeepney = False
         try:

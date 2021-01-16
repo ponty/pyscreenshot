@@ -24,9 +24,6 @@ class WxScreen(CBackend):
     #  wx is never installed by default
     # pygdk3 is default on Gnome
 
-    def __init__(self):
-        pass
-
     def grab(self, bbox=None):
         if platform_is_osx():
             raise WxBackendError("osx not supported")

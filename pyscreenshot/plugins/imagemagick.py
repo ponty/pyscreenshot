@@ -16,9 +16,6 @@ class ImagemagickWrapper(CBackend):
     name = "imagemagick"
     is_subprocess = True
 
-    def __init__(self):
-        pass
-
     def grab(self, bbox=None):
         if platform_is_osx():
             raise ImagemagickBackendError("osx not supported")

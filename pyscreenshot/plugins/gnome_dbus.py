@@ -14,9 +14,6 @@ class GnomeDBusWrapper(CBackend):
     name = "gnome_dbus"
     is_subprocess = True
 
-    def __init__(self):
-        pass
-
     def grab(self, bbox=None):
         im = read_func_img(self._grab_to_file, bbox)
         return im

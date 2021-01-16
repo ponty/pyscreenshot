@@ -19,9 +19,6 @@ class GrimWrapper(CBackend):
     name = "grim"
     is_subprocess = True
 
-    def __init__(self):
-        pass
-
     def _bbox_to_grim_region(self, bbox):
         """
         Translate pyscreenshot's bbox tuple convention of (x1, y1, x2, y2) to

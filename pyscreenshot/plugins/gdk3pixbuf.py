@@ -18,9 +18,6 @@ class Gdk3BackendError(Exception):
 class Gdk3PixbufWrapper(CBackend):
     name = "pygdk3"
 
-    def __init__(self):
-        pass
-
     def grab(self, bbox=None):
         """Grabs an image directly to a buffer.
 

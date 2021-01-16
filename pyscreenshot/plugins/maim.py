@@ -16,9 +16,6 @@ class MaimWrapper(CBackend):
     name = "maim"
     is_subprocess = True
 
-    def __init__(self):
-        pass
-
     def grab(self, bbox=None):
         cmd = [PROGRAM, "--hidecursor"]
         if bbox:

@@ -15,9 +15,6 @@ app = None
 class PySideGrabWindow(CBackend):
     name = "pyside"
 
-    def __init__(self):
-        pass
-
     def grab_to_buffer(self, buff, file_type="png"):
         from PySide import QtGui
         from PySide import QtCore

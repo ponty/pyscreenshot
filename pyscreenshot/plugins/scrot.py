@@ -16,9 +16,6 @@ class ScrotWrapper(CBackend):
     name = "scrot"
     is_subprocess = True
 
-    def __init__(self):
-        pass
-
     def grab(self, bbox=None):
         im = read_prog_img([PROGRAM, "--silent"])
         if bbox:
