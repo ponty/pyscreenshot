@@ -1,6 +1,8 @@
+tldr: Use [Pillow][15]
+
 The ``pyscreenshot`` module is obsolete in most cases.
 It was created because [PIL][5] ImageGrab module worked on Windows only,
-but now Linux and macOS are also [supported][15].
+but now Linux and macOS are also [supported][15] by Pillow.
 There are some features in ``pyscreenshot`` which can be useful in special cases:
 flexible backends, Wayland support, sometimes better performance, optional subprocessing.
 
