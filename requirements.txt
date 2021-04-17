@@ -1,4 +1,4 @@
 EasyProcess
-entrypoint2
+entrypoint2>=0.2.4
 mss ; python_version > '3.4'
 jeepney ; python_version > '3.4' and platform_system == 'Linux'
