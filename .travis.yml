@@ -2,9 +2,9 @@ language: python
 
 matrix:
   include:
-    - name: 3.6_trusty
-      python: 3.6
-      dist: trusty
+    # - name: 3.6_trusty
+    #   python: 3.6
+    #   dist: trusty
 
     - name: "3.5_xenial_with_system"
       python: "3.5_with_system_site_packages"
