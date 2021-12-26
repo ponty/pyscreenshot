@@ -14,6 +14,8 @@ sudo apt-get install -y python3.8-dev
 sudo apt-get install -y python3-distutils
 sudo apt-get install -y python3.9-dev
 sudo apt-get install -y python3.9-distutils
+sudo apt-get install -y python3.10-dev
+sudo apt-get install -y python3.10-distutils
 
 # tools
 sudo apt-get install -y mc xvfb

@@ -31,7 +31,7 @@ Features:
  * saving to [Pillow][6] image memory
  * some back-ends are based on this discussion: http://stackoverflow.com/questions/69645/take-a-screenshot-via-a-python-script-linux
  * pure Python library
- * supported Python versions: 3.6, 3.7, 3.8, 3.9
+ * supported Python versions: 3.6, 3.7, 3.8, 3.9, 3.10
  * It has wrappers for various back-ends:
      * [scrot][1]
      * [maim][2]
