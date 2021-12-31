@@ -7,13 +7,20 @@ from logging import DEBUG
 
 log = logging.getLogger(__name__)
 
-CLEANUP = True
+CLEANUP = False
+
+# for image debug
+USE_TESTOUT_DIR = 1
 
 
 class ImageDebug(object):
     def __init__(self):
         self.index = 0
-        self.dir = tempfile.mkdtemp(prefix="pyscreenshot_img_")
+        d = None
+        if USE_TESTOUT_DIR:
+            d = os.path.join(os.getcwd(), "testout")
+            os.makedirs(d, exist_ok=True)
+        self.dir = tempfile.mkdtemp(dir=d, prefix="pyscreenshot_img_")
         if CLEANUP:
             atexit.register(shutil.rmtree, self.dir)
 
