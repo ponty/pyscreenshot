@@ -16,6 +16,8 @@ except ImportError:
 def missing_RANDR():
     if platform_is_osx():
         return False
+    if platform_is_win():
+        return False
     if not display:
         return False
     disp = display.Display()

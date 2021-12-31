@@ -20,12 +20,20 @@ imdbg = ImageDebug()
 
 
 def check_ref(backend, bbox, childprocess, refimgpath):
+    im = pyscreenshot.grab(bbox=bbox, backend=backend, childprocess=childprocess)
+
     img_ref = Image.open(refimgpath)
     logging.debug("ref full getextrema: %s", img_ref.getextrema())
+    # if not bbox:
+    #     bbox = img_ref.getbbox()
+    #     # rm tkinter border
+    #     bw = 1
+    #     bbox = (bbox[0] + bw, bbox[1] + bw, bbox[2] - bw, bbox[3] - bw)
+    #     img_ref = img_ref.crop(bbox)
+    #     im = im.crop(bbox)
+    # elif bbox:
     if bbox:
         img_ref = img_ref.crop(bbox)
-
-    im = pyscreenshot.grab(bbox=bbox, backend=backend, childprocess=childprocess)
 
     img_ref = img_ref.convert("RGB")
     logging.debug("ref  getextrema: %s", img_ref.getextrema())

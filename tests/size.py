@@ -4,6 +4,8 @@ from easyprocess import EasyProcess
 
 from pyscreenshot.util import platform_is_linux, platform_is_osx, platform_is_win
 
+# import tkinter
+
 
 def display_size_x():
     # http://www.cyberciti.biz/faq/how-do-i-find-out-screen-resolution-of-my-linux-desktop/
@@ -34,6 +36,12 @@ def display_size_win():
     from win32api import GetSystemMetrics
 
     return int(GetSystemMetrics(0)), int(GetSystemMetrics(1))
+
+
+# def display_size_tk():
+#     root = tkinter.Tk()
+#     w, h = root.winfo_screenwidth(), root.winfo_screenheight()
+#     return (w, h)
 
 
 def display_size():
