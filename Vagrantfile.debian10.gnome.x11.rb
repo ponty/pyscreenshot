@@ -76,6 +76,8 @@ Vagrant.configure("2") do |config|
   ' >> /etc/gdm3/daemon.conf
 
   SHELL
+
+  config.ssh.extra_args = ["-t", "cd /vagrant; bash --login"]       
 end
 
 # export VAGRANT_VAGRANTFILE=Vagrantfile.debian10.gnome.x11.rb;export VAGRANT_DOTFILE_PATH=.vagrant_${VAGRANT_VAGRANTFILE} 

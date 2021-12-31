@@ -7,8 +7,8 @@ pacman -Syyu  --noconfirm
 pacman --needed -S --noconfirm gnome gdm
 
 # pqiv
-pacman --needed -S --noconfirm git base-devel
-sudo -u vagrant sh -c 'cd /tmp && git clone https://aur.archlinux.org/pqiv.git && cd pqiv && makepkg -si --noconfirm'
+# pacman --needed -S --noconfirm git base-devel
+# sudo -u vagrant sh -c 'cd /tmp && git clone https://aur.archlinux.org/pqiv.git && cd pqiv && makepkg -si --noconfirm'
 
 # tools
 pacman --needed -S --noconfirm python-pip xorg-server-xvfb mc xorg-xdpyinfo

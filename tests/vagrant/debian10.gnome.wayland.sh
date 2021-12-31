@@ -11,7 +11,7 @@ sudo apt-get install -y gnome-core gnome-screenshot
 # test dependencies
 # sudo add-apt-repository --yes  ppa:jan-simon/pqiv
 # sudo apt-get update
-sudo apt-get install -y pqiv x11-utils xvfb python3-pip
+sudo apt-get install -y x11-utils xvfb python3-pip 
 sudo python3 -m pip install tox
 
 # tools

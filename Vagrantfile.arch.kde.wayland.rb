@@ -78,6 +78,8 @@ Session=plasmawayland.desktop' > /etc/sddm.conf.d/autologin.conf
   /vagrant/tests/vagrant/arch_kde.sh
 
   SHELL
+
+  config.ssh.extra_args = ["-t", "cd /vagrant; bash --login"]       
 end
 
 # export VAGRANT_VAGRANTFILE=Vagrantfile.arch.kde.wayland.rb;export VAGRANT_DOTFILE_PATH=.vagrant_${VAGRANT_VAGRANTFILE} 

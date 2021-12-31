@@ -6,7 +6,7 @@ echo 'export export LC_ALL=C' >> /home/vagrant/.profile
 
 # install python versions
 sudo add-apt-repository --yes  ppa:deadsnakes/ppa
-sudo add-apt-repository --yes  ppa:jan-simon/pqiv
+# sudo add-apt-repository --yes  ppa:jan-simon/pqiv
 sudo apt-get update
 sudo apt-get install -y python3.6-dev
 sudo apt-get install -y python3.7-dev
@@ -48,7 +48,7 @@ sudo apt-get install -y python3-pyside
 sudo pip3 install pyside2 --no-cache-dir
 
 # test dependencies
-sudo apt-get install -y pqiv x11-utils
+sudo apt-get install -y x11-utils
 sudo pip3 install -U tox
 
 # doc dependencies

@@ -68,6 +68,8 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
   /vagrant/tests/vagrant/debian10.kde.wayland.sh
   SHELL
+
+  config.ssh.extra_args = ["-t", "cd /vagrant; bash --login"]       
 end
 
 # export VAGRANT_VAGRANTFILE=Vagrantfile.debian10.kde.wayland.rb;export VAGRANT_DOTFILE_PATH=.vagrant_${VAGRANT_VAGRANTFILE} 

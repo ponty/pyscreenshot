@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+set -e
 
 # config.vm.synced_folder ".", "/vagrant", type: "rsync",
 #   rsync__exclude: [".git/",".tox/"],
@@ -22,8 +23,28 @@ sudo systemsetup -setcomputersleep Never
 sudo systemsetup -setdisplaysleep Never
 sudo systemsetup -setharddisksleep Never
 
+# Warning: A newer Command Line Tools release is available.
+# Update them from Software Update in System Preferences or run:
+# softwareupdate --all --install --force
 
-brew install python3 imagemagick wxmac pyqt pyside gdk-pixbuf gtk+3 mc pqiv pidof
+# Error: 
+#  homebrew-core is a shallow clone.
+# To `brew update`, first run:
+git -C /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core fetch --unshallow
+
+brew install openssl@1.1
+brew install python3 
+brew install wxwidgets 
+
+brew install pidof 
+# brew install mc  htop
+brew install imagemagick 
+# brew install pyqt pyqt@5 
+# brew install pyside  pyside@2
+brew install gdk-pixbuf gtk+3 
+# brew install python-tk
+# brew install pqiv 
+
 #brew cask install xquartz
 python3 -m pip install --user pillow wxpython pyobjc-framework-Quartz pyobjc-framework-LaunchServices pytest tox
 

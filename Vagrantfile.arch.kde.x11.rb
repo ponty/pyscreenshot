@@ -79,6 +79,8 @@ Vagrant.configure("2") do |config|
   /vagrant/tests/vagrant/arch_kde.sh
 
   SHELL
+
+  config.ssh.extra_args = ["-t", "cd /vagrant; bash --login"]       
 end
 
 # export VAGRANT_VAGRANTFILE=Vagrantfile.arch.kde.x11.rb;export VAGRANT_DOTFILE_PATH=.vagrant_${VAGRANT_VAGRANTFILE}

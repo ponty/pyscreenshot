@@ -6,7 +6,7 @@ PowerShell -Command "[Net.ServicePointManager]::SecurityProtocol = [Net.ServiceP
 PowerShell -Command "Set-ExecutionPolicy Bypass -Scope Process -Force; iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex"
 
 choco install python -y
-choco install fsviewer -y
+# choco install fsviewer -y
 choco install imagemagick -y
 choco install wxpython -y 
 choco install gtk-runtime -y

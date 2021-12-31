@@ -4,9 +4,8 @@ from os.path import dirname, join
 from time import sleep
 
 import fabric
-from entrypoint2 import entrypoint
-
 import vagrant
+from entrypoint2 import entrypoint
 
 # from fabric.api import env, execute, task, run, sudo, settings
 
@@ -88,10 +87,12 @@ def run_box(options, vagrantfile, cmds, guiproc):
                         sleep(1)
                     print(f"{guiproc} pid={pid}")
                 sleep(5)
+                print(f"collected commands: {cmds}")
                 for cmd in cmds:
                     if options.recreate:
                         if "tox" in cmd:
-                            cmd += " -r"
+                            # cmd += " -r"
+                            cmd = cmd.replace("tox", "tox -r")
                     conn.run(wrapcmd(cmd, guiproc), echo=True, pty=True)
     finally:
         if options.halt:
@@ -100,11 +101,6 @@ def run_box(options, vagrantfile, cmds, guiproc):
 
 config = {
     "server": ("Vagrantfile", ["tox"], "",),
-    "ubuntu.20.10.sway": (
-        "Vagrantfile.ubuntu.20.10.sway.rb",
-        ["tox -e py3-desktop"],
-        "kitty",
-    ),
     "debian10.gnome.wayland": (
         "Vagrantfile.debian10.gnome.wayland.rb",
         # ["bash -c 'tox -e py3-desktop'"],
@@ -122,11 +118,11 @@ config = {
         ["tox -e py3-desktop"],
         "konsole",
     ),
-    "debian10.kde.x11": (
-        "Vagrantfile.debian10.kde.x11.rb",
-        ["tox -e py3-desktop"],
-        "konsole",
-    ),
+    # "debian10.kde.x11": (
+    #     "Vagrantfile.debian10.kde.x11.rb",
+    #     ["tox -e py3-desktop"],
+    #     "konsole",
+    # ),
     # "lubuntu.18.04": (
     #     "Vagrantfile.lubuntu.18.04.rb",
     #     ["tox -e py3-desktop"],
@@ -152,11 +148,11 @@ config = {
     #     ["tox -e py3-desktop"],
     #     "gnome-shell",
     # ),
-    "kubuntu.20.04": (
-        "Vagrantfile.kubuntu.20.04.rb",
-        ["tox -e py3-desktop"],
-        "konsole",
-    ),
+    # "kubuntu.20.04": (
+    #     "Vagrantfile.kubuntu.20.04.rb",
+    #     ["tox -e py3-desktop"],
+    #     "konsole",
+    # ),
     # "ubuntu.18.04": (
     #     "Vagrantfile.ubuntu.18.04.rb",
     #     ["tox -e py3-desktop"],
@@ -186,8 +182,18 @@ config = {
     #     # "Xwayland",
     # ),
     # "win": ("Vagrantfile.win.rb", ["tox -e py3-win"], "",),
-    "osx": (
-        "Vagrantfile.osx.rb",
+    "ubuntu.21.10.sway": (
+        "Vagrantfile.ubuntu.21.10.sway.rb",
+        ["tox -e py3-desktop"],
+        "kitty",
+    ),
+    # "osx.10.14": (
+    #     "Vagrantfile.osx.10.14.rb",
+    #     ["bash --login -c 'python3 -m tox -e py3-osx'"],
+    #     "Dock",
+    # ),
+    "osx.10.15": (
+        "Vagrantfile.osx.10.15.rb",
         ["bash --login -c 'python3 -m tox -e py3-osx'"],
         "Dock",
     ),
@@ -208,7 +214,7 @@ def main(boxes="all", fast=False, destroy=False):
         boxes = boxes.split(",")
     for k, v in config.items():
         if k in boxes:
-            options.win = k == "win"
-            options.osx = k == "osx"
+            options.win = k.startswith("win")
+            options.osx = k.startswith("osx")
             print("-----> %s %s %s" % (k, v[0], v[1]))
             run_box(options, v[0], v[1], v[2])

@@ -51,6 +51,7 @@ Vagrant.configure(2) do |config|
   #
      # Customize the amount of memory on the VM:
      vb.memory = "2048"
+     vb.name = "pyscreenshot_ubuntu.server.18.04"
    end
   #
   # View the documentation for the provider you are using for more
