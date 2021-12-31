@@ -40,3 +40,5 @@ docs/api/*
 *.log
 
 Vagrantfile.*.rb
+
+testout

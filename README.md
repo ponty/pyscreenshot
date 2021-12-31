@@ -15,7 +15,7 @@ Links:
  * home: https://github.com/ponty/pyscreenshot
  * PYPI: https://pypi.python.org/pypi/pyscreenshot
 
-[![Build Status](https://travis-ci.org/ponty/pyscreenshot.svg?branch=master)](https://travis-ci.org/ponty/pyscreenshot)
+![workflow](https://github.com/ponty/pyscreenshot/actions/workflows/main.yml/badge.svg)
 
 Goal:
   Pyscreenshot tries to allow to take screenshots without installing 3rd party libraries.
