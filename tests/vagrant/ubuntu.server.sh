@@ -2,10 +2,11 @@
 export DEBIAN_FRONTEND=noninteractive
 APT="apt-get -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef -y --allow-downgrades --allow-remove-essential --allow-change-held-packages"
 
-echo 'export export LC_ALL=C' >> /home/vagrant/.profile
+sudo update-locale LANG=en_US.UTF-8 LANGUAGE=en.UTF-8
+# echo 'export export LC_ALL=C' >> /home/vagrant/.profile
 
 # install python versions
-sudo add-apt-repository --yes  ppa:deadsnakes/ppa
+sudo add-apt-repository --yes ppa:deadsnakes/ppa
 # sudo add-apt-repository --yes  ppa:jan-simon/pqiv
 sudo apt-get update
 sudo apt-get install -y python3.6-dev

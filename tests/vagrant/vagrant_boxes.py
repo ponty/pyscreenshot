@@ -101,6 +101,26 @@ def run_box(options, vagrantfile, cmds, guiproc):
 
 config = {
     "server": ("Vagrantfile", ["tox"], "",),
+    "debian11.gnome.wayland": (
+        "Vagrantfile.debian11.gnome.wayland.rb",
+        ["tox -e py3-desktop"],
+        "gnome-terminal-server",
+    ),
+    "debian11.gnome.x11": (
+        "Vagrantfile.debian11.gnome.x11.rb",
+        ["tox -e py3-desktop"],
+        "gnome-terminal-server",
+    ),
+    # "debian11.kde.wayland": (
+    #     "Vagrantfile.debian11.kde.wayland.rb",
+    #     ["tox -e py3-desktop"],
+    #     "konsole",
+    # ),
+    # "debian11.kde.x11": (
+    #     "Vagrantfile.debian11.kde.x11.rb",
+    #     ["tox -e py3-desktop"],
+    #     "konsole",
+    # ),
     "debian10.gnome.wayland": (
         "Vagrantfile.debian10.gnome.wayland.rb",
         # ["bash -c 'tox -e py3-desktop'"],
@@ -212,9 +232,23 @@ def main(boxes="all", fast=False, destroy=False):
         boxes = list(config.keys())
     else:
         boxes = boxes.split(",")
+
     for k, v in config.items():
-        if k in boxes:
+        name = k
+        vagrantfile, cmds, guiproc = v[0], v[1], v[2]
+        if name in boxes:
             options.win = k.startswith("win")
             options.osx = k.startswith("osx")
-            print("-----> %s %s %s" % (k, v[0], v[1]))
-            run_box(options, v[0], v[1], v[2])
+            print("----->")
+            print("----->")
+            print("-----> %s %s %s" % (name, vagrantfile, cmds))
+            print("----->")
+            print("----->")
+            try:
+                run_box(options, vagrantfile, cmds, guiproc)
+            finally:
+                print("<-----")
+                print("<-----")
+                print("<----- %s %s %s" % (name, vagrantfile, cmds))
+                print("<-----")
+                print("<-----")
