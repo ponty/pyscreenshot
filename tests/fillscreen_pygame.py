@@ -13,6 +13,12 @@ log = logging.getLogger(__name__)
 
 
 def fillscreen_pygame(fimage):
+    # DBus org.kde.kwin.Screenshot disappears on Kubuntu 20.04 after starting pygame
+    #  fix: System Settings > Compositor > uncheck Allow apps to turn off compositing.
+    #       or https://www.pygame.org/docs/ref/pygame.html
+    #           SDL_VIDEO_X11_NET_WM_BYPASS_COMPOSITOR
+    #           Set to "0" to re-enable the compositor.
+    os.environ["SDL_VIDEO_X11_NET_WM_BYPASS_COMPOSITOR"] = "0"
     pygame.init()
     pygame.mouse.set_visible(0)
     log.info("pygame modes:%s", pygame.display.list_modes())

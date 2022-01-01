@@ -118,11 +118,11 @@ config = {
         ["tox -e py3-desktop"],
         "konsole",
     ),
-    # "debian10.kde.x11": (
-    #     "Vagrantfile.debian10.kde.x11.rb",
-    #     ["tox -e py3-desktop"],
-    #     "konsole",
-    # ),
+    "debian10.kde.x11": (
+        "Vagrantfile.debian10.kde.x11.rb",
+        ["tox -e py3-desktop"],
+        "konsole",
+    ),
     # "lubuntu.18.04": (
     #     "Vagrantfile.lubuntu.18.04.rb",
     #     ["tox -e py3-desktop"],
@@ -148,11 +148,11 @@ config = {
     #     ["tox -e py3-desktop"],
     #     "gnome-shell",
     # ),
-    # "kubuntu.20.04": (
-    #     "Vagrantfile.kubuntu.20.04.rb",
-    #     ["tox -e py3-desktop"],
-    #     "konsole",
-    # ),
+    "kubuntu.20.04": (
+        "Vagrantfile.kubuntu.20.04.rb",
+        ["tox -e py3-desktop"],
+        "konsole",
+    ),
     # "ubuntu.18.04": (
     #     "Vagrantfile.ubuntu.18.04.rb",
     #     ["tox -e py3-desktop"],
