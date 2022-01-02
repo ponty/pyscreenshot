@@ -88,10 +88,12 @@ jobs:
     - name: speedtest
       run: |
         python -m pyscreenshot.check.speedtest
+        python -m pyscreenshot.check.speedtest  --childprocess 0
     - name: speedtest --virtual-display
       if: startsWith(matrix.os, 'ubuntu')
       run: |
         python -m pyscreenshot.check.speedtest --virtual-display
+        python -m pyscreenshot.check.speedtest --virtual-display  --childprocess 0
     - name: Test with pytest
       if: ${{ !startsWith(matrix.os, 'ubuntu') }}
       run: |
