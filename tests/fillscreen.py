@@ -5,8 +5,10 @@ import tempfile
 from os.path import dirname, join
 from shutil import rmtree
 from time import sleep
+# from image_debug import ImageDebug
 
 from easyprocess import EasyProcess
+from PIL import ImageChops
 
 import pyscreenshot
 from genimg import generate_image
@@ -28,8 +30,8 @@ def init():
         atexit.register(lambda: rmtree(d))
         refimgpath = join(d, "ref.bmp")
 
-        im = generate_image()
-        im.save(refimgpath)
+        img_ref = generate_image()
+        img_ref.save(refimgpath)
 
         # fillscreen_tk = join(dirname(__file__), "fillscreen_tk.py")
         fillscreen_pygame = join(dirname(__file__), "fillscreen_pygame.py")
@@ -61,10 +63,39 @@ def init():
         #     cmd = [python, fillscreen_pygame, "--image", refimgpath]
         proc = EasyProcess(cmd).start()
         atexit.register(proc.stop)
-        print(refimgpath)
-        sleep(40)  # TODO: wait for image displayed
-        if not proc.is_alive():
-            raise FillscreenError("fillscreen stopped: %s" % proc)
+        log.debug(refimgpath)
+
+        # sleep(30)
+        # imdbg = ImageDebug()
+        t = 0
+        while True:
+            sleep(2)
+            t += 2
+            if t > 90:
+                raise FillscreenError("fillscreen timeout: %s" % t)
+
+            if not proc.is_alive():
+                raise FillscreenError("fillscreen stopped: %s" % proc)
+
+            im = pyscreenshot.grab()
+            # imdbg.img_debug(im, "raw")
+            im = im.convert("RGB")
+            img_diff = ImageChops.difference(img_ref, im)
+            ex = img_diff.getextrema()
+            log.debug("diff getextrema: %s", ex)
+            color_diff_max = max([b for (_, b) in ex])
+            diff_bbox = img_diff.getbbox()
+            if not diff_bbox is None:
+                log.debug(
+                    "different image data. color_diff_max:%s extrema:%s diff_bbox=%s"
+                    % (color_diff_max, ex, diff_bbox)
+                )
+                # imdbg.img_debug(img_ref, "ref")
+                # imdbg.img_debug(im, "got")
+                # imdbg.img_debug(img_diff, "img_diff" + str(diff_bbox))
+
+            if color_diff_max < 10:
+                break
 
         # if the OS has color correction
         #  then the screenshot has slighly different color than the original image
