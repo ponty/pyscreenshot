@@ -6,7 +6,7 @@ from os.path import join
 import pygame
 from entrypoint2 import entrypoint
 from genimg import generate_image
-from pygame.locals import *
+from pygame.locals import K_ESCAPE, KEYDOWN
 
 log = logging.getLogger(__name__)
 

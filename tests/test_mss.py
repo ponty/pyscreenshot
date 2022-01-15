@@ -13,8 +13,9 @@ try:
 except ImportError:
     display = None
 
-# https://github.com/python-xlib/python-xlib/blob/master/examples/xrandr.py#L44
+
 def missing_RANDR():
+    # https://github.com/python-xlib/python-xlib/blob/master/examples/xrandr.py#L44
     if platform_is_osx():
         return False
     if platform_is_win():

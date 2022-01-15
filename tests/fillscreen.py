@@ -90,7 +90,7 @@ def init():
             log.debug("diff getextrema: %s", ex)
             color_diff_max = max([b for (_, b) in ex])
             diff_bbox = img_diff.getbbox()
-            if not diff_bbox is None:
+            if diff_bbox is not None:
                 log.debug(
                     "different image data. color_diff_max:%s extrema:%s diff_bbox=%s"
                     % (color_diff_max, ex, diff_bbox)

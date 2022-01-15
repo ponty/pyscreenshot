@@ -60,7 +60,7 @@ def check_ref(backend, bbox, childprocess, refimgpath):
     #     color_diff_max = max([b for (_, b) in ex])
     #     assert color_diff_max < 70
     # else:
-    if not diff_bbox is None:
+    if diff_bbox is not None:
         print(
             "different image data %s bbox=%s extrema:%s diff_bbox=%s"
             % (backend, bbox, ex, diff_bbox)

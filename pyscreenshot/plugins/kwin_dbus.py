@@ -19,7 +19,7 @@ class KwinDBusWrapper(CBackend):
     def grab(self, bbox=None):
         has_jeepney = False
         try:
-            from jeepney import new_method_call
+            # from jeepney import new_method_call
             from jeepney.integrate.blocking import connect_and_authenticate
             from jeepney.wrappers import MessageGenerator, new_method_call
 

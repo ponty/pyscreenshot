@@ -9,14 +9,15 @@ from pyscreenshot.util import extract_version
 log = logging.getLogger(__name__)
 
 
-PROGRAM = "xwd"
-
 # wikipedia:  https://en.wikipedia.org/wiki/Xwd
 #       xwd | xwdtopnm | pnmtopng > Screenshot.png
 # xwdtopnm is buggy:  https://bugs.launchpad.net/ubuntu/+source/netpbm-free/+bug/1379480
 # solution : imagemagick convert
 #       xwd -root -display :0 | convert xwd:- file.png
 # TODO: xwd sometimes grabs the wrong window so this backend will be not added now
+PROGRAM = "xwd"
+
+
 def read_xwd_img():
     def run_prog(fpng, bbox=None):
         fxwd = fpng + ".xwd"
