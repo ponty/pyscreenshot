@@ -49,4 +49,4 @@ def main():
     embedme.call()
     print(embedme.stdout)
     assert embedme.return_code == 0
-    assert not "but file does not exist" in embedme.stdout
+    assert "but file does not exist" not in embedme.stdout
