@@ -1,0 +1,12 @@
+autoflake
+isort
+black
+
+# pytest
+pyvirtualdisplay
+pillow
+# python-xlib
+# pyobjc-framework-Quartz ; platform_system == 'Darwin'
+# pyobjc-framework-LaunchServices; platform_system == 'Darwin'
+# pywin32 ; platform_system == 'Windows'
+# pygame>=2.1

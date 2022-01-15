@@ -6,3 +6,5 @@ pyobjc-framework-Quartz ; platform_system == 'Darwin'
 pyobjc-framework-LaunchServices; platform_system == 'Darwin'
 pywin32 ; platform_system == 'Windows'
 pygame>=2.1
+mypy
+flake8
