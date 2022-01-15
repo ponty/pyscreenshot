@@ -67,7 +67,10 @@ def run_box(options, vagrantfile, cmds, guiproc):
         v.up()
 
         with fabric.Connection(
-            v.user_hostname_port(), connect_kwargs={"key_filename": v.keyfile(),},
+            v.user_hostname_port(),
+            connect_kwargs={
+                "key_filename": v.keyfile(),
+            },
         ) as conn:
             with conn.cd("c:/vagrant" if options.win else "/vagrant"):
                 if not options.win:
@@ -100,7 +103,11 @@ def run_box(options, vagrantfile, cmds, guiproc):
 
 
 config = {
-    "server": ("Vagrantfile", ["tox"], "",),
+    "server": (
+        "Vagrantfile",
+        ["tox"],
+        "",
+    ),
     "debian11.gnome.wayland": (
         "Vagrantfile.debian11.gnome.wayland.rb",
         ["tox -e py3-desktop"],

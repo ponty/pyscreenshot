@@ -63,8 +63,8 @@ def run_all(n, childprocess_param, virtual_only=True, bbox=None):
 
 @entrypoint
 def speedtest(virtual_display=False, backend="", childprocess="", bbox="", number=10):
-    """Performance test of all back-ends. 
-    
+    """Performance test of all back-ends.
+
     :param virtual_display: run with Xvfb
     :param bbox: bounding box coordinates x1:y1:x2:y2
     :param backend: back-end can be forced if set (example:default, scrot, wx,..),

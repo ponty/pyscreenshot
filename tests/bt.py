@@ -3,15 +3,15 @@ import os
 import sys
 from time import sleep
 
-from easyprocess import EasyProcess
-from entrypoint2 import entrypoint
-from PIL import Image, ImageChops
-
 import fillscreen
-import pyscreenshot
 from config import bbox_ls
 from double_disp import check_double_disp
+from easyprocess import EasyProcess
+from entrypoint2 import entrypoint
 from image_debug import ImageDebug
+from PIL import Image, ImageChops
+
+import pyscreenshot
 from pyscreenshot.util import platform_is_linux
 
 # backend tester (bt)

@@ -1,4 +1,5 @@
 from bt import backend_to_check, check_import
+
 from pyscreenshot import FailedBackendError
 from pyscreenshot.util import (
     platform_is_linux,

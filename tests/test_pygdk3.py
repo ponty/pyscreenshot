@@ -1,4 +1,5 @@
 from bt import backend_to_check, check_import
+
 from pyscreenshot.util import use_x_display
 
 ok = False

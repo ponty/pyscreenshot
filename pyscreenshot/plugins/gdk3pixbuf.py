@@ -34,8 +34,7 @@ class Gdk3PixbufWrapper(CBackend):
 
         gi.require_version("Gdk", "3.0")
         # gi.require_version('GdkPixbuf', '2.0')
-        from gi.repository import Gdk
-        from gi.repository import GdkPixbuf
+        from gi.repository import Gdk, GdkPixbuf
 
         # read_pixel_bytes: New in version 2.32.
         if GdkPixbuf.PIXBUF_MAJOR == 2:

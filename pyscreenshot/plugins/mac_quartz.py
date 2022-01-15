@@ -17,10 +17,10 @@ class MacQuartzWrapper(CBackend):
 
     def _grab_to_file(self, filename, bbox=None, dpi=72):
         # Should query dpi from somewhere, e.g for retina displays?
-        import Quartz
         import LaunchServices
-        from Cocoa import NSURL
+        import Quartz
         import Quartz.CoreGraphics as CG
+        from Cocoa import NSURL
 
         if bbox:
             width = bbox[2] - bbox[0]

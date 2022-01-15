@@ -6,8 +6,8 @@ from pyscreenshot.imcodec import codec
 
 @entrypoint
 def main(filename="", bbox="", backend="", show=False):
-    """Copy the contents of the screen to file. 
-    
+    """Copy the contents of the screen to file.
+
     :param filename: output file
     :param show: show image
     :param bbox: bounding box coordinates x1:y1:x2:y2

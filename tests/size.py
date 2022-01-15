@@ -1,4 +1,4 @@
-'''
+"""
 import os
 
 # import tkinter
@@ -64,4 +64,4 @@ def display_size():
     # assert pgw == w
     # assert pgh == h
     return w, h
-'''
+"""

@@ -21,9 +21,9 @@ class GnomeDBusWrapper(CBackend):
     def _grab_to_file(self, filename, bbox=None):
         has_jeepney = False
         try:
-            from jeepney.wrappers import MessageGenerator, new_method_call
             from jeepney import new_method_call
             from jeepney.integrate.blocking import connect_and_authenticate
+            from jeepney.wrappers import MessageGenerator, new_method_call
 
             has_jeepney = True
         except ImportError:
@@ -60,7 +60,12 @@ class GnomeDBusWrapper(CBackend):
         dbscr = Screenshot()
         if bbox:
             msg = dbscr.ScreenshotArea(
-                bbox[0], bbox[1], bbox[2] - bbox[0], bbox[3] - bbox[1], False, filename,
+                bbox[0],
+                bbox[1],
+                bbox[2] - bbox[0],
+                bbox[3] - bbox[1],
+                False,
+                filename,
             )
         else:
             msg = dbscr.Screenshot(False, False, filename)

@@ -5,9 +5,8 @@ from os.path import join
 
 import pygame
 from entrypoint2 import entrypoint
-from pygame.locals import *
-
 from genimg import generate_image
+from pygame.locals import *
 
 log = logging.getLogger(__name__)
 
