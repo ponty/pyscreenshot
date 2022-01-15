@@ -1,10 +1,11 @@
+'''
 import os
 
+# import tkinter
+import pygame
 from easyprocess import EasyProcess
 
 from pyscreenshot.util import platform_is_linux, platform_is_osx, platform_is_win
-
-# import tkinter
 
 
 def display_size_x():
@@ -44,12 +45,23 @@ def display_size_win():
 #     return (w, h)
 
 
+def display_size_pygame():
+    infoObject = pygame.display.Info()
+    return infoObject.current_w, infoObject.current_h
+
+
 def display_size():
     if platform_is_osx():
-        return display_size_osx()
+        w, h = display_size_osx()
 
     if platform_is_win():
-        return display_size_win()
+        w, h = display_size_win()
 
     if platform_is_linux():
-        return display_size_x()
+        w, h = display_size_x()
+
+    # pgw, pgh = display_size_pygame()
+    # assert pgw == w
+    # assert pgh == h
+    return w, h
+'''

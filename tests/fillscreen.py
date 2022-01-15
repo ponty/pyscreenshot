@@ -5,14 +5,15 @@ import tempfile
 from os.path import dirname, join
 from shutil import rmtree
 from time import sleep
-# from image_debug import ImageDebug
 
 from easyprocess import EasyProcess
-from PIL import ImageChops
+from PIL import Image, ImageChops
 
 import pyscreenshot
-from genimg import generate_image
 from pyscreenshot.util import platform_is_osx, platform_is_win
+
+# from image_debug import ImageDebug
+
 
 log = logging.getLogger(__name__)
 
@@ -30,8 +31,8 @@ def init():
         atexit.register(lambda: rmtree(d))
         refimgpath = join(d, "ref.bmp")
 
-        img_ref = generate_image()
-        img_ref.save(refimgpath)
+        # img_ref = generate_image()
+        # img_ref.save(refimgpath)
 
         # fillscreen_tk = join(dirname(__file__), "fillscreen_tk.py")
         fillscreen_pygame = join(dirname(__file__), "fillscreen_pygame.py")
@@ -77,6 +78,10 @@ def init():
             if not proc.is_alive():
                 raise FillscreenError("fillscreen stopped: %s" % proc)
 
+            try:
+                img_ref = Image.open(refimgpath)
+            except FileNotFoundError:
+                continue
             im = pyscreenshot.grab()
             # imdbg.img_debug(im, "raw")
             im = im.convert("RGB")

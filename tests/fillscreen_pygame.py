@@ -25,6 +25,10 @@ def fillscreen_pygame(fimage):
     # log.info("pygame info:%s", pygame.display.Info())
     log.info("env $DISPLAY= %s", os.environ.get("DISPLAY"))
 
+    infoObject = pygame.display.Info()
+    im = generate_image(infoObject.current_w, infoObject.current_h)
+    im.save(fimage)
+
     windowSurface = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
     img = pygame.image.load(fimage)
 
@@ -49,7 +53,8 @@ def fillscreen_pygame(fimage):
 def main(image=""):
     if not image:
         d = tempfile.mkdtemp(prefix="fillscreen")
+        # atexit.register(lambda: rmtree(d))
         image = join(d, "ref.bmp")
-        im = generate_image()
-        im.save(image)
+    # im = generate_image()
+    # im.save(image)
     fillscreen_pygame(image)

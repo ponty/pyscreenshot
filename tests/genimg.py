@@ -3,13 +3,13 @@ import logging
 from entrypoint2 import entrypoint
 from PIL import Image
 
-from size import display_size
+# from size import display_size
 
 log = logging.getLogger(__name__)
 
 
-def generate_image():
-    w, h = display_size()
+def generate_image(w, h):
+    # w, h = display_size()
     log.debug("display size: %s x %s", w, h)
     if w <= 0 or h <= 0:
         raise ValueError("invalid display size %s x %s" % (w, h))
