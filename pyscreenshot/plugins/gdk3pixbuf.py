@@ -30,11 +30,11 @@ class Gdk3PixbufWrapper(CBackend):
         """
         if platform_is_osx():
             raise Gdk3BackendError("osx not supported")
-        import gi
+        import gi  # type: ignore
 
         gi.require_version("Gdk", "3.0")
         # gi.require_version('GdkPixbuf', '2.0')
-        from gi.repository import Gdk, GdkPixbuf
+        from gi.repository import Gdk, GdkPixbuf  # type: ignore
 
         # read_pixel_bytes: New in version 2.32.
         if GdkPixbuf.PIXBUF_MAJOR == 2:

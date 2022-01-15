@@ -24,7 +24,7 @@ class MssWrapper(CBackend):
     def grab(self, bbox=None):
         if py_minor() < 5:
             raise MssError()
-        import mss
+        import mss  # type: ignore
 
         # atexit.register(sct.close())
 

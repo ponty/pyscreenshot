@@ -27,7 +27,7 @@ class WxScreen(CBackend):
     def grab(self, bbox=None):
         if platform_is_osx():
             raise WxBackendError("osx not supported")
-        import wx
+        import wx  # type: ignore
 
         global app
         if not app:
