@@ -6,13 +6,14 @@ from time import sleep
 import fabric
 import vagrant
 from entrypoint2 import entrypoint
+from pathlib import Path
 
 # from fabric.api import env, execute, task, run, sudo, settings
 
 
 # pip3 install fabric vncdotool python-vagrant entrypoint2
 
-DIR = dirname(dirname(dirname(__file__)))
+DIR = Path(__file__).parent
 
 
 class Options:
@@ -32,11 +33,12 @@ def wrapcmd(cmd, guiproc):
 
 def run_box(options, vagrantfile, cmds, guiproc):
     env = os.environ
-    env["VAGRANT_VAGRANTFILE"] = join(DIR, vagrantfile)
-    if vagrantfile != "Vagrantfile":
-        env["VAGRANT_DOTFILE_PATH"] = join(DIR, ".vagrant_" + vagrantfile)
-    else:
+    if vagrantfile == "Vagrantfile":
+        env["VAGRANT_VAGRANTFILE"] = str(DIR.parent.parent / vagrantfile)
         env["VAGRANT_DOTFILE_PATH"] = ""
+    else:
+        env["VAGRANT_VAGRANTFILE"] = str(DIR / vagrantfile)
+        env["VAGRANT_DOTFILE_PATH"] = str(DIR / (".vagrant_" + vagrantfile))
 
     v = vagrant.Vagrant(env=env, quiet_stdout=False, quiet_stderr=False)
     status = v.status()
