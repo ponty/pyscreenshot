@@ -43,6 +43,7 @@ jobs:
     - name: Install ubuntu dependencies
       if: startsWith(matrix.os, 'ubuntu')
       run: |
+        sudo apt-get update
         sudo apt-get install -y xvfb scrot maim imagemagick x11-utils python3-gi gir1.2-gtk-3.0 python3-wxgtk4.0 python3-pyqt5
     - name: Install ubuntu-18.04 dependencies
       if: matrix.os == 'ubuntu-18.04'
