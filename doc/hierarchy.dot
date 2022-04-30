@@ -32,6 +32,7 @@ digraph G {
             pyscreenshot -> ScreencaptureWrapper
             pyscreenshot -> Gdk3PixbufWrapper
             pyscreenshot -> GnomeScreenshotWrapper
+            pyscreenshot -> FreedesktopDBusWrapper
             pyscreenshot -> GnomeDBusWrapper
             pyscreenshot -> KwinDBusWrapper
             pyscreenshot -> MssWrapper
@@ -71,7 +72,7 @@ digraph G {
     Qt5GrabWindowWrapper -> PyQt5 -> Qt5;
     PySideGrabWindowWrapper -> PySide -> Qt4;
     PySide2GrabWindowWrapper -> PySide2 -> Qt5;
-    
+
     Qt4 -> macOS;
     Qt4 -> Windows;
     Qt4 -> X11;
