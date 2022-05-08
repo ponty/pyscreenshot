@@ -21,6 +21,7 @@ from pyscreenshot.plugins.qt4grabwindow import Qt4GrabWindow
 from pyscreenshot.plugins.qt5grabwindow import Qt5GrabWindow
 from pyscreenshot.plugins.scrot import ScrotWrapper
 from pyscreenshot.plugins.wxscreen import WxScreen
+from pyscreenshot.plugins.ksnip import KsnipWrapper
 from pyscreenshot.util import (
     platform_is_linux,
     platform_is_osx,
@@ -51,6 +52,7 @@ backend_dict = {
     GnomeScreenshotWrapper.name: GnomeScreenshotWrapper,
     KwinDBusWrapper.name: KwinDBusWrapper,
     # XwdWrapper.name: XwdWrapper,
+    KsnipWrapper.name: KsnipWrapper,
 }
 
 
@@ -90,6 +92,7 @@ def backends(childprocess):
         yield GnomeScreenshotWrapper
 
         yield GrimWrapper
+        yield KsnipWrapper
 
     elif platform_is_osx():
         yield PilWrapper
