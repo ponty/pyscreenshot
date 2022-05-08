@@ -4,6 +4,7 @@ import traceback
 from pyscreenshot.childproc import childprocess_grab
 from pyscreenshot.err import FailedBackendError
 from pyscreenshot.plugins.gdk3pixbuf import Gdk3PixbufWrapper
+from pyscreenshot.plugins.freedesktop_dbus import FreedesktopDBusWrapper
 from pyscreenshot.plugins.gnome_dbus import GnomeDBusWrapper
 from pyscreenshot.plugins.gnome_screenshot import GnomeScreenshotWrapper
 from pyscreenshot.plugins.grim import GrimWrapper
@@ -45,6 +46,7 @@ backend_dict = {
     Gdk3PixbufWrapper.name: Gdk3PixbufWrapper,
     ScreencaptureWrapper.name: ScreencaptureWrapper,
     MacQuartzWrapper.name: MacQuartzWrapper,
+    FreedesktopDBusWrapper.name: FreedesktopDBusWrapper,
     GnomeDBusWrapper.name: GnomeDBusWrapper,
     GnomeScreenshotWrapper.name: GnomeScreenshotWrapper,
     KwinDBusWrapper.name: KwinDBusWrapper,
@@ -77,6 +79,8 @@ def backends(childprocess):
             yield WxScreen
             for x in qt():
                 yield x
+        yield FreedesktopDBusWrapper
+
         yield GnomeDBusWrapper
 
         # on screen notification
