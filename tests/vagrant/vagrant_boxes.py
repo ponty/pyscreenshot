@@ -80,7 +80,16 @@ def run_box(options, vagrantfile, cmds, guiproc):
                         freecmd = "top -l 1 -s 0 | grep PhysMem"
                     else:  # linux
                         freecmd = "free -h"
-                    cmds = [freecmd, "env | sort"] + cmds + [freecmd]
+                    cmds = (
+                        [
+                            freecmd,
+                            "env | sort",
+                            "gnome-shell --version || true",
+                            "plasmashell --version || true",
+                        ]
+                        + cmds
+                        + [freecmd]
+                    )
 
                 if guiproc:
                     pid = None
@@ -120,16 +129,16 @@ config = {
         ["tox -e py3-desktop"],
         "gnome-terminal-server",
     ),
-    # "debian11.kde.wayland": (
-    #     "Vagrantfile.debian11.kde.wayland.rb",
-    #     ["tox -e py3-desktop"],
-    #     "konsole",
-    # ),
-    # "debian11.kde.x11": (
-    #     "Vagrantfile.debian11.kde.x11.rb",
-    #     ["tox -e py3-desktop"],
-    #     "konsole",
-    # ),
+    "debian11.kde.wayland": (
+        "Vagrantfile.debian11.kde.wayland.rb",
+        ["tox -e py3-desktop"],
+        "konsole",
+    ),
+    "debian11.kde.x11": (
+        "Vagrantfile.debian11.kde.x11.rb",
+        ["tox -e py3-desktop"],
+        "konsole",
+    ),
     "debian10.gnome.wayland": (
         "Vagrantfile.debian10.gnome.wayland.rb",
         # ["bash -c 'tox -e py3-desktop'"],
@@ -192,6 +201,16 @@ config = {
         ["tox -e py3-desktop"],
         "gnome-shell",
     ),
+    "ubuntu.21.10": (
+        "Vagrantfile.ubuntu.21.10.rb",
+        ["tox -e py3-desktop"],
+        "gnome-shell",
+    ),
+    "ubuntu.22.04": (
+        "Vagrantfile.ubuntu.22.04.rb",
+        ["tox -e py3-desktop"],
+        "gnome-shell",
+    ),
     # "arch.kde.x11": (
     #     "Vagrantfile.arch.kde.x11.rb",
     #     ["tox -e py3-desktop"],
@@ -213,6 +232,11 @@ config = {
     # "win": ("Vagrantfile.win.rb", ["tox -e py3-win"], "",),
     "ubuntu.21.10.sway": (
         "Vagrantfile.ubuntu.21.10.sway.rb",
+        ["tox -e py3-desktop"],
+        "kitty",
+    ),
+    "ubuntu.22.04.sway": (
+        "Vagrantfile.ubuntu.22.04.sway.rb",
         ["tox -e py3-desktop"],
         "kitty",
     ),
