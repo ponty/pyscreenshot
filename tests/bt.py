@@ -117,6 +117,25 @@ def gnome():
         return "gnome" in XDG_CURRENT_DESKTOP.lower()
 
 
+def gnome_version():
+    p = EasyProcess(["gnome-shell", "--version"]).call()
+    # GNOME Shell 41.3
+    if p.return_code != 0:
+        return
+    # 41.3
+    s = p.stdout.split()[-1]
+    return [int(x) for x in s.split(".")]
+
+def kde_version():
+    p = EasyProcess(["plasmashell", "--version"]).call()
+    # plasmashell 5.14.5
+    if p.return_code != 0:
+        return
+    # 5.14.5
+    s = p.stdout.split()[-1]
+    return [int(x) for x in s.split(".")]
+
+
 def check_import(module):
     found = False
     # try:
