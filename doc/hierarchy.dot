@@ -85,6 +85,7 @@ digraph G {
     PIL -> X11;
     ImagemagickWrapper -> Imagemagick -> X11;
     ScrotWrapper -> Scrot -> X11;
+    KsnipWrapper -> ksnip;
     MaimWrapper -> Maim -> X11;
 
     Gnome -> Wayland;
