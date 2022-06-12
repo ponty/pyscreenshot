@@ -45,7 +45,7 @@ def main():
         os.chdir("..")
         for p in pls:
             p.stop()
-    embedme = EasyProcess(["npx", "embedme", "../README.md"])
+    embedme = EasyProcess(["embedme", "../README.md"])
     embedme.call()
     print(embedme.stdout)
     assert embedme.return_code == 0
