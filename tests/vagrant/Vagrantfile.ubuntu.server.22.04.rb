@@ -6,7 +6,7 @@ Vagrant.configure(2) do |config|
   config.vm.provider "virtualbox" do |vb|
     #   vb.gui = true
     vb.memory = "2048"
-    vb.name = "pyscreenshot_ubuntu.server.22.04_main"
+    vb.name = "pyscreenshot_ubuntu.server.22.04"
   end
 
   config.vm.provision "shell", path: "tests/vagrant/ubuntu.server.sh", privileged: true

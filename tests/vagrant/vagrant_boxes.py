@@ -115,7 +115,7 @@ def run_box(options, vagrantfile, cmds, guiproc):
 
 config = {
     "server": (
-        "Vagrantfile",
+        "Vagrantfile.ubuntu.server.22.04.rb",
         ["tox"],
         "",
     ),
