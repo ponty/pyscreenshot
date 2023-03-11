@@ -12,6 +12,12 @@ class KdeDBusError(Exception):
     pass
 
 
+# https://gitlab.gnome.org/GNOME/gimp/-/issues/6626
+# The org.kde.kwin.Screenshot interface is deprecated in KDE Plasma 5.22.
+
+# "The process is not authorized to take a screenshot"
+
+
 class KwinDBusWrapper(CBackend):
     name = "kwin_dbus"
     is_subprocess = True
@@ -20,13 +26,9 @@ class KwinDBusWrapper(CBackend):
         has_jeepney = False
         try:
             # from jeepney import new_method_call
-            from jeepney.integrate.blocking import (
-                connect_and_authenticate,
-            )  # type: ignore
-            from jeepney.wrappers import (
-                MessageGenerator,  # type: ignore
-                new_method_call,
-            )
+            from jeepney.io.blocking import open_dbus_connection  # type: ignore
+            from jeepney.wrappers import MessageGenerator  # type: ignore
+            from jeepney.wrappers import new_method_call
 
             has_jeepney = True
         except ImportError:
@@ -55,13 +57,13 @@ class KwinDBusWrapper(CBackend):
                 )
 
         # https://jeepney.readthedocs.io/en/latest/integrate.html
-        connection = connect_and_authenticate(bus="SESSION")
+        connection = open_dbus_connection(bus="SESSION")
         dbscr = Screenshot()
         # bbox not working:
         #   if bbox: msg = dbscr.screenshotArea(bbox[0], bbox[1], bbox[2] - bbox[0], bbox[3] - bbox[1], False)
         msg = dbscr.screenshotFullscreen(False)
-        filename = connection.send_and_get_reply(msg)
-        filename = filename[0]
+        reply = connection.send_and_get_reply(msg)
+        filename = reply.body[0]
         if not filename:
             raise KdeDBusError()
 

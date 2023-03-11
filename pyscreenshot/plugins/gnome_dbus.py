@@ -22,13 +22,9 @@ class GnomeDBusWrapper(CBackend):
         has_jeepney = False
         try:
             # from jeepney import new_method_call
-            from jeepney.integrate.blocking import (
-                connect_and_authenticate,
-            )  # type: ignore
-            from jeepney.wrappers import (
-                MessageGenerator,  # type: ignore
-                new_method_call,
-            )
+            from jeepney.io.blocking import open_dbus_connection  # type: ignore
+            from jeepney.wrappers import MessageGenerator  # type: ignore
+            from jeepney.wrappers import new_method_call
 
             has_jeepney = True
         except ImportError:
@@ -61,7 +57,7 @@ class GnomeDBusWrapper(CBackend):
                 )
 
         # https://jeepney.readthedocs.io/en/latest/integrate.html
-        connection = connect_and_authenticate(bus="SESSION")
+        connection = open_dbus_connection(bus="SESSION")
         dbscr = Screenshot()
         if bbox:
             msg = dbscr.ScreenshotArea(
@@ -74,8 +70,9 @@ class GnomeDBusWrapper(CBackend):
             )
         else:
             msg = dbscr.Screenshot(False, False, filename)
-        result = connection.send_and_get_reply(msg)
-        if not result[0]:
+        reply = connection.send_and_get_reply(msg)
+        result = reply.body[0]
+        if not result:
             raise GnomeDBusError("dbus error: %s %s" % (msg, result))
 
     def backend_version(self):
