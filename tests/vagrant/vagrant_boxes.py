@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 import os
-from os.path import dirname, join
+from pathlib import Path
 from time import sleep
 
 import fabric
 import vagrant
 from entrypoint2 import entrypoint
-from pathlib import Path
 
 # from fabric.api import env, execute, task, run, sudo, settings
 

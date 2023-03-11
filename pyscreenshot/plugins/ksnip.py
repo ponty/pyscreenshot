@@ -3,7 +3,6 @@ import logging
 from easyprocess import EasyProcess
 
 from pyscreenshot.plugins.backend import CBackend
-from pyscreenshot.util import extract_version
 
 log = logging.getLogger(__name__)
 

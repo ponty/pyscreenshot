@@ -1,4 +1,4 @@
-from bt import backend_to_check, gnome, kde, gnome_version
+from bt import backend_to_check, gnome, gnome_version, kde
 
 if gnome():
     # GNOME Shell 41.0 disallowed unrestricted access to the screenshot API

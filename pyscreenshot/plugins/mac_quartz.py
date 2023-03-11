@@ -11,7 +11,6 @@ class MacQuartzWrapper(CBackend):
     name = "mac_quartz"
 
     def grab(self, bbox=None):
-
         im = read_func_img(self._grab_to_file, bbox)
         return im
 

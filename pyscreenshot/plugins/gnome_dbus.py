@@ -22,8 +22,13 @@ class GnomeDBusWrapper(CBackend):
         has_jeepney = False
         try:
             # from jeepney import new_method_call
-            from jeepney.integrate.blocking import connect_and_authenticate  # type: ignore
-            from jeepney.wrappers import MessageGenerator, new_method_call  # type: ignore
+            from jeepney.integrate.blocking import (
+                connect_and_authenticate,
+            )  # type: ignore
+            from jeepney.wrappers import (
+                MessageGenerator,  # type: ignore
+                new_method_call,
+            )
 
             has_jeepney = True
         except ImportError:

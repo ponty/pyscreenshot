@@ -3,12 +3,13 @@ import traceback
 
 from pyscreenshot.childproc import childprocess_grab
 from pyscreenshot.err import FailedBackendError
-from pyscreenshot.plugins.gdk3pixbuf import Gdk3PixbufWrapper
 from pyscreenshot.plugins.freedesktop_dbus import FreedesktopDBusWrapper
+from pyscreenshot.plugins.gdk3pixbuf import Gdk3PixbufWrapper
 from pyscreenshot.plugins.gnome_dbus import GnomeDBusWrapper
 from pyscreenshot.plugins.gnome_screenshot import GnomeScreenshotWrapper
 from pyscreenshot.plugins.grim import GrimWrapper
 from pyscreenshot.plugins.imagemagick import ImagemagickWrapper
+from pyscreenshot.plugins.ksnip import KsnipWrapper
 from pyscreenshot.plugins.kwin_dbus import KwinDBusWrapper
 from pyscreenshot.plugins.mac_quartz import MacQuartzWrapper
 from pyscreenshot.plugins.mac_screencapture import ScreencaptureWrapper
@@ -21,7 +22,6 @@ from pyscreenshot.plugins.qt4grabwindow import Qt4GrabWindow
 from pyscreenshot.plugins.qt5grabwindow import Qt5GrabWindow
 from pyscreenshot.plugins.scrot import ScrotWrapper
 from pyscreenshot.plugins.wxscreen import WxScreen
-from pyscreenshot.plugins.ksnip import KsnipWrapper
 from pyscreenshot.util import (
     platform_is_linux,
     platform_is_osx,

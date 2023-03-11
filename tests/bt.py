@@ -126,6 +126,7 @@ def gnome_version():
     s = p.stdout.split()[-1]
     return [int(x) for x in s.split(".")]
 
+
 def kde_version():
     p = EasyProcess(["plasmashell", "--version"]).call()
     # plasmashell 5.14.5
