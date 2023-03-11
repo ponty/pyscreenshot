@@ -1,8 +1,11 @@
 import logging
+import os
 
 from easyprocess import EasyProcess
+from PIL import Image
 
 from pyscreenshot.plugins.backend import CBackend
+from pyscreenshot.tempexport import RunProgError
 
 log = logging.getLogger(__name__)
 
@@ -25,6 +28,7 @@ class KsnipWrapper(CBackend):
             raise RunProgError(p.stderr)
         filename = lastline.split()[-1]
         im = Image.open(filename)
+        os.remove(filename)
 
         # TODO: bbox param
         if bbox:
