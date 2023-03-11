@@ -19,9 +19,9 @@ digraph G {
             fillcolor=white;
             label = "backends";
 
-            pyscreenshot -> Qt4GrabWindowWrapper;
+            // pyscreenshot -> Qt4GrabWindowWrapper;
             pyscreenshot -> Qt5GrabWindowWrapper;
-            pyscreenshot -> PySideGrabWindowWrapper;
+            // pyscreenshot -> PySideGrabWindowWrapper;
             pyscreenshot -> PySide2GrabWindowWrapper;
             pyscreenshot -> PilWrapper;
             pyscreenshot -> ImagemagickWrapper;
@@ -34,17 +34,17 @@ digraph G {
             pyscreenshot -> GnomeScreenshotWrapper
             pyscreenshot -> FreedesktopDBusWrapper
             pyscreenshot -> GnomeDBusWrapper
-            pyscreenshot -> KwinDBusWrapper
+            // pyscreenshot -> KwinDBusWrapper
             pyscreenshot -> MssWrapper
             pyscreenshot -> GrimWrapper;
         }
     }
     subgraph cluster_3 {
-        PIL;
+        Pillow;
         wxPython;
-        PyQt4;
+        // PyQt4;
         PyQt5;
-        PySide;
+        // PySide;
         PySide2;
         screencapture;
         Quartz;
@@ -52,59 +52,77 @@ digraph G {
         Maim;
         Imagemagick;
         "gnome-screenshot";
+        Grim;
     }
     subgraph cluster_4 {
         label = "GUI library";
-        Qt4;
+        // Qt4;
         Qt5;
         wxWidgets;
         "GTK+";
     }
     subgraph cluster_5 {
+        label = "D-Bus";
+        "D-Bus (GNOME)";
+        // "D-Bus (KDE)";
+        "D-Bus (xdg-desktop-portal)";
+
+        "jeepney (GNOME)";
+        // "jeepney (KDE)";
+        "jeepney (xdg-desktop-portal)";
+    }
+    subgraph cluster_9 {
         label = "Display";
         Windows;
         macOS;
         X11;
         Wayland;
     }
-    Qt4GrabWindowWrapper -> PyQt4 -> Qt4;
-    PyQt4 -> Qt5;
+    // Qt4GrabWindowWrapper -> PyQt4 -> Qt4;
+    // PyQt4 -> Qt5;
     Qt5GrabWindowWrapper -> PyQt5 -> Qt5;
-    PySideGrabWindowWrapper -> PySide -> Qt4;
+    // PySideGrabWindowWrapper -> PySide -> Qt4;
     PySide2GrabWindowWrapper -> PySide2 -> Qt5;
 
-    Qt4 -> macOS;
-    Qt4 -> Windows;
-    Qt4 -> X11;
+    // Qt4 -> macOS;
+    // Qt4 -> Windows;
+    // Qt4 -> X11;
     Qt5 -> macOS;
     Qt5 -> Windows;
     Qt5 -> X11;
 
-    PilWrapper -> PIL -> Windows;
-    PIL -> macOS;
-    PIL -> X11;
+    PilWrapper -> Pillow -> Windows;
+    Pillow -> macOS;
+    Pillow -> X11;
+    Pillow -> "gnome-screenshot";
+
     ImagemagickWrapper -> Imagemagick -> X11;
     ScrotWrapper -> Scrot -> X11;
-    KsnipWrapper -> ksnip;
+    // KsnipWrapper -> ksnip;
     MaimWrapper -> Maim -> X11;
 
     Gnome -> Wayland;
     Gnome -> X11;
-    KDE -> Wayland;
-    KDE -> X11;
+    // KDE -> Wayland;
+    // KDE -> X11;
+    PortalDesktop -> Wayland;
+    PortalDesktop -> X11;
 
     "D-Bus (GNOME)" -> Gnome;
-    "D-Bus (KDE)" -> KDE;
+    // "D-Bus (KDE)" -> KDE;
+    "D-Bus (xdg-desktop-portal)" -> PortalDesktop;
 
     "jeepney (GNOME)"-> "D-Bus (GNOME)";
-    "jeepney (KDE)"-> "D-Bus (KDE)";
+    // "jeepney (KDE)"-> "D-Bus (KDE)";
+    "jeepney (xdg-desktop-portal)"-> "D-Bus (xdg-desktop-portal)";
+
+    GnomeDBusWrapper -> "jeepney (GNOME)";
+    // KwinDBusWrapper -> "jeepney (KDE)";
+    FreedesktopDBusWrapper -> "jeepney (xdg-desktop-portal)";
 
     GnomeScreenshotWrapper -> "gnome-screenshot";
     "gnome-screenshot" -> X11;
     "gnome-screenshot" -> "D-Bus (GNOME)";
-
-    GnomeDBusWrapper -> "jeepney (GNOME)";
-    KwinDBusWrapper -> "jeepney (KDE)";
 
     //"GTK+" -> macOS;
     "GTK+" -> Windows;
@@ -128,7 +146,7 @@ digraph G {
     MssWrapper -> macOS;
     MssWrapper -> Windows;
 
-    GrimWrapper -> Grim -> Wayland
+    GrimWrapper -> Grim -> Wayland;
 
     application -> pyscreenshot;
 

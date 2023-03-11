@@ -98,10 +98,10 @@ def backend_to_check(backend, delay=0):
 
 
 @entrypoint
-def main(backend, refimgpath, delay):
+def main(backend, refimgpath: str, delay: float):
     if not backend:
         backend = None
-    delay = int(delay)
+    # delay = int(delay)
     backend_ref(backend, childprocess=False, refimgpath=refimgpath, delay=delay)
 
 
@@ -148,9 +148,12 @@ def check_import(module):
 
     import importlib
 
-    spam_spec = importlib.util.find_spec(module)
-    found = spam_spec is not None
-    return found
+    try:
+        spam_spec = importlib.util.find_spec(module)
+        found = spam_spec is not None
+        return found
+    except ModuleNotFoundError:
+        return False
 
 
 def prog_check(cmd):

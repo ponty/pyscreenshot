@@ -1,4 +1,17 @@
 #!/bin/sh
+
+# Ubuntu 14.04.6 LTS (Trusty Tahr)
+# Ubuntu 16.04.6 LTS (Xenial Xerus)
+# Ubuntu 18.04.3 LTS (Bionic Beaver)
+# Ubuntu 20.04 LTS (Focal Fossa)
+
+# no python3-wx before bionic
+# no pyqt5 before xenial
+# pygdk3 plugin is not compatible with trusty
+# no python3-pyside before xenial
+# no python3-pyside2 before disco (19.04)
+
+
 export DEBIAN_FRONTEND=noninteractive
 APT="apt-get -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef -y --allow-downgrades --allow-remove-essential --allow-change-held-packages"
 
@@ -42,9 +55,9 @@ sudo apt-get install -y libcanberra-gtk3-module
 
 sudo apt-get install -y python3-wxgtk4.0
 
-sudo apt-get install -y python3-pyqt4
+# sudo apt-get install -y python3-pyqt4
 sudo apt-get install -y python3-pyqt5
-sudo apt-get install -y python3-pyside
+# sudo apt-get install -y python3-pyside
 
 #sudo apt-get install -y python3-pyside2 # no python3-pyside2 before disco (19.04)
 sudo pip3 install pyside2 --no-cache-dir

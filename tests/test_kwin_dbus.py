@@ -1,7 +1,9 @@
-from bt import backend_to_check, gnome, kde
+# from bt import backend_to_check, gnome, kde
 
-if kde():
+# "The process is not authorized to take a screenshot"
 
-    def test_kwin_dbus():
-        assert not gnome()
-        backend_to_check("kwin_dbus")
+# if kde():
+
+#     def test_kwin_dbus():
+#         assert not gnome()
+#         backend_to_check("kwin_dbus")

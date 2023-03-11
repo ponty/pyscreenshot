@@ -1,20 +1,18 @@
 $ python3 -m pyscreenshot.check.versions
-python               3.8.5
-pyscreenshot         2.3
-pil                  8.0.1
-mss                  6.1.0
-scrot                1.2
+python               3.10.6
+pyscreenshot         3.1
+pil                  9.0.1
+mss                  7.0.1
+scrot                1.7
 grim                 ?.?
-maim                 5.5.3
-imagemagick          6.9.10
-pyqt5                5.14.1
-pyqt                 
-pyside2              5.14.0
-pyside               
+maim                 5.6.3
+imagemagick          6.9.11
+pyqt5                5.15.6
+pyside2              5.15.2
 wx                   4.0.7
-pygdk3               3.36.0
+pygdk3               3.42.1
 mac_screencapture    
 mac_quartz           
+freedesktop_dbus     ?.?
 gnome_dbus           ?.?
-gnome-screenshot     3.36.0
-kwin_dbus            ?.?
+gnome-screenshot     41.0

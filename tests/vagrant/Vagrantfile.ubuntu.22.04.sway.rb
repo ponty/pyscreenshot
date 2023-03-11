@@ -6,6 +6,8 @@ Vagrant.configure(2) do |config|
     #  vb.gui = true
     vb.memory = "2048"
     vb.name = "pyscreenshot.ubuntu.22.04.sway"
+    vb.customize ["modifyvm", :id, "--graphicscontroller", "vmsvga"]
+    vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
   end
 
   config.vm.provision "shell", path: "tests/vagrant/ubuntu.22.04.sway.sh", privileged: true

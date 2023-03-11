@@ -1,11 +1,44 @@
 #!/usr/bin/env python3
 import os
+import os.path
+import threading
+import time
 from pathlib import Path
+from tempfile import TemporaryDirectory
 from time import sleep
 
 import fabric
+import imagehash
 import vagrant
+from easyprocess import EasyProcess
 from entrypoint2 import entrypoint
+from PIL import Image
+
+KBD_RIGHT = "e0 4d e0 cd".split()
+KBD_SPACE = "39 b9".split()
+
+
+def vbox_send_kbd(box, kbd):
+    cmd = ["VBoxManage", "controlvm", box, "keyboardputscancode"] + kbd
+    EasyProcess(cmd).call()
+
+
+def close_confirm_wnd(box):
+    vbox_send_kbd(box, KBD_RIGHT + KBD_RIGHT + KBD_SPACE)
+
+
+def vbox_screenshot(box, bbox=None):
+    with TemporaryDirectory(prefix="vbox_screenshot") as tmpdirname:
+        filename = os.path.join(tmpdirname, "screenshot.png")
+
+        cmd = ["VBoxManage", "controlvm", box, "screenshotpng", filename]
+        EasyProcess(cmd).call()
+
+        im = Image.open(filename)
+        if bbox:
+            im = im.crop(bbox)  # (left, upper, right, lower)
+        return im
+
 
 # from fabric.api import env, execute, task, run, sudo, settings
 
@@ -20,24 +53,25 @@ class Options:
     recreate = True
     destroy = False
     fast = False
+    create = False
 
 
 def wrapcmd(cmd, guiproc):
     if guiproc:
         # copy env vars from graphical session
-        cmd = f"sudo cat /proc/`pidof {guiproc}`/environ | tr '\\0' '\\n' > /tmp/x;export $(cat /tmp/x); {cmd}"
+        cmd2 = f"pid=`pidof {guiproc}`"
+        cmd2 += ";pid=$( cut -d ' ' -f 1 <<< $pid )"
+        cmd2 += ";sudo cat /proc/$pid/environ | tr '\\0' '\\n' > /tmp/environ"
+        cmd2 += ";export $(cat /tmp/environ)"
+        cmd = cmd2 + f"; {cmd}"
     print(f"command: {cmd}")
     return cmd
 
 
-def run_box(options, vagrantfile, cmds, guiproc):
+def run_box(name, options, vagrantfile, cmds, guiproc):
     env = os.environ
-    if vagrantfile == "Vagrantfile":
-        env["VAGRANT_VAGRANTFILE"] = str(DIR.parent.parent / vagrantfile)
-        env["VAGRANT_DOTFILE_PATH"] = ""
-    else:
-        env["VAGRANT_VAGRANTFILE"] = str(DIR / vagrantfile)
-        env["VAGRANT_DOTFILE_PATH"] = str(DIR / (".vagrant_" + vagrantfile))
+    env["VAGRANT_VAGRANTFILE"] = str(DIR / vagrantfile)
+    env["VAGRANT_DOTFILE_PATH"] = str(DIR / (".vagrant_" + vagrantfile))
 
     v = vagrant.Vagrant(env=env, quiet_stdout=False, quiet_stderr=False)
     status = v.status()
@@ -63,6 +97,32 @@ def run_box(options, vagrantfile, cmds, guiproc):
             v.up()
             sleep(3 * 60)
             v.halt()
+
+    if options.create:
+        return
+
+    event = threading.Event()
+
+    auto_confirm_thread = None
+    if name == "ubuntu.22.04":
+
+        box = "pyscreenshot_" + name
+
+        def auto_confirm():
+            confirm_wnd_hash = "0000207e3e3e0000"
+            bbox = (610, 120, 670, 150)
+            while True:
+                if event.is_set():
+                    break
+                img = vbox_screenshot(box, bbox)
+                h = imagehash.average_hash(img)
+                # print(h)
+                if str(h) == confirm_wnd_hash:
+                    # print("close_confirm_wnd")
+                    close_confirm_wnd(box)
+                time.sleep(1)
+
+        auto_confirm_thread = threading.Thread(target=auto_confirm)
 
     try:
         v.up()
@@ -100,6 +160,10 @@ def run_box(options, vagrantfile, cmds, guiproc):
                         sleep(1)
                     print(f"{guiproc} pid={pid}")
                 sleep(5)
+
+                if auto_confirm_thread:
+                    auto_confirm_thread.start()
+
                 print(f"collected commands: {cmds}")
                 for cmd in cmds:
                     if options.recreate:
@@ -108,157 +172,124 @@ def run_box(options, vagrantfile, cmds, guiproc):
                             cmd = cmd.replace("tox", "tox -r")
                     conn.run(wrapcmd(cmd, guiproc), echo=True, pty=True)
     finally:
+        event.set()
+        if auto_confirm_thread:
+            auto_confirm_thread.join()
         if options.halt:
             v.halt()
 
 
 config = {
-    "server": (
-        "Vagrantfile.ubuntu.server.22.04.rb",
+    "ubuntu.server.22.04": (
         ["tox"],
         "",
     ),
-    "debian11.gnome.wayland": (
-        "Vagrantfile.debian11.gnome.wayland.rb",
-        ["tox -e py3-desktop"],
-        "gnome-terminal-server",
-    ),
-    "debian11.gnome.x11": (
-        "Vagrantfile.debian11.gnome.x11.rb",
-        ["tox -e py3-desktop"],
-        "gnome-terminal-server",
-    ),
-    "debian11.kde.wayland": (
-        "Vagrantfile.debian11.kde.wayland.rb",
-        ["tox -e py3-desktop"],
-        "konsole",
-    ),
-    "debian11.kde.x11": (
-        "Vagrantfile.debian11.kde.x11.rb",
-        ["tox -e py3-desktop"],
-        "konsole",
-    ),
-    "debian10.gnome.wayland": (
-        "Vagrantfile.debian10.gnome.wayland.rb",
-        # ["bash -c 'tox -e py3-desktop'"],
-        ["tox -e py3-desktop"],
-        "gnome-terminal-server",
-    ),
-    "debian10.gnome.x11": (
-        "Vagrantfile.debian10.gnome.x11.rb",
-        # ["bash -c 'tox -e py3-desktop'"],
-        ["tox -e py3-desktop"],
-        "gnome-terminal-server",
-    ),
-    "debian10.kde.wayland": (
-        "Vagrantfile.debian10.kde.wayland.rb",
-        ["tox -e py3-desktop"],
-        "konsole",
-    ),
-    "debian10.kde.x11": (
-        "Vagrantfile.debian10.kde.x11.rb",
-        ["tox -e py3-desktop"],
-        "konsole",
-    ),
-    # "lubuntu.18.04": (
-    #     "Vagrantfile.lubuntu.18.04.rb",
-    #     ["tox -e py3-desktop"],
-    #     "lxsession",
-    # ),
     "lubuntu.20.04": (
-        "Vagrantfile.lubuntu.20.04.rb",
         ["tox -e py3-desktop"],
         "qterminal",
     ),
-    # "xubuntu.18.04": (
-    #     "Vagrantfile.xubuntu.18.04.rb",
-    #     ["tox -e py3-desktop"],
-    #     "xfdesktop",
-    # ),
+    "lubuntu.22.04": (
+        ["tox -e py3-desktop"],
+        "qterminal",
+    ),
+    "lubuntu.22.10": (
+        ["tox -e py3-desktop"],
+        "qterminal",
+    ),
     "xubuntu.20.04": (
-        "Vagrantfile.xubuntu.20.04.rb",
         ["tox -e py3-desktop"],
         "xfdesktop",
     ),
-    # "kubuntu.18.04": (
-    #     "Vagrantfile.kubuntu.18.04.rb",
-    #     ["tox -e py3-desktop"],
-    #     "gnome-shell",
-    # ),
+    "xubuntu.22.04": (
+        ["tox -e py3-desktop"],
+        "xfdesktop",
+    ),
+    "xubuntu.22.10": (
+        ["tox -e py3-desktop"],
+        "xfdesktop",
+    ),
     "kubuntu.20.04": (
-        "Vagrantfile.kubuntu.20.04.rb",
         ["tox -e py3-desktop"],
         "konsole",
     ),
-    # "ubuntu.18.04": (
-    #     "Vagrantfile.ubuntu.18.04.rb",
-    #     ["tox -e py3-desktop"],
-    #     "gnome-shell",
-    # ),
-    "ubuntu.20.04": (
-        "Vagrantfile.ubuntu.20.04.rb",
-        ["tox -e py3-desktop"],
-        "gnome-shell",
+    "kubuntu.22.04": (
+        ["tox -e py3-desktop-freedesktop"],
+        "konsole",
     ),
-    "ubuntu.21.10": (
-        "Vagrantfile.ubuntu.21.10.rb",
+    "kubuntu.22.10": (
+        ["tox -e py3-desktop-freedesktop"],
+        "konsole",
+    ),
+    "ubuntu.20.04": (
         ["tox -e py3-desktop"],
-        "gnome-shell",
+        "gnome-terminal-server",
     ),
     "ubuntu.22.04": (
-        "Vagrantfile.ubuntu.22.04.rb",
-        ["tox -e py3-desktop"],
-        "gnome-shell",
+        ["tox -e py3-desktop-freedesktop"],
+        "gnome-terminal-server",
     ),
-    # "arch.kde.x11": (
-    #     "Vagrantfile.arch.kde.x11.rb",
-    #     ["tox -e py3-desktop"],
-    #     "plasmashell",
-    #     # "plasma_session",
-    # ),
-    # "arch.kde.wayland": (
-    #     "Vagrantfile.arch.kde.wayland.rb",
-    #     ["tox -e py3-desktop"],
-    #     "plasma_session",
-    #     # "Xwayland",
-    # ),
-    # "arch.gnome.wayland": (
-    #     "Vagrantfile.arch.gnome.wayland.rb",
-    #     ["tox -e py3-desktop"],
-    #     "gnome-shell-calendar-server",
-    #     # "Xwayland",
-    # ),
-    # "win": ("Vagrantfile.win.rb", ["tox -e py3-win"], "",),
-    "ubuntu.21.10.sway": (
-        "Vagrantfile.ubuntu.21.10.sway.rb",
-        ["tox -e py3-desktop"],
-        "kitty",
+    "ubuntu.22.10": (
+        ["tox -e py3-desktop-freedesktop"],
+        "gnome-terminal-server",
     ),
     "ubuntu.22.04.sway": (
-        "Vagrantfile.ubuntu.22.04.sway.rb",
         ["tox -e py3-desktop"],
-        "kitty",
+        "foot",
     ),
+    # "debian11.gnome.wayland": (
+    #     ["tox -e py3-desktop"],
+    #     "gnome-terminal-server",
+    # ),
+    # "debian11.gnome.x11": (
+    #     ["tox -e py3-desktop"],
+    #     "gnome-terminal-server",
+    # ),
+    # "debian11.kde.wayland": (
+    #     ["tox -e py3-desktop"],
+    #     "konsole",
+    # ),
+    # "debian11.kde.x11": (
+    #     ["tox -e py3-desktop"],
+    #     "konsole",
+    # ),
+    # "debian10.gnome.wayland": (
+    #     # ["bash -c 'tox -e py3-desktop'"],
+    #     ["tox -e py3-desktop"],
+    #     "gnome-terminal-server",
+    # ),
+    # "debian10.gnome.x11": (
+    #     # ["bash -c 'tox -e py3-desktop'"],
+    #     ["tox -e py3-desktop"],
+    #     "gnome-terminal-server",
+    # ),
+    # "debian10.kde.wayland": (
+    #     ["tox -e py3-desktop"],
+    #     "konsole",
+    # ),
+    # "debian10.kde.x11": (
+    #     ["tox -e py3-desktop"],
+    #     "konsole",
+    # ),
     # "osx.10.14": (
-    #     "Vagrantfile.osx.10.14.rb",
     #     ["bash --login -c 'python3 -m tox -e py3-osx'"],
     #     "Dock",
     # ),
-    "osx.10.15": (
-        "Vagrantfile.osx.10.15.rb",
-        ["bash --login -c 'python3 -m tox -e py3-osx'"],
-        "Dock",
-    ),
+    # "osx.10.15": (
+    #     ["bash --login -c 'python3 -m tox -e py3-osx'"],
+    #     "Dock",
+    # ),
+    # "win": ("Vagrantfile.win.rb", ["tox -e py3-win"], "",),
 }
 
 
 @entrypoint
-def main(boxes="all", fast=False, destroy=False):
+def main(boxes="all", fast=False, destroy=False, create=False):
     options = Options()
     options.halt = not fast
     options.recreate = not fast
     options.destroy = destroy
     options.fast = fast
+    options.create = create
 
     if boxes == "all":
         boxes = list(config.keys())
@@ -267,7 +298,8 @@ def main(boxes="all", fast=False, destroy=False):
 
     for k, v in config.items():
         name = k
-        vagrantfile, cmds, guiproc = v[0], v[1], v[2]
+        vagrantfile = "Vagrantfile." + name + ".rb"
+        cmds, guiproc = v[0], v[1]
         if name in boxes:
             options.win = k.startswith("win")
             options.osx = k.startswith("osx")
@@ -277,7 +309,7 @@ def main(boxes="all", fast=False, destroy=False):
             print("----->")
             print("----->")
             try:
-                run_box(options, vagrantfile, cmds, guiproc)
+                run_box(name, options, vagrantfile, cmds, guiproc)
             finally:
                 print("<-----")
                 print("<-----")

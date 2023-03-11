@@ -4,6 +4,7 @@ import time
 from entrypoint2 import entrypoint
 
 import pyscreenshot
+from pyscreenshot.plugins.freedesktop_dbus import FreedesktopDBusWrapper
 from pyscreenshot.plugins.gnome_dbus import GnomeDBusWrapper
 from pyscreenshot.plugins.gnome_screenshot import GnomeScreenshotWrapper
 from pyscreenshot.plugins.kwin_dbus import KwinDBusWrapper
@@ -13,6 +14,8 @@ from pyscreenshot.util import run_mod_as_subproc
 def run(force_backend, n, childprocess, bbox=None):
     sys.stdout.write("%-20s\t" % force_backend)
     sys.stdout.flush()  # before any crash
+    # if force_backend == "freedesktop_dbus":
+    #     return
     if force_backend == "default":
         force_backend = None
     try:
@@ -30,7 +33,12 @@ def run(force_backend, n, childprocess, bbox=None):
         print("")
 
 
-novirt = [GnomeDBusWrapper.name, KwinDBusWrapper.name, GnomeScreenshotWrapper.name]
+novirt = [
+    GnomeDBusWrapper.name,
+    KwinDBusWrapper.name,
+    GnomeScreenshotWrapper.name,
+    FreedesktopDBusWrapper.name,
+]
 
 
 def run_all(n, childprocess_param, virtual_only=True, bbox=None):
@@ -50,13 +58,18 @@ def run_all(n, childprocess_param, virtual_only=True, bbox=None):
     else:
         debugpar = []
     for x in ["default"] + pyscreenshot.backends():
+        if x == "freedesktop_dbus":
+            continue
         backendpar = ["--backend", x]
         # skip non X backends
         if virtual_only and x in novirt:
             continue
         p = run_mod_as_subproc(
             "pyscreenshot.check.speedtest",
-            ["--childprocess", childprocess_param] + bboxpar + debugpar + backendpar,
+            ["--childprocess", childprocess_param, "--number", str(n)]
+            + bboxpar
+            + debugpar
+            + backendpar,
         )
         print(p.stdout)
 

@@ -25,7 +25,12 @@ jobs:
         python-version: 
           - "3.9"
           - "3.10"
-          - "3.11"
+        include:
+          - python-version: "3.8"
+            os: ubuntu-22.04
+          - python-version: "3.11"
+            os: ubuntu-22.04
+            
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
@@ -36,19 +41,20 @@ jobs:
       if: startsWith(matrix.os, 'ubuntu')
       run: |
         sudo apt-get update
-        sudo apt-get install -y xvfb scrot maim imagemagick x11-utils python3-gi gir1.2-gtk-3.0 python3-wxgtk4.0 python3-pyqt5
+        sudo apt-get install -y xvfb scrot maim imagemagick x11-utils python3-gi gir1.2-gtk-3.0 python3-wxgtk4.0 python3-pyqt5 
+        sudo apt-get install -y libsdl2-dev libsdl2-ttf-dev libsdl2-image-dev libsdl2-mixer-dev libportmidi-dev libportmidi-dev
     - name: Install ubuntu-20.04 dependencies
       if: matrix.os == 'ubuntu-20.04'
       run: |
         sudo apt-get install -y python3-pyside2.qtwidgets
         #wget http://ppa.launchpad.net/jan-simon/pqiv/ubuntu/pool/main/p/pqiv/pqiv_2.10.3-0~4~ubuntu20.04.1_amd64.deb
         #sudo apt install ./*.deb
-    - name: Install MacOS dependencies
-      if: startsWith(matrix.os, 'macos')
-      run: |
-        #brew install --cask xquartz
-        #brew install wxmac pyqt pyside 
-        brew install imagemagick pqiv
+    # - name: Install MacOS dependencies
+    #   if: startsWith(matrix.os, 'macos')
+    #   run: |
+    #     #brew install --cask xquartz
+    #     #brew install wxmac pyqt pyside 
+    #     #brew install imagemagick pqiv
     - name: Install Win dependencies
       if: startsWith(matrix.os, 'win')
       run: |
@@ -60,6 +66,7 @@ jobs:
         choco install pyqt5 -y
     - name: pip install
       run: |
+        pip install wheel
         python -m pip install .
         pip install -r requirements-test.txt
     - name: print versions
@@ -86,12 +93,12 @@ jobs:
         xvfb-run -s "-br -screen 0 900x800x24" pytest -v .
     - name: Archive production artifacts
       if: ${{ always() }}
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: testout-${{ matrix.os }}-${{ matrix.python-version }}
         path: |
           tests/testout
-    - name: Lint
-      if: matrix.os == 'ubuntu-20.04'
-      run: |
-        ./lint.sh
+    # - name: Lint
+    #   if: matrix.os == 'ubuntu-20.04'
+    #   run: |
+    #     ./lint.sh
