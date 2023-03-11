@@ -9,19 +9,22 @@ from pyscreenshot.plugins.gnome_dbus import GnomeDBusWrapper
 from pyscreenshot.plugins.gnome_screenshot import GnomeScreenshotWrapper
 from pyscreenshot.plugins.grim import GrimWrapper
 from pyscreenshot.plugins.imagemagick import ImagemagickWrapper
-from pyscreenshot.plugins.ksnip import KsnipWrapper
-from pyscreenshot.plugins.kwin_dbus import KwinDBusWrapper
+
+# from pyscreenshot.plugins.kwin_dbus import KwinDBusWrapper
 from pyscreenshot.plugins.mac_quartz import MacQuartzWrapper
 from pyscreenshot.plugins.mac_screencapture import ScreencaptureWrapper
 from pyscreenshot.plugins.maim import MaimWrapper
 from pyscreenshot.plugins.msswrap import MssWrapper
 from pyscreenshot.plugins.pilwrap import PilWrapper
 from pyscreenshot.plugins.pyside2_grabwindow import PySide2GrabWindow
-from pyscreenshot.plugins.pyside_grabwindow import PySideGrabWindow
-from pyscreenshot.plugins.qt4grabwindow import Qt4GrabWindow
+
+# from pyscreenshot.plugins.pyside_grabwindow import PySideGrabWindow
+# from pyscreenshot.plugins.qt4grabwindow import Qt4GrabWindow
 from pyscreenshot.plugins.qt5grabwindow import Qt5GrabWindow
 from pyscreenshot.plugins.scrot import ScrotWrapper
 from pyscreenshot.plugins.wxscreen import WxScreen
+
+# from pyscreenshot.plugins.ksnip import KsnipWrapper
 from pyscreenshot.util import (
     platform_is_linux,
     platform_is_osx,
@@ -40,9 +43,9 @@ backend_dict = {
     MaimWrapper.name: MaimWrapper,
     ImagemagickWrapper.name: ImagemagickWrapper,
     Qt5GrabWindow.name: Qt5GrabWindow,
-    Qt4GrabWindow.name: Qt4GrabWindow,
+    # Qt4GrabWindow.name: Qt4GrabWindow,
     PySide2GrabWindow.name: PySide2GrabWindow,
-    PySideGrabWindow.name: PySideGrabWindow,
+    # PySideGrabWindow.name: PySideGrabWindow,
     WxScreen.name: WxScreen,
     Gdk3PixbufWrapper.name: Gdk3PixbufWrapper,
     ScreencaptureWrapper.name: ScreencaptureWrapper,
@@ -50,17 +53,17 @@ backend_dict = {
     FreedesktopDBusWrapper.name: FreedesktopDBusWrapper,
     GnomeDBusWrapper.name: GnomeDBusWrapper,
     GnomeScreenshotWrapper.name: GnomeScreenshotWrapper,
-    KwinDBusWrapper.name: KwinDBusWrapper,
+    # KwinDBusWrapper.name: KwinDBusWrapper,
     # XwdWrapper.name: XwdWrapper,
-    KsnipWrapper.name: KsnipWrapper,
+    # KsnipWrapper.name: KsnipWrapper,
 }
 
 
 def qt():
     yield Qt5GrabWindow
-    yield Qt4GrabWindow
+    # yield Qt4GrabWindow
     yield PySide2GrabWindow
-    yield PySideGrabWindow
+    # yield PySideGrabWindow
 
 
 def backends(childprocess):
@@ -81,18 +84,21 @@ def backends(childprocess):
             yield WxScreen
             for x in qt():
                 yield x
-        yield FreedesktopDBusWrapper
 
         yield GnomeDBusWrapper
 
         # on screen notification
-        yield KwinDBusWrapper
+        # "The process is not authorized to take a screenshot"
+        # yield KwinDBusWrapper
 
         # flash effect
         yield GnomeScreenshotWrapper
 
         yield GrimWrapper
-        yield KsnipWrapper
+        # yield KsnipWrapper
+
+        # confirmation dialog
+        yield FreedesktopDBusWrapper
 
     elif platform_is_osx():
         yield PilWrapper
