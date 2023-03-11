@@ -1,4 +1,4 @@
-tldr: Use [Pillow][15]. If Pillow doesn't work or it's slow then try pyscreenshot.
+TL;DR: Use [Pillow][15]. If Pillow doesn't work or it's slow then try pyscreenshot.
 
 The ``pyscreenshot`` module is obsolete in most cases.
 It was created because [PIL][5] ImageGrab module worked on Windows only,
@@ -35,21 +35,26 @@ Features:
 * pure Python library
 * supported Python versions: 3.9, 3.10, 3.11
 * It has wrappers for various back-ends:
-  * [scrot][1]
-  * [maim][2]
-  * [ImageMagick][3]
-  * [Pillow][6]
-  * [PyQt4][7]
-  * [PyQt5][8]
+  * [Pillow][6] (X11, Linux gnome-screenshot, Win, macOS screencapture)
+  * [Python MSS][14] (X11, Win, macOS)
+  * [xdg-desktop-portal][20] (D-Bus: org.freedesktop.portal.Screenshot) (X11, Wayland)
+  * GNOME (D-Bus: org.gnome.Shell.Screenshot) (Gnome X11/Wayland)
+  * [scrot][1] (X11)
+  * [maim][2] (X11)
+  * [ImageMagick][3] (X11)
+  * [PyQt5][8] (X11, Win, macOS)
+  * [PySide2][10] (X11, Win, macOS)
+  * [wxPython][12] (X11, Win, macOS)
+  * [gnome-screenshot][13] (X11, Gnome Wayland)
+  * [Grim][19] (Sway Wayland)
+  * Quartz (macOS)
+  * screencapture (macOS)
+* Old removed backends: 
+  * PyGTK
+  * QtPy, 
   * [PySide][9]
-  * [PySide2][10]
-  * [wxPython][12]
-  * Quartz (Mac)
-  * screencapture (Mac)
-  * [gnome-screenshot][13]
-  * [Python MSS][14]
-  * [Grim][19]
-  * Old removed backends: QtPy, PyGTK
+  * [PyQt4][7]
+  * KDE Plasma (D-Bus: org.kde.kwin.Screenshot)
 * Performance is not the main target for this library, but you can benchmark the possible settings and choose the fastest one.
 * Interactivity is not supported.
 * Mouse pointer is not visible.
@@ -58,35 +63,25 @@ Known problems:
 
 * KDE Wayland has on screen notification
 * gnome-screenshot has Flash effect (https://bugzilla.gnome.org/show_bug.cgi?id=672759)
-
+* xdg-desktop-portal can have confirmation dialog box
+  
 Comparison:
 
-| system                  | pyscreenshot 3.1 | pillow 8.4.0 | mss 6.1.0 |
-| ----------------------- | :--------------: | :----------: | :-------: |
-| Debian 10 gnome wayland |        ✅         |      ❌       |     ❌     |
-| Debian 10 gnome X11     |        ✅         |      ✅       |     ✅     |
-| Debian 10 kde wayland   |        ✅         |      ❌       |     ❌     |
-| Debian 10 kde X11       |        ✅         |      ✅       |     ✅     |
-| Debian 11 gnome wayland |        ✅         |      ❌       |     ❌     |
-| Debian 11 gnome X11     |        ✅         |      ✅       |     ✅     |
-| Debian 11 kde wayland   |                  |              |           |
-| Debian 11 kde X11       |                  |              |           |
-| Kubuntu 20.04           |        ✅         |      ✅       |     ✅     |
-| Ubuntu 20.04            |        ✅         |      ✅       |     ✅     |
-| Xubuntu 20.04           |        ✅         |      ✅       |     ✅     |
-| Lubuntu 20.04           |        ✅         |      ✅       |     ✅     |
-| Ubuntu 20.04 + xvfb     |        ✅         |      ✅       |     ✅     |
-| Ubuntu 21.10 + sway     |        ✅         |      ❌       |     ❌     |
-| Win                     |                  |              |           |
-| macOS 10.14             |                  |              |           |
-| macOS 10.15             |        ✅         |      ✅       |     ✅     |
-| macOS 11                |                  |              |           |
+| system                        | pyscreenshot 3.1 | pillow 9.4.0 | mss 7.0.1 |
+| ----------------------------- | :--------------: | :----------: | :-------: |
+| Ubuntu 22.04                  |        ✅         |      ❌       |     ❌     |
+| Kubuntu 22.04                 |        ✅         |      ✅       |     ✅     |
+| Xubuntu 22.04                 |        ✅         |      ✅       |     ✅     |
+| Lubuntu 22.04                 |        ✅         |      ✅       |     ✅     |
+| Ubuntu Server 22.04+sway+grim |        ✅         |      ❌       |     ❌     |
+
 
 Installation:
 
 ```console
 $ python3 -m pip install Pillow pyscreenshot
 ```
+
 Examples
 ========
 
@@ -103,6 +98,7 @@ im = ImageGrab.grab()
 im.save("fullscreen.png")
 
 ```
+
 ```py
 # pyscreenshot/examples/grabbox.py
 
@@ -116,6 +112,7 @@ im = ImageGrab.grab(bbox=(10, 10, 510, 510))  # X1,Y1,X2,Y2
 im.save("box.png")
 
 ```
+
 ```py
 # pyscreenshot/examples/virtdisp.py
 
@@ -135,6 +132,7 @@ with Display(size=(100, 60)) as disp:  # start Xvfb display
 img.save("xmessage.png")
 
 ```
+
 Image:
 
 ![](/doc/gen/xmessage.png)
@@ -147,7 +145,7 @@ Backends are started in a subprocess with default (safest) settings
 which is necessary to isolate them from the main process and from each other.
 Disabling this option makes performance much better, but it may cause problems in some cases.
 
-Test on Ubuntu 20.04 X11
+Test on Ubuntu 22.04 X11
 
 Versions:
 
@@ -155,26 +153,25 @@ Versions:
 
 ```console
 $ python3 -m pyscreenshot.check.versions
-python               3.8.5
-pyscreenshot         2.3
-pil                  8.0.1
-mss                  6.1.0
-scrot                1.2
+python               3.10.6
+pyscreenshot         3.1
+pil                  9.0.1
+mss                  7.0.1
+scrot                1.7
 grim                 ?.?
-maim                 5.5.3
-imagemagick          6.9.10
-pyqt5                5.14.1
-pyqt               
-pyside2              5.14.0
-pyside             
+maim                 5.6.3
+imagemagick          6.9.11
+pyqt5                5.15.6
+pyside2              5.15.2
 wx                   4.0.7
-pygdk3               3.36.0
-mac_screencapture  
-mac_quartz         
+pygdk3               3.42.1
+mac_screencapture    
+mac_quartz           
+freedesktop_dbus     ?.?
 gnome_dbus           ?.?
-gnome-screenshot     3.36.0
-kwin_dbus            ?.?
+gnome-screenshot     41.0
 ```
+
 Backends are started in a subprocess (safest):
 
 <!-- embedme doc/gen/python3_-m_pyscreenshot.check.speedtest.txt -->
@@ -184,25 +181,23 @@ $ python3 -m pyscreenshot.check.speedtest
 
 n=10
 ------------------------------------------------------
-default             	1    sec	(  101 ms per call)
-pil                 	1.7  sec	(  166 ms per call)
-mss                 	1.9  sec	(  191 ms per call)
-scrot               	0.97 sec	(   97 ms per call)
-grim              
-maim                	1.4  sec	(  144 ms per call)
-imagemagick         	2.4  sec	(  235 ms per call)
-pyqt5               	4.3  sec	(  429 ms per call)
-pyqt              
-pyside2             	4.2  sec	(  423 ms per call)
-pyside            
-wx                  	4.1  sec	(  412 ms per call)
-pygdk3              	2    sec	(  204 ms per call)
-mac_screencapture   
-mac_quartz        
-gnome_dbus          	1.4  sec	(  144 ms per call)
-gnome-screenshot    	3.8  sec	(  381 ms per call)
-kwin_dbus         
+default             	1    sec	(  100 ms per call)
+pil                 	1.7  sec	(  167 ms per call)
+mss                 	2    sec	(  197 ms per call)
+scrot               	1    sec	(  100 ms per call)
+grim                	
+maim                	1.4  sec	(  135 ms per call)
+imagemagick         	2.2  sec	(  221 ms per call)
+pyqt5               	4    sec	(  403 ms per call)
+pyside2             	3.9  sec	(  394 ms per call)
+wx                  	2.9  sec	(  293 ms per call)
+pygdk3              	2.2  sec	(  218 ms per call)
+mac_screencapture   	
+mac_quartz          	
+gnome_dbus          	
+gnome-screenshot    	4    sec	(  401 ms per call)
 ```
+
 Backends are started without subprocess (fastest):
 
 <!-- embedme doc/gen/python3_-m_pyscreenshot.check.speedtest_--childprocess_0.txt -->
@@ -212,31 +207,30 @@ $ python3 -m pyscreenshot.check.speedtest --childprocess 0
 
 n=10
 ------------------------------------------------------
-default             	0.11 sec	(   10 ms per call)
-pil                 	0.09 sec	(    8 ms per call)
-mss                 	0.15 sec	(   15 ms per call)
-scrot               	0.95 sec	(   95 ms per call)
-grim              
-maim                	1.5  sec	(  145 ms per call)
-imagemagick         	2.4  sec	(  235 ms per call)
-pyqt5               	1.1  sec	(  114 ms per call)
-pyqt              
-pyside2             	1.2  sec	(  118 ms per call)
-pyside            
-wx                  	0.43 sec	(   43 ms per call)
-pygdk3              	0.16 sec	(   15 ms per call)
-mac_screencapture   
-mac_quartz        
-gnome_dbus          	1.5  sec	(  147 ms per call)
-gnome-screenshot    	3.8  sec	(  383 ms per call)
-kwin_dbus         
+default             	0.13 sec	(   12 ms per call)
+pil                 	0.12 sec	(   11 ms per call)
+mss                 	0.2  sec	(   19 ms per call)
+scrot               	1    sec	(   99 ms per call)
+grim                	
+maim                	1.3  sec	(  134 ms per call)
+imagemagick         	2.2  sec	(  218 ms per call)
+pyqt5               	1    sec	(  104 ms per call)
+pyside2             	1    sec	(  101 ms per call)
+wx                  	0.34 sec	(   33 ms per call)
+pygdk3              	0.23 sec	(   23 ms per call)
+mac_screencapture   	
+mac_quartz          	
+gnome_dbus          	
+gnome-screenshot    	4.4  sec	(  437 ms per call)
 ```
+
 You can force a backend:
 
 ```python
 import pyscreenshot as ImageGrab
 im = ImageGrab.grab(backend="scrot")
 ```
+
 You can force if subprocess is applied, setting it to False together with `mss` or `pil` gives the best performance in most cases:
 
 ```python
@@ -244,16 +238,18 @@ You can force if subprocess is applied, setting it to False together with `mss` 
 import pyscreenshot as ImageGrab
 im = ImageGrab.grab(backend="mss", childprocess=False)
 ```
+
 Wayland
 =======
 
-Wayland is supported with two setups:
+Wayland is supported with these setups:
 
-1. using D-Bus on GNOME or KDE.
-2. using [Grim][19] on any Wayland compositor with wlr-screencopy-unstable-v1 support. (GNOME:no, KDE:no, Sway:yes)
+1. using D-Bus (org.freedesktop.portal.Screenshot) on any desktop with xdg-desktop-portal.
+2. using D-Bus (org.gnome.Shell.Screenshot) on GNOME.
+3. using [Grim][19] on any Wayland compositor with wlr-screencopy-unstable-v1 support. (GNOME:no, KDE:no, Sway:yes)
 
 If both Wayland and X are available then Wayland is preferred
-because Xwayland can not be used for screenshot.Rules for decision:
+because Xwayland can not be used for screenshot. Rules for decision:
 
 1. use X if DISPLAY variable exists and XDG_SESSION_TYPE variable != "wayland"
 2. use Wayland if 1. is not successful
@@ -267,6 +263,15 @@ Only pure python modules are used:
 2. [entrypoint2][18] for generating command line interface
 3. [MSS][14] backend is added because it is very fast and pure and multiplatform
 4. [jeepney][16] for D-Bus calls
+
+Test
+====
+
+Some Linux distributions can be tested with VirtualBox and Vagrant:
+
+```console
+$ ./tests/vagrant/vagrant_boxes.py
+```
 
 Hierarchy
 =========
@@ -290,3 +295,4 @@ Hierarchy
 [17]: https://github.com/ponty/EasyProcess
 [18]: https://github.com/ponty/entrypoint2
 [19]: https://github.com/emersion/grim
+[20]: https://github.com/flatpak/xdg-desktop-portal
