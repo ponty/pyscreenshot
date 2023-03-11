@@ -103,7 +103,7 @@ def init():
                 break
 
         # if the OS has color correction
-        #  then the screenshot has slighly different color than the original image
+        #  then the screenshot has slightly different color than the original image
         if platform_is_win() or platform_is_osx():
             refimgpath = refimgpath + ".pil.png"
             im = pyscreenshot.grab(backend="pil")

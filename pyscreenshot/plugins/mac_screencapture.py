@@ -6,7 +6,7 @@ from pyscreenshot.util import platform_is_osx
 
 PROGRAM = "screencapture"
 # https://ss64.com/osx/screencapture.html
-#  By default screneshots are saved as .png files,
+#  By default screenshots are saved as .png files,
 
 
 class ScreencaptureError(Exception):
