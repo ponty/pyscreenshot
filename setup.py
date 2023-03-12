@@ -12,7 +12,9 @@ VERSION = __version__
 
 URL = "https://github.com/ponty/pyscreenshot"
 DESCRIPTION = "python screenshot"
-LONG_DESCRIPTION = """The pyscreenshot module is obsolete in most cases.
+LONG_DESCRIPTION = """TL;DR: Use Pillow. If Pillow doesn't work or it's slow then try pyscreenshot.
+
+The pyscreenshot module is obsolete in most cases.
 It was created because PIL ImageGrab module worked on Windows only,
 but now Linux and macOS are also supported.
 There are some features in pyscreenshot which can be useful in special cases:

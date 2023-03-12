@@ -9,3 +9,5 @@ import shutil
 [p.unlink() for p in pathlib.Path(".").rglob("*.py[co]")]
 [p.rmdir() for p in pathlib.Path(".").rglob("__pycache__")]
 [p.unlink() for p in pathlib.Path(".").rglob("*.log")]
+[shutil.rmtree(p) for p in pathlib.Path(".").glob("testout")]
+[shutil.rmtree(p) for p in pathlib.Path("tests").glob("testout")]
