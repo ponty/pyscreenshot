@@ -61,10 +61,10 @@ jobs:
       run: |
         # choco install fsviewer -y
         choco install imagemagick -y
-        choco install wxpython -y 
-        choco install gtk-runtime -y
-        choco install pyqt4 -y
-        choco install pyqt5 -y
+        # choco install wxpython -y 
+        # choco install gtk-runtime -y
+        # choco install pyqt4 -y
+        # choco install pyqt5 -y
     - name: pip install
       run: |
         pip install wheel
